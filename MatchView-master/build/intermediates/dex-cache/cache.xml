@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/xubinggui/Downloads/MatchView-master/demo/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/classes.jar"
+        jumboMode="false"
+        revision="21.1.0"
+        sha1="d1bf02de1c56d942e7a9d093b8610ba1ef4128e3">
+        <dex dex="/Users/xubinggui/Downloads/MatchView-master/demo/build/intermediates/pre-dexed/debug/classes-3da1f504c1412dc966453c0f33550f24ba43a8a0.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/Downloads/MatchView-master/demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/classes.jar"
+        jumboMode="false"
+        revision="21.1.0"
+        sha1="7ae2d38807a43b2f2185ff4089a92c790b579e54">
+        <dex dex="/Users/xubinggui/Downloads/MatchView-master/demo/build/intermediates/pre-dexed/debug/classes-affa1d851c80bf05056c99392f225ff3c3bb67bc.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/Downloads/MatchView-master/demo/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/libs/internal_impl-21.0.2.jar"
+        jumboMode="false"
+        revision="21.1.0"
+        sha1="962e8b12569c56dbdcf8367eb4eac8bb129cd18f">
+        <dex dex="/Users/xubinggui/Downloads/MatchView-master/demo/build/intermediates/pre-dexed/debug/internal_impl-21.0.2-869ffd8773e4a6692c3d34bd7c77b2efa5bf0087.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.2/support-annotations-21.0.2.jar"
+        jumboMode="false"
+        revision="21.1.0"
+        sha1="99373741f99a0556ee293c41e8faa1ca3ae8a4e6">
+        <dex dex="/Users/xubinggui/Downloads/MatchView-master/demo/build/intermediates/pre-dexed/debug/support-annotations-21.0.2-4fca92a91ab07f57d5f33796d7c8cdb7f9c3e291.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/Downloads/MatchView-master/demo/build/intermediates/exploded-aar/MatchView-master/library/unspecified/classes.jar"
+        jumboMode="false"
+        revision="21.1.0"
+        sha1="a663f42e7467118d37823e61f7d94d005ee750df">
+        <dex dex="/Users/xubinggui/Downloads/MatchView-master/demo/build/intermediates/pre-dexed/debug/classes-e936d00ded796652d4b613034190965a79de7bfe.jar" />
+    </item>
+
+</items>

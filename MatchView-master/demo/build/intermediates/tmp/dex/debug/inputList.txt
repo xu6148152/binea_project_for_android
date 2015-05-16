@@ -1,0 +1,6 @@
+/Users/xubinggui/Downloads/MatchView-master/demo/build/intermediates/classes/debug
+/Users/xubinggui/Downloads/MatchView-master/demo/build/intermediates/pre-dexed/debug/support-annotations-21.0.2-4fca92a91ab07f57d5f33796d7c8cdb7f9c3e291.jar
+/Users/xubinggui/Downloads/MatchView-master/demo/build/intermediates/pre-dexed/debug/classes-e936d00ded796652d4b613034190965a79de7bfe.jar
+/Users/xubinggui/Downloads/MatchView-master/demo/build/intermediates/pre-dexed/debug/internal_impl-21.0.2-869ffd8773e4a6692c3d34bd7c77b2efa5bf0087.jar
+/Users/xubinggui/Downloads/MatchView-master/demo/build/intermediates/pre-dexed/debug/classes-affa1d851c80bf05056c99392f225ff3c3bb67bc.jar
+/Users/xubinggui/Downloads/MatchView-master/demo/build/intermediates/pre-dexed/debug/classes-3da1f504c1412dc966453c0f33550f24ba43a8a0.jar
