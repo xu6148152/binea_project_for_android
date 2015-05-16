@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MaterialDesignProgressBar">
+        <attr name="mdp_progress" format="float" />
+        <attr name="mdp_maxProgress" format="float" />
+        <attr name="mdp_animDuration" format="integer" />
+        <attr name="mdp_color" format="color"/>
+        <attr name="mdp_thickness" format="dimension"/>
+        <attr name="mdp_indeterminate" format="boolean" />
+        <attr name="mdp_animAutostart" format="boolean" />
+        <attr name="mdp_animSteps" format="integer" />
+    </declare-styleable>
+</resources>
