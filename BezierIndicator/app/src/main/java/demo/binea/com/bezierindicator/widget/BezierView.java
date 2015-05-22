@@ -47,7 +47,7 @@ public class BezierView extends View {
 		makePath();
 		canvas.drawPath(mPath, mPaint);
 		canvas.drawCircle(mHeadPoint.getX(), mHeadPoint.getY(), mHeadPoint.getRadius(), mPaint);
-		canvas.drawCircle(mFootPoint.getX(), mFootPoint.getY(), mHeadPoint.getRadius(), mPaint);
+		canvas.drawCircle(mFootPoint.getX(), mFootPoint.getY(), mFootPoint.getRadius(), mPaint);
 	}
 
 	private void makePath() {

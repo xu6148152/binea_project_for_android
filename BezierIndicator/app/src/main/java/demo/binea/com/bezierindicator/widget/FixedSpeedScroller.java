@@ -2,12 +2,12 @@ package demo.binea.com.bezierindicator.widget;
 
 import android.content.Context;
 import android.view.animation.Interpolator;
-import android.widget.OverScroller;
+import android.widget.Scroller;
 
 /**
  * Created by xubinggui on 5/21/15.
  */
-public class FixedSpeedScroller extends OverScroller {
+public class FixedSpeedScroller extends Scroller {
 
 	private int mDuration;
 
@@ -19,8 +19,8 @@ public class FixedSpeedScroller extends OverScroller {
 		super(context, interpolator);
 	}
 
-	public FixedSpeedScroller(Context context, Interpolator interpolator, float bounceCoefficientX, float bounceCoefficientY) {
-		super(context, interpolator, bounceCoefficientX, bounceCoefficientY);
+	public FixedSpeedScroller(Context context, Interpolator interpolator, boolean flywheel) {
+		super(context, interpolator, flywheel);
 	}
 
 	public void setScrollSpeed(int duration) {

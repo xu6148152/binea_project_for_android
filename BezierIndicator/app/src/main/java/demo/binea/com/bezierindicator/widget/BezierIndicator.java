@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -24,6 +25,7 @@ import demo.binea.com.bezierindicator.widget.listener.TabClickListener;
 public class BezierIndicator extends FrameLayout {
 
 	private static final float INDICATOR_ANIM_DURATION = 3000;
+	private static final String TAG = BezierIndicator.class.getSimpleName();
 	private int textColor;
 	private int selectedTextColor;
 	private float textSize;
@@ -88,6 +90,7 @@ public class BezierIndicator extends FrameLayout {
 		mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			@Override
 			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+				Log.d(TAG, "positionOffset " + positionOffset);
 				if (position < tabs.size() - 1) {
 					float radiusOffsetHead = 0.5f;
 					if (positionOffset < radiusOffsetHead) {
@@ -95,7 +98,7 @@ public class BezierIndicator extends FrameLayout {
 					} else {
 						mBezierView.getHeadPoint().setRadius(
 								(positionOffset - radiusOffsetHead) /
-										(1 - radiusOffsetHead) * radiusOffsetHead + radiusMin);
+										(1 - radiusOffsetHead) * radiusOffset + radiusMin);
 					}
 					float radiusOffsetFoot = 0.5f;
 					if (positionOffset < radiusOffsetFoot) {
@@ -103,7 +106,7 @@ public class BezierIndicator extends FrameLayout {
 					} else {
 						mBezierView.getFootPoint().setRadius(radiusMin);
 					}
-
+					Log.d(TAG, "radius footpoint " + mBezierView.getFootPoint().getRadius() + " headpoint " + mBezierView.getHeadPoint().getRadius());
 					// x
 					float headX = 1f;
 					if (positionOffset < headMoveOffset) {
