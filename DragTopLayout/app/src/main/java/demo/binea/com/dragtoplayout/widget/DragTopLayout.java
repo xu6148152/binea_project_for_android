@@ -3,10 +3,10 @@ package demo.binea.com.dragtoplayout.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Handler;
-import android.os.Parcelable;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +19,10 @@ import demo.binea.com.dragtoplayout.R;
  */
 public class DragTopLayout extends FrameLayout {
 
+	private static final String TAG = DragTopLayout.class.getSimpleName();
 	private ViewDragHelper mViewDragHelper;
 	private int collapseOffset;
-	private boolean overDrag;
+	private boolean overDrag = true;
 	private int dragContentViewId;
 	private int topViewId;
 	private boolean captureTop;
@@ -34,7 +35,6 @@ public class DragTopLayout extends FrameLayout {
 	private int topViewHeight;
 	private int top;
 	private boolean shouldIntercept = false;
-	private boolean dispatchChildContentView;
 	private float ratio;
 	private boolean dispatchingChildrenDownFaked;
 	private float dispatchingChildrenStartedAtY;
@@ -136,15 +136,15 @@ public class DragTopLayout extends FrameLayout {
 		}
 	}
 
-	@Override
-	protected Parcelable onSaveInstanceState() {
-
-		Parcelable superState = super.onSaveInstanceState();
-		SavedState state = new SavedState(superState);
-		state.panelState = panelState.toInt();
-
-		return state;
-	}
+//	@Override
+//	protected Parcelable onSaveInstanceState() {
+//
+//		Parcelable superState = super.onSaveInstanceState();
+//		SavedState state = new SavedState(superState);
+//		state.panelState = panelState.toInt();
+//
+//		return state;
+//	}
 
 	ViewDragHelper.Callback mCallback = new ViewDragHelper.Callback() {
 		@Override
@@ -249,7 +249,7 @@ public class DragTopLayout extends FrameLayout {
 		}
 	}
 
-	private void handleSlide(int newTopViewHeight) {
+	private void handleSlide(final int top) {
 		new Handler().post(new Runnable() {
 			@Override
 			public void run() {
@@ -279,25 +279,32 @@ public class DragTopLayout extends FrameLayout {
 
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
-		return shouldIntercept && mViewDragHelper.shouldInterceptTouchEvent(ev);
+		Log.d(TAG, "viewTop " + topView.getTop());
+		if(topView.getTop() >= 0){
+			return true;
+		}
+		final boolean b = mViewDragHelper.shouldInterceptTouchEvent(ev);
+		Log.d(TAG, "[onInterceptTouchEvent] shouldIntercept " + shouldIntercept + " b " + b);
+		return shouldIntercept && b;
 	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
+		Log.d(TAG,"[onTouchEvent]");
 		final int action = event.getActionMasked();
 
-		if(!dispatchChildContentView){
+		if(!dispatchingChildrenContentView){
 			mViewDragHelper.processTouchEvent(event);
 		}
 
 		if(action == MotionEvent.ACTION_MOVE && ratio == 0.0f){
-			dispatchChildContentView = true;
+			dispatchingChildrenContentView = true;
 			if(!dispatchingChildrenDownFaked){
 				dispatchingChildrenStartedAtY = event.getY();
 				event.setAction(MotionEvent.ACTION_DOWN);
 				dispatchingChildrenDownFaked = true;
 			}
-
+			Log.d(TAG, "contentView dispatchTouchEvent");
 			contentView.dispatchTouchEvent(event);
 		}
 
@@ -511,17 +518,17 @@ public class DragTopLayout extends FrameLayout {
 		}
 	}
 
-	/**
-	 * Save the instance state
-	 */
-	private static class SavedState extends BaseSavedState {
-
-		int panelState;
-
-		SavedState(Parcelable superState) {
-			super(superState);
-		}
-
-	}
+//	/**
+//	 * Save the instance state
+//	 */
+//	private static class SavedState extends BaseSavedState {
+//
+//		int panelState;
+//
+//		SavedState(Parcelable superState) {
+//			super(superState);
+//		}
+//
+//	}
 
 }
