@@ -156,6 +156,8 @@ public class MainActivity extends AppCompatActivity {
 //			Intent intent = new Intent(this, AboutActivity.class);
 //			startActivity(intent);
 			return true;
+		} else if(id == R.id.action_auto_scroll_back){
+			dragLayout.setIsAutoScrollBack();
 		}
 
 		return super.onOptionsItemSelected(item);

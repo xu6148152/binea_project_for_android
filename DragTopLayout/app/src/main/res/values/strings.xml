@@ -8,6 +8,7 @@
     <string name="action_toggle">Toggle</string>
     <string name="action_about">About</string>
     <string name="action_offset">Offset</string>
+    <string name="action_auto_scroll_back">auto scroll back</string>
     <string name="action_over">OverDrag</string>
     <string name="action_pulltorefresh">PullToRefresh</string>
 </resources>

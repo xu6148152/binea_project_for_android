@@ -43,6 +43,8 @@ public class DragTopLayout extends FrameLayout {
 	private float refreshRatio = 1.0f;
 	private PanelListener panelListener;
 
+	private boolean isAutoScrollBack = true;
+
 	public static enum PanelState{
 		COLLAPSED(0),
 		EXPANDED(1),
@@ -184,14 +186,16 @@ public class DragTopLayout extends FrameLayout {
 		public void onViewReleased(View releasedChild, float xvel, float yvel) {
 			super.onViewReleased(releasedChild, xvel, yvel);
 
-			int top;
-			if (yvel > 0 || contentTop > topViewHeight) {
-				top = topViewHeight + getPaddingTop();
-			} else {
-				top = getPaddingTop() + collapseOffset;
+			if(isAutoScrollBack) {
+				int top;
+				if (yvel > 0 || contentTop > topViewHeight) {
+					top = topViewHeight + getPaddingTop();
+				} else {
+					top = getPaddingTop() + collapseOffset;
+				}
+				mViewDragHelper.settleCapturedViewAt(releasedChild.getLeft(), top);
+				postInvalidate();
 			}
-			mViewDragHelper.settleCapturedViewAt(releasedChild.getLeft(), top);
-			postInvalidate();
 		}
 	};
 
@@ -461,6 +465,11 @@ public class DragTopLayout extends FrameLayout {
 	 */
 	public void onRefreshComplete() {
 		isRefreshing = false;
+	}
+
+	public void setIsAutoScrollBack(){
+		isAutoScrollBack = !isAutoScrollBack;
+		overDrag = !overDrag;
 	}
 
 	/**

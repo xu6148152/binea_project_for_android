@@ -22,6 +22,13 @@
           android:orderInCategory="103"
           android:title="@string/action_offset"
           app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_auto_scroll_back"
+        android:orderInCategory="105"
+        android:title="@string/action_auto_scroll_back"
+        app:showAsAction="never" />
+
       <item
           android:id="@+id/action_pulltorefresh"
           android:orderInCategory="104"
