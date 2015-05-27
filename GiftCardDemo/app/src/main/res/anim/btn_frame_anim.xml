@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true" >
+    <item android:drawable="@mipmap/buybtn00000" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00001" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00002" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00004" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00005" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00006" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00007" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00008" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00009" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00010" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00011" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00012" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00013" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00014" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00015" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00016" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00017" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00018" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00019" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00020" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00021" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00022" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00023" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00024" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00025" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00026" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00027" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00028" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00029" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00030" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00031" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00032" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00033" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00034" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00035" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00036" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00037" android:duration="@integer/frame_duration" />
+    <item android:drawable="@mipmap/buybtn00038" android:duration="@integer/frame_duration" />
+</animation-list>
