@@ -6,9 +6,6 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
-/**
- * Created by Jack Yang (jackyang@zepplabs.com) on 4/26/15.
- */
 public class RacquetHeatmap {
 
     /**
