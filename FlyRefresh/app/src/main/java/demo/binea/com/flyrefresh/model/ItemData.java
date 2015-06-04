@@ -8,7 +8,7 @@ import java.util.Date;
  * Created by Jing on 15/5/27.
  */
 public class ItemData {
-    int color;
+    public int color;
     public int icon;
     public String title;
     public Date time;

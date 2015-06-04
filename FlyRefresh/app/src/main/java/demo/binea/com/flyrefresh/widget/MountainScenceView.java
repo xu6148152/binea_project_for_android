@@ -75,6 +75,7 @@ public class MountainScenceView extends View implements PullHeaderListener{
 	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 	public MountainScenceView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
+		init();
 	}
 
 	private void init() {

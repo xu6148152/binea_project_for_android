@@ -48,14 +48,14 @@ public class PullHeadLayout extends FrameLayout {
 
 	private View mHeadView;
 	private View mContentView;
-	private ImageView mFlyView;
+	protected ImageView mFlyView;
 
 	private Drawable mActionDrawable;
 
 	private int mPagingTouchSlop;
 	private int mMaxVelocity;
 
-	private FloatingActionButton mActionView;
+	protected FloatingActionButton mActionView;
 
 	protected HeaderController mHeaderController;
 
@@ -93,7 +93,7 @@ public class PullHeadLayout extends FrameLayout {
 		int headerExpandHeight = DEFAULT_EXPAND;
 		int headerShrinkHeight = DEFAULT_SHRINK;
 
-		if(null != attrs){
+		if (null != attrs) {
 			final TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.PullHeaderLayout);
 
 			headerHeight = ta.getDimensionPixelOffset(R.styleable.PullHeaderLayout_phl_header_height,
@@ -114,9 +114,9 @@ public class PullHeadLayout extends FrameLayout {
 		mPagingTouchSlop = conf.getScaledTouchSlop() * 2;
 
 		mMaxVelocity = conf.getScaledMaximumFlingVelocity();
-//		mScrollHandler = new DefalutScrollHandler();
+		mScrollHandler = new DefaultScrollHandler();
 
-//		mScrollChecker = new ScrollChecker();
+		mScrollChecker = new ScrollChecker();
 
 
 	}
@@ -127,22 +127,22 @@ public class PullHeadLayout extends FrameLayout {
 
 		final int childCount = getChildCount();
 
-		if(childCount > 2){
+		if (childCount > 2) {
 			throw new IllegalArgumentException("FlyRefreshLayout only can host 2 elements");
-		}else if(childCount == 2){
-			if(mHeaderId != 0 && mHeadView == null){
+		} else if (childCount == 2) {
+			if (mHeaderId != 0 && mHeadView == null) {
 				mHeadView = findViewById(mHeaderId);
 			}
 
-			if(mContentId != 0 && mContentView == null){
+			if (mContentId != 0 && mContentView == null) {
 				mContentView = findViewById(mContentId);
 			}
 
-			if(mHeadView == null || mContentView == null){
+			if (mHeadView == null || mContentView == null) {
 				mHeadView = getChildAt(0);
 				mContentView = getChildAt(1);
 			}
-		}else if(childCount == 1){
+		} else if (childCount == 1) {
 			mContentView = getChildAt(0);
 		}
 
@@ -150,24 +150,24 @@ public class PullHeadLayout extends FrameLayout {
 
 	}
 
-	private void setActionDrawable(Drawable actionDrawable) {
-		if(actionDrawable != null){
-			if(mActionView == null){
+	public void setActionDrawable(Drawable actionDrawable) {
+		if (actionDrawable != null) {
+			if (mActionView == null) {
 				final int bgColor = UIUtils.getThemeColorFromAttrOrRes(getContext(), R.attr.colorAccent, R.color.accent);
 				final int pressedColor = UIUtils.darkerColor(bgColor, 0.8f);
 				mActionView = new FloatingActionButton(getContext());
 				mActionView.setBackgroundTintList(UIUtils.createColorStateList(bgColor, pressedColor));
-				addView(mActionView);
-			}else {
-				if (mFlyView == null) {
-					mFlyView = new ImageView(getContext());
-					mFlyView.setScaleType(ImageView.ScaleType.FIT_XY);
-					addView(mFlyView, new LayoutParams(ACTION_ICON_SIZE, ACTION_ICON_SIZE));
-				}
-				mFlyView.setImageDrawable(mActionDrawable);
+				addView(mActionView, new LayoutParams(ACTION_ICON_SIZE, ACTION_ICON_SIZE));
 			}
-		}else{
-			if(mActionView != null){
+			if (mFlyView == null) {
+				mFlyView = new ImageView(getContext());
+				mFlyView.setScaleType(ImageView.ScaleType.FIT_XY);
+				addView(mFlyView, new LayoutParams(ACTION_ICON_SIZE, ACTION_ICON_SIZE));
+			}
+			mFlyView.setImageDrawable(mActionDrawable);
+
+		} else {
+			if (mActionView != null) {
 				removeView(mActionView);
 				removeView(mFlyView);
 			}
@@ -178,15 +178,15 @@ public class PullHeadLayout extends FrameLayout {
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-		if(mHeadView != null){
+		if (mHeadView != null) {
 			measureChildWithMargins(mHeadView, widthMeasureSpec, 0, heightMeasureSpec, 0);
 		}
 
-		if(mContentView != null){
+		if (mContentView != null) {
 			measureChildWithMargins(mContentView, widthMeasureSpec, 0, heightMeasureSpec, mHeaderController.getMinHeight());
 		}
 
-		if(mActionView != null){
+		if (mActionView != null) {
 			measureChild(mActionView, widthMeasureSpec, heightMeasureSpec);
 			measureChild(mFlyView, widthMeasureSpec, heightMeasureSpec);
 		}
@@ -204,7 +204,7 @@ public class PullHeadLayout extends FrameLayout {
 		final int paddingLeft = getPaddingLeft();
 		final int paddingTop = getPaddingTop();
 		int left, top, right, bottom;
-		if(mHeadView != null){
+		if (mHeadView != null) {
 			MarginLayoutParams lp = (MarginLayoutParams) mHeadView.getLayoutParams();
 			left = lp.leftMargin + paddingLeft;
 			top = lp.topMargin + paddingTop;
@@ -213,16 +213,16 @@ public class PullHeadLayout extends FrameLayout {
 			mHeadView.layout(left, top, right, bottom);
 		}
 
-		if(mContentView != null){
+		if (mContentView != null) {
 			MarginLayoutParams lp = (MarginLayoutParams) mContentView.getLayoutParams();
 			left = paddingLeft + lp.leftMargin;
 			top = paddingTop + lp.topMargin;
 			right = mContentView.getMeasuredWidth() + lp.rightMargin;
 			bottom = mContentView.getMeasuredHeight() + lp.bottomMargin;
-			mContentView.layout(left,top,right,bottom);
+			mContentView.layout(left, top, right, bottom);
 		}
 
-		if(mActionView != null){
+		if (mActionView != null) {
 			int halfWidth = (mActionView.getMeasuredWidth() + 1) / 2;
 			int halfHeight = (mActionView.getMeasuredHeight() + 1) / 2;
 			final int adjustCenter = UIUtils.dpToPx(2);
@@ -242,19 +242,19 @@ public class PullHeadLayout extends FrameLayout {
 
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent ev) {
-		if(!isEnabled() || mHeadView == null || mContentView == null){
+		if (!isEnabled() || mHeadView == null || mContentView == null) {
 			return super.dispatchTouchEvent(ev);
 		}
 
 		obtainVelocityTracker(ev);
 		final int action = ev.getAction();
-		switch (action){
+		switch (action) {
 			case MotionEvent.ACTION_DOWN:
 				mHasSendCancelEvent = false;
 				mDownEvent = ev;
 				mHeaderController.onTouchDown(ev.getX(), ev.getY());
 
-				if(mBounceAnim != null && mBounceAnim.isRunning()){
+				if (mBounceAnim != null && mBounceAnim.isRunning()) {
 					mBounceAnim.cancel();
 				}
 
@@ -265,16 +265,16 @@ public class PullHeadLayout extends FrameLayout {
 			case MotionEvent.ACTION_UP:
 				final float initVelocity = getInitVelocity();
 				releaseVelocity();
-				if(mHeaderController.isInTouch()){
+				if (mHeaderController.isInTouch()) {
 					mHeaderController.onTouchRelease();
-					onRelease((int)initVelocity);
+					onRelease((int) initVelocity);
 
-					if(mHeaderController.hasMoved()){
+					if (mHeaderController.hasMoved()) {
 						sendCancelEvent();
 						return true;
 					}
 					return super.dispatchTouchEvent(ev);
-				}else{
+				} else {
 					return super.dispatchTouchEvent(ev);
 				}
 
@@ -290,20 +290,20 @@ public class PullHeadLayout extends FrameLayout {
 						&& Math.abs(offsetX) > Math.abs(offsetY))) {
 					mPreventForHorizontal = true;
 				}
-				if(mPreventForHorizontal){
+				if (mPreventForHorizontal) {
 					return super.dispatchTouchEvent(ev);
 				}
 
 				boolean moveDown = offsetY > 0;
 
-				if(moveDown){
-					if(mContentView != null && mScrollHandler.canScrollDown(mContentView)){
-						if(mHeaderController.isInTouch()){
+				if (moveDown) {
+					if (mContentView != null && mScrollHandler.canScrollDown(mContentView)) {
+						if (mHeaderController.isInTouch()) {
 							mHeaderController.onTouchRelease();
 							sendDownEvent();
 						}
 						return super.dispatchTouchEvent(ev);
-					}else{
+					} else {
 						if (!mHeaderController.isInTouch()) {
 							mHeaderController.onTouchDown(ev.getX(), ev.getY());
 							offsetY = mHeaderController.getOffsetY();
@@ -311,7 +311,7 @@ public class PullHeadLayout extends FrameLayout {
 						willMovePos(offsetY);
 						return true;
 					}
-				}else{
+				} else {
 					if (mHeaderController.canMoveUp()) {
 						willMovePos(offsetY);
 						return true;
@@ -348,11 +348,11 @@ public class PullHeadLayout extends FrameLayout {
 	}
 
 	private void movePos(int delta) {
-		if(mContentView != null){
+		if (mContentView != null) {
 			mContentView.offsetTopAndBottom(delta);
 		}
 
-		if(mActionView != null){
+		if (mActionView != null) {
 			mActionView.offsetTopAndBottom((int) delta);
 
 			mFlyView.offsetTopAndBottom((int) delta);
@@ -394,28 +394,28 @@ public class PullHeadLayout extends FrameLayout {
 	}
 
 	private void releaseVelocity() {
-		if(mVelocityTracker != null){
+		if (mVelocityTracker != null) {
 			mVelocityTracker.recycle();
 			mVelocityTracker = null;
 		}
 	}
 
 	private void obtainVelocityTracker(MotionEvent ev) {
-		if(mVelocityTracker == null){
+		if (mVelocityTracker == null) {
 			mVelocityTracker = VelocityTracker.obtain();
 		}
 		mVelocityTracker.addMovement(ev);
 	}
 
 	private float getInitVelocity() {
-		if(mVelocityTracker != null){
+		if (mVelocityTracker != null) {
 			mVelocityTracker.computeCurrentVelocity(1000, mMaxVelocity);
 			return mVelocityTracker.getYVelocity();
 		}
 		return 0;
 	}
 
-	class ScrollChecker implements Runnable{
+	class ScrollChecker implements Runnable {
 		private Scroller mScroller;
 		private boolean mIsRunning = false;
 		private int mStart;
@@ -438,6 +438,7 @@ public class PullHeadLayout extends FrameLayout {
 				finish();
 			}
 		}
+
 		private void finish() {
 			reset();
 			onScrollFinish();
@@ -512,12 +513,12 @@ public class PullHeadLayout extends FrameLayout {
 		}
 	}
 
-	private void onStartRefreshAnimation() {
+	protected void onStartRefreshAnimation() {
 
 	}
 
-	public void setHeaderView(View headerView, LayoutParams lp){
-		if(mHeadView != null){
+	public void setHeaderView(View headerView, LayoutParams lp) {
+		if (mHeadView != null) {
 			removeView(mHeadView);
 		}
 

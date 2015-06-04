@@ -75,7 +75,7 @@ public class UIUtils {
 
 	public static ColorStateList createColorStateList(int normal, int pressed) {
 		int[] colors = new int[] {pressed, pressed, pressed, normal};
-		int[][] states = new int[6][];
+		int[][] states = new int[4][];
 		states[0] = new int[] { android.R.attr.state_pressed};
 		states[1] = new int[] { android.R.attr.state_focused};
 		states[2] = new int[] { android.R.attr.state_checked};
