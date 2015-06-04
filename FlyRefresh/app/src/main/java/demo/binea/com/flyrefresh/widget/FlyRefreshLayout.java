@@ -23,7 +23,7 @@ public class FlyRefreshLayout extends PullHeadLayout {
 	}
 
 	private void init(Context context) {
-		MountanScenceView headerView = new MountanScenceView(getContext());
+		MountainScenceView headerView = new MountainScenceView(getContext());
 		LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mHeaderController.getMaxHeight());
 		setHeaderView(headerView, lp);
 	}
