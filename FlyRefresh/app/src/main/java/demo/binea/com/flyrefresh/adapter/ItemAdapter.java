@@ -23,9 +23,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
 	private LayoutInflater mInflater;
 	private DateFormat dateFormat;
-	private ArrayList<ItemData> mDataSet = new ArrayList<>();
+	private ArrayList<ItemData> mDataSet;
 
-	public ItemAdapter(Context context) {
+	public ItemAdapter(Context context, ArrayList<ItemData> dataSet) {
+		mDataSet = dataSet;
 		mInflater = LayoutInflater.from(context);
 		dateFormat = SimpleDateFormat.getDateInstance(DateFormat.DEFAULT, Locale.ENGLISH);
 	}

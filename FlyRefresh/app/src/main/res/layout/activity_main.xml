@@ -16,16 +16,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="24dp"
-            android:background="#FF0000"/>
+            android:background="#FFFFFF"/>
     </demo.binea.com.flyrefresh.widget.FlyRefreshLayout>
 
     <android.support.v7.widget.Toolbar
+        android:visibility="gone"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@android:color/transparent"
         android:elevation="4dp"
-        android:visibility="gone"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 

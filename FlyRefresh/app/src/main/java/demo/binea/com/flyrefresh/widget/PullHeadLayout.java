@@ -41,6 +41,7 @@ public class PullHeadLayout extends FrameLayout {
 	private final static int DEFAULT_HEIGHT = UIUtils.dpToPx(240);
 	private final static int DEFAULT_SHRINK = UIUtils.dpToPx(48);
 	private final static int ACTION_ICON_SIZE = UIUtils.dpToPx(32);
+	private final static int ACTION_BUTTON_SIZE = UIUtils.dpToPx(50);
 	private final static int ACTION_BUTTON_CENTER = UIUtils.dpToPx(40);
 
 	private int mHeaderId = 0;
@@ -157,14 +158,14 @@ public class PullHeadLayout extends FrameLayout {
 				final int pressedColor = UIUtils.darkerColor(bgColor, 0.8f);
 				mActionView = new FloatingActionButton(getContext());
 				mActionView.setBackgroundTintList(UIUtils.createColorStateList(bgColor, pressedColor));
-				addView(mActionView, new LayoutParams(ACTION_ICON_SIZE, ACTION_ICON_SIZE));
+				addView(mActionView, new LayoutParams(ACTION_BUTTON_SIZE, ACTION_BUTTON_SIZE));
 			}
 			if (mFlyView == null) {
 				mFlyView = new ImageView(getContext());
 				mFlyView.setScaleType(ImageView.ScaleType.FIT_XY);
 				addView(mFlyView, new LayoutParams(ACTION_ICON_SIZE, ACTION_ICON_SIZE));
 			}
-			mFlyView.setImageDrawable(mActionDrawable);
+			mFlyView.setImageDrawable(actionDrawable);
 
 		} else {
 			if (mActionView != null) {
@@ -208,17 +209,17 @@ public class PullHeadLayout extends FrameLayout {
 			MarginLayoutParams lp = (MarginLayoutParams) mHeadView.getLayoutParams();
 			left = lp.leftMargin + paddingLeft;
 			top = lp.topMargin + paddingTop;
-			right = lp.rightMargin + mHeadView.getMeasuredWidth();
-			bottom = lp.bottomMargin + mHeadView.getMeasuredHeight();
+			right = mHeadView.getMeasuredWidth();
+			bottom = mHeadView.getMeasuredHeight();
 			mHeadView.layout(left, top, right, bottom);
 		}
 
 		if (mContentView != null) {
 			MarginLayoutParams lp = (MarginLayoutParams) mContentView.getLayoutParams();
 			left = paddingLeft + lp.leftMargin;
-			top = paddingTop + lp.topMargin;
-			right = mContentView.getMeasuredWidth() + lp.rightMargin;
-			bottom = mContentView.getMeasuredHeight() + lp.bottomMargin;
+			top = paddingTop + lp.topMargin + offsetY;
+			right = mContentView.getMeasuredWidth();
+			bottom = top + mContentView.getMeasuredHeight();
 			mContentView.layout(left, top, right, bottom);
 		}
 
@@ -370,9 +371,7 @@ public class PullHeadLayout extends FrameLayout {
 		}
 	}
 
-	private void onMoveHeader(int pullState, float percentage) {
-
-	}
+	protected void onMoveHeader(int pullState, float percentage) {}
 
 	private void sendDownEvent() {
 		final MotionEvent last = mLastMoveEvent;
@@ -526,6 +525,9 @@ public class PullHeadLayout extends FrameLayout {
 
 		mHeadView = headerView;
 
+		if(headerView instanceof PullHeaderListener){
+			mPullHeaderListenerView = (PullHeaderListener) headerView;
+		}
 	}
 
 }

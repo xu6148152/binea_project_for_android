@@ -152,4 +152,12 @@ public class FlyRefreshLayout extends PullHeadLayout {
 		});
 		mFlyAnimator.start();
 	}
+
+	@Override
+	protected void onMoveHeader(int pullState, float percentage) {
+		super.onMoveHeader(pullState, percentage);
+		if(mHeaderController.isOverHeight()){
+			getActionView().setRotation(-45 * percentage);
+		}
+	}
 }
