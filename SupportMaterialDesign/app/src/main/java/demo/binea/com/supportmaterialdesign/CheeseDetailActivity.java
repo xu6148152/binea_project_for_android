@@ -1,6 +1,9 @@
 package demo.binea.com.supportmaterialdesign;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
@@ -8,9 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import demo.binea.com.supportmaterialdesign.data.Cheeses;
 
@@ -18,11 +21,14 @@ import demo.binea.com.supportmaterialdesign.data.Cheeses;
  * Created by xubinggui on 6/8/15.
  */
 public class CheeseDetailActivity extends AppCompatActivity {
+	private static final Uri URI = Uri.parse(
+			"http://apod.nasa.gov/apod/image/1410/20141008tleBaldridge001h990.jpg");
 
 	public static final String EXTRA_NAME = "cheese_name";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		Fresco.initialize(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail);
 
@@ -54,8 +60,17 @@ public class CheeseDetailActivity extends AppCompatActivity {
 	}
 
 	private void loadBackdrop() {
-		final ImageView imageView = (ImageView) findViewById(R.id.backdrop);
-		Glide.with(this).load(Cheeses.getRandomCheeseDrawable()).centerCrop().into(imageView);
+		final SimpleDraweeView imageView = (SimpleDraweeView) findViewById(R.id.backdrop);
+//		Glide.with(this).load(Cheeses.getRandomCheeseDrawable()).centerCrop().into(imageView);
+//		final ImageView imageView = (ImageView) findViewById(R.id.backdrop);
+		Resources resources = getResources();
+		final int resId = Cheeses.getRandomCheeseDrawable();
+		final Uri uri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
+				resources.getResourcePackageName(resId) + '/' +
+				resources.getResourceTypeName(resId) + '/' +
+				resources.getResourceEntryName(resId));
+//		final Uri uri = Uri.parse("android.resource://" + this.getPackageName() + "/" + Cheeses.getRandomCheeseDrawable());
+		imageView.setImageURI(uri);
 	}
 
 	@Override
