@@ -1,6 +1,5 @@
 package demo.binea.com.supportmaterialdesign;
 
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -12,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.facebook.common.util.UriUtil;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -65,11 +65,12 @@ public class CheeseDetailActivity extends AppCompatActivity {
 //		final ImageView imageView = (ImageView) findViewById(R.id.backdrop);
 		Resources resources = getResources();
 		final int resId = Cheeses.getRandomCheeseDrawable();
-		final Uri uri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
-				resources.getResourcePackageName(resId) + '/' +
-				resources.getResourceTypeName(resId) + '/' +
-				resources.getResourceEntryName(resId));
+//		final Uri uri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
+//				resources.getResourcePackageName(resId) + '/' +
+//				resources.getResourceTypeName(resId) + '/' +
+//				resources.getResourceEntryName(resId));
 //		final Uri uri = Uri.parse("android.resource://" + this.getPackageName() + "/" + Cheeses.getRandomCheeseDrawable());
+		Uri uri = new Uri.Builder().scheme(UriUtil.LOCAL_RESOURCE_SCHEME).path(String.valueOf(resId)).build();
 		imageView.setImageURI(uri);
 	}
 
