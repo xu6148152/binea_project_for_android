@@ -55,6 +55,8 @@ public class CheeseListFragment extends Fragment {
 	public static class SimpleStringRecyclerViewAdapter
 			extends RecyclerView.Adapter<SimpleStringRecyclerViewAdapter.ViewHolder> {
 
+
+
 		private final TypedValue mTypedValue = new TypedValue();
 		private int mBackground;
 		private List<String> mValues;
