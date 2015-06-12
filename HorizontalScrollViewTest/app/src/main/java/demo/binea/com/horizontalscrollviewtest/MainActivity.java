@@ -13,13 +13,13 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		TestFragmentAdapter mAdapter = new TestFragmentAdapter(getSupportFragmentManager());
-
-		ViewPager mPager = (ViewPager)findViewById(R.id.pager);
-		mPager.setAdapter(mAdapter);
-
-		TitlePageIndicator mIndicator = (TitlePageIndicator)findViewById(R.id.indicator);
-		mIndicator.setViewPager(mPager);
+//		TestFragmentAdapter mAdapter = new TestFragmentAdapter(getSupportFragmentManager());
+//
+//		ViewPager mPager = (ViewPager)findViewById(R.id.pager);
+//		mPager.setAdapter(mAdapter);
+//
+//		TitlePageIndicator mIndicator = (TitlePageIndicator)findViewById(R.id.indicator);
+//		mIndicator.setViewPager(mPager);
 	}
 
 	@Override
