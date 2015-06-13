@@ -356,20 +356,23 @@ public class DragTopLayout extends FrameLayout {
 
 		final int action = MotionEventCompat.getActionMasked(event);
 		LogUtil.d(TAG,"dispatchingChildrenContentView " + dispatchingChildrenContentView);
+		if(action == MotionEvent.ACTION_DOWN){
+			downY = event.getY();
+		}
 		if (!dispatchingChildrenContentView) {
 			try {
 				// There seems to be a bug on certain devices: "pointerindex out of range" in viewdraghelper
 				// https://github.com/umano/AndroidSlidingUpPanel/issues/351
+
 				dragHelper.processTouchEvent(event);
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		if(action == MotionEvent.ACTION_DOWN){
-			downY = event.getY();
-		}
-		Log.d(TAG, "pannelState " + panelState);
-		if (action == MotionEvent.ACTION_MOVE && (panelState == PanelState.COLLAPSED || panelState == PanelState.EXPANDED)) {
+
+		Log.d(TAG, "pannelState " + panelState + " shouldIntercept " + shouldIntercept);
+		if (action == MotionEvent.ACTION_MOVE && (panelState == PanelState.COLLAPSED || panelState == PanelState.EXPANDED) && !shouldIntercept) {
 			dispatchingChildrenContentView = true;
 			if (!dispatchingChildrenDownFaked) {
 				dispatchingChildrenStartedAtY = event.getY();
@@ -377,6 +380,7 @@ public class DragTopLayout extends FrameLayout {
 				dispatchingChildrenDownFaked = true;
 			}
 			dragContentView.dispatchTouchEvent(event);
+			return true;
 		}
 
 		if (dispatchingChildrenContentView && dispatchingChildrenStartedAtY < event.getY()) {
