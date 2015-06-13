@@ -19,50 +19,52 @@ import demo.binea.com.dragtoplayout.R;
  */
 public class DragTopLayout extends FrameLayout {
 
-	private static final String TAG = DragTopLayout.class.getSimpleName();
-	private ViewDragHelper mViewDragHelper;
-	private int collapseOffset;
-	private boolean overDrag = true;
-	private int dragContentViewId;
-	private int topViewId;
-	private boolean captureTop;
-	private PanelState panelState;
-
-	private View topView;
-	private View contentView;
+	private final String TAG = DragTopLayout.class.getSimpleName();
+	private ViewDragHelper dragHelper;
 	private int dragRange;
+	private View dragContentView;
+	private View topView;
+
 	private int contentTop;
 	private int topViewHeight;
-	private int top;
-	private boolean shouldIntercept = false;
 	private float ratio;
-	private boolean dispatchingChildrenDownFaked;
-	private float dispatchingChildrenStartedAtY;
-	private boolean dispatchingChildrenContentView;
-	private boolean isRefreshing = false;
-	private float refreshRatio = 1.0f;
+	private boolean isRefreshing;
+	private boolean shouldIntercept = true;
+
 	private PanelListener panelListener;
+	private float refreshRatio = 1.5f;
+	private boolean overDrag = false;
+	private int collapseOffset;
+	private int topViewId = -1;
+	private int dragContentViewId = -1;
+	private boolean captureTop = true;
 
-	private boolean isAutoScrollBack = true;
+	// Used for scrolling
+	private boolean dispatchingChildrenDownFaked = false;
+	private boolean dispatchingChildrenContentView = false;
+	private float dispatchingChildrenStartedAtY = Float.MAX_VALUE;
 
-	public static enum PanelState{
+	private PanelState panelState = PanelState.EXPANDED;
+
+
+	public static enum PanelState {
+
 		COLLAPSED(0),
 		EXPANDED(1),
 		SLIDING(2);
 
 		private int asInt;
 
-		PanelState(int i){
-			asInt = i;
+		PanelState(int i) {
+			this.asInt = i;
 		}
 
-		public static PanelState fromeInt(int i){
-			switch (i){
+		static PanelState fromInt(int i) {
+			switch (i) {
 				case 0:
 					return COLLAPSED;
 				case 2:
 					return SLIDING;
-
 				default:
 				case 1:
 					return EXPANDED;
@@ -74,6 +76,8 @@ public class DragTopLayout extends FrameLayout {
 		}
 	}
 
+
+
 	public DragTopLayout(Context context) {
 		this(context, null);
 	}
@@ -84,13 +88,14 @@ public class DragTopLayout extends FrameLayout {
 
 	public DragTopLayout(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
-
-		initAttribute(attrs);
+		init(attrs);
 	}
 
-	private void initAttribute(AttributeSet attrs) {
-		mViewDragHelper = ViewDragHelper.create(this, 1.0f, mCallback);
-		final TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.DragTopLayout);
+	private void init(AttributeSet attrs) {
+		dragHelper = ViewDragHelper.create(this, 1.0f, callback);
+
+		// init from attrs
+		TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.DragTopLayout);
 		setCollapseOffset(a.getDimensionPixelSize(R.styleable.DragTopLayout_dtlCollapseOffset, collapseOffset));
 		overDrag = a.getBoolean(R.styleable.DragTopLayout_dtlOverDrag, overDrag);
 		dragContentViewId = a.getResourceId(R.styleable.DragTopLayout_dtlDragContentView, -1);
@@ -100,11 +105,114 @@ public class DragTopLayout extends FrameLayout {
 		a.recycle();
 	}
 
-	private void initOpen(boolean isOpen) {
-		if (isOpen) {
+	private void initOpen(boolean initOpen){
+		if (initOpen) {
 			panelState = PanelState.EXPANDED;
 		} else {
 			panelState = PanelState.COLLAPSED;
+		}
+	}
+
+	@Override
+	public void onFinishInflate() {
+		super.onFinishInflate();
+
+		if (getChildCount() < 2) {
+			throw new RuntimeException("Content view must contains two child views at least.");
+		}
+
+		if (topViewId != -1 && dragContentViewId == -1) {
+			throw new IllegalArgumentException("You have set \"dtlTopView\" but not \"dtlDragContentView\". Both are required!");
+		}
+
+		if (dragContentViewId != -1 && topViewId == -1) {
+			throw new IllegalArgumentException("You have set \"dtlDragContentView\" but not \"dtlTopView\". Both are required!");
+		}
+
+		if (dragContentViewId != -1 && topViewId != -1) {
+			bindId(this);
+		} else {
+			topView = getChildAt(0);
+			dragContentView = getChildAt(1);
+		}
+	}
+
+	private void bindId(View view) {
+		topView = view.findViewById(topViewId);
+		dragContentView = view.findViewById(dragContentViewId);
+
+		if (topView == null) {
+			throw new IllegalArgumentException("\"dtlTopView\" with id = \"@id/"
+					+ getResources().getResourceEntryName(topViewId)
+					+ "\" has NOT been found. Is a child with that id in this " + getClass().getSimpleName() + "?");
+		}
+
+
+		if (dragContentView == null) {
+			throw new IllegalArgumentException("\"dtlDragContentView\" with id = \"@id/"
+					+ getResources().getResourceEntryName(dragContentViewId)
+					+ "\" has NOT been found. Is a child with that id in this "
+					+ getClass().getSimpleName()
+					+ "?");
+		}
+	}
+
+	@Override
+	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+		super.onLayout(changed, left, top, right, bottom);
+		dragRange = getHeight();
+
+		// In case of resetting the content top to target position before sliding.
+		int contentTopTemp = contentTop;
+		resetTopViewHeight();
+		resetContentHeight();
+
+		topView.layout(left, Math.min(topView.getPaddingTop(), contentTop - topViewHeight), right,
+				contentTop);
+		dragContentView.layout(left, contentTopTemp, right,
+				contentTopTemp + dragContentView.getHeight());
+	}
+
+	private void resetTopViewHeight() {
+		int newTopHeight = topView.getHeight();
+		// Top layout is changed
+		if (topViewHeight != newTopHeight) {
+			if (panelState == PanelState.EXPANDED) {
+				contentTop = newTopHeight;
+				handleSlide(newTopHeight);
+			} else if(panelState == PanelState.COLLAPSED){
+				// update the drag content top when it is collapsed.
+				contentTop = collapseOffset;
+			}
+			topViewHeight = newTopHeight;
+		}
+	}
+
+	private void resetContentHeight() {
+		if (dragContentView != null && dragContentView.getHeight() != 0) {
+			ViewGroup.LayoutParams layoutParams = dragContentView.getLayoutParams();
+			layoutParams.height = getHeight() - collapseOffset;
+			dragContentView.setLayoutParams(layoutParams);
+		}
+	}
+
+	private void handleSlide(final int top) {
+		new Handler().post(new Runnable() {
+			@Override
+			public void run() {
+				dragHelper.smoothSlideViewTo(dragContentView, getPaddingLeft(), top);
+				postInvalidate();
+			}
+		});
+	}
+
+	private void resetDragContent(boolean anim, int top) {
+		contentTop = top;
+		if (anim) {
+			dragHelper.smoothSlideViewTo(dragContentView, getPaddingLeft(), contentTop);
+			postInvalidate();
+		} else {
+			requestLayout();
 		}
 	}
 
@@ -138,29 +246,50 @@ public class DragTopLayout extends FrameLayout {
 		}
 	}
 
-//	@Override
-//	protected Parcelable onSaveInstanceState() {
-//
-//		Parcelable superState = super.onSaveInstanceState();
-//		SavedState state = new SavedState(superState);
-//		state.panelState = panelState.toInt();
-//
-//		return state;
-//	}
+	@Override
+	protected Parcelable onSaveInstanceState() {
 
-	ViewDragHelper.Callback mCallback = new ViewDragHelper.Callback() {
+		Parcelable superState = super.onSaveInstanceState();
+		SavedState state = new SavedState(superState);
+		state.panelState = panelState.toInt();
+
+		return state;
+	}
+
+	@Override
+	protected void onRestoreInstanceState(Parcelable state) {
+
+		if (!(state instanceof SavedState)) {
+			// FIX #10
+			super.onRestoreInstanceState(BaseSavedState.EMPTY_STATE);
+			return;
+		}
+
+		SavedState s = (SavedState) state;
+		super.onRestoreInstanceState(s.getSuperState());
+
+		this.panelState = PanelState.fromInt(s.panelState);
+		if (panelState == PanelState.COLLAPSED) {
+			closeTopView(false);
+		} else {
+			openTopView(false);
+		}
+	}
+
+	private ViewDragHelper.Callback callback = new ViewDragHelper.Callback() {
 		@Override
 		public boolean tryCaptureView(View child, int pointerId) {
-			if(child == topView && captureTop){
-				mViewDragHelper.captureChildView(contentView, pointerId);
+			if (child == topView && captureTop) {
+				dragHelper.captureChildView(dragContentView, pointerId);
 				return false;
 			}
-			return child == contentView;
+			return child == dragContentView;
 		}
 
 		@Override
 		public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
 			super.onViewPositionChanged(changedView, left, top, dx, dy);
+			LogUtil.d(TAG,"top " + top);
 			contentTop = top;
 			requestLayout();
 			calculateRatio(contentTop);
@@ -185,131 +314,69 @@ public class DragTopLayout extends FrameLayout {
 		@Override
 		public void onViewReleased(View releasedChild, float xvel, float yvel) {
 			super.onViewReleased(releasedChild, xvel, yvel);
+			// yvel > 0 Fling down || yvel < 0 Fling up
+//			int top;
+//			if (yvel > 0 || contentTop > topViewHeight) {
+//				top = topViewHeight + getPaddingTop();
+//			} else {
+//				top = getPaddingTop() + collapseOffset;
+//			}
+//			dragHelper.settleCapturedViewAt(releasedChild.getLeft(), top);
+//			postInvalidate();
+		}
 
-			if(isAutoScrollBack) {
-				int top;
-				if (yvel > 0 || contentTop > topViewHeight) {
-					top = topViewHeight + getPaddingTop();
-				} else {
-					top = getPaddingTop() + collapseOffset;
-				}
-				mViewDragHelper.settleCapturedViewAt(releasedChild.getLeft(), top);
-				postInvalidate();
-			}
+		@Override
+		public void onViewDragStateChanged(int state) {
+			super.onViewDragStateChanged(state);
 		}
 	};
 
 	@Override
-	protected void onFinishInflate() {
-		super.onFinishInflate();
-
-		if(getChildCount() < 2){
-			throw new RuntimeException("Content view must contains two child views at least.");
-		}
-
-//		if(topViewId == -1 || dragContentViewId == -1){
-//			throw new IllegalArgumentException("make sure you have set topview and contentview both");
-//		}
-
-//		topView = findViewById(topViewId);
-//		contentView = findViewById(dragContentViewId);
-		topView = getChildAt(0);
-		contentView = getChildAt(1);
-	}
-
-	@Override
-	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-		super.onLayout(changed, left, top, right, bottom);
-
-		dragRange = getHeight();
-
-		int contentTopTemp = contentTop;
-		resetTopViewHeight();
-		resetContentHeight();
-
-		topView.layout(left, Math.min(topView.getPaddingTop(), contentTop - topView.getHeight()), right, contentTop);
-		contentView.layout(left, contentTopTemp, right, contentTopTemp + contentView.getHeight());
-	}
-
-	private void resetContentHeight() {
-		if (contentView != null && contentView.getHeight() != 0) {
-			ViewGroup.LayoutParams layoutParams = contentView.getLayoutParams();
-			layoutParams.height = getHeight() - collapseOffset;
-			contentView.setLayoutParams(layoutParams);
-		}
-	}
-
-	private void resetTopViewHeight() {
-		final int newTopViewHeight = topView.getHeight();
-
-		if(newTopViewHeight != topViewHeight){
-			if(panelState == PanelState.EXPANDED){
-				contentTop = newTopViewHeight;
-				handleSlide(newTopViewHeight);
-			}else if(panelState == PanelState.COLLAPSED){
-				contentTop = collapseOffset;
-			}
-			topViewHeight = newTopViewHeight;
-		}
-	}
-
-	private void handleSlide(final int top) {
-		new Handler().post(new Runnable() {
-			@Override
-			public void run() {
-				mViewDragHelper.smoothSlideViewTo(contentView, getPaddingLeft(), top);
-				postInvalidate();
-			}
-		});
-	}
-
-	private void resetDragContent(boolean isAnim, int top){
-		contentTop = top;
-
-		if (isAnim) {
-			mViewDragHelper.smoothSlideViewTo(contentView, getPaddingLeft(), contentTop);
-			postInvalidate();
-		} else {
-			requestLayout();
-		}
-	}
-
-	@Override
 	public void computeScroll() {
-		if(mViewDragHelper.continueSettling(true)){
+		if (dragHelper.continueSettling(true)) {
 			ViewCompat.postInvalidateOnAnimation(this);
 		}
 	}
 
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
-		Log.d(TAG, "viewTop " + topView.getTop());
-		if(topView.getTop() >= 0){
-			return true;
+		try {
+			boolean intercept = shouldIntercept;
+			LogUtil.d(TAG, "shouldIntercept " + shouldIntercept + " intercept " + intercept);
+			return intercept;
+		} catch (NullPointerException e) {
+			e.printStackTrace();
 		}
-		final boolean b = mViewDragHelper.shouldInterceptTouchEvent(ev);
-		Log.d(TAG, "[onInterceptTouchEvent] shouldIntercept " + shouldIntercept + " b " + b);
-		return shouldIntercept && b;
+		return false;
 	}
 
+	float downY;
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		Log.d(TAG,"[onTouchEvent]");
-		final int action = event.getActionMasked();
 
-		if(!dispatchingChildrenContentView){
-			mViewDragHelper.processTouchEvent(event);
+		final int action = MotionEventCompat.getActionMasked(event);
+		LogUtil.d(TAG,"dispatchingChildrenContentView " + dispatchingChildrenContentView);
+		if (!dispatchingChildrenContentView) {
+			try {
+				// There seems to be a bug on certain devices: "pointerindex out of range" in viewdraghelper
+				// https://github.com/umano/AndroidSlidingUpPanel/issues/351
+				dragHelper.processTouchEvent(event);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-
-		if(action == MotionEvent.ACTION_MOVE && ratio == 0.0f){
+		if(action == MotionEvent.ACTION_DOWN){
+			downY = event.getY();
+		}
+		Log.d(TAG, "pannelState " + panelState);
+		if (action == MotionEvent.ACTION_MOVE && (panelState == PanelState.COLLAPSED || panelState == PanelState.EXPANDED)) {
 			dispatchingChildrenContentView = true;
-			if(!dispatchingChildrenDownFaked){
+			if (!dispatchingChildrenDownFaked) {
 				dispatchingChildrenStartedAtY = event.getY();
 				event.setAction(MotionEvent.ACTION_DOWN);
 				dispatchingChildrenDownFaked = true;
 			}
-			Log.d(TAG, "contentView dispatchTouchEvent");
-			contentView.dispatchTouchEvent(event);
+			dragContentView.dispatchTouchEvent(event);
 		}
 
 		if (dispatchingChildrenContentView && dispatchingChildrenStartedAtY < event.getY()) {
@@ -318,7 +385,7 @@ public class DragTopLayout extends FrameLayout {
 
 		if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
 			resetDispatchingContentView();
-			contentView.dispatchTouchEvent(event);
+			dragContentView.dispatchTouchEvent(event);
 		}
 
 		return true;
@@ -330,13 +397,18 @@ public class DragTopLayout extends FrameLayout {
 		dispatchingChildrenStartedAtY = Float.MAX_VALUE;
 	}
 
+
+	//================
+	// public
+	//================
+
 	public PanelState getState() {
 		return panelState;
 	}
 
 	public void openTopView(boolean anim) {
 		// Before created
-		if (contentView.getHeight() == 0) {
+		if (dragContentView.getHeight() == 0) {
 			panelState = PanelState.EXPANDED;
 			if (panelListener != null) {
 				panelListener.onSliding(1.0f);
@@ -347,7 +419,7 @@ public class DragTopLayout extends FrameLayout {
 	}
 
 	public void closeTopView(boolean anim) {
-		if (contentView.getHeight() == 0) {
+		if (dragContentView.getHeight() == 0) {
 			panelState = PanelState.COLLAPSED;
 			if (panelListener != null) {
 				panelListener.onSliding(0.0f);
@@ -467,11 +539,6 @@ public class DragTopLayout extends FrameLayout {
 		isRefreshing = false;
 	}
 
-	public void setIsAutoScrollBack(){
-		isAutoScrollBack = !isAutoScrollBack;
-		overDrag = !overDrag;
-	}
-
 	/**
 	 * Set the collapse offset
 	 *
@@ -527,17 +594,46 @@ public class DragTopLayout extends FrameLayout {
 		}
 	}
 
-//	/**
-//	 * Save the instance state
-//	 */
-//	private static class SavedState extends BaseSavedState {
-//
-//		int panelState;
-//
-//		SavedState(Parcelable superState) {
-//			super(superState);
-//		}
-//
-//	}
+	/**
+	 * Save the instance state
+	 */
+	private static class SavedState extends BaseSavedState {
 
+		int panelState;
+
+		SavedState(Parcelable superState) {
+			super(superState);
+		}
+
+	}
+
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+		if(ev.getAction() == MotionEvent.ACTION_DOWN){
+			downY = ev.getY();
+		}
+
+		if(ev.getAction() == MotionEvent.ACTION_MOVE){
+			float moveY = ev.getY();
+			float deltY = moveY - downY;
+			downY = moveY;
+			if( panelState == PanelState.EXPANDED){
+				if(deltY > 0) {
+					shouldIntercept = false;
+				}else if(deltY < 0){
+					shouldIntercept = true;
+				}
+			}
+			if(panelState == PanelState.COLLAPSED){
+				if(deltY < 0) {
+					shouldIntercept = false;
+				}else if(deltY > 0){
+					shouldIntercept = true;
+				}
+			}
+		}
+
+		LogUtil.d(TAG, "dispatch shouldIntercept " + shouldIntercept);
+		return super.dispatchTouchEvent(ev);
+	}
 }
