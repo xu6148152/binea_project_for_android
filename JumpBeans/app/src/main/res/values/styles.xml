@@ -5,4 +5,8 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="TextAppearance.DemoText" parent="TextAppearance.AppCompat.Large">
+        <item name="android:textColor">#BB000000</item>
+    </style>
+
 </resources>

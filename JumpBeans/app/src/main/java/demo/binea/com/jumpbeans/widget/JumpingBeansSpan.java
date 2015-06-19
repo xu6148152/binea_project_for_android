@@ -5,6 +5,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.text.TextPaint;
 import android.text.style.SuperscriptSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,16 +16,15 @@ import java.lang.ref.WeakReference;
  */
 public final class JumpingBeansSpan extends SuperscriptSpan implements ValueAnimator.AnimatorUpdateListener{
 
-	private WeakReference<TextView> textView;
-	private int delay;
-	private int loopDuration;
-	private float animatedRange;
+	private final WeakReference<TextView> textView;
+	private final int delay;
+	private final int loopDuration;
+	private final float animatedRange;
 	private int shift;
-
 	private ValueAnimator jumpAnimator;
 
 	public JumpingBeansSpan(@NonNull TextView textView, int loopDuration, int position, int waveCharOffset,
-	                        float animatedRange) {
+			float animatedRange) {
 		this.textView = new WeakReference<>(textView);
 		this.delay = waveCharOffset * position;
 		this.loopDuration = loopDuration;
@@ -32,7 +32,13 @@ public final class JumpingBeansSpan extends SuperscriptSpan implements ValueAnim
 	}
 
 	@Override
-	public void updateMeasureState(TextPaint tp) {
+	public void updateMeasureState(@NonNull TextPaint tp) {
+		initIfNecessary(tp.ascent());
+		tp.baselineShift = shift;
+	}
+
+	@Override
+	public void updateDrawState(@NonNull TextPaint tp) {
 		initIfNecessary(tp.ascent());
 		tp.baselineShift = shift;
 	}
@@ -57,6 +63,7 @@ public final class JumpingBeansSpan extends SuperscriptSpan implements ValueAnim
 
 	@Override
 	public void onAnimationUpdate(ValueAnimator animation) {
+		// No need for synchronization as this always run on main thread anyway
 		TextView v = textView.get();
 		if (v != null) {
 			updateAnimationFor(animation, v);
@@ -65,21 +72,7 @@ public final class JumpingBeansSpan extends SuperscriptSpan implements ValueAnim
 		}
 	}
 
-	private void cleanupAndComplainAboutUserBeingAFool() {
-		teardown();
-	}
-
-	public void teardown() {
-		if (jumpAnimator != null) {
-			jumpAnimator.cancel();
-			jumpAnimator.removeAllListeners();
-		}
-		if (textView.get() != null) {
-			textView.clear();
-		}
-	}
-
-	private void updateAnimationFor(ValueAnimator animation, TextView v) {
+	private void updateAnimationFor(@NonNull ValueAnimator animation, @NonNull TextView v) {
 		if (isAttachedToHierarchy(v)) {
 			shift = (int) animation.getAnimatedValue();
 			v.invalidate();
@@ -91,5 +84,22 @@ public final class JumpingBeansSpan extends SuperscriptSpan implements ValueAnim
 			return v.isAttachedToWindow();
 		}
 		return v.getParent() != null;   // Best-effort fallback
+	}
+
+	private void cleanupAndComplainAboutUserBeingAFool() {
+		// The textview has been destroyed and teardown() hasn't been called
+		teardown();
+		Log.w("JumpingBeans",
+				"!!! Remember to call JumpingBeans.stopJumping() when appropriate !!!");
+	}
+
+	/*package*/ void teardown() {
+		if (jumpAnimator != null) {
+			jumpAnimator.cancel();
+			jumpAnimator.removeAllListeners();
+		}
+		if (textView.get() != null) {
+			textView.clear();
+		}
 	}
 }

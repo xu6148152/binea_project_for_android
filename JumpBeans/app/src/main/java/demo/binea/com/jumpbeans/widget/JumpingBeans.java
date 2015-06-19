@@ -5,7 +5,6 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.widget.TextView;
-
 import java.lang.ref.WeakReference;
 
 /**
@@ -29,8 +28,8 @@ public final class JumpingBeans {
 	public static final String THREE_DOTS_ELLIPSIS = "...";
 	public static final int THREE_DOTS_ELLIPSIS_LENGTH = 3;
 
-	private JumpingBeansSpan[] jumpingBeans;
-	private WeakReference<TextView> textView;
+	private final JumpingBeansSpan[] jumpingBeans;
+	private final WeakReference<TextView> textView;
 
 	private JumpingBeans(@NonNull JumpingBeansSpan[] beans, @NonNull TextView textView) {
 		this.jumpingBeans = beans;
@@ -38,11 +37,11 @@ public final class JumpingBeans {
 	}
 
 	/**
-	 * Create an instance of the {@link Builder}
+	 * Create an instance of the {@link net.frakbot.jumpingbeans.JumpingBeans.Builder}
 	 * applied to the provided {@code TextView}.
 	 *
 	 * @param textView The TextView to apply the JumpingBeans to
-	 * @return the {@link Builder}
+	 * @return the {@link net.frakbot.jumpingbeans.JumpingBeans.Builder}
 	 */
 	public static Builder with(@NonNull TextView textView) {
 		return new Builder(textView);
@@ -131,7 +130,7 @@ public final class JumpingBeans {
 	}
 
 	/**
-	 * Builder class for {@link JumpingBeans} objects.
+	 * Builder class for {@link net.frakbot.jumpingbeans.JumpingBeans} objects.
 	 * <p/>
 	 * Provides a way to set the fields of a {@link JumpingBeans} and generate
 	 * the desired jumping beans effect. With this builder you can easily append
@@ -176,7 +175,7 @@ public final class JumpingBeans {
 		 * <i>before</i> you begin using this builder.</b>
 		 * <p/>
 		 * Call the {@link #build()} method once you're done to get the
-		 * resulting {@link JumpingBeans}.
+		 * resulting {@link net.frakbot.jumpingbeans.JumpingBeans}.
 		 *
 		 * @see #setIsWave(boolean)
 		 */
@@ -206,7 +205,7 @@ public final class JumpingBeans {
 		 * <i>before</i> you begin using this builder.</b>
 		 * <p/>
 		 * Call the {@link #build()} method once you're done to get the
-		 * resulting {@link JumpingBeans}.
+		 * resulting {@link net.frakbot.jumpingbeans.JumpingBeans}.
 		 *
 		 * @param startPos The position of the first character to animate
 		 * @param endPos   The position after the one the animated range ends at
@@ -229,7 +228,7 @@ public final class JumpingBeans {
 		 * Sets the fraction of the animation loop time spent actually animating.
 		 * The rest of the time will be spent "resting".
 		 * The default value is
-		 * {@link JumpingBeans#DEFAULT_ANIMATION_DUTY_CYCLE}.
+		 * {@link net.frakbot.jumpingbeans.JumpingBeans#DEFAULT_ANIMATION_DUTY_CYCLE}.
 		 *
 		 * @param animatedRange The fraction of the animation loop time spent
 		 *                      actually animating the characters
@@ -244,7 +243,7 @@ public final class JumpingBeans {
 
 		/**
 		 * Sets the jumping loop duration. The default value is
-		 * {@link JumpingBeans#DEFAULT_LOOP_DURATION}.
+		 * {@link net.frakbot.jumpingbeans.JumpingBeans#DEFAULT_LOOP_DURATION}.
 		 *
 		 * @param loopDuration The jumping animation loop duration, in milliseconds
 		 */
@@ -292,7 +291,7 @@ public final class JumpingBeans {
 
 		/**
 		 * Combine all of the options that have been set and return a new
-		 * {@link JumpingBeans} instance.
+		 * {@link net.frakbot.jumpingbeans.JumpingBeans} instance.
 		 * <p/>
 		 * Remember to call the {@link #stopJumping()} method once you're done
 		 * using the JumpingBeans (that is, when you detach the TextView from
@@ -337,4 +336,5 @@ public final class JumpingBeans {
 		}
 
 	}
+
 }
