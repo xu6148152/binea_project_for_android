@@ -1,0 +1,172 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="color_filter"/>
+        <Button
+            android:id="@+id/btn_circle_view"
+            android:text="ColorMatrix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_light_matrix"
+            android:text="LightingColorFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_porter_duff_color_filter"
+            android:text="PorterDuffColorFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xfermode"/>
+
+        <Button
+            android:id="@+id/btn_avoid_fermode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="avoidXfermode"/>
+
+        <Button
+            android:id="@+id/btn_clock_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="clock_view"/>
+
+        <Button
+            android:id="@+id/btn_mutipl_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mutipl_view"/>
+
+        <Button
+            android:id="@+id/btn_font_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="font_view"/>
+
+        <Button
+            android:id="@+id/btn_mask_filter_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mask_filter_view"/>
+
+        <Button
+            android:id="@+id/btn_path_effect_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="path_effect_view"/>
+
+        <Button
+            android:id="@+id/btn_ecg_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ecg_view"/>
+
+        <Button
+        android:id="@+id/btn_shader_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="shader_view"/>
+
+        <Button
+            android:id="@+id/btn_reflect_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="reflect_view"/>
+
+        <Button
+            android:id="@+id/btn_dream_effect_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dream_effect_view"/>
+
+        <Button
+            android:id="@+id/btn_matrix_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="matrix_view"/>
+
+        <Button
+            android:id="@+id/btn_matrix_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="matrix_image_view"/>
+
+        <Button
+            android:id="@+id/btn_anim_list_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="anim_list_view"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Canvas"/>
+
+        <Button
+            android:id="@+id/btn_mesh_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mesh"/>
+
+        <Button
+            android:id="@+id/btn_mesh_view2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mesh2"/>
+
+        <Button
+            android:id="@+id/btn_wave_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="wave_view"/>
+
+        <Button
+            android:id="@+id/btn_polyline_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="polyline_view"/>
+
+        <Button
+            android:id="@+id/btn_custom_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="custom_image_view"/>
+
+        <Button
+            android:id="@+id/btn_custom_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="custom_layout"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="drawable"/>
+
+        <Button
+            android:id="@+id/btn_drawable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="drawable"/>
+    </LinearLayout>
+
+</ScrollView>

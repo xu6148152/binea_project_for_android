@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.xubinggui.customviewtest" >
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="false"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.ColorfilterViewActivity" />
+        <activity android:name=".activity.LightColorMatrixActivity" />
+        <activity android:name=".activity.PorterDuffColorFilterActivity" />
+        <activity android:name=".activity.XfermodeActivity" />
+        <activity android:name=".activity.ClockViewActivity" />
+        <activity android:name=".activity.MutiplViewActivity" />
+        <activity android:name=".activity.FontViewActivity" />
+        <activity android:name=".activity.MaskFilterActivity" />
+        <activity android:name=".activity.PathEffectActivity" />
+        <activity android:name=".activity.ECGActivity" />
+        <activity
+            android:name=".activity.ShaderViewActivity"
+            android:label="@string/title_activity_shader_view" >
+        </activity>
+        <activity
+            android:name=".activity.ReflectViewActivity"
+            android:label="@string/title_activity_reflect_view" >
+        </activity>
+        <activity
+            android:name=".activity.DreamEffectActivity"
+            android:label="@string/title_activity_dream_effect" >
+        </activity>
+        <activity
+            android:name=".activity.MatrixViewActivity"
+            android:label="@string/title_activity_matrix_view" >
+        </activity>
+        <activity
+            android:name=".activity.MatrixImageViewActivity"
+            android:label="@string/title_activity_matrix_image_view" >
+        </activity>
+        <activity
+            android:name=".activity.AnimListActivity"
+            android:label="@string/title_activity_anim_list" >
+        </activity>
+        <activity
+            android:name=".activity.BitmapMeshViewActivity"
+            android:label="@string/title_activity_bitma_mesh_view" >
+        </activity>
+        <activity
+            android:name=".activity.BitmapMeshView2Activity"
+            android:label="@string/title_activity_bitmap_mesh_view2" >
+        </activity>
+        <activity
+            android:name=".activity.WaveViewActivity"
+            android:label="@string/title_activity_wave_view" >
+        </activity>
+        <activity
+            android:name=".activity.PolylineViewActivity"
+            android:label="@string/title_activity_polyline_view" >
+        </activity>
+        <activity
+            android:name=".activity.CustomImageViewActivity"
+            android:label="@string/title_activity_custom_image_view" >
+        </activity>
+        <activity
+            android:name=".activity.CustomLayoutActivity"
+            android:label="@string/title_activity_custom_layout" >
+        </activity>
+        <activity
+            android:name=".activity.DrawableActivity"
+            android:label="@string/title_activity_drawable" >
+        </activity>
+    </application>
+
+</manifest>

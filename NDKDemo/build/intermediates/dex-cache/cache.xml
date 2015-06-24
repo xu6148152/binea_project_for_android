@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/xubinggui/android_dev/NDKDemo/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/xubinggui/android_dev/NDKDemo/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-0cf0dc4484c9bfb1a9afd2557cd07320cc797caf.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/android_dev/NDKDemo/app/build/intermediates/exploded-aar/NDKDemo/hellojni/unspecified/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e99cf8e970d7190f809491975b35d1e3d48bdff7">
+        <dex dex="/Users/xubinggui/android_dev/NDKDemo/app/build/intermediates/pre-dexed/debug/classes-b7db4c2fe11dfec51517a996fe80b467d1035f77.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/android_dev/NDKDemo/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/xubinggui/android_dev/NDKDemo/app/build/intermediates/pre-dexed/debug/classes-21253b6cbf82b7167c06534e6f8beca2e2c5ac90.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/android_dev/NDKDemo/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/xubinggui/android_dev/NDKDemo/app/build/intermediates/pre-dexed/debug/classes-efb8d4b44bac9dcb1906602b467b06c6133aef3d.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/xubinggui/android_dev/NDKDemo/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-2bea3af4c1fd6e78143c658051daf8ad6359adf6.jar" />
+    </item>
+
+</items>

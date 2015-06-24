@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/xubinggui/.gradle/caches/modules-2/files-2.1/commons-cli/commons-cli/1.2/2bf96b7aa8b611c177d329452af1dc933e14501c/commons-cli-1.2.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="2bf96b7aa8b611c177d329452af1dc933e14501c">
+        <dex dex="/Users/xubinggui/android-open/CustomViewTest/app/build/intermediates/pre-dexed/debug/commons-cli-1.2-38e71f28b01f4ddc0dcaaecb36eff2b98f1b7552.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/android-open/CustomViewTest/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/xubinggui/android-open/CustomViewTest/app/build/intermediates/pre-dexed/debug/classes-f71106a8d240a4091cfe7019dd38108813578d80.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/android-open/CustomViewTest/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/xubinggui/android-open/CustomViewTest/app/build/intermediates/pre-dexed/debug/classes-908982c7f1d8b6d1d34c8e145ba7d0390cb6b6d0.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/2.0.1/516c03b21d50a644d538de0f0369c620989cd8f0/jsr305-2.0.1.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="516c03b21d50a644d538de0f0369c620989cd8f0">
+        <dex dex="/Users/xubinggui/android-open/CustomViewTest/app/build/intermediates/pre-dexed/debug/jsr305-2.0.1-5d929295e2294b00df7e4c9be283ab61fe771d40.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/android-open/CustomViewTest/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/xubinggui/android-open/CustomViewTest/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-2c545d4daa7fdca7552e6921ccb5a891f5a2f9d2.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/xubinggui/android-open/CustomViewTest/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-2bea3af4c1fd6e78143c658051daf8ad6359adf6.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/android-open/CustomViewTest/app/build/intermediates/exploded-aar/com.facebook.stetho/stetho/1.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="ad550d13088889cd4b803d2691472039275bc967">
+        <dex dex="/Users/xubinggui/android-open/CustomViewTest/app/build/intermediates/pre-dexed/debug/classes-a11c248a76704623c6d67036c6e19fefa056d338.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife/6.1.0/63735f48b82bcd24cdd33821342428252eb1ca5a/butterknife-6.1.0.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="63735f48b82bcd24cdd33821342428252eb1ca5a">
+        <dex dex="/Users/xubinggui/android-open/CustomViewTest/app/build/intermediates/pre-dexed/debug/butterknife-6.1.0-b42499a4a1f62cf4d63d0a10489d9fab83658be4.jar" />
+    </item>
+
+</items>

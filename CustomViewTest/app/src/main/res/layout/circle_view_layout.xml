@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.example.xubinggui.customviewtest.widget.CircleView
+            android:id="@+id/circle_view"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/aa"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/tv_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="R"/>
+
+            <SeekBar
+                android:layout_toRightOf="@id/tv_red"
+                android:id="@+id/sb_red"
+                android:max="255"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/tv_green"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="G"/>
+
+            <SeekBar
+                android:layout_toRightOf="@id/tv_green"
+                android:id="@+id/sb_green"
+                android:max="255"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/tv_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="B"/>
+
+            <SeekBar
+                android:layout_toRightOf="@id/tv_blue"
+                android:id="@+id/sb_blue"
+                android:max="255"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/tv_alpha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A"/>
+
+            <SeekBar
+                android:layout_toRightOf="@id/tv_alpha"
+                android:id="@+id/sb_alpha"
+                android:max="255"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+        </RelativeLayout>
+
+        <Button
+            android:text="reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_reset"/>
+    </LinearLayout>
+</ScrollView>

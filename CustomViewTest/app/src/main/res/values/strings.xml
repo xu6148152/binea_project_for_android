@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CustomViewTest</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_shader_view">ShaderViewActivity</string>
+    <string name="title_activity_reflect_view">ReflectViewActivity</string>
+    <string name="title_activity_dream_effect">DreamEffectActivity</string>
+    <string name="title_activity_matrix_view">MatrixViewActivity</string>
+    <string name="title_activity_matrix_image_view">MatrixImageViewActivity</string>
+    <string name="title_activity_anim_list">AnimListActivity</string>
+    <string name="title_activity_bitma_mesh_view">BitmaMeshViewActivity</string>
+    <string name="title_activity_bitmap_mesh_view2">BitmapMeshView2Activity</string>
+    <string name="title_activity_wave_view">WaveViewActivity</string>
+    <string name="title_activity_polyline_view">PolylineViewActivity</string>
+    <string name="title_activity_custom_image_view">CustomImageViewActivity</string>
+    <string name="title_activity_custom_layout">CustomLayoutActivity</string>
+    <string name="title_activity_drawable">DrawableActivity</string>
+
+</resources>

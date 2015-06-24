@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/xubinggui/android_dev/Camera2Demo/app/build/intermediates/exploded-aar/com.android.support/support-v13/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0dcc55e70f7ebf7238fe2ec53f662eb378ab2668">
+        <dex dex="/Users/xubinggui/android_dev/Camera2Demo/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-a6d21f2ea7716a40184e69f16742b6199dbab0f3.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/android_dev/Camera2Demo/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/xubinggui/android_dev/Camera2Demo/app/build/intermediates/pre-dexed/debug/classes-dbb979742179ca77076e150a7f84457ecbf5884c.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/android_dev/Camera2Demo/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/xubinggui/android_dev/Camera2Demo/app/build/intermediates/pre-dexed/debug/classes-a7832934e986a891bd169b5f2d0a4c40acd581fd.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/android_dev/Camera2Demo/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/xubinggui/android_dev/Camera2Demo/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-9a16f6e62439d55a1e1605e08001f283c559279a.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/android_dev/Camera2Demo/app/build/intermediates/exploded-aar/com.android.support/support-v13/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c2071dcaf7a008c3b01a6381a33be55396bab09">
+        <dex dex="/Users/xubinggui/android_dev/Camera2Demo/app/build/intermediates/pre-dexed/debug/classes-3bf10b27314280bc85732656af447b423be18c5e.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/xubinggui/android_dev/Camera2Demo/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-2bea3af4c1fd6e78143c658051daf8ad6359adf6.jar" />
+    </item>
+
+</items>

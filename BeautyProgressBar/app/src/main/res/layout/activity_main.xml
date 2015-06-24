@@ -1,0 +1,96 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:xbg="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="25dp">
+
+        <demo.binea.com.beautyprogressbar.widget.HorizontalProgressBar
+            android:id="@+id/id_progressbar01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dip"
+            android:padding="5dp"/>
+
+        <demo.binea.com.beautyprogressbar.widget.HorizontalProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dip"
+            android:padding="5dp"
+            android:progress="10"
+            xbg:progress_text_color="#ff2903FC"
+            xbg:progress_unreached_color="#ffBCB4E8"/>
+
+        <demo.binea.com.beautyprogressbar.widget.HorizontalProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dip"
+            android:padding="5dp"
+            android:progress="30"
+            xbg:progress_text_color="#ff03F793"
+            xbg:progress_unreached_color="#ffAFF2D6"/>
+
+        <demo.binea.com.beautyprogressbar.widget.HorizontalProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dip"
+            android:padding="5dp"
+            android:progress="50"
+            xbg:progress_text_color="#ffF53B03"
+            xbg:progress_unreached_color="#ffF7C6B7"/>
+
+        <demo.binea.com.beautyprogressbar.widget.CircleProgressBar
+            android:id="@+id/id_progress02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dip"
+            android:padding="5dp"
+            android:progress="30"/>
+
+        <demo.binea.com.beautyprogressbar.widget.HorizontalProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dip"
+            android:padding="5dp"
+            android:progress="50"
+            xbg:progress_reached_bar_height="20dp"
+            xbg:progress_text_color="#ffF53B03"
+            xbg:radius="60dp"/>
+
+        <demo.binea.com.beautyprogressbar.widget.CircleProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dip"
+            android:padding="5dp"
+            android:progress="70"
+            xbg:progress_text_color="#ff2903FC"
+            xbg:progress_text_size="30sp"
+            xbg:progress_unreached_color="#ffBCB4E8"
+            xbg:radius="80dp"/>
+
+        <demo.binea.com.beautyprogressbar.widget.CircleProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dip"
+            android:background="#44ff0000"
+            android:padding="5dp"
+            android:progress="70"
+            xbg:progress_reached_bar_height="20dp"
+            xbg:progress_text_color="#ffF53B03"
+            xbg:progress_unreached_color="#00F7C6B7"/>
+
+        <demo.binea.com.beautyprogressbar.widget.LeafLoadingView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+        <android.support.v4.widget.ContentLoadingProgressBar
+            android:id="@+id/content_progress_bar"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+
+    </LinearLayout>
+</ScrollView>
