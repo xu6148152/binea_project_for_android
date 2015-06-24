@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">DrawableDemo</string>
+
+    <string name="drawable_state">drawable_state</string>
+</resources>

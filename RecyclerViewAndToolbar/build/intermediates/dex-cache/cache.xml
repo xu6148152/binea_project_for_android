@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/xubinggui/android-open/RecyclerViewAndToolbar/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/xubinggui/android-open/RecyclerViewAndToolbar/app/build/intermediates/pre-dexed/debug/classes-c4762f4542566806ca258af2820c5330faf089be.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/android-open/RecyclerViewAndToolbar/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/xubinggui/android-open/RecyclerViewAndToolbar/app/build/intermediates/pre-dexed/debug/classes-a4e18d6b83b6c93e093ba08f1288a0cb127358d1.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/android-open/RecyclerViewAndToolbar/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/xubinggui/android-open/RecyclerViewAndToolbar/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-05f543f4c57697c5b63ba46e612e73a8a7839f57.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/android-open/RecyclerViewAndToolbar/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="efeda77c808750cb670ee9c48d8a1835d89dbcb2">
+        <dex dex="/Users/xubinggui/android-open/RecyclerViewAndToolbar/app/build/intermediates/pre-dexed/debug/classes-f0852e7efb39ca40f784b997ee3d61ad26a9e6e5.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/android-open/RecyclerViewAndToolbar/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="00b0b7233e1ec64acebfac40d4983d32d4712426">
+        <dex dex="/Users/xubinggui/android-open/RecyclerViewAndToolbar/app/build/intermediates/pre-dexed/debug/classes-9e3ba63e284c2fa9236b7500600a4e29f9147a10.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/xubinggui/android-open/RecyclerViewAndToolbar/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-2bea3af4c1fd6e78143c658051daf8ad6359adf6.jar" />
+    </item>
+
+</items>
