@@ -71,7 +71,7 @@ public class PullAndLoadListView extends PullToRefreshListView {
 
             if (visibleItemCount == totalItemCount) {
                 mProgressBarLoadMore.setVisibility(View.GONE);
-                // mLabLoadMore.setVisibility(View.GONE);
+                 //mLabLoadMore.setVisibility(View.GONE);
                 return;
             }
 
@@ -102,6 +102,7 @@ public class PullAndLoadListView extends PullToRefreshListView {
     public void onLoadMoreComplete() {
         mIsLoadingMore = false;
         mProgressBarLoadMore.setVisibility(View.GONE);
+        //smoothScrollToPosition(getAdapter().getCount() - 1);
     }
 
     /**
