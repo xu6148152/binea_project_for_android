@@ -6,12 +6,12 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.view.View;
 import android.widget.AbsListView;
-import demo.binea.com.pullrefreshstickyheaderlistview.widget.se.emilsjolander.stickylistheaders.pulltorefresh.PullAndLoadListView;
+import demo.binea.com.pullrefreshstickyheaderlistview.widget.se.emilsjolander.stickylistheaders.pulltorefresh.PullToRefreshListView;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-class WrapperViewList extends PullAndLoadListView {
+class WrapperViewList extends PullToRefreshListView {
 
 	interface LifeCycleListener {
 		void onDispatchDrawOccurred(Canvas canvas);
