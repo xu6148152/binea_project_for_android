@@ -24,8 +24,6 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.SectionIndexer;
 import demo.binea.com.pullrefreshstickyheaderlistview.R;
-import demo.binea.com.pullrefreshstickyheaderlistview.widget.se.emilsjolander.stickylistheaders.pulltorefresh.PullAndLoadListView;
-import demo.binea.com.pullrefreshstickyheaderlistview.widget.se.emilsjolander.stickylistheaders.pulltorefresh.PullToRefreshListView;
 
 /**
  * Even though this is a FrameLayout subclass we it is called a ListView. This
@@ -1032,27 +1030,7 @@ public class StickyListHeadersListView extends FrameLayout {
         mList.onRestoreInstanceState(state);
     }
 
-    public void setOnRefreshListener(PullToRefreshListView.OnRefreshListener listener){
-        if(null != mList) {
-            mList.setOnRefreshListener(listener);
-        }
-    }
-
-    public void setOnLoadMoreListener(PullAndLoadListView.OnLoadMoreListener listener){
-        if(null != mList) {
-            mList.setOnLoadMoreListener(listener);
-        }
-    }
-
-    public void onRefreshComplete(){
-        if(null != mList){
-            mList.onRefreshComplete();
-        }
-    }
-
-    public void onLoadMoreComplete(){
-        if(null != mList){
-            mList.onLoadMoreComplete();
-        }
+    public void setRefreshAndLoadMoreListener(RefreshAndLoadListener listener){
+        mList.setonre
     }
 }
