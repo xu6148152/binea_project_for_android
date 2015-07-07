@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FitChart">
+        <attr name="strokeSize" format="dimension|reference" />
+        <attr name="strokeColor" format="color|reference" />
+    </declare-styleable>
+</resources>
