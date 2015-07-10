@@ -1,12 +1,46 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".MainActivity"
+        >
 
-        <TextureView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/texture_view"/>
+    <demo.binea.com.mediacodecdemo.CaptureVideo.AspectFrameLayout
+            android:id="@+id/cameraPreview_afl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            >
+            <android.opengl.GLSurfaceView
+                    android:id="@+id/cameraPreview_surfaceView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
 
-</RelativeLayout>
+    </demo.binea.com.mediacodecdemo.CaptureVideo.AspectFrameLayout>
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="start"
+            android:id="@+id/toggleRecording_button"
+            android:onClick="clickToggleRecording"
+            android:layout_gravity="bottom"
+            />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cameraOutputFile_text"
+            />
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="play"
+            android:id="@+id/btn_play"
+            />
+
+</FrameLayout>
