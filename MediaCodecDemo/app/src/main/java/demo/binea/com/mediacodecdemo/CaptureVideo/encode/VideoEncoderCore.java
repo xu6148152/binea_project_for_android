@@ -1,4 +1,20 @@
-package demo.binea.com.mediacodecdemo.CaptureVideo.coder.grafica;
+/*
+ * Copyright 2014 Google Inc. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package demo.binea.com.mediacodecdemo.CaptureVideo.encode;
 
 import android.media.MediaCodec;
 import android.media.MediaCodecInfo;
@@ -21,7 +37,7 @@ import java.nio.ByteBuffer;
  * on one thread, and drain the output on a different thread.
  */
 public class VideoEncoderCore {
-    private static final String TAG = VideoEncoderCore.class.getCanonicalName();
+    private static final String TAG = "VideoEncoderCore";
     private static final boolean VERBOSE = false;
 
     // TODO: these ought to be configurable as well
@@ -35,7 +51,6 @@ public class VideoEncoderCore {
     private MediaCodec.BufferInfo mBufferInfo;
     private int mTrackIndex;
     private boolean mMuxerStarted;
-
 
     /**
      * Configures encoder and muxer state, and prepares the input Surface.
@@ -68,9 +83,7 @@ public class VideoEncoderCore {
         //
         // We're not actually interested in multiplexing audio.  We just want to convert
         // the raw H.264 elementary stream we get from MediaCodec into a .mp4 file.
-        mMuxer = new MediaMuxer(outputFile.toString(),
-                MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
-
+        mMuxer = new MediaMuxer(outputFile.toString(), MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
         mTrackIndex = -1;
         mMuxerStarted = false;
     }
@@ -146,8 +159,7 @@ public class VideoEncoderCore {
                 mMuxer.start();
                 mMuxerStarted = true;
             } else if (encoderStatus < 0) {
-                Log.w(TAG, "unexpected result from encoder.dequeueOutputBuffer: " +
-                        encoderStatus);
+                Log.w(TAG, "unexpected result from encoder.dequeueOutputBuffer: " + encoderStatus);
                 // let's ignore it
             } else {
                 ByteBuffer encodedData = encoderOutputBuffers[encoderStatus];

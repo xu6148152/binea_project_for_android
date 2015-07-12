@@ -12,6 +12,7 @@ import demo.binea.com.mediacodecdemo.CaptureVideo.camera.CameraController;
 import demo.binea.com.mediacodecdemo.CaptureVideo.camera.CameraHelper;
 import demo.binea.com.mediacodecdemo.CaptureVideo.camera.CameraRecordRenderer;
 import demo.binea.com.mediacodecdemo.CaptureVideo.camera.CommonHandlerListener;
+import demo.binea.com.mediacodecdemo.CaptureVideo.encode.newencode.MediaVideoEncoder;
 import demo.binea.com.mediacodecdemo.filter.FilterManager;
 
 /**
@@ -22,6 +23,9 @@ public class CameraPreview extends AutoFitSurfaceView
     private CameraHandler mBackgroundHandler;
     private HandlerThread mHandlerThread;
     private CameraRecordRenderer mCameraRenderer;
+
+    private int viewWidth;
+    private int viewHeight;
 
     public CameraPreview(Context context) {
         this(context, null);
@@ -90,6 +94,26 @@ public class CameraPreview extends AutoFitSurfaceView
         requestRender();
     }
 
+    public int getVideoWidth() {
+        return viewHeight;
+    }
+
+    public int getVideoHeight() {
+        return viewHeight;
+    }
+
+    public void setVideoEncoder(final MediaVideoEncoder encoder) {
+        queueEvent(new Runnable() {
+            @Override
+            public void run() {
+                synchronized (mCameraRenderer) {
+                    mCameraRenderer.setVideoEncoder(encoder);
+                    //mVideoEncoder = encoder;
+                }
+            }
+        });
+    }
+
     public static class CameraHandler extends Handler {
         public static final int SETUP_CAMERA = 1001;
         public static final int CONFIGURE_CAMERA = 1002;
@@ -132,8 +156,8 @@ public class CameraPreview extends AutoFitSurfaceView
                 Camera.Size previewSize = CameraHelper.getOptimalPreviewSize(
                         CameraController.getInstance().getCameraParameters(),
                         CameraController.getInstance().mCameraPictureSize, width);
-
                 CameraController.getInstance().configureCameraParameters(previewSize);
+                viewWidth = width;
                 if (previewSize != null) {
                     mCameraRenderer.setCameraPreviewSize(previewSize.height, previewSize.width);
                 }
@@ -160,5 +184,13 @@ public class CameraPreview extends AutoFitSurfaceView
             default:
                 break;
         }
+    }
+
+    public void stopRecording(){
+        mCameraRenderer.setRecordingEnabled(false);
+    }
+
+    public void startRecordind(){
+        mCameraRenderer.setRecordingEnabled(true);
     }
 }

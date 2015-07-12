@@ -1,4 +1,4 @@
-package demo.binea.com.mediacodecdemo.CaptureVideo.coder;
+package demo.binea.com.mediacodecdemo.CaptureVideo.encode;
 
 /**
  * Created by relex on 15/6/2.
