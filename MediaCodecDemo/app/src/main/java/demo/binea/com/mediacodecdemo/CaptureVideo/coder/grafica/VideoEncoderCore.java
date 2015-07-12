@@ -1,4 +1,4 @@
-package demo.binea.com.mediacodecdemo.CaptureVideo;
+package demo.binea.com.mediacodecdemo.CaptureVideo.coder.grafica;
 
 import android.media.MediaCodec;
 import android.media.MediaCodecInfo;

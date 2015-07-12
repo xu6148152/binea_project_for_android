@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package demo.binea.com.mediacodecdemo.CaptureVideo.gles;
+package demo.binea.com.mediacodecdemo.CaptureVideo.gles.grafika;
 
 import android.graphics.SurfaceTexture;
 import android.view.Surface;
+import demo.binea.com.mediacodecdemo.CaptureVideo.gles.EglCore;
+import demo.binea.com.mediacodecdemo.CaptureVideo.gles.EglSurfaceBase;
 
 /**
  * Recordable EGL window surface.

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package demo.binea.com.mediacodecdemo.CaptureVideo.gles;
+package demo.binea.com.mediacodecdemo.CaptureVideo.gles.grafika;
 
 import android.opengl.Matrix;
 

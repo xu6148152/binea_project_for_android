@@ -25,6 +25,7 @@ import android.opengl.EGLExt;
 import android.opengl.EGLSurface;
 import android.util.Log;
 import android.view.Surface;
+import demo.binea.com.mediacodecdemo.CaptureVideo.gles.grafika.*;
 
 /**
  * Core EGL state (display, context, config).
@@ -32,7 +33,7 @@ import android.view.Surface;
  * The EGLContext must only be attached to one thread at a time.  This class is not thread-safe.
  */
 public final class EglCore {
-    private static final String TAG = GlUtil.TAG;
+    private static final String TAG = demo.binea.com.mediacodecdemo.CaptureVideo.gles.grafika.GlUtil.TAG;
 
     /**
      * Constructor flag: surface must be recordable.  This discourages EGL from using a

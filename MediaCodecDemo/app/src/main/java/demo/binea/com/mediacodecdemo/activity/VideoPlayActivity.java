@@ -1,8 +1,9 @@
-package demo.binea.com.mediacodecdemo;
+package demo.binea.com.mediacodecdemo.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.VideoView;
+import demo.binea.com.mediacodecdemo.R;
 
 /**
  * Created by xubinggui on 7/9/15.

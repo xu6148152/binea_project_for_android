@@ -14,7 +14,10 @@
  * limitations under the License.
  */
 
-package demo.binea.com.mediacodecdemo.CaptureVideo.gles;
+package demo.binea.com.mediacodecdemo.CaptureVideo.gles.grafika;
+
+import demo.binea.com.mediacodecdemo.CaptureVideo.gles.EglCore;
+import demo.binea.com.mediacodecdemo.CaptureVideo.gles.EglSurfaceBase;
 
 /**
  * Off-screen EGL surface (pbuffer).

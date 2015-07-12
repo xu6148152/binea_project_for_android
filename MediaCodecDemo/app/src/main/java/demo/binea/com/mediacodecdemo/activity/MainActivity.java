@@ -1,4 +1,4 @@
-package demo.binea.com.mediacodecdemo;
+package demo.binea.com.mediacodecdemo.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -21,9 +21,10 @@ import android.widget.TextView;
 import demo.binea.com.mediacodecdemo.CaptureVideo.AspectFrameLayout;
 import demo.binea.com.mediacodecdemo.CaptureVideo.CameraOrientation;
 import demo.binea.com.mediacodecdemo.CaptureVideo.CameraUtils;
-import demo.binea.com.mediacodecdemo.CaptureVideo.TextureMovieEncoder;
-import demo.binea.com.mediacodecdemo.CaptureVideo.gles.FullFrameRect;
-import demo.binea.com.mediacodecdemo.CaptureVideo.gles.Texture2dProgram;
+import demo.binea.com.mediacodecdemo.CaptureVideo.coder.grafica.TextureMovieEncoder;
+import demo.binea.com.mediacodecdemo.CaptureVideo.gles.grafika.FullFrameRect;
+import demo.binea.com.mediacodecdemo.CaptureVideo.gles.grafika.Texture2dProgram;
+import demo.binea.com.mediacodecdemo.R;
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;

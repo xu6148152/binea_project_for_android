@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
-import demo.binea.com.mediacodecdemo.MainActivity;
+import demo.binea.com.mediacodecdemo.activity.MainActivity;
 
 /**
  * Created by xubinggui on 7/9/15.
