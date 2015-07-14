@@ -5,8 +5,8 @@ import android.graphics.SurfaceTexture;
 import android.opengl.EGL14;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
-import demo.binea.com.mediacodecdemo.CaptureVideo.coder.EncoderConfig;
-import demo.binea.com.mediacodecdemo.CaptureVideo.coder.TextureMovieEncoder;
+import demo.binea.com.mediacodecdemo.CaptureVideo.encode.EncoderConfig;
+import demo.binea.com.mediacodecdemo.CaptureVideo.encode.newencode.MediaVideoEncoder;
 import demo.binea.com.mediacodecdemo.CaptureVideo.gles.FullFrameRect;
 import demo.binea.com.mediacodecdemo.CaptureVideo.gles.GlUtil;
 import demo.binea.com.mediacodecdemo.filter.FilterManager;
@@ -29,7 +29,7 @@ public class CameraRecordRenderer implements GLSurfaceView.Renderer {
 
     private FilterManager.FilterType mCurrentFilterType;
     private FilterManager.FilterType mNewFilterType;
-    private TextureMovieEncoder mVideoEncoder;
+    public MediaVideoEncoder mVideoEncoder;
 
     private boolean mRecordingEnabled;
     private int mRecordingStatus;
@@ -44,7 +44,7 @@ public class CameraRecordRenderer implements GLSurfaceView.Renderer {
         mApplicationContext = applicationContext;
         mCameraHandler = cameraHandler;
         mCurrentFilterType = mNewFilterType = FilterManager.FilterType.Normal;
-        mVideoEncoder = TextureMovieEncoder.getInstance();
+        //mVideoEncoder = TextureMovieEncoder.getInstance();
     }
 
     public void setEncoderConfig(EncoderConfig encoderConfig) {
@@ -71,13 +71,13 @@ public class CameraRecordRenderer implements GLSurfaceView.Renderer {
 
     @Override public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         Matrix.setIdentityM(mSTMatrix, 0);
-        mRecordingEnabled = mVideoEncoder.isRecording();
-        if (mRecordingEnabled) {
-            mRecordingStatus = RECORDING_RESUMED;
-        } else {
-            mRecordingStatus = RECORDING_OFF;
-            mVideoEncoder.initFilter(mCurrentFilterType);
-        }
+        //mRecordingEnabled = mVideoEncoder.isRecording();
+        //if (mRecordingEnabled) {
+        //    mRecordingStatus = RECORDING_RESUMED;
+        //} else {
+        //    mRecordingStatus = RECORDING_OFF;
+            //mVideoEncoder.initFilter(mCurrentFilterType);
+        //}
         mFullScreen = new FullFrameRect(
                 FilterManager.getCameraFilter(mCurrentFilterType, mApplicationContext));
         mTextureId = mFullScreen.createTexture();
@@ -108,50 +108,59 @@ public class CameraRecordRenderer implements GLSurfaceView.Renderer {
         mSurfaceTexture.getTransformMatrix(mSTMatrix);
         mFullScreen.drawFrame(mTextureId, mSTMatrix);
 
-        videoOnDrawFrame(mTextureId, mSTMatrix, mSurfaceTexture.getTimestamp());
-    }
 
-    private void videoOnDrawFrame(int textureId, float[] texMatrix, long timestamp) {
-        if (mRecordingEnabled && mEncoderConfig != null) {
-            switch (mRecordingStatus) {
-                case RECORDING_OFF:
-                    mEncoderConfig.updateEglContext(EGL14.eglGetCurrentContext());
-                    mVideoEncoder.startRecording(mEncoderConfig);
-                    mVideoEncoder.setTextureId(textureId);
-                    mVideoEncoder.scaleMVPMatrix(mMvpScaleX, mMvpScaleY);
-                    mRecordingStatus = RECORDING_ON;
-
-                    break;
-                case RECORDING_RESUMED:
-                    mVideoEncoder.updateSharedContext(EGL14.eglGetCurrentContext());
-                    mVideoEncoder.setTextureId(textureId);
-                    mVideoEncoder.scaleMVPMatrix(mMvpScaleX, mMvpScaleY);
-                    mRecordingStatus = RECORDING_ON;
-                    break;
-                case RECORDING_ON:
-                    // yay
-                    break;
-                default:
-                    throw new RuntimeException("unknown status " + mRecordingStatus);
-            }
-        } else {
-            switch (mRecordingStatus) {
-                case RECORDING_ON:
-                case RECORDING_RESUMED:
-                    mVideoEncoder.stopRecording();
-                    mRecordingStatus = RECORDING_OFF;
-                    break;
-                case RECORDING_OFF:
-                    // yay
-                    break;
-                default:
-                    throw new RuntimeException("unknown status " + mRecordingStatus);
+        synchronized (this) {
+            if (mVideoEncoder != null && mRecordingEnabled) {
+                mVideoEncoder.setEglContext(EGL14.eglGetCurrentContext(), mTextureId);
+                // notify to capturing thread that the camera frame is available.
+                //mVideoEncoder.scaleMVPMatrix(mMvpScaleX, mMvpScaleY);
+                mVideoEncoder.frameAvailableSoon(mSTMatrix);
             }
         }
-
-        mVideoEncoder.updateFilter(mCurrentFilterType);
-        mVideoEncoder.frameAvailable(texMatrix, timestamp);
+        //videoOnDrawFrame(mTextureId, mSTMatrix, mSurfaceTexture.getTimestamp());
     }
+
+    //private void videoOnDrawFrame(int textureId, float[] texMatrix, long timestamp) {
+    //    if (mRecordingEnabled && mEncoderConfig != null) {
+    //        switch (mRecordingStatus) {
+    //            case RECORDING_OFF:
+    //                mEncoderConfig.updateEglContext(EGL14.eglGetCurrentContext());
+    //                mVideoEncoder.startRecording(mEncoderConfig);
+    //                mVideoEncoder.setTextureId(textureId);
+    //                mVideoEncoder.scaleMVPMatrix(mMvpScaleX, mMvpScaleY);
+    //                mRecordingStatus = RECORDING_ON;
+    //
+    //                break;
+    //            case RECORDING_RESUMED:
+    //                mVideoEncoder.updateSharedContext(EGL14.eglGetCurrentContext());
+    //                mVideoEncoder.setTextureId(textureId);
+    //                mVideoEncoder.scaleMVPMatrix(mMvpScaleX, mMvpScaleY);
+    //                mRecordingStatus = RECORDING_ON;
+    //                break;
+    //            case RECORDING_ON:
+    //                // yay
+    //                break;
+    //            default:
+    //                throw new RuntimeException("unknown status " + mRecordingStatus);
+    //        }
+    //    } else {
+    //        switch (mRecordingStatus) {
+    //            case RECORDING_ON:
+    //            case RECORDING_RESUMED:
+    //                mVideoEncoder.stopRecording();
+    //                mRecordingStatus = RECORDING_OFF;
+    //                break;
+    //            case RECORDING_OFF:
+    //                // yay
+    //                break;
+    //            default:
+    //                throw new RuntimeException("unknown status " + mRecordingStatus);
+    //        }
+    //    }
+    //
+    //    mVideoEncoder.updateFilter(mCurrentFilterType);
+    //    mVideoEncoder.frameAvailable(texMatrix, timestamp);
+    //}
 
     public void notifyPausing() {
 
@@ -168,5 +177,9 @@ public class CameraRecordRenderer implements GLSurfaceView.Renderer {
 
     public void changeFilter(FilterManager.FilterType filterType) {
         mNewFilterType = filterType;
+    }
+
+    public void setVideoEncoder(MediaVideoEncoder encoder) {
+        mVideoEncoder = encoder;
     }
 }

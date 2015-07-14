@@ -21,7 +21,7 @@ import android.widget.TextView;
 import demo.binea.com.mediacodecdemo.CaptureVideo.AspectFrameLayout;
 import demo.binea.com.mediacodecdemo.CaptureVideo.CameraOrientation;
 import demo.binea.com.mediacodecdemo.CaptureVideo.CameraUtils;
-import demo.binea.com.mediacodecdemo.CaptureVideo.coder.grafica.TextureMovieEncoder;
+import demo.binea.com.mediacodecdemo.CaptureVideo.encode.grafica.TextureMovieEncoder;
 import demo.binea.com.mediacodecdemo.CaptureVideo.gles.grafika.FullFrameRect;
 import demo.binea.com.mediacodecdemo.CaptureVideo.gles.grafika.Texture2dProgram;
 import demo.binea.com.mediacodecdemo.R;
