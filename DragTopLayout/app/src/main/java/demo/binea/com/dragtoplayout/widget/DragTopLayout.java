@@ -360,20 +360,20 @@ public class DragTopLayout extends FrameLayout {
         }
     }
 
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        try {
-            //if(Math.abs(lastDeltY) < mTouchSlop){
-            //    shouldIntercept = false;
-            //}
-            boolean intercept = shouldIntercept && dragHelper.shouldInterceptTouchEvent(ev);
-            LogUtil.d(TAG, "onInterceptTouchEvent shouldIntercept " + shouldIntercept + " intercept " + intercept);
-            return intercept;
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
+    //@Override
+    //public boolean onInterceptTouchEvent(MotionEvent ev) {
+    //    try {
+    //        //if(Math.abs(lastDeltY) < mTouchSlop){
+    //        //    shouldIntercept = false;
+    //        //}
+    //        boolean intercept = shouldIntercept;
+    //        LogUtil.d(TAG, "onInterceptTouchEvent shouldIntercept " + shouldIntercept + " intercept " + intercept);
+    //        return intercept;
+    //    } catch (NullPointerException e) {
+    //        e.printStackTrace();
+    //    }
+    //    return false;
+    //}
 
     float downY;
     float downX;
@@ -423,11 +423,11 @@ public class DragTopLayout extends FrameLayout {
             resetDispatchingContentView();
             LogUtil.d(TAG, "shouldDispatchToChild " + shouldDispatchToChild);
             //if(shouldDispatchToChild){
+                dragContentView.dispatchTouchEvent(event);
+            //}
+            //if(Math.abs(downX - event.getX()) > Math.abs(downY - event.getY())){
             //    dragContentView.dispatchTouchEvent(event);
             //}
-            if(Math.abs(downX - event.getX()) > Math.abs(downY - event.getY())){
-                dragContentView.dispatchTouchEvent(event);
-            }
         }
 
         return true;
@@ -717,6 +717,10 @@ public class DragTopLayout extends FrameLayout {
             shouldIntercept = false;
         }
 
+        if(shouldIntercept){
+            dragHelper.processTouchEvent(ev);
+            return true;
+        }
         LogUtil.d(TAG, "dispatch shouldIntercept " + shouldIntercept);
         return super.dispatchTouchEvent(ev);
     }
