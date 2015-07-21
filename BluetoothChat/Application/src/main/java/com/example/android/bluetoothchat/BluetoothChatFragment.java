@@ -41,7 +41,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.android.common.logger.Log;
 
 /**
@@ -175,7 +174,7 @@ public class BluetoothChatFragment extends Fragment {
                 if (null != view) {
                     TextView textView = (TextView) view.findViewById(R.id.edit_text_out);
                     String message = textView.getText().toString();
-                    sendMessage(message);
+                    sendMessage(Byte2Hex.RAWDATACOMMAND);
                 }
             }
         });
@@ -214,7 +213,13 @@ public class BluetoothChatFragment extends Fragment {
         // Check that there's actually something to send
         if (message.length() > 0) {
             // Get the message bytes and tell the BluetoothChatService to write
-            byte[] send = message.getBytes();
+            //byte[] send = message.getBytes();
+            final byte[] send = Byte2Hex.hexToBytes(message);
+            for(int i = 0;i<send.length / 2; i++){
+                byte tmp = send[i];
+                send[i] = send[send.length - 1 - i];
+                send[send.length - 1 - i] = tmp;
+            }
             mChatService.write(send);
 
             // Reset out string buffer to zero and clear the edit text field

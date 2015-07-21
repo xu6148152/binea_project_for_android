@@ -205,7 +205,7 @@ public class BluetoothChatService {
 
         setState(STATE_CONNECTED);
 
-        BasketDataDelegate delegate = new BasketDataDelegate(socket);
+        //BasketDataDelegate delegate = new BasketDataDelegate(socket);
     }
 
     /**
@@ -471,7 +471,7 @@ public class BluetoothChatService {
 
         public void run() {
             Log.i(TAG, "BEGIN mConnectedThread");
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[10240];
             int bytes;
 
             // Keep listening to the InputStream while connected
@@ -479,10 +479,11 @@ public class BluetoothChatService {
                 try {
                     // Read from the InputStream
                     bytes = mmInStream.read(buffer);
-
+                    String readMessage = Byte2Hex.bytesToHex(buffer, " ");
+                    Log.d(TAG, "length " + readMessage.length() + " readMessage " + readMessage);
                     // Send the obtained bytes to the UI Activity
-                    mHandler.obtainMessage(Constants.MESSAGE_READ, bytes, -1, buffer)
-                            .sendToTarget();
+                    //mHandler.obtainMessage(Constants.MESSAGE_READ, bytes, -1, buffer)
+                    //        .sendToTarget();
                 } catch (IOException e) {
                     Log.e(TAG, "disconnected", e);
                     connectionLost();
