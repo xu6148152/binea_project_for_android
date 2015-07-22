@@ -471,7 +471,7 @@ public class BluetoothChatService {
 
         public void run() {
             Log.i(TAG, "BEGIN mConnectedThread");
-            byte[] buffer = new byte[10240];
+            byte[] buffer = new byte[1340];
             int bytes;
 
             // Keep listening to the InputStream while connected
@@ -479,7 +479,8 @@ public class BluetoothChatService {
                 try {
                     // Read from the InputStream
                     bytes = mmInStream.read(buffer);
-                    String readMessage = Byte2Hex.bytesToHex(buffer, " ");
+                    String readMessage = Byte2Hex.bytesToHex(buffer);
+                    FileUtil.saveData(readMessage);
                     Log.d(TAG, "length " + readMessage.length() + " readMessage " + readMessage);
                     // Send the obtained bytes to the UI Activity
                     //mHandler.obtainMessage(Constants.MESSAGE_READ, bytes, -1, buffer)

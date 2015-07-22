@@ -88,6 +88,15 @@ public class BluetoothChatFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //StringBuilder sb = new StringBuilder();
+        //for(int i = 0;i<RawData.RAWDATA.length();i+=4){
+        //    final String stringData = RawData.RAWDATA.substring(i, i + 4);
+        //    final int str = Integer.parseInt(stringData, 16);
+        //    sb.append(str + " ");
+        //}
+        //sb.toString();
+        Log.d("PATH ", FileUtil.filePath);
         setHasOptionsMenu(true);
         // Get local Bluetooth adapter
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
