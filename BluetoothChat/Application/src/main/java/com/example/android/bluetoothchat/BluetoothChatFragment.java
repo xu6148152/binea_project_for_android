@@ -41,12 +41,15 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com._94fifty.model.request.EndDribblingActivityRequest;
+import com._94fifty.model.request.StartDribblingActivityRequest;
+import com._94fifty.model.type.RequestStatus;
 import com.example.android.common.logger.Log;
 
 /**
  * This fragment controls Bluetooth to communicate with other devices.
  */
-public class BluetoothChatFragment extends Fragment {
+public class BluetoothChatFragment extends Fragment{
 
     private static final String TAG = "BluetoothChatFragment";
 
@@ -59,6 +62,8 @@ public class BluetoothChatFragment extends Fragment {
     private ListView mConversationView;
     private EditText mOutEditText;
     private Button mSendButton;
+
+    private boolean isStartShoot = false;
 
     /**
      * Name of the connected device
@@ -84,6 +89,8 @@ public class BluetoothChatFragment extends Fragment {
      * Member object for the chat services
      */
     private BluetoothChatService mChatService = null;
+
+    private TextView tv_shoot_count;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -159,6 +166,7 @@ public class BluetoothChatFragment extends Fragment {
         mConversationView = (ListView) view.findViewById(R.id.in);
         mOutEditText = (EditText) view.findViewById(R.id.edit_text_out);
         mSendButton = (Button) view.findViewById(R.id.button_send);
+        tv_shoot_count = (TextView) view.findViewById(R.id.tv_shoot_count);
     }
 
     /**
@@ -183,7 +191,30 @@ public class BluetoothChatFragment extends Fragment {
                 if (null != view) {
                     TextView textView = (TextView) view.findViewById(R.id.edit_text_out);
                     String message = textView.getText().toString();
-                    sendMessage(Byte2Hex.RAWDATACOMMAND);
+                    String msg = null;
+                    if(!isStartShoot) {
+                        //sendMessage(Byte2Hex.RAWDATACOMMAND);
+                        final RequestStatus requestStatus = mChatService.delegate.sendRequest(
+                                new StartDribblingActivityRequest());
+
+                        if(requestStatus == RequestStatus.OK){
+                            msg = "start ok";
+                        }else{
+                            msg = "start error";
+                        }
+                    }else{
+                        final RequestStatus requestStatus = mChatService.delegate.sendRequest(
+                                new EndDribblingActivityRequest());
+                        if(requestStatus == RequestStatus.OK){
+                            msg = "end ok";
+                        }else{
+                            msg = "end error";
+                        }
+                    }
+
+                    Log.d(TAG,"requestStatus " + msg);
+
+                    isStartShoot = !isStartShoot;
                 }
             }
         });
@@ -335,6 +366,12 @@ public class BluetoothChatFragment extends Fragment {
                                 Toast.LENGTH_SHORT).show();
                     }
                     break;
+
+                case Constants.MESSAGE_DRIBBLING_ACTIVITY_RECORD_NOTIFICATION:
+                    final long totalDribblingCount =
+                            msg.getData().getLong(Constants.DRIBBLING_ACTIVITY_RECORD_NOTIFICATION);
+                    tv_shoot_count.setText(String.valueOf(totalDribblingCount));
+                    break;
             }
         }
     };
@@ -412,5 +449,4 @@ public class BluetoothChatFragment extends Fragment {
         }
         return false;
     }
-
 }

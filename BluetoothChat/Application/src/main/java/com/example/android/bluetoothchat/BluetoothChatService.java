@@ -24,6 +24,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import com._94fifty.model.response.notification.DribblingActivityRecordNotification;
 import com.example.android.common.logger.Log;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,7 +37,7 @@ import java.util.UUID;
  * incoming connections, a thread for connecting with a device, and a
  * thread for performing data transmissions when connected.
  */
-public class BluetoothChatService {
+public class BluetoothChatService implements BasketballDataNotificationListener {
     // Debugging
     private static final String TAG = "BluetoothChatService";
 
@@ -67,6 +68,10 @@ public class BluetoothChatService {
     public static final int STATE_CONNECTING = 2; // now initiating an outgoing connection
     public static final int STATE_CONNECTED = 3;  // now connected to a remote device
 
+
+    public BluetoothSocket socket;
+
+    public BasketDataDelegate delegate;
     /**
      * Constructor. Prepares a new BluetoothChat session.
      *
@@ -193,8 +198,8 @@ public class BluetoothChatService {
         }
 
         // Start the thread to manage the connection and perform transmissions
-        mConnectedThread = new ConnectedThread(socket, socketType);
-        mConnectedThread.start();
+        //mConnectedThread = new ConnectedThread(socket, socketType);
+        //mConnectedThread.start();
 
         // Send the name of the connected device back to the UI Activity
         Message msg = mHandler.obtainMessage(Constants.MESSAGE_DEVICE_NAME);
@@ -205,7 +210,8 @@ public class BluetoothChatService {
 
         setState(STATE_CONNECTED);
 
-        //BasketDataDelegate delegate = new BasketDataDelegate(socket);
+        delegate = new BasketDataDelegate(socket);
+        delegate.setBasketballDataMotificationListener(this);
     }
 
     /**
@@ -284,6 +290,15 @@ public class BluetoothChatService {
         BluetoothChatService.this.start();
     }
 
+    @Override
+    public void dribblingActivityRecord(DribblingActivityRecordNotification notification) {
+        Message msg = mHandler.obtainMessage(Constants.MESSAGE_DRIBBLING_ACTIVITY_RECORD_NOTIFICATION);
+        Bundle bundle = new Bundle();
+        bundle.putLong(Constants.DRIBBLING_ACTIVITY_RECORD_NOTIFICATION, notification.getRecord().getTotalDribbles());
+        msg.setData(bundle);
+        mHandler.sendMessage(msg);
+    }
+
     /**
      * This thread runs while listening for incoming connections. It behaves
      * like a server-side client. It runs until a connection is accepted
@@ -318,7 +333,7 @@ public class BluetoothChatService {
                     "BEGIN mAcceptThread" + this);
             setName("AcceptThread" + mSocketType);
 
-            BluetoothSocket socket = null;
+            //BluetoothSocket socket = null;
 
             // Listen to the server socket if we're not connected
             while (mState != STATE_CONNECTED) {

@@ -64,7 +64,8 @@
     <string name="scanning">scanning for devices...</string>
     <string name="secure_connect">Connect a device - Secure</string>
     <string name="select_device">select a device to connect</string>
-    <string name="send">Send</string>
+    <string name="start">start</string>
+    <string name="stop">stop</string>
     <string name="title_connected_to">connected to <ns1:g id="device_name">%1$s</ns1:g></string>
     <string name="title_connecting">connecting...</string>
     <string name="title_not_connected">not connected</string>
