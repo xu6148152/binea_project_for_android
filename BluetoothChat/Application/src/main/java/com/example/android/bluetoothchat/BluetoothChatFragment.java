@@ -45,6 +45,7 @@ import com._94fifty.model.request.EndDribblingActivityRequest;
 import com._94fifty.model.request.StartDribblingActivityRequest;
 import com._94fifty.model.type.RequestStatus;
 import com.example.android.common.logger.Log;
+import java.util.Date;
 
 /**
  * This fragment controls Bluetooth to communicate with other devices.
@@ -194,8 +195,11 @@ public class BluetoothChatFragment extends Fragment{
                     String msg = null;
                     if(!isStartShoot) {
                         //sendMessage(Byte2Hex.RAWDATACOMMAND);
+                        StartDribblingActivityRequest request = new StartDribblingActivityRequest();
+                        request.setNotificationInterval(1000);
+                        request.setStartTimestamp(new Date(System.currentTimeMillis()));
                         final RequestStatus requestStatus = mChatService.delegate.sendRequest(
-                                new StartDribblingActivityRequest());
+                                request);
 
                         if(requestStatus == RequestStatus.OK){
                             msg = "start ok";
@@ -203,8 +207,10 @@ public class BluetoothChatFragment extends Fragment{
                             msg = "start error";
                         }
                     }else{
+                        final EndDribblingActivityRequest request =
+                                new EndDribblingActivityRequest();
                         final RequestStatus requestStatus = mChatService.delegate.sendRequest(
-                                new EndDribblingActivityRequest());
+                                request);
                         if(requestStatus == RequestStatus.OK){
                             msg = "end ok";
                         }else{

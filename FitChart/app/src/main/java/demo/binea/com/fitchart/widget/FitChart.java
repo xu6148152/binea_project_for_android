@@ -39,6 +39,15 @@ public class FitChart extends View {
     private final int DEFAULT_MIN_VALUES = 0;
     private final int DEFAULT_MAX_VALUES = 100;
 
+    private final int START_ANGLE = -90;
+    private final int ANIMATION_DURATION = 1000;
+    private final float INITIAL_ANIMATION_PROGRESS = 0.0f;
+    private final float MAXIMUM_SWEEP_ANGLE = 360f;
+    private final int DESIGN_MODE_SWEEP_ANGLE = 216;
+
+    private float mAnimationProgress = INITIAL_ANIMATION_PROGRESS;
+    private float mMaxSweepAngle = MAXIMUM_SWEEP_ANGLE;
+
     public FitChart(Context context) {
         this(context, null);
     }
@@ -117,17 +126,37 @@ public class FitChart extends View {
     }
 
     private void renderValue(Canvas canvas) {
+        if(!isInEditMode()){
+            int valueCount = mChartValues.size() - 1;
+            for(int index = valueCount; index >= 0; index--){
+                renderValue(canvas, mChartValues.get(index));
+            }
+        }else{
+            renderValue(canvas, null);
+        }
+    }
 
+    private void renderValue(Canvas canvas, FitChartValue fitChartValue) {
+        if(!isInEditMode()){
+            float animationSeek = calculateAnimationSeek();
+
+        }
+    }
+
+    private float calculateAnimationSeek() {
+        return mMaxSweepAngle * mAnimationProgress + START_ANGLE;
     }
 
     private void renderBack(Canvas canvas) {
-
+        final float viewRadius = getViewRadius();
+        mBackPath.addCircle(mDrawingArea.centerX(), mDrawingArea.centerY(), viewRadius, Path.Direction.CW);
+        canvas.drawPath(mBackPath, mBackStrokePaint);
     }
 
     private float getViewRadius(){
         if(mDrawingArea != null){
             return mDrawingArea.width() / 2;
         }
-        return
+        return DEFAULT_VALUE_RADIUS;
     }
 }
