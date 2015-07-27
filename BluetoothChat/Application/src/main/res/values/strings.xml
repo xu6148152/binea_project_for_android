@@ -17,7 +17,9 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!--  BluetoothChat -->
-    <string name="start">start</string>
+    <string name="start_dribbling">start dribbling</string>
+    <string name="start_shooting">start shooting</string>
+    <string name="start_raw_stream">start raw stream</string>
     <string name="stop">stop</string>
     <string name="not_connected">You are not connected to a device</string>
     <string name="bt_not_enabled_leaving">Bluetooth was not enabled. Leaving Bluetooth Chat.</string>

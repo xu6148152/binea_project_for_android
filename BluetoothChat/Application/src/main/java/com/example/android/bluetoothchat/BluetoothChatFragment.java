@@ -42,10 +42,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com._94fifty.model.request.EndDribblingActivityRequest;
-import com._94fifty.model.request.StartDribblingActivityRequest;
+import com._94fifty.model.request.EndRawStreamRequest;
+import com._94fifty.model.request.EndShootingActivityRequest;
 import com._94fifty.model.type.RequestStatus;
 import com.example.android.common.logger.Log;
-import java.util.Date;
 
 /**
  * This fragment controls Bluetooth to communicate with other devices.
@@ -62,9 +62,13 @@ public class BluetoothChatFragment extends Fragment{
     // Layout Views
     private ListView mConversationView;
     private EditText mOutEditText;
-    private Button mSendButton;
+    private Button mStartDribblingButton;
+    private Button mStartShootingButton;
+    private Button mStartRawStream;
 
-    private boolean isStartShoot = false;
+    private boolean isStartDribbling = false;
+    private boolean isStartShooting = false;
+    private boolean isStartRawStream = false;
 
     /**
      * Name of the connected device
@@ -166,8 +170,10 @@ public class BluetoothChatFragment extends Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         mConversationView = (ListView) view.findViewById(R.id.in);
         mOutEditText = (EditText) view.findViewById(R.id.edit_text_out);
-        mSendButton = (Button) view.findViewById(R.id.button_send);
+        mStartDribblingButton = (Button) view.findViewById(R.id.btn_start_dribbling);
         tv_shoot_count = (TextView) view.findViewById(R.id.tv_shoot_count);
+        mStartShootingButton = (Button) view.findViewById(R.id.btn_start_shooting);
+        mStartRawStream = (Button) view.findViewById(R.id.btn_start_raw_stream);
     }
 
     /**
@@ -185,7 +191,7 @@ public class BluetoothChatFragment extends Fragment{
         mOutEditText.setOnEditorActionListener(mWriteListener);
 
         // Initialize the send button with a listener that for click events
-        mSendButton.setOnClickListener(new View.OnClickListener() {
+        mStartDribblingButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Send a message using content of the edit text widget
                 View view = getView();
@@ -193,37 +199,126 @@ public class BluetoothChatFragment extends Fragment{
                     TextView textView = (TextView) view.findViewById(R.id.edit_text_out);
                     String message = textView.getText().toString();
                     String msg = null;
-                    if(!isStartShoot) {
+                    if(mChatService.delegate == null){
+                        return;
+                    }
+                    if (!isStartDribbling) {
                         //sendMessage(Byte2Hex.RAWDATACOMMAND);
-                        StartDribblingActivityRequest request = new StartDribblingActivityRequest();
-                        request.setNotificationInterval(1000);
-                        request.setStartTimestamp(new Date(System.currentTimeMillis()));
-                        final RequestStatus requestStatus = mChatService.delegate.sendRequest(
-                                request);
-
-                        if(requestStatus == RequestStatus.OK){
-                            msg = "start ok";
-                        }else{
-                            msg = "start error";
-                        }
-                    }else{
+                        //StartDribblingActivityRequest request = new StartDribblingActivityRequest();
+                        //request.setNotificationInterval(1);
+                        //startDribblingActivity(ActivityLimitBasis.Time, NotificationTrigger.Time,
+                        //        3000, 200, 5, 1,
+                        //        new DeviceResponseCallback<StartDribblingActivityResponse>() {
+                        //        });
+                        //request.setStartTimestamp(new Date(System.currentTimeMillis()));
+                        //final RequestStatus requestStatus = mChatService.delegate.sendRequest(
+                        //        request);
+                        mChatService.delegate.startDribblingActivity();
+                        //if(requestStatus == RequestStatus.OK){
+                        //    msg = "start ok";
+                        //}else{
+                        //    msg = "start error";
+                        //}
+                    } else {
                         final EndDribblingActivityRequest request =
                                 new EndDribblingActivityRequest();
-                        final RequestStatus requestStatus = mChatService.delegate.sendRequest(
-                                request);
-                        if(requestStatus == RequestStatus.OK){
+                        request.setToken((short)(int)(System.currentTimeMillis() & 0x7FFF));
+                        final RequestStatus requestStatus =
+                                mChatService.delegate.sendRequest(request);
+                        if (requestStatus == RequestStatus.OK) {
                             msg = "end ok";
-                        }else{
+                        } else {
                             msg = "end error";
                         }
                     }
 
-                    Log.d(TAG,"requestStatus " + msg);
+                    Log.d(TAG, "requestStatus " + msg);
 
-                    isStartShoot = !isStartShoot;
+                    isStartDribbling = !isStartDribbling;
+                    if(isStartDribbling){
+                        mStartDribblingButton.setText(getString(R.string.stop));
+                    }else{
+                        mStartDribblingButton.setText(getString(R.string.start_dribbling));
+                    }
                 }
             }
         });
+
+        mStartShootingButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Send a message using content of the edit text widget
+                View view = getView();
+                if(mChatService.delegate == null){
+                    return;
+                }
+                if (null != view) {
+                    TextView textView = (TextView) view.findViewById(R.id.edit_text_out);
+                    String message = textView.getText().toString();
+                    String msg = null;
+                    if (!isStartShooting) {
+                        mChatService.delegate.startShootingActivity();
+                    } else {
+                        final EndShootingActivityRequest request =
+                                new EndShootingActivityRequest();
+                        request.setToken((short)(int)(System.currentTimeMillis() & 0x7FFF));
+                        final RequestStatus requestStatus =
+                                mChatService.delegate.sendRequest(request);
+                        if (requestStatus == RequestStatus.OK) {
+                            msg = "end ok";
+                        } else {
+                            msg = "end error";
+                        }
+                    }
+
+                    Log.d(TAG, "requestStatus " + msg);
+
+                    isStartShooting = !isStartShooting;
+                    if(isStartShooting){
+                        mStartDribblingButton.setText(getString(R.string.stop));
+                    }else{
+                        mStartDribblingButton.setText(getString(R.string.start_shooting));
+                    }
+                }
+            }
+        });
+
+        mStartRawStream.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Send a message using content of the edit text widget
+                View view = getView();
+                if(mChatService.delegate == null){
+                    return;
+                }
+                if (null != view) {
+                    String msg = null;
+                    if (!isStartRawStream) {
+                        mChatService.delegate.startRawStream();
+                    } else {
+                        final EndRawStreamRequest request =
+                                new EndRawStreamRequest();
+                        request.setToken((short)(int)(System.currentTimeMillis() & 0x7FFF));
+                        final RequestStatus requestStatus =
+                                mChatService.delegate.sendRequest(request);
+                        if (requestStatus == RequestStatus.OK) {
+                            msg = "end ok";
+                        } else {
+                            msg = "end error";
+                        }
+                    }
+
+                    Log.d(TAG, "requestStatus " + msg);
+
+                    isStartRawStream = !isStartRawStream;
+                    if(isStartRawStream){
+                        mStartDribblingButton.setText(getString(R.string.stop));
+                    }else{
+                        mStartDribblingButton.setText(getString(R.string.start_raw_stream));
+                    }
+                }
+            }
+        });
+
+
 
         // Initialize the BluetoothChatService to perform bluetooth connections
         mChatService = new BluetoothChatService(getActivity(), mHandler);

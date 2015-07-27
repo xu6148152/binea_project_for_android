@@ -6,9 +6,17 @@ import com._94fifty.device.BluetoothDeviceBridgeFactory;
 import com._94fifty.device.DeviceBridge;
 import com._94fifty.model.request.AbstractRequest;
 import com._94fifty.model.response.AbstractResponse;
+import com._94fifty.model.response.StartDribblingActivityResponse;
+import com._94fifty.model.response.StartRawStreamResponse;
+import com._94fifty.model.response.StartShootingActivityResponse;
 import com._94fifty.model.response.notification.AbstractNotification;
 import com._94fifty.model.response.notification.DribblingActivityRecordNotification;
+import com._94fifty.model.response.notification.RawDataNotification;
+import com._94fifty.model.response.notification.ShootingActivityRecordNotification;
+import com._94fifty.model.type.ActivityLimitBasis;
 import com._94fifty.model.type.ConnectionState;
+import com._94fifty.model.type.InvocationType;
+import com._94fifty.model.type.NotificationTrigger;
 import com._94fifty.model.type.RequestStatus;
 
 /**
@@ -39,14 +47,29 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
     }
 
     @Override public void onNotification(AbstractNotification abstractNotification) {
-        DribblingActivityRecordNotification notification =
-                (DribblingActivityRecordNotification) abstractNotification;
+
         //for(int i =0;i<notification.getRawData().length;i++){
         //    if(notification.getRawData()[i] != 0)
         //    Log.d(TAG,"onNotification " + notification.getRawData()[i]);
         //}
-        Log.d(TAG, "onNotification " + notification.getRecord().getTotalDribbles());
-        mListener.dribblingActivityRecord(notification);
+        if(abstractNotification.getType() == InvocationType.DribblingActivityRecord) {
+            DribblingActivityRecordNotification notification =
+                    (DribblingActivityRecordNotification) abstractNotification;
+            Log.d(TAG, "DribblingActivityRecordNotification onNotification " + notification.getRecord().getTotalDribbles());
+            mListener.dribblingActivityRecord(notification);
+        }else if(abstractNotification.getType() == InvocationType.StartShootingActivity){
+            ShootingActivityRecordNotification notification =
+                    (ShootingActivityRecordNotification) abstractNotification;
+            Log.d(TAG, "ShootingActivityRecordNotification onNotification " + notification.getRecord().getAverageShotSpin());
+        }else if(abstractNotification.getType() == InvocationType.RawData){
+            RawDataNotification notification =
+                    (RawDataNotification) abstractNotification;
+            for(int i = 0; i < notification.getRawData().length; i++){
+                if(notification.getRawData()[i] != 0){
+                    Log.d(TAG, "RawDataNotification onNotification " + notification.getRawData());
+                }
+            }
+        }
 
     }
 
@@ -71,5 +94,32 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
 
     public void setBasketballDataMotificationListener(BasketballDataNotificationListener listener){
         mListener = listener;
+    }
+
+    public void startDribblingActivity(){
+        DeviceFacade.startDribblingActivity(mDeviceBridge, ActivityLimitBasis.Time,
+                NotificationTrigger.Time, 600000, 200, 5, 1, new DeviceResponseCallback<StartDribblingActivityResponse>() {
+                    @Override protected void onResponse(StartDribblingActivityResponse response) {
+                        Log.d(TAG, " response " + response.getStatus().isOK());
+                    }
+                });
+    }
+
+    public void startShootingActivity(){
+        DeviceFacade.startShootingActivity(mDeviceBridge, ActivityLimitBasis.Event,
+                NotificationTrigger.Event, 20, 1, 1,
+                new DeviceResponseCallback<StartShootingActivityResponse>() {
+                    @Override protected void onResponse(StartShootingActivityResponse response) {
+                        Log.d(TAG, " response " + response.getStatus().isOK());
+                    }
+                });
+    }
+
+    public void startRawStream(){
+        DeviceFacade.startRawStream(mDeviceBridge, new DeviceResponseCallback<StartRawStreamResponse>() {
+            @Override protected void onResponse(StartRawStreamResponse response) {
+                Log.d(TAG, " response " + response.getStatus().isOK());
+            }
+        });
     }
 }

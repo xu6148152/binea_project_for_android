@@ -48,18 +48,40 @@
 
     </LinearLayout>
 
-    <Button
-            android:id="@+id/button_send"
+    <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/start"
-            />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+        <Button
+                android:id="@+id/btn_start_dribbling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start_dribbling"
+                />
+
+        <Button
+                android:id="@+id/btn_start_shooting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start_shooting"
+                />
+
+        <Button
+                android:id="@+id/btn_start_raw_stream"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start_raw_stream"
+                />
+    </LinearLayout>
 
     <TextView
             android:id="@+id/tv_shoot_count"
-            android:layout_gravity="center"
+            android:layout_gravity="right|center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="60sp"/>
+            android:textSize="60sp"
+            android:layout_marginRight="20dp"
+            />
 </FrameLayout>
 <!-- From: file:/Users/xubinggui/Android/my_project/BluetoothChat/Application/src/main/res/layout/fragment_bluetooth_chat.xml -->
