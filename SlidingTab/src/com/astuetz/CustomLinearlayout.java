@@ -33,6 +33,11 @@ public class CustomLinearlayout extends LinearLayout {
 		super(context, attrs);
 	}
 
+	@Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+		setMeasuredDimension(getScreenWidth() + OFFSET + getChildAt(0).getMeasuredWidth() / 2 + getChildAt(1).getMeasuredWidth() / 2, getMeasuredHeight());
+	}
+
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		Log.d(TAG, "offset " + offset);

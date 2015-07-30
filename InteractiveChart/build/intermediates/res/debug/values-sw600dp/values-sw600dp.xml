@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/xubinggui/Android/my_project/InteractiveChart/res/values-sw600dp/dimens.xml -->
+    <eat-comment/>
+    <dimen name="chart_padding">48dp</dimen>
+</resources>

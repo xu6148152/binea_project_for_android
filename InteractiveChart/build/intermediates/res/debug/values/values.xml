@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="InteractiveLineGraphView"><attr format="dimension" name="labelTextSize"/><attr format="color" name="labelTextColor"/><attr format="dimension" name="labelSeparation"/><attr format="dimension" name="axisThickness"/><attr format="color" name="axisColor"/><attr format="dimension" name="dataThickness"/><attr format="color" name="dataColor"/><attr format="dimension" name="gridThickness"/><attr format="color" name="gridColor"/></declare-styleable>
+    <!-- From: file:/Users/xubinggui/Android/my_project/InteractiveChart/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="chart_padding">16dp</dimen>
+    <dimen name="min_chart_size">100dp</dimen>
+    <!-- From: file:/Users/xubinggui/Android/my_project/InteractiveChart/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="action_pan_down">Demo pan down</string>
+    <string name="action_pan_left">Demo pan left</string>
+    <string name="action_pan_right">Demo pan right</string>
+    <string name="action_pan_up">Demo pan up</string>
+    <string name="action_zoom_in">Demo zoom in</string>
+    <string name="action_zoom_out">Demo zoom out</string>
+    <string name="app_description">A sample application that allows you to navigate a simple line graph using touch gestures.</string>
+    <string name="app_name">Interactive Chart Demo</string>
+    <!-- From: file:/Users/xubinggui/Android/my_project/InteractiveChart/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="AppTheme" parent="@android:style/Theme.Light"/>
+</resources>
