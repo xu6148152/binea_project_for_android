@@ -64,11 +64,13 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
         }else if(abstractNotification.getType() == InvocationType.RawData){
             RawDataNotification notification =
                     (RawDataNotification) abstractNotification;
-            for(int i = 0; i < notification.getRawData().length; i++){
-                if(notification.getRawData()[i] != 0){
-                    Log.d(TAG, "RawDataNotification onNotification " + notification.getRawData());
-                }
-            }
+            String readMessage = Byte2Hex.bytesToHex(notification.getRawData());
+            FileUtil.saveData(readMessage);
+            //for(int i = 0; i < notification.getRawData().length; i++){
+            //    if(notification.getRawData()[i] != 0){
+            //        Log.d(TAG, "RawDataNotification onNotification " + notification.getRawData()[i]);
+            //    }
+            //}
         }
 
     }

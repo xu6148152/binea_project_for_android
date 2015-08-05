@@ -50,7 +50,7 @@ import com.example.android.common.logger.Log;
 /**
  * This fragment controls Bluetooth to communicate with other devices.
  */
-public class BluetoothChatFragment extends Fragment{
+public class BluetoothChatFragment extends Fragment implements View.OnClickListener{
 
     private static final String TAG = "BluetoothChatFragment";
 
@@ -191,134 +191,9 @@ public class BluetoothChatFragment extends Fragment{
         mOutEditText.setOnEditorActionListener(mWriteListener);
 
         // Initialize the send button with a listener that for click events
-        mStartDribblingButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Send a message using content of the edit text widget
-                View view = getView();
-                if (null != view) {
-                    TextView textView = (TextView) view.findViewById(R.id.edit_text_out);
-                    String message = textView.getText().toString();
-                    String msg = null;
-                    if(mChatService.delegate == null){
-                        return;
-                    }
-                    if (!isStartDribbling) {
-                        //sendMessage(Byte2Hex.RAWDATACOMMAND);
-                        //StartDribblingActivityRequest request = new StartDribblingActivityRequest();
-                        //request.setNotificationInterval(1);
-                        //startDribblingActivity(ActivityLimitBasis.Time, NotificationTrigger.Time,
-                        //        3000, 200, 5, 1,
-                        //        new DeviceResponseCallback<StartDribblingActivityResponse>() {
-                        //        });
-                        //request.setStartTimestamp(new Date(System.currentTimeMillis()));
-                        //final RequestStatus requestStatus = mChatService.delegate.sendRequest(
-                        //        request);
-                        mChatService.delegate.startDribblingActivity();
-                        //if(requestStatus == RequestStatus.OK){
-                        //    msg = "start ok";
-                        //}else{
-                        //    msg = "start error";
-                        //}
-                    } else {
-                        final EndDribblingActivityRequest request =
-                                new EndDribblingActivityRequest();
-                        request.setToken((short)(int)(System.currentTimeMillis() & 0x7FFF));
-                        final RequestStatus requestStatus =
-                                mChatService.delegate.sendRequest(request);
-                        if (requestStatus == RequestStatus.OK) {
-                            msg = "end ok";
-                        } else {
-                            msg = "end error";
-                        }
-                    }
-
-                    Log.d(TAG, "requestStatus " + msg);
-
-                    isStartDribbling = !isStartDribbling;
-                    if(isStartDribbling){
-                        mStartDribblingButton.setText(getString(R.string.stop));
-                    }else{
-                        mStartDribblingButton.setText(getString(R.string.start_dribbling));
-                    }
-                }
-            }
-        });
-
-        mStartShootingButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Send a message using content of the edit text widget
-                View view = getView();
-                if(mChatService.delegate == null){
-                    return;
-                }
-                if (null != view) {
-                    TextView textView = (TextView) view.findViewById(R.id.edit_text_out);
-                    String message = textView.getText().toString();
-                    String msg = null;
-                    if (!isStartShooting) {
-                        mChatService.delegate.startShootingActivity();
-                    } else {
-                        final EndShootingActivityRequest request =
-                                new EndShootingActivityRequest();
-                        request.setToken((short)(int)(System.currentTimeMillis() & 0x7FFF));
-                        final RequestStatus requestStatus =
-                                mChatService.delegate.sendRequest(request);
-                        if (requestStatus == RequestStatus.OK) {
-                            msg = "end ok";
-                        } else {
-                            msg = "end error";
-                        }
-                    }
-
-                    Log.d(TAG, "requestStatus " + msg);
-
-                    isStartShooting = !isStartShooting;
-                    if(isStartShooting){
-                        mStartDribblingButton.setText(getString(R.string.stop));
-                    }else{
-                        mStartDribblingButton.setText(getString(R.string.start_shooting));
-                    }
-                }
-            }
-        });
-
-        mStartRawStream.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Send a message using content of the edit text widget
-                View view = getView();
-                if(mChatService.delegate == null){
-                    return;
-                }
-                if (null != view) {
-                    String msg = null;
-                    if (!isStartRawStream) {
-                        mChatService.delegate.startRawStream();
-                    } else {
-                        final EndRawStreamRequest request =
-                                new EndRawStreamRequest();
-                        request.setToken((short)(int)(System.currentTimeMillis() & 0x7FFF));
-                        final RequestStatus requestStatus =
-                                mChatService.delegate.sendRequest(request);
-                        if (requestStatus == RequestStatus.OK) {
-                            msg = "end ok";
-                        } else {
-                            msg = "end error";
-                        }
-                    }
-
-                    Log.d(TAG, "requestStatus " + msg);
-
-                    isStartRawStream = !isStartRawStream;
-                    if(isStartRawStream){
-                        mStartDribblingButton.setText(getString(R.string.stop));
-                    }else{
-                        mStartDribblingButton.setText(getString(R.string.start_raw_stream));
-                    }
-                }
-            }
-        });
-
-
+        mStartDribblingButton.setOnClickListener(this);
+        mStartShootingButton.setOnClickListener(this);
+        mStartRawStream.setOnClickListener(this);
 
         // Initialize the BluetoothChatService to perform bluetooth connections
         mChatService = new BluetoothChatService(getActivity(), mHandler);
@@ -549,5 +424,110 @@ public class BluetoothChatFragment extends Fragment{
             }
         }
         return false;
+    }
+
+    @Override public void onClick(View v) {
+        if(mChatService.delegate == null){
+            Toast.makeText(getActivity(), "basketball do not connect", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String msg = null;
+        switch (v.getId()){
+            case R.id.btn_start_dribbling:
+                if (!isStartDribbling) {
+                    //sendMessage(Byte2Hex.RAWDATACOMMAND);
+                    //StartDribblingActivityRequest request = new StartDribblingActivityRequest();
+                    //request.setNotificationInterval(1);
+                    //startDribblingActivity(ActivityLimitBasis.Time, NotificationTrigger.Time,
+                    //        3000, 200, 5, 1,
+                    //        new DeviceResponseCallback<StartDribblingActivityResponse>() {
+                    //        });
+                    //request.setStartTimestamp(new Date(System.currentTimeMillis()));
+                    //final RequestStatus requestStatus = mChatService.delegate.sendRequest(
+                    //        request);
+                    mChatService.delegate.startDribblingActivity();
+                    //if(requestStatus == RequestStatus.OK){
+                    //    msg = "start ok";
+                    //}else{
+                    //    msg = "start error";
+                    //}
+                } else {
+                    final EndDribblingActivityRequest request =
+                            new EndDribblingActivityRequest();
+                    request.setToken((short)(int)(System.currentTimeMillis() & 0x7FFF));
+                    final RequestStatus requestStatus =
+                            mChatService.delegate.sendRequest(request);
+                    if (requestStatus == RequestStatus.OK) {
+                        msg = "end ok";
+                    } else {
+                        msg = "end error";
+                    }
+                }
+
+                Log.d(TAG, "requestStatus " + msg);
+
+                isStartDribbling = !isStartDribbling;
+                if(isStartDribbling){
+                    mStartDribblingButton.setText(getString(R.string.stop));
+                }else{
+                    mStartDribblingButton.setText(getString(R.string.start_dribbling));
+                }
+                break;
+
+            case R.id.btn_start_shooting:
+                if (!isStartShooting) {
+                    mChatService.delegate.startShootingActivity();
+                } else {
+                    final EndShootingActivityRequest request =
+                            new EndShootingActivityRequest();
+                    request.setToken((short)(int)(System.currentTimeMillis() & 0x7FFF));
+                    final RequestStatus requestStatus =
+                            mChatService.delegate.sendRequest(request);
+                    if (requestStatus == RequestStatus.OK) {
+                        msg = "end ok";
+                    } else {
+                        msg = "end error";
+                    }
+                }
+
+                Log.d(TAG, "requestStatus " + msg);
+
+                isStartShooting = !isStartShooting;
+                if(isStartShooting){
+                    mStartDribblingButton.setText(getString(R.string.stop));
+                }else{
+                    mStartDribblingButton.setText(getString(R.string.start_shooting));
+                }
+                break;
+
+            case R.id.btn_start_raw_stream:
+                if (!isStartRawStream) {
+                    FileUtil.createFile();
+                    mChatService.delegate.startRawStream();
+                } else {
+                    final EndRawStreamRequest request =
+                            new EndRawStreamRequest();
+                    request.setToken((short)(int)(System.currentTimeMillis() & 0x7FFF));
+                    final RequestStatus requestStatus =
+                            mChatService.delegate.sendRequest(request);
+                    if (requestStatus == RequestStatus.OK) {
+                        msg = "end ok";
+
+                    } else {
+                        msg = "end error";
+                    }
+                    Log.d(TAG, "requestStatus " + msg);
+                    DialogUtil.showDialog(getActivity());
+                }
+
+                isStartRawStream = !isStartRawStream;
+                if(isStartRawStream){
+                    mStartRawStream.setText(getString(R.string.stop));
+                }else{
+                    mStartRawStream.setText(getString(R.string.start_raw_stream));
+                }
+
+                break;
+        }
     }
 }

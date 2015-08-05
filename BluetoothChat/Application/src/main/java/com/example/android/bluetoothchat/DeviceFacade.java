@@ -61,7 +61,7 @@ public class DeviceFacade {
         request.setActivityLimit(activityLimit);
         request.setNotificationInterval(notificationInterval);
         request.setPlayerHeight(70);
-        request.setShootingAlgorithmType(ShootingAlgorithmType.WithMagnometer);
+        request.setShootingAlgorithmType(ShootingAlgorithmType.UsingPass);
         request.setShotDistance(180);
         request.setUserId(userId);
         short i = (short)(int)(System.currentTimeMillis() & 0x7FFF);
