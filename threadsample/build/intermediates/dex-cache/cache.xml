@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/xubinggui/Android/my_project/threadsample/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="/Users/xubinggui/Android/my_project/threadsample/build/intermediates/pre-dexed/debug/classes-1e7c1e95fad8e5907383da5247a2e5b83ad403ee.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="/Users/xubinggui/Android/my_project/threadsample/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-fc0cca0617ea9f288f63443ae6c9ed1cda0c9a50.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/Android/my_project/threadsample/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="/Users/xubinggui/Android/my_project/threadsample/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-6542713148137c3fad10b7276b90f0639fdcf170.jar" />
+    </item>
+
+</items>

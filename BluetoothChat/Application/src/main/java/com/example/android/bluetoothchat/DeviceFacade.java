@@ -62,7 +62,7 @@ public class DeviceFacade {
         request.setNotificationInterval(notificationInterval);
         request.setPlayerHeight(70);
         request.setShootingAlgorithmType(ShootingAlgorithmType.WithMagnometer);
-        request.setShotDistance(20);
+        request.setShotDistance(180);
         request.setUserId(userId);
         short i = (short)(int)(System.currentTimeMillis() & 0x7FFF);
         request.setToken(i);
@@ -73,6 +73,7 @@ public class DeviceFacade {
     public static RequestStatus startRawStream(DeviceBridge deviceBridge,
             final DeviceResponseCallback<StartRawStreamResponse> callback){
         final StartRawStreamRequest request = new StartRawStreamRequest();
+        request.setActivityDuration(Integer.MAX_VALUE);
         request.setToken((short)(int)(System.currentTimeMillis() & 0x7FFF));
         return executeRequest(deviceBridge, request);
 
