@@ -6,6 +6,9 @@ import com._94fifty.device.BluetoothDeviceBridgeFactory;
 import com._94fifty.device.DeviceBridge;
 import com._94fifty.model.request.AbstractRequest;
 import com._94fifty.model.response.AbstractResponse;
+import com._94fifty.model.response.EndDribblingActivityResponse;
+import com._94fifty.model.response.EndRawStreamResponse;
+import com._94fifty.model.response.EndShootingActivityResponse;
 import com._94fifty.model.response.StartDribblingActivityResponse;
 import com._94fifty.model.response.StartRawStreamResponse;
 import com._94fifty.model.response.StartShootingActivityResponse;
@@ -47,7 +50,7 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
     }
 
     @Override public void onNotification(AbstractNotification abstractNotification) {
-
+        Log.d(TAG, "onNotification" + abstractNotification);
         //for(int i =0;i<notification.getRawData().length;i++){
         //    if(notification.getRawData()[i] != 0)
         //    Log.d(TAG,"onNotification " + notification.getRawData()[i]);
@@ -57,26 +60,22 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
                     (DribblingActivityRecordNotification) abstractNotification;
             Log.d(TAG, "DribblingActivityRecordNotification onNotification " + notification.getRecord().getTotalDribbles());
             mListener.dribblingActivityRecord(notification);
-        }else if(abstractNotification.getType() == InvocationType.StartShootingActivity){
+        }else if(abstractNotification.getType() == InvocationType.ShootingActivityRecord){
             ShootingActivityRecordNotification notification =
                     (ShootingActivityRecordNotification) abstractNotification;
             Log.d(TAG, "ShootingActivityRecordNotification onNotification " + notification.getRecord().getAverageShotSpin());
         }else if(abstractNotification.getType() == InvocationType.RawData){
             RawDataNotification notification =
                     (RawDataNotification) abstractNotification;
-            String readMessage = Byte2Hex.bytesToHex(notification.getRawData());
+            String readMessage = Byte2Hex.convert2byte(notification.getRawData());
             FileUtil.saveData(readMessage);
-            //for(int i = 0; i < notification.getRawData().length; i++){
-            //    if(notification.getRawData()[i] != 0){
-            //        Log.d(TAG, "RawDataNotification onNotification " + notification.getRawData()[i]);
-            //    }
-            //}
         }
 
     }
 
     @Override public void onResponse(AbstractResponse abstractResponse) {
         Log.d(TAG, "onResponse " + abstractResponse.toString());
+        abstractResponse.
     }
 
     @Override public void onResponseError(byte[] bytes, String s) {
@@ -102,7 +101,17 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
         DeviceFacade.startDribblingActivity(mDeviceBridge, ActivityLimitBasis.Time,
                 NotificationTrigger.Time, 600000, 200, 5, 1, new DeviceResponseCallback<StartDribblingActivityResponse>() {
                     @Override protected void onResponse(StartDribblingActivityResponse response) {
-                        Log.d(TAG, " response " + response.getStatus().isOK());
+                        Log.d(TAG, "startDribblingActivity response " + response.getStatus().isOK());
+                    }
+                });
+    }
+
+    public void endDribblingActivity(){
+        DeviceFacade.endDribblingActivity(mDeviceBridge,
+                new DeviceResponseCallback<EndDribblingActivityResponse>() {
+                    @Override protected void onResponse(EndDribblingActivityResponse response) {
+                        Log.d(TAG,
+                                "endDribblingActivity onResponse " + response.getStatus().isOK());
                     }
                 });
     }
@@ -112,16 +121,35 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
                 NotificationTrigger.Event, 20, 1, 1,
                 new DeviceResponseCallback<StartShootingActivityResponse>() {
                     @Override protected void onResponse(StartShootingActivityResponse response) {
-                        Log.d(TAG, " response " + response.getStatus().isOK());
+                        Log.d(TAG, "startShootingActivity response " + response.getStatus().isOK());
+                    }
+                });
+    }
+
+    public void endShootingActivity(){
+        DeviceFacade.endShootingActivity(mDeviceBridge,
+                new DeviceResponseCallback<EndShootingActivityResponse>() {
+                    @Override protected void onResponse(EndShootingActivityResponse response) {
+                        Log.d(TAG, "endShootingActivity onResponse " + response.getStatus().isOK());
                     }
                 });
     }
 
     public void startRawStream(){
-        DeviceFacade.startRawStream(mDeviceBridge, new DeviceResponseCallback<StartRawStreamResponse>() {
-            @Override protected void onResponse(StartRawStreamResponse response) {
-                Log.d(TAG, " response " + response.getStatus().isOK());
-            }
-        });
+        DeviceFacade.startRawStream(mDeviceBridge,
+                new DeviceResponseCallback<StartRawStreamResponse>() {
+                    @Override protected void onResponse(StartRawStreamResponse response) {
+                        Log.d(TAG, "startRawStream response " + response.getStatus().isOK());
+                    }
+                });
+    }
+
+    public void endRawStream(){
+        DeviceFacade.endRawStream(mDeviceBridge,
+                new DeviceResponseCallback<EndRawStreamResponse>() {
+                    @Override protected void onResponse(EndRawStreamResponse response) {
+                        Log.d(TAG, "endRawStream onResponse " + response.getStatus().isOK());
+                    }
+                });
     }
 }

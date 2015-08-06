@@ -41,10 +41,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com._94fifty.model.request.EndDribblingActivityRequest;
-import com._94fifty.model.request.EndRawStreamRequest;
-import com._94fifty.model.request.EndShootingActivityRequest;
-import com._94fifty.model.type.RequestStatus;
 import com.example.android.common.logger.Log;
 
 /**
@@ -434,37 +430,15 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
         String msg = null;
         switch (v.getId()){
             case R.id.btn_start_dribbling:
-                if (!isStartDribbling) {
-                    //sendMessage(Byte2Hex.RAWDATACOMMAND);
-                    //StartDribblingActivityRequest request = new StartDribblingActivityRequest();
-                    //request.setNotificationInterval(1);
-                    //startDribblingActivity(ActivityLimitBasis.Time, NotificationTrigger.Time,
-                    //        3000, 200, 5, 1,
-                    //        new DeviceResponseCallback<StartDribblingActivityResponse>() {
-                    //        });
-                    //request.setStartTimestamp(new Date(System.currentTimeMillis()));
-                    //final RequestStatus requestStatus = mChatService.delegate.sendRequest(
-                    //        request);
-                    mChatService.delegate.startDribblingActivity();
-                    //if(requestStatus == RequestStatus.OK){
-                    //    msg = "start ok";
-                    //}else{
-                    //    msg = "start error";
-                    //}
-                } else {
-                    final EndDribblingActivityRequest request =
-                            new EndDribblingActivityRequest();
-                    request.setToken((short)(int)(System.currentTimeMillis() & 0x7FFF));
-                    final RequestStatus requestStatus =
-                            mChatService.delegate.sendRequest(request);
-                    if (requestStatus == RequestStatus.OK) {
-                        msg = "end ok";
-                    } else {
-                        msg = "end error";
-                    }
+                if(isStartShooting || isStartRawStream){
+                    showToastForHintOtherRequestIsStart();
+                    return;
                 }
-
-                Log.d(TAG, "requestStatus " + msg);
+                if (!isStartDribbling) {
+                    mChatService.delegate.startDribblingActivity();
+                } else {
+                    mChatService.delegate.endDribblingActivity();
+                }
 
                 isStartDribbling = !isStartDribbling;
                 if(isStartDribbling){
@@ -475,48 +449,33 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
                 break;
 
             case R.id.btn_start_shooting:
+                if(isStartDribbling || isStartRawStream){
+                    showToastForHintOtherRequestIsStart();
+                    return;
+                }
                 if (!isStartShooting) {
                     mChatService.delegate.startShootingActivity();
                 } else {
-                    final EndShootingActivityRequest request =
-                            new EndShootingActivityRequest();
-                    request.setToken((short)(int)(System.currentTimeMillis() & 0x7FFF));
-                    final RequestStatus requestStatus =
-                            mChatService.delegate.sendRequest(request);
-                    if (requestStatus == RequestStatus.OK) {
-                        msg = "end ok";
-                    } else {
-                        msg = "end error";
-                    }
+                    mChatService.delegate.endShootingActivity();
                 }
-
-                Log.d(TAG, "requestStatus " + msg);
 
                 isStartShooting = !isStartShooting;
                 if(isStartShooting){
-                    mStartDribblingButton.setText(getString(R.string.stop));
+                    mStartShootingButton.setText(getString(R.string.stop));
                 }else{
-                    mStartDribblingButton.setText(getString(R.string.start_shooting));
+                    mStartShootingButton.setText(getString(R.string.start_shooting));
                 }
                 break;
 
             case R.id.btn_start_raw_stream:
+                if(isStartDribbling || isStartShooting){
+                    return;
+                }
                 if (!isStartRawStream) {
                     FileUtil.createFile();
                     mChatService.delegate.startRawStream();
                 } else {
-                    final EndRawStreamRequest request =
-                            new EndRawStreamRequest();
-                    request.setToken((short)(int)(System.currentTimeMillis() & 0x7FFF));
-                    final RequestStatus requestStatus =
-                            mChatService.delegate.sendRequest(request);
-                    if (requestStatus == RequestStatus.OK) {
-                        msg = "end ok";
-
-                    } else {
-                        msg = "end error";
-                    }
-                    Log.d(TAG, "requestStatus " + msg);
+                    mChatService.delegate.endRawStream();
                     DialogUtil.showDialog(getActivity());
                 }
 
@@ -529,5 +488,9 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
 
                 break;
         }
+    }
+
+    private void showToastForHintOtherRequestIsStart(){
+        Toast.makeText(getActivity(), "other request is started, please stop it before you can start a new request", Toast.LENGTH_SHORT).show();
     }
 }

@@ -199,7 +199,9 @@ public class DeviceListActivity extends Activity {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 // If it's already paired, skip it, because it's been listed already
                 if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
-                    if(("1C:BA:8C:24:EE:26".equals(device.getAddress()) || "BC:6A:29:30:9D:A3".equals(device.getAddress()) && mNewDevicesArrayAdapter.getCount() == 0)) {
+                    if(("1C:BA:8C:24:EE:26".equals(device.getAddress()) ||
+                            "BC:6A:29:30:9D:A3".equals(device.getAddress()) ||
+                            "BC:6A:29:A7:E6:7F".equals(device.getAddress())) && mNewDevicesArrayAdapter.getCount() == 0) {
                         mNewDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
                     }
                 }

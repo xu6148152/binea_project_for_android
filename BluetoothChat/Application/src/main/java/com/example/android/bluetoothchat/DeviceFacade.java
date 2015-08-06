@@ -2,9 +2,15 @@ package com.example.android.bluetoothchat;
 
 import com._94fifty.device.DeviceBridge;
 import com._94fifty.model.request.AbstractRequest;
+import com._94fifty.model.request.EndDribblingActivityRequest;
+import com._94fifty.model.request.EndRawStreamRequest;
+import com._94fifty.model.request.EndShootingActivityRequest;
 import com._94fifty.model.request.StartDribblingActivityRequest;
 import com._94fifty.model.request.StartRawStreamRequest;
 import com._94fifty.model.request.StartShootingActivityRequest;
+import com._94fifty.model.response.EndDribblingActivityResponse;
+import com._94fifty.model.response.EndRawStreamResponse;
+import com._94fifty.model.response.EndShootingActivityResponse;
 import com._94fifty.model.response.StartDribblingActivityResponse;
 import com._94fifty.model.response.StartRawStreamResponse;
 import com._94fifty.model.response.StartShootingActivityResponse;
@@ -40,6 +46,12 @@ public class DeviceFacade {
 
     }
 
+    public static RequestStatus endDribblingActivity(DeviceBridge deviceBridge, final DeviceResponseCallback<EndDribblingActivityResponse> callback){
+        EndDribblingActivityRequest request = new EndDribblingActivityRequest();
+        request.setToken((short)(int)(System.currentTimeMillis() & 0x7FFF));
+        return executeRequest(deviceBridge, request);
+    }
+
     private static RequestStatus executeRequest(DeviceBridge deviceBridge, AbstractRequest request){
         if(deviceBridge != null){
             return deviceBridge.executeRequest(request);
@@ -70,12 +82,24 @@ public class DeviceFacade {
 
     }
 
+    public static RequestStatus endShootingActivity(DeviceBridge deviceBridge, final DeviceResponseCallback<EndShootingActivityResponse> callback){
+        EndShootingActivityRequest request = new EndShootingActivityRequest();
+        request.setToken((short)(int)(System.currentTimeMillis() & 0x7FFF));
+        return executeRequest(deviceBridge, request);
+    }
+
     public static RequestStatus startRawStream(DeviceBridge deviceBridge,
             final DeviceResponseCallback<StartRawStreamResponse> callback){
         final StartRawStreamRequest request = new StartRawStreamRequest();
         request.setActivityDuration(Integer.MAX_VALUE);
-        request.setToken((short)(int)(System.currentTimeMillis() & 0x7FFF));
+        //request.setToken((short)(int)(System.currentTimeMillis() & 0x7FFF));
         return executeRequest(deviceBridge, request);
 
+    }
+
+    public static RequestStatus endRawStream(DeviceBridge deviceBridge, final DeviceResponseCallback<EndRawStreamResponse> callback){
+        EndRawStreamRequest request = new EndRawStreamRequest();
+        request.setToken((short) (int) (System.currentTimeMillis() & 0x7FFF));
+        return executeRequest(deviceBridge, request);
     }
 }

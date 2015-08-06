@@ -48,4 +48,61 @@ public class Byte2Hex {
         return bytes;
     }
 
+    public static String convert2byte(byte[] bytes){
+        byte[] accemerometers = new byte[600];//x y z short * 100
+        byte[] gyro = new byte[600];//x y z short * 100
+        byte[] magnetometer = new byte[120];//x y z short * 20
+
+        System.arraycopy(bytes, 0, accemerometers, 0, accemerometers.length);
+        System.arraycopy(bytes, accemerometers.length, gyro, 0, gyro.length);
+        System.arraycopy(bytes, accemerometers.length * 2, magnetometer, 0, magnetometer.length);
+        StringBuilder sb = new StringBuilder();
+        int k = 0;
+        for(int i = 0;i<600;i = i + 6){
+            //accemerometers x y z
+            //byte xLow = accemerometers[i];
+            //byte xHigh = accemerometers[i + 1];
+            //final int accemerometersX = convert2short(xLow, xHigh);
+            //sb.append(accemerometersX + " ");
+            //byte ylow = accemerometers[i + 2];
+            //byte yHigh = accemerometers[i + 3];
+            //final int accemerometersY = convert2short(ylow, yHigh);
+            //sb.append(accemerometersY + " ");
+            //byte zLow = accemerometers[i + 4];
+            //byte zHigh = accemerometers[i + 5];
+            //final int accemerometersZ = convert2short(zLow, zHigh);
+            //sb.append(accemerometersZ + " ");
+            loopXYZ(sb, accemerometers, i);
+            loopXYZ(sb, gyro, i);
+            if(i != 0 && i%30 == 0){
+                k = k + 6;
+            }
+            loopXYZ(sb ,magnetometer, k);
+            //gyro x y z
+
+            sb.append("\n");
+        }
+        sb.append("\n\n");
+        return sb.toString();
+    }
+
+    private static int convert2short(byte low, byte high){
+        return high * 256 + low;
+    }
+
+    private static void loopXYZ(StringBuilder sb, byte[] bytes, int i){
+        byte xLow = bytes[i];
+        byte xHigh = bytes[i + 1];
+        final int accemerometersX = convert2short(xLow, xHigh);
+        sb.append(accemerometersX + " ");
+        byte ylow = bytes[i + 2];
+        byte yHigh = bytes[i + 3];
+        final int accemerometersY = convert2short(ylow, yHigh);
+        sb.append(accemerometersY + " ");
+        byte zLow = bytes[i + 4];
+        byte zHigh = bytes[i + 5];
+        final int accemerometersZ = convert2short(zLow, zHigh);
+        sb.append(accemerometersZ + " ");
+    }
+
 }
