@@ -75,7 +75,6 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
 
     @Override public void onResponse(AbstractResponse abstractResponse) {
         Log.d(TAG, "onResponse " + abstractResponse.toString());
-        abstractResponse.
     }
 
     @Override public void onResponseError(byte[] bytes, String s) {
