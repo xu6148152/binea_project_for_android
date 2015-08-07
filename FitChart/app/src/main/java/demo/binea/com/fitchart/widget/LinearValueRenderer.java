@@ -12,6 +12,23 @@ public class LinearValueRenderer extends BaseRenderer implements Render {
     }
 
     @Override public Path buildPath(float animationProgress, float animationSeek) {
-        return null;
+        Path path = null;
+        if(getValue().getStartAngle() <= animationSeek){
+            path = new Path();
+            float sweepAngle = calculateSweepAngle(animationSeek, getValue());
+            path.addArc(getDrawingArea(), getValue().getStartAngle(), sweepAngle);
+        }
+        return path;
+    }
+
+    private float calculateSweepAngle(float animationSeek, FitChartValue value) {
+        float result;
+        float totalSizeOfValue = value.getStartAngle() + value.getSweepAngle();
+        if(totalSizeOfValue > animationSeek){
+            result = animationSeek - value.getStartAngle();
+        }else{
+            result = value.getSweepAngle();
+        }
+        return result;
     }
 }

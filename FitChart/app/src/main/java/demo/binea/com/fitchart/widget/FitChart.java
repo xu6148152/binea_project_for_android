@@ -1,5 +1,7 @@
 package demo.binea.com.fitchart.widget;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -8,8 +10,10 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import demo.binea.com.fitchart.R;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -39,7 +43,7 @@ public class FitChart extends View {
     private final int DEFAULT_MIN_VALUES = 0;
     private final int DEFAULT_MAX_VALUES = 100;
 
-    private final int START_ANGLE = -90;
+    public static final int START_ANGLE = -90;
     private final int ANIMATION_DURATION = 1000;
     private final float INITIAL_ANIMATION_PROGRESS = 0.0f;
     private final float MAXIMUM_SWEEP_ANGLE = 360f;
@@ -47,6 +51,9 @@ public class FitChart extends View {
 
     private float mAnimationProgress = INITIAL_ANIMATION_PROGRESS;
     private float mMaxSweepAngle = MAXIMUM_SWEEP_ANGLE;
+
+    private float mMinValue = DEFAULT_MIN_VALUES;
+    private float mMaxValue = DEFAULT_MAX_VALUES;
 
     public FitChart(Context context) {
         this(context, null);
@@ -125,6 +132,11 @@ public class FitChart extends View {
         renderValue(canvas);
     }
 
+    @Override protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        calculateDrawableArea();
+    }
+
     private void renderValue(Canvas canvas) {
         if(!isInEditMode()){
             int valueCount = mChartValues.size() - 1;
@@ -139,7 +151,16 @@ public class FitChart extends View {
     private void renderValue(Canvas canvas, FitChartValue fitChartValue) {
         if(!isInEditMode()){
             float animationSeek = calculateAnimationSeek();
-
+            final Render renderer =
+                    RendererFactory.getRenderer(mAnimationMode, fitChartValue, mDrawingArea);
+            final Path path = renderer.buildPath(mAnimationProgress, animationSeek);
+            if(null != path){
+                canvas.drawPath(path, fitChartValue.getPaint());
+            }
+        }else{
+            Path path = new Path();
+            path.addArc(mDrawingArea, START_ANGLE, DESIGN_MODE_SWEEP_ANGLE);
+            canvas.drawPath(path, mValueDesignPaint);
         }
     }
 
@@ -159,4 +180,94 @@ public class FitChart extends View {
         }
         return DEFAULT_VALUE_RADIUS;
     }
+
+    public void setMinValue(float value){
+        mMinValue = value;
+    }
+
+    public void setMaxValue(float value){
+        mMaxValue = value;
+    }
+
+    public float getMinValue(){
+        return mMinValue;
+    }
+
+    public float getMaxValue(){
+        return mMaxValue;
+    }
+
+    public void setValue(float value){
+        mChartValues.clear();
+        FitChartValue chartValue = new FitChartValue(value, mValueStrokeColor);
+        chartValue.setPaint(buildPaintForValue());
+        chartValue.setStartAngle(START_ANGLE);
+        chartValue.setSweepAngle(calculateSweepAngle(value));
+        mChartValues.add(chartValue);
+        mMaxSweepAngle = chartValue.getSweepAngle();
+        playAnimation();
+    }
+
+    public void setValues(Collection<FitChartValue> values) {
+        mChartValues.clear();
+        mMaxSweepAngle = 0;
+        float offsetSweepAngle = START_ANGLE;
+        for (FitChartValue chartValue : values) {
+            float sweepAngle = calculateSweepAngle(chartValue.getValue());
+            chartValue.setPaint(buildPaintForValue());
+            chartValue.setStartAngle(offsetSweepAngle);
+            chartValue.setSweepAngle(sweepAngle);
+            mChartValues.add(chartValue);
+            offsetSweepAngle += sweepAngle;
+            mMaxSweepAngle += sweepAngle;
+        }
+        playAnimation();
+    }
+
+    private void playAnimation() {
+        final ObjectAnimator animator =
+                ObjectAnimator.ofFloat(this, "animationSeek", 0.0f, 1.0f);
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.setDuration(ANIMATION_DURATION);
+        animatorSet.setInterpolator(new DecelerateInterpolator());
+        animatorSet.setTarget(this);
+        animatorSet.play(animator);
+        animatorSet.start();
+    }
+
+    private float calculateSweepAngle(float value) {
+        float chartValueWindow = Math.max(mMinValue, mMaxValue) - Math.min(mMinValue, mMaxValue);
+        float chartValueScale = (360f / chartValueWindow);
+        return value * chartValueScale;
+    }
+
+    private Paint buildPaintForValue(){
+        Paint paint = getPaint();
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(mStrokeSize);
+        paint.setStrokeCap(Paint.Cap.ROUND);
+        return paint;
+    }
+
+    public void setAnimationMode(AnimationMode mode){
+        mAnimationMode = mode;
+    }
+
+    public void setAnimationSeek(float value){
+        mAnimationProgress = value;
+        invalidate();
+    }
+
+    private void calculateDrawableArea(){
+        float drawPadding = (mStrokeSize / 2);
+        float width = getWidth();
+        float height = getHeight();
+        float left = drawPadding;
+        float top = drawPadding;
+        float right = width - drawPadding;
+        float bottom = height - drawPadding;
+        mDrawingArea = new RectF(left, top, right, bottom);
+    }
+
+
 }

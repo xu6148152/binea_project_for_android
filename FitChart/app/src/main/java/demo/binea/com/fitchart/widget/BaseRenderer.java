@@ -3,22 +3,22 @@ package demo.binea.com.fitchart.widget;
 import android.graphics.RectF;
 
 /**
- * Created by xubinggui on 7/24/15.
+ * Created by xubinggui on 8/7/15.
  */
 abstract class BaseRenderer {
-    private final RectF mDrawingArea;
-    private final FitChartValue mValue;
+    private final RectF drawingArea;
+    private final FitChartValue value;
 
     FitChartValue getValue() {
-        return mValue;
+        return value;
     }
 
     RectF getDrawingArea() {
-        return mDrawingArea;
+        return drawingArea;
     }
 
     public BaseRenderer(RectF drawingArea, FitChartValue value) {
-        this.mDrawingArea = drawingArea;
-        this.mValue = value;
+        this.drawingArea = drawingArea;
+        this.value = value;
     }
 }

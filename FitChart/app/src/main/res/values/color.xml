@@ -3,4 +3,9 @@
     <color name="default_back_color">@android:color/transparent</color>
     <color name="default_back_stroke_color">#f0f0f0</color>
     <color name="default_chart_value_color">#ff3d00</color>
+
+    <color name="chart_value_1">#2d4302</color>
+    <color name="chart_value_2">#75a80d</color>
+    <color name="chart_value_3">#8fc026</color>
+    <color name="chart_value_4">#B5CC84</color>
 </resources>

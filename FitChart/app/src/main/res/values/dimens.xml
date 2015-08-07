@@ -4,4 +4,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="default_stroke_size">18dp</dimen>
+    <dimen name="chart_size">250dp</dimen>
+    <dimen name="stroke_size">18dp</dimen>
 </resources>
