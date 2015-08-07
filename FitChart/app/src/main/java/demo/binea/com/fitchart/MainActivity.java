@@ -31,5 +31,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.add_value).setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                fitChart.setValue(30f);
+            }
+        });
     }
 }
