@@ -14,7 +14,7 @@ public class FileUtil {
 
     public static final String TAG = FileUtil.class.getCanonicalName();
 
-    public static final String filePath = Environment.getExternalStorageDirectory().toString();
+    public static final String filePath = Environment.getExternalStorageDirectory().toString() + File.separator + "basket_basket";
     public static final String fileName = "b_temp_baseket.txt";
 
     public static File file = null;
@@ -24,8 +24,10 @@ public class FileUtil {
             Log.d(TAG, "file delete " + file.delete());
         }
         file = new File(filePath, fileName);
+
         if(!file.exists()){
             try {
+                Log.d(TAG, "create directory " + file.getParentFile().mkdirs());
                 Log.d(TAG, " file create " + file.createNewFile());
             } catch (IOException e) {
                 e.printStackTrace();
