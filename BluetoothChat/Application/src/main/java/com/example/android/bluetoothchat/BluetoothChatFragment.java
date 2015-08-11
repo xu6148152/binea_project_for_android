@@ -42,6 +42,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.android.common.logger.Log;
+import com.example.android.listener.EndDribblingListener;
+import com.example.android.listener.EndRawStreamListener;
+import com.example.android.listener.EndShootingListener;
 
 /**
  * This fragment controls Bluetooth to communicate with other devices.
@@ -436,16 +439,37 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
                 }
                 if (!isStartDribbling) {
                     mChatService.delegate.startDribblingActivity();
+                    isStartDribbling = true;
                 } else {
+                    mChatService.delegate.setEndDribblingListener(new EndDribblingListener() {
+                        @Override public void onResponse(boolean isOk) {
+                            if (isOk) {
+                                isStartDribbling = !isStartDribbling;
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override public void run() {
+                                        if (isStartDribbling) {
+                                            mStartDribblingButton.setText(getString(R.string.stop));
+                                        } else {
+                                            mStartDribblingButton.setText(
+                                                    getString(R.string.start_dribbling));
+                                        }
+                                    }
+                                });
+
+                            }
+                        }
+                    });
+
                     mChatService.delegate.endDribblingActivity();
                 }
 
-                isStartDribbling = !isStartDribbling;
-                if(isStartDribbling){
+                if (isStartDribbling) {
                     mStartDribblingButton.setText(getString(R.string.stop));
-                }else{
-                    mStartDribblingButton.setText(getString(R.string.start_dribbling));
+                } else {
+                    mStartDribblingButton.setText(
+                            getString(R.string.start_dribbling));
                 }
+
                 break;
 
             case R.id.btn_start_shooting:
@@ -455,11 +479,28 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
                 }
                 if (!isStartShooting) {
                     mChatService.delegate.startShootingActivity();
+                    isStartShooting = true;
                 } else {
+                    mChatService.delegate.setEndShootingListener(new EndShootingListener() {
+                        @Override public void onResponse(boolean isOk) {
+                            if (isOk) {
+                                isStartShooting = !isStartShooting;
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override public void run() {
+                                        if (isStartShooting) {
+                                            mStartShootingButton.setText(getString(R.string.stop));
+                                        } else {
+                                            mStartShootingButton.setText(
+                                                    getString(R.string.start_shooting));
+                                        }
+                                    }
+                                });
+
+                            }
+                        }
+                    });
                     mChatService.delegate.endShootingActivity();
                 }
-
-                isStartShooting = !isStartShooting;
                 if(isStartShooting){
                     mStartShootingButton.setText(getString(R.string.stop));
                 }else{
@@ -474,12 +515,29 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
                 if (!isStartRawStream) {
                     FileUtil.createFile();
                     mChatService.delegate.startRawStream();
+                    isStartRawStream = true;
                 } else {
+                    mChatService.delegate.setEndRawStreamListener(new EndRawStreamListener() {
+                        @Override public void onResponse(boolean isOk) {
+                            if (isOk) {
+                                isStartRawStream = !isStartRawStream;
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override public void run() {
+                                        DialogUtil.showDialog(getActivity());
+                                        if (isStartRawStream) {
+                                            mStartRawStream.setText(getString(R.string.stop));
+                                        } else {
+                                            mStartRawStream.setText(
+                                                    getString(R.string.start_raw_stream));
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    });
                     mChatService.delegate.endRawStream();
-                    DialogUtil.showDialog(getActivity());
                 }
 
-                isStartRawStream = !isStartRawStream;
                 if(isStartRawStream){
                     mStartRawStream.setText(getString(R.string.stop));
                 }else{

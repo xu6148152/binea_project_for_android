@@ -21,6 +21,10 @@ import com._94fifty.model.type.ConnectionState;
 import com._94fifty.model.type.InvocationType;
 import com._94fifty.model.type.NotificationTrigger;
 import com._94fifty.model.type.RequestStatus;
+import com._94fifty.model.type.ResponseStatus;
+import com.example.android.listener.EndDribblingListener;
+import com.example.android.listener.EndRawStreamListener;
+import com.example.android.listener.EndShootingListener;
 
 /**
  * Created by xubinggui on 7/20/15.
@@ -33,6 +37,10 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
     private ConnectionState mCurrentConnectionState;
 
     private BasketballDataNotificationListener mListener;
+
+    private EndRawStreamListener endRawStreamListener;
+    private EndShootingListener endShootingListener;
+    private EndDribblingListener endDribblingListener;
 
     public BasketDataDelegate(BluetoothSocket socket) {
         BluetoothDeviceBridgeFactory factory = new BluetoothDeviceBridgeFactory();
@@ -74,6 +82,25 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
     }
 
     @Override public void onResponse(AbstractResponse abstractResponse) {
+        if(abstractResponse.getType() == InvocationType.EndRawStream){
+            if(abstractResponse.getStatus() == ResponseStatus.OK){
+
+            }else{
+
+            }
+        }else if(abstractResponse.getType() == InvocationType.EndShootingActivity){
+            if(abstractResponse.getStatus() == ResponseStatus.OK){
+
+            }else{
+
+            }
+        }else if(abstractResponse.getType() == InvocationType.EndDribblingActivity){
+            if(abstractResponse.getStatus() == ResponseStatus.OK){
+
+            }else{
+
+            }
+        }
         Log.d(TAG, "onResponse " + abstractResponse.toString());
     }
 
@@ -150,5 +177,17 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
                         Log.d(TAG, "endRawStream onResponse " + response.getStatus().isOK());
                     }
                 });
+    }
+
+    public void setEndRawStreamListener(EndRawStreamListener listener){
+        endRawStreamListener = listener;
+    }
+
+    public void setEndShootingListener(EndShootingListener listener){
+        endShootingListener = listener;
+    }
+
+    public void setEndDribblingListener(EndDribblingListener listener){
+        endDribblingListener = listener;
     }
 }
