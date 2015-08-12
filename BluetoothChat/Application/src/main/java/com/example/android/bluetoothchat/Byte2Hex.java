@@ -87,22 +87,22 @@ public class Byte2Hex {
     }
 
     private static int convert2short(byte low, byte high){
-        return high * 256 + low;
+        return high + low * 256;
     }
 
     private static void loopXYZ(StringBuilder sb, byte[] bytes, int i){
         byte xLow = bytes[i];
         byte xHigh = bytes[i + 1];
         final int accemerometersX = convert2short(xLow, xHigh);
-        sb.append(accemerometersX + " ");
+        sb.append(accemerometersX + "\t");
         byte ylow = bytes[i + 2];
         byte yHigh = bytes[i + 3];
         final int accemerometersY = convert2short(ylow, yHigh);
-        sb.append(accemerometersY + " ");
+        sb.append(accemerometersY + "\t");
         byte zLow = bytes[i + 4];
         byte zHigh = bytes[i + 5];
         final int accemerometersZ = convert2short(zLow, zHigh);
-        sb.append(accemerometersZ + " ");
+        sb.append(accemerometersZ + "\t");
     }
 
 }

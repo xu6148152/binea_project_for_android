@@ -83,22 +83,28 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
 
     @Override public void onResponse(AbstractResponse abstractResponse) {
         if(abstractResponse.getType() == InvocationType.EndRawStream){
-            if(abstractResponse.getStatus() == ResponseStatus.OK){
-
-            }else{
-
+            if(endRawStreamListener != null) {
+                if (abstractResponse.getStatus() == ResponseStatus.OK) {
+                    endRawStreamListener.onResponse(true);
+                } else {
+                    endRawStreamListener.onResponse(false);
+                }
             }
         }else if(abstractResponse.getType() == InvocationType.EndShootingActivity){
-            if(abstractResponse.getStatus() == ResponseStatus.OK){
-
-            }else{
-
+            if(endShootingListener != null) {
+                if (abstractResponse.getStatus() == ResponseStatus.OK) {
+                    endShootingListener.onResponse(true);
+                } else {
+                    endShootingListener.onResponse(false);
+                }
             }
         }else if(abstractResponse.getType() == InvocationType.EndDribblingActivity){
-            if(abstractResponse.getStatus() == ResponseStatus.OK){
-
-            }else{
-
+            if(endDribblingListener != null) {
+                if (abstractResponse.getStatus() == ResponseStatus.OK) {
+                    endDribblingListener.onResponse(true);
+                } else {
+                    endDribblingListener.onResponse(false);
+                }
             }
         }
         Log.d(TAG, "onResponse " + abstractResponse.toString());
