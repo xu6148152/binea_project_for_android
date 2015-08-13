@@ -72,12 +72,12 @@ public class Byte2Hex {
             //byte zHigh = accemerometers[i + 5];
             //final int accemerometersZ = convert2short(zLow, zHigh);
             //sb.append(accemerometersZ + " ");
-            loopXYZ(sb, accemerometers, i);
-            loopXYZ(sb, gyro, i);
+            loopXYZ(sb, accemerometers, i, TYPE.ACCEMEROMETERS);
+            loopXYZ(sb, gyro, i, TYPE.GYRO);
             if(i != 0 && i%30 == 0){
                 k = k + 6;
             }
-            loopXYZ(sb ,magnetometer, k);
+            loopXYZ(sb ,magnetometer, k, TYPE.COMPASS);
             //gyro x y z
 
             sb.append("\n");
@@ -90,19 +90,41 @@ public class Byte2Hex {
         return high + low * 256;
     }
 
-    private static void loopXYZ(StringBuilder sb, byte[] bytes, int i){
+    private static void loopXYZ(StringBuilder sb, byte[] bytes, int i, TYPE type){
+        double tmpData = 0;
         byte xLow = bytes[i];
         byte xHigh = bytes[i + 1];
         final int accemerometersX = convert2short(xLow, xHigh);
-        sb.append(accemerometersX + "\t");
+        tmpData = transferRawDataToNormal(accemerometersX, type);
+        sb.append(tmpData + "\t");
         byte ylow = bytes[i + 2];
         byte yHigh = bytes[i + 3];
         final int accemerometersY = convert2short(ylow, yHigh);
-        sb.append(accemerometersY + "\t");
+        tmpData = transferRawDataToNormal(accemerometersY, type);
+        sb.append(tmpData + "\t");
         byte zLow = bytes[i + 4];
         byte zHigh = bytes[i + 5];
         final int accemerometersZ = convert2short(zLow, zHigh);
-        sb.append(accemerometersZ + "\t");
+        tmpData = transferRawDataToNormal(accemerometersZ, type);
+        sb.append(tmpData + "\t");
+    }
+
+    private static double transferRawDataToNormal(int accemerometersX, TYPE type){
+        double tmpData;
+        if(type == TYPE.ACCEMEROMETERS){
+            tmpData = accemerometersX / 32767.0f * 16;
+        }else if(type == TYPE.GYRO){
+            tmpData = accemerometersX / 32767.0f * 2000;
+        }else{
+            tmpData = accemerometersX / 4096.0f * 0.88;
+        }
+        return tmpData;
+    }
+
+    enum TYPE{
+        ACCEMEROMETERS,
+        GYRO,
+        COMPASS
     }
 
 }
