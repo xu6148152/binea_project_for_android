@@ -83,5 +83,12 @@
             android:textSize="60sp"
             android:layout_marginRight="20dp"
             />
+
+    <Chronometer
+            android:id="@+id/time"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
 </FrameLayout>
 <!-- From: file:/Users/xubinggui/Android/my_project/BluetoothChat/Application/src/main/res/layout/fragment_bluetooth_chat.xml -->

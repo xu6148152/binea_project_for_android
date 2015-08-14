@@ -1,6 +1,9 @@
 package com.example.android.bluetoothchat;
 
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
+import android.content.Intent;
+import android.os.HandlerThread;
 import android.util.Log;
 import com._94fifty.device.BluetoothDeviceBridgeFactory;
 import com._94fifty.device.DeviceBridge;
@@ -42,10 +45,21 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
     private EndShootingListener endShootingListener;
     private EndDribblingListener endDribblingListener;
 
-    public BasketDataDelegate(BluetoothSocket socket) {
+    private HandlerThread mHandlerThread;
+    private DataProcessHandler handler;
+
+    private StringBuilder sb;
+
+    private Context mContext;
+
+    public BasketDataDelegate(BluetoothSocket socket, Context context) {
         BluetoothDeviceBridgeFactory factory = new BluetoothDeviceBridgeFactory();
         mDeviceBridge = factory.create(socket, this);
         mDeviceBridge.addListener(this);
+        mHandlerThread = new HandlerThread("DataDeletate Thread " + System.currentTimeMillis());
+        mHandlerThread.start();
+        handler = new DataProcessHandler(mHandlerThread.getLooper());
+        mContext = context;
     }
 
     @Override public void onConnectionStateChanged(ConnectionState connectionState) {
@@ -75,8 +89,16 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
         }else if(abstractNotification.getType() == InvocationType.RawData){
             RawDataNotification notification =
                     (RawDataNotification) abstractNotification;
-            String readMessage = Byte2Hex.convert2byte(notification.getRawData());
-            FileUtil.saveData(readMessage);
+            Intent intent = new Intent(mContext, TaskIntentService.class);
+            intent.putExtra(TaskIntentService.DATA, notification.getRawData());
+            mContext.startService(intent);
+            //String readMessage = Byte2Hex.convert2byte(notification.getRawData());
+            //sb.append(readMessage);
+            //final Message msg = handler.obtainMessage();
+            //msg.what = DataProcessHandler.NEW_RAW_DATA;
+            //msg.obj = new RawDataMessage(notification.getRawData());
+            //handler.sendMessage(msg);
+
         }
 
     }
@@ -85,6 +107,8 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
         if(abstractResponse.getType() == InvocationType.EndRawStream){
             if(endRawStreamListener != null) {
                 if (abstractResponse.getStatus() == ResponseStatus.OK) {
+                    Log.d(TAG, "rawData " + sb.toString());
+                    sb.delete(0, sb.length());
                     endRawStreamListener.onResponse(true);
                 } else {
                     endRawStreamListener.onResponse(false);
@@ -168,6 +192,7 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
     }
 
     public void startRawStream(){
+        sb = new StringBuilder();
         DeviceFacade.startRawStream(mDeviceBridge,
                 new DeviceResponseCallback<StartRawStreamResponse>() {
                     @Override protected void onResponse(StartRawStreamResponse response) {

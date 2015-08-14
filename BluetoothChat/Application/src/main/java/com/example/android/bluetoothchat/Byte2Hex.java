@@ -82,7 +82,7 @@ public class Byte2Hex {
 
             sb.append("\n");
         }
-        sb.append("\n\n");
+        sb.append("\n");
         return sb.toString();
     }
 
@@ -112,7 +112,7 @@ public class Byte2Hex {
     private static double transferRawDataToNormal(int accemerometersX, TYPE type){
         double tmpData;
         if(type == TYPE.ACCEMEROMETERS){
-            tmpData = accemerometersX / 32767.0f * 16;
+            tmpData = accemerometersX / 32767.0f * 16 * 9.8;
         }else if(type == TYPE.GYRO){
             tmpData = accemerometersX / 32767.0f * 2000;
         }else{

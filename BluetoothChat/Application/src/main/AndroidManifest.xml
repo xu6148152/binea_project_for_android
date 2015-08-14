@@ -53,6 +53,8 @@
                 android:theme="@android:style/Theme.Holo.Dialog"
                 />
 
+        <service android:name="com.example.android.bluetoothchat.TaskIntentService" />
+
     </application>
 
 </manifest>

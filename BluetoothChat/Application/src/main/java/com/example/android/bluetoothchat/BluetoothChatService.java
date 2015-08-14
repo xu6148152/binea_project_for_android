@@ -72,6 +72,8 @@ public class BluetoothChatService implements BasketballDataNotificationListener 
     public BluetoothSocket socket;
 
     public BasketDataDelegate delegate;
+
+    private Context mContext;
     /**
      * Constructor. Prepares a new BluetoothChat session.
      *
@@ -79,6 +81,7 @@ public class BluetoothChatService implements BasketballDataNotificationListener 
      * @param handler A Handler to send messages back to the UI Activity
      */
     public BluetoothChatService(Context context, Handler handler) {
+        mContext = context;
         mAdapter = BluetoothAdapter.getDefaultAdapter();
         mState = STATE_NONE;
         mHandler = handler;
@@ -210,7 +213,7 @@ public class BluetoothChatService implements BasketballDataNotificationListener 
 
         setState(STATE_CONNECTED);
 
-        delegate = new BasketDataDelegate(socket);
+        delegate = new BasketDataDelegate(socket, mContext);
         delegate.setBasketballDataMotificationListener(this);
     }
 

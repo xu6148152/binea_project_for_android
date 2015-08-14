@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -37,6 +38,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -64,6 +66,7 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
     private Button mStartDribblingButton;
     private Button mStartShootingButton;
     private Button mStartRawStream;
+    private Chronometer time;
 
     private boolean isStartDribbling = false;
     private boolean isStartShooting = false;
@@ -173,6 +176,9 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
         tv_shoot_count = (TextView) view.findViewById(R.id.tv_shoot_count);
         mStartShootingButton = (Button) view.findViewById(R.id.btn_start_shooting);
         mStartRawStream = (Button) view.findViewById(R.id.btn_start_raw_stream);
+        time = (Chronometer) view.findViewById(R.id.time);
+        time.setText("00:00:00");
+        time.setFormat("计时：%s");
     }
 
     /**
@@ -513,6 +519,8 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
                     return;
                 }
                 if (!isStartRawStream) {
+                    time.setBase(SystemClock.elapsedRealtime());
+                    time.start();
                     FileUtil.createFile();
                     mChatService.delegate.startRawStream();
                     isStartRawStream = true;
@@ -523,7 +531,9 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
                                 isStartRawStream = !isStartRawStream;
                                 getActivity().runOnUiThread(new Runnable() {
                                     @Override public void run() {
+                                        time.stop();
                                         DialogUtil.showDialog(getActivity());
+
                                         if (isStartRawStream) {
                                             mStartRawStream.setText(getString(R.string.stop));
                                         } else {
