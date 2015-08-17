@@ -1,4 +1,6 @@
-package com.example.android.bluetoothchat;
+package com.example.android.utils;
+
+import java.nio.ByteBuffer;
 
 public class Byte2Hex {
 
@@ -125,6 +127,49 @@ public class Byte2Hex {
         ACCEMEROMETERS,
         GYRO,
         COMPASS
+    }
+
+    public static byte[] long2ByteArray (long value, int capacity)
+    {
+        //return ByteBuffer.allocate(capacity).putLong(value).array();
+        byte[] bytes = new byte[capacity];
+        int j = 0;
+        for(int i = 0;i<capacity;i++){
+            bytes[i] = (byte) (value >> j & 0xff);
+            j += 8;
+        }
+        return bytes;
+    }
+
+    public static byte[] float2ByteArray (float value)
+    {
+        return ByteBuffer.allocate(4).putFloat(value).array();
+    }
+
+    public static byte[] int2byte(int value, int capacity){
+        byte[] bytes = new byte[capacity];
+        int j = 0;
+        for(int i = 0;i<capacity;i++){
+            bytes[i] = (byte) (value >> j & 0xff);
+            j += 8;
+        }
+        return bytes;
+        //return ByteBuffer.allocate(4).putInt(value).array();
+    }
+
+    public static int crc16(final byte[] buffer) {
+        int crc = 0xFFFF;
+
+        for (int j = 0; j < buffer.length ; j++) {
+            crc = ((crc  >>> 8) | (crc  << 8) )& 0xffff;
+            crc ^= (buffer[j] & 0xff);//byte to int, trunc sign
+            crc ^= ((crc & 0xff) >> 4);
+            crc ^= (crc << 12) & 0xffff;
+            crc ^= ((crc & 0xFF) << 5) & 0xffff;
+        }
+        crc &= 0xffff;
+        return crc;
+
     }
 
 }

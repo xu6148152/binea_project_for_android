@@ -76,7 +76,6 @@
     </LinearLayout>
 
     <TextView
-            android:visibility="gone"
             android:id="@+id/tv_shoot_count"
             android:layout_gravity="right|center_vertical"
             android:layout_width="wrap_content"
@@ -86,7 +85,6 @@
             />
 
     <Chronometer
-            android:visibility="gone"
             android:id="@+id/time"
             android:layout_gravity="bottom|center_horizontal"
             android:layout_width="wrap_content"

@@ -1,4 +1,4 @@
-package com.example.android.bluetoothchat;
+package com.example.android.utils;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.example.android.bluetoothchat.R;
 
 /**
  * Created by xubinggui on 8/5/15.

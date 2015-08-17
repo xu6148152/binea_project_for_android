@@ -2,7 +2,6 @@ package com.example.android.bluetoothchat;
 
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
-import android.content.Intent;
 import android.os.HandlerThread;
 import android.util.Log;
 import com._94fifty.device.BluetoothDeviceBridgeFactory;
@@ -85,13 +84,14 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
         }else if(abstractNotification.getType() == InvocationType.ShootingActivityRecord){
             ShootingActivityRecordNotification notification =
                     (ShootingActivityRecordNotification) abstractNotification;
-            Log.d(TAG, "ShootingActivityRecordNotification onNotification " + notification.getRecord().getAverageShotSpin());
+            Log.d(TAG, "ShootingActivityRecordNotification onNotification " + notification);
         }else if(abstractNotification.getType() == InvocationType.RawData){
             RawDataNotification notification =
                     (RawDataNotification) abstractNotification;
-            Intent intent = new Intent(mContext, TaskIntentService.class);
-            intent.putExtra(TaskIntentService.DATA, notification.getRawData());
-            mContext.startService(intent);
+            Log.d(TAG, "notificationId " + notification.getNotificationId());
+            //Intent intent = new Intent(mContext, TaskIntentService.class);
+            //intent.putExtra(TaskIntentService.DATA, notification.getRawData());
+            //mContext.startService(intent);
             //String readMessage = Byte2Hex.convert2byte(notification.getRawData());
             //sb.append(readMessage);
             //final Message msg = handler.obtainMessage();
@@ -173,8 +173,8 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
     }
 
     public void startShootingActivity(){
-        DeviceFacade.startShootingActivity(mDeviceBridge, ActivityLimitBasis.Event,
-                NotificationTrigger.Event, 20, 1, 1,
+        DeviceFacade.startShootingActivity(mDeviceBridge, ActivityLimitBasis.Time,
+                NotificationTrigger.Event, 10, 1, 1,
                 new DeviceResponseCallback<StartShootingActivityResponse>() {
                     @Override protected void onResponse(StartShootingActivityResponse response) {
                         Log.d(TAG, "startShootingActivity response " + response.getStatus().isOK());

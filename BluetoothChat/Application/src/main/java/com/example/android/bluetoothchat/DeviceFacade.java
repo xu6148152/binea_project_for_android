@@ -59,7 +59,9 @@ public class DeviceFacade {
         return RequestStatus.Error;
     }
 
-    public static RequestStatus startShootingActivity(DeviceBridge deviceBridge, final ActivityLimitBasis activityLimitBasis,
+    public static RequestStatus startShootingActivity(
+            DeviceBridge deviceBridge,
+            final ActivityLimitBasis activityLimitBasis,
             final NotificationTrigger notificationTrigger,
             final int activityLimit,
             final int notificationInterval,
@@ -91,7 +93,7 @@ public class DeviceFacade {
     public static RequestStatus startRawStream(DeviceBridge deviceBridge,
             final DeviceResponseCallback<StartRawStreamResponse> callback){
         final StartRawStreamRequest request = new StartRawStreamRequest();
-        request.setActivityDuration(Integer.MAX_VALUE);
+        request.setActivityDuration(Long.MAX_VALUE);
         //request.setToken((short)(int)(System.currentTimeMillis() & 0x7FFF));
         return executeRequest(deviceBridge, request);
 

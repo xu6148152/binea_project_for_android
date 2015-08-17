@@ -43,10 +43,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com._94fifty.model.ShootingRecord;
 import com.example.android.common.logger.Log;
-import com.example.android.listener.EndDribblingListener;
-import com.example.android.listener.EndRawStreamListener;
-import com.example.android.listener.EndShootingListener;
+import com.example.android.model.EventType;
+import com.example.android.model.GlobalVar;
+import com.example.android.model.MessageType;
+import com.example.android.model.PackageData;
+import com.example.android.utils.Byte2Hex;
+import com.example.android.utils.FileUtil;
 
 /**
  * This fragment controls Bluetooth to communicate with other devices.
@@ -165,6 +169,8 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        ShootingRecord record = new ShootingRecord();
+        PackageData data = new PackageData(MessageType.BALL_EVENT, EventType.SHOOTING_RESULT, record);
         return inflater.inflate(R.layout.fragment_bluetooth_chat, container, false);
     }
 
@@ -336,6 +342,8 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
                 case Constants.MESSAGE_DEVICE_NAME:
                     // save the connected device's name
                     mConnectedDeviceName = msg.getData().getString(Constants.DEVICE_NAME);
+                    GlobalVar.currentDeviceName = mConnectedDeviceName;
+                    GlobalVar.currentMacAddress = msg.getData().getString(Constants.DEVICE_ADDRESS);
                     if (null != activity) {
                         Toast.makeText(activity, "Connected to "
                                 + mConnectedDeviceName, Toast.LENGTH_SHORT).show();
@@ -351,7 +359,7 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
                 case Constants.MESSAGE_DRIBBLING_ACTIVITY_RECORD_NOTIFICATION:
                     final long totalDribblingCount =
                             msg.getData().getLong(Constants.DRIBBLING_ACTIVITY_RECORD_NOTIFICATION);
-                    tv_shoot_count.setText(String.valueOf(totalDribblingCount));
+                    tv_shoot_count.setText(String.valueOf(totalDribblingCount / 10));
                     break;
             }
         }
@@ -447,26 +455,39 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
                     mChatService.delegate.startDribblingActivity();
                     isStartDribbling = true;
                 } else {
-                    mChatService.delegate.setEndDribblingListener(new EndDribblingListener() {
-                        @Override public void onResponse(boolean isOk) {
-                            if (isOk) {
-                                isStartDribbling = !isStartDribbling;
-                                getActivity().runOnUiThread(new Runnable() {
-                                    @Override public void run() {
-                                        if (isStartDribbling) {
-                                            mStartDribblingButton.setText(getString(R.string.stop));
-                                        } else {
-                                            mStartDribblingButton.setText(
-                                                    getString(R.string.start_dribbling));
-                                        }
-                                    }
-                                });
-
-                            }
-                        }
-                    });
+                    //mChatService.delegate.setEndDribblingListener(new EndDribblingListener() {
+                    //    @Override public void onResponse(boolean isOk) {
+                    //        if (isOk) {
+                    //            isStartDribbling = !isStartDribbling;
+                    //            getActivity().runOnUiThread(new Runnable() {
+                    //                @Override public void run() {
+                    //                    if (isStartDribbling) {
+                    //                        mStartDribblingButton.setText(getString(R.string.stop));
+                    //                    } else {
+                    //                        mStartDribblingButton.setText(
+                    //                                getString(R.string.start_dribbling));
+                    //                    }
+                    //                }
+                    //            });
+                    //
+                    //        }
+                    //    }
+                    //});
 
                     mChatService.delegate.endDribblingActivity();
+                    mChatService.delegate.endDribblingActivity();
+                    //isStartDribbling = !isStartDribbling;
+                    //getActivity().runOnUiThread(new Runnable() {
+                    //    @Override public void run() {
+                    //        if (isStartDribbling) {
+                    //            mStartDribblingButton.setText(getString(R.string.stop));
+                    //        } else {
+                    //            mStartDribblingButton.setText(
+                    //                    getString(R.string.start_dribbling));
+                    //        }
+                    //    }
+                    //});
+                    isStartDribbling = !isStartDribbling;
                 }
 
                 if (isStartDribbling) {
@@ -487,25 +508,27 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
                     mChatService.delegate.startShootingActivity();
                     isStartShooting = true;
                 } else {
-                    mChatService.delegate.setEndShootingListener(new EndShootingListener() {
-                        @Override public void onResponse(boolean isOk) {
-                            if (isOk) {
-                                isStartShooting = !isStartShooting;
-                                getActivity().runOnUiThread(new Runnable() {
-                                    @Override public void run() {
-                                        if (isStartShooting) {
-                                            mStartShootingButton.setText(getString(R.string.stop));
-                                        } else {
-                                            mStartShootingButton.setText(
-                                                    getString(R.string.start_shooting));
-                                        }
-                                    }
-                                });
-
-                            }
-                        }
-                    });
+                    //mChatService.delegate.setEndShootingListener(new EndShootingListener() {
+                    //    @Override public void onResponse(boolean isOk) {
+                    //        if (isOk) {
+                    //            isStartShooting = !isStartShooting;
+                    //            getActivity().runOnUiThread(new Runnable() {
+                    //                @Override public void run() {
+                    //                    if (isStartShooting) {
+                    //                        mStartShootingButton.setText(getString(R.string.stop));
+                    //                    } else {
+                    //                        mStartShootingButton.setText(
+                    //                                getString(R.string.start_shooting));
+                    //                    }
+                    //                }
+                    //            });
+                    //
+                    //        }
+                    //    }
+                    //});
                     mChatService.delegate.endShootingActivity();
+                    mChatService.delegate.endShootingActivity();
+                    isStartShooting = !isStartShooting;
                 }
                 if(isStartShooting){
                     mStartShootingButton.setText(getString(R.string.stop));
@@ -525,27 +548,29 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
                     mChatService.delegate.startRawStream();
                     isStartRawStream = true;
                 } else {
-                    mChatService.delegate.setEndRawStreamListener(new EndRawStreamListener() {
-                        @Override public void onResponse(boolean isOk) {
-                            if (isOk) {
-                                isStartRawStream = !isStartRawStream;
-                                getActivity().runOnUiThread(new Runnable() {
-                                    @Override public void run() {
-                                        time.stop();
-                                        DialogUtil.showDialog(getActivity());
-
-                                        if (isStartRawStream) {
-                                            mStartRawStream.setText(getString(R.string.stop));
-                                        } else {
-                                            mStartRawStream.setText(
-                                                    getString(R.string.start_raw_stream));
-                                        }
-                                    }
-                                });
-                            }
-                        }
-                    });
+                    //mChatService.delegate.setEndRawStreamListener(new EndRawStreamListener() {
+                    //    @Override public void onResponse(boolean isOk) {
+                    //        if (isOk) {
+                    //            isStartRawStream = !isStartRawStream;
+                    //            getActivity().runOnUiThread(new Runnable() {
+                    //                @Override public void run() {
+                    //                    time.stop();
+                    //                    DialogUtil.showDialog(getActivity());
+                    //
+                    //                    if (isStartRawStream) {
+                    //                        mStartRawStream.setText(getString(R.string.stop));
+                    //                    } else {
+                    //                        mStartRawStream.setText(
+                    //                                getString(R.string.start_raw_stream));
+                    //                    }
+                    //                }
+                    //            });
+                    //        }
+                    //    }
+                    //});
                     mChatService.delegate.endRawStream();
+                    mChatService.delegate.endRawStream();
+                    isStartRawStream = !isStartRawStream;
                 }
 
                 if(isStartRawStream){

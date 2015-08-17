@@ -2,6 +2,8 @@ package com.example.android.bluetoothchat;
 
 import android.content.Intent;
 import android.util.Log;
+import com.example.android.utils.Byte2Hex;
+import com.example.android.utils.FileUtil;
 
 /**
  * Created by xubinggui on 7/31/15.

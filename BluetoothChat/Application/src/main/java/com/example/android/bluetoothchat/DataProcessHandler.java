@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import com.example.android.utils.Byte2Hex;
+import com.example.android.utils.FileUtil;
 
 /**
  * Created by xubinggui on 8/14/15.

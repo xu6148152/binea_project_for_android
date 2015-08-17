@@ -26,6 +26,8 @@ import android.os.Handler;
 import android.os.Message;
 import com._94fifty.model.response.notification.DribblingActivityRecordNotification;
 import com.example.android.common.logger.Log;
+import com.example.android.utils.Byte2Hex;
+import com.example.android.utils.FileUtil;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -208,6 +210,7 @@ public class BluetoothChatService implements BasketballDataNotificationListener 
         Message msg = mHandler.obtainMessage(Constants.MESSAGE_DEVICE_NAME);
         Bundle bundle = new Bundle();
         bundle.putString(Constants.DEVICE_NAME, device.getName());
+        bundle.putString(Constants.DEVICE_ADDRESS, device.getAddress());
         msg.setData(bundle);
         mHandler.sendMessage(msg);
 

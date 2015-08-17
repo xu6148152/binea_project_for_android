@@ -1,4 +1,4 @@
-package com.example.android.bluetoothchat;
+package com.example.android.utils;
 
 import android.os.Environment;
 import android.util.Log;
