@@ -1,4 +1,4 @@
-package com.example.android.bluetoothchat;
+package com.example.android.model;
 
 /**
  * Created by xubinggui on 7/21/15.

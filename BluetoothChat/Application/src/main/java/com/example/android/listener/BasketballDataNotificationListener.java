@@ -1,4 +1,4 @@
-package com.example.android.bluetoothchat;
+package com.example.android.listener;
 
 import com._94fifty.model.response.notification.DribblingActivityRecordNotification;
 

@@ -1,9 +1,10 @@
-package com.example.android.bluetoothchat;
+package com.example.android.process;
 
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import com.example.android.model.RawDataMessage;
 import com.example.android.utils.Byte2Hex;
 import com.example.android.utils.FileUtil;
 

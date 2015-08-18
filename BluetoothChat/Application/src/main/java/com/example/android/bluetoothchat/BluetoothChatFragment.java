@@ -43,12 +43,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com._94fifty.model.ShootingRecord;
 import com.example.android.common.logger.Log;
-import com.example.android.model.EventType;
 import com.example.android.model.GlobalVar;
-import com.example.android.model.MessageType;
-import com.example.android.model.PackageData;
 import com.example.android.utils.Byte2Hex;
 import com.example.android.utils.FileUtil;
 
@@ -169,8 +165,8 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        ShootingRecord record = new ShootingRecord();
-        PackageData data = new PackageData(MessageType.BALL_EVENT, EventType.SHOOTING_RESULT, record);
+        //ShootingRecord record = new ShootingRecord();
+        //PackageData data = new PackageData(MessageType.BALL_EVENT, EventType.SHOOTING_RESULT, record);
         return inflater.inflate(R.layout.fragment_bluetooth_chat, container, false);
     }
 

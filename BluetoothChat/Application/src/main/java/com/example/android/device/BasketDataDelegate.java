@@ -1,4 +1,4 @@
-package com.example.android.bluetoothchat;
+package com.example.android.device;
 
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
@@ -24,6 +24,9 @@ import com._94fifty.model.type.InvocationType;
 import com._94fifty.model.type.NotificationTrigger;
 import com._94fifty.model.type.RequestStatus;
 import com._94fifty.model.type.ResponseStatus;
+import com.example.android.listener.BasketballDataNotificationListener;
+import com.example.android.process.DataProcessHandler;
+import com.example.android.bluetoothchat.DeviceResponseCallback;
 import com.example.android.listener.EndDribblingListener;
 import com.example.android.listener.EndRawStreamListener;
 import com.example.android.listener.EndShootingListener;
@@ -155,9 +158,11 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
 
     public void startDribblingActivity(){
         DeviceFacade.startDribblingActivity(mDeviceBridge, ActivityLimitBasis.Time,
-                NotificationTrigger.Time, 600000, 200, 5, 1, new DeviceResponseCallback<StartDribblingActivityResponse>() {
+                NotificationTrigger.Time, 600000, 200, 5, 1,
+                new DeviceResponseCallback<StartDribblingActivityResponse>() {
                     @Override protected void onResponse(StartDribblingActivityResponse response) {
-                        Log.d(TAG, "startDribblingActivity response " + response.getStatus().isOK());
+                        Log.d(TAG,
+                                "startDribblingActivity response " + response.getStatus().isOK());
                     }
                 });
     }

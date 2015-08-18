@@ -1,4 +1,4 @@
-package com.example.android.bluetoothchat;
+package com.example.android.device;
 
 import com._94fifty.device.DeviceBridge;
 import com._94fifty.model.request.AbstractRequest;
@@ -18,6 +18,7 @@ import com._94fifty.model.type.ActivityLimitBasis;
 import com._94fifty.model.type.NotificationTrigger;
 import com._94fifty.model.type.RequestStatus;
 import com._94fifty.model.type.ShootingAlgorithmType;
+import com.example.android.bluetoothchat.DeviceResponseCallback;
 import java.util.Date;
 
 /**

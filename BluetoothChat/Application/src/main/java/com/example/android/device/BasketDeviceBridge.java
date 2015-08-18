@@ -1,4 +1,4 @@
-package com.example.android.bluetoothchat;
+package com.example.android.device;
 
 import com._94fifty.device.DeviceBridge;
 import com._94fifty.model.DeviceInfo;
