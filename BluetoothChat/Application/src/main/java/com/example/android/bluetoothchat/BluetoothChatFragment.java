@@ -470,7 +470,7 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
                     //    }
                     //});
 
-                    mChatService.delegate.endDribblingActivity();
+                    //mChatService.delegate.endDribblingActivity();
                     mChatService.delegate.endDribblingActivity();
                     //isStartDribbling = !isStartDribbling;
                     //getActivity().runOnUiThread(new Runnable() {
@@ -522,7 +522,7 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
                     //        }
                     //    }
                     //});
-                    mChatService.delegate.endShootingActivity();
+                    //mChatService.delegate.endShootingActivity();
                     mChatService.delegate.endShootingActivity();
                     isStartShooting = !isStartShooting;
                 }

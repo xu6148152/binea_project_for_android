@@ -2,8 +2,17 @@ package com.example.android.bluetoothchat;
 
 import android.content.Intent;
 import android.util.Log;
-import com.example.android.utils.Byte2Hex;
-import com.example.android.utils.FileUtil;
+import com.example.android.model.BaseData;
+import com.example.android.model.DribblingRecordWrapper;
+import com.example.android.model.MessageType;
+import com.example.android.model.PackageData;
+import com.example.android.model.ShootingRecordWrapper;
+import java.io.IOException;
+import java.io.Serializable;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
 
 /**
  * Created by xubinggui on 7/31/15.
@@ -11,6 +20,8 @@ import com.example.android.utils.FileUtil;
 public class TaskIntentService extends WrapperIntentService {
 
     public static final String DATA = "DATA";
+    public static final String MESSAGE_TYPE = "MESSAGE_TYPE";
+    public static final String EVENT_TYPE = "EVENT_TYPE";
 
     private static final String TAG = TaskIntentService.class.getCanonicalName();
 
@@ -39,22 +50,39 @@ public class TaskIntentService extends WrapperIntentService {
     }
 
     @Override protected void onHandleIntent(Intent intent) {
-        byte[] data = intent.getByteArrayExtra(DATA);
+        final Serializable data = intent.getSerializableExtra(DATA);
+        final byte eventType = intent.getByteExtra(EVENT_TYPE, (byte) -1);
+        final int messageType = intent.getIntExtra(MESSAGE_TYPE, -1);
+        if(data instanceof ShootingRecordWrapper){
+            ShootingRecordWrapper recordWrapper = (ShootingRecordWrapper) data;
+            sendUDPMessage(MessageType.toEnum(messageType), eventType, recordWrapper);
+            Log.d(TAG, " ShootingRecordWrapper " + recordWrapper.getCurrentShotMade());
+        }else if(data instanceof DribblingRecordWrapper){
+            DribblingRecordWrapper recordWrapper = (DribblingRecordWrapper) data;
+            sendUDPMessage(MessageType.toEnum(messageType), eventType, recordWrapper);
+            Log.d(TAG, " DribblingRecordWrapper " + recordWrapper.getTotalDribbles());
+        }else{
+            sendUDPMessage(MessageType.toEnum(messageType), eventType, null);
+        }
+
         Log.d(TAG, " onHandleIntent data " + data);
-        String readMessage = Byte2Hex.convert2byte(data);
-        FileUtil.saveData(readMessage);
-        //int action = intent.getIntExtra(KEY_SERVICE_ACTION, -1);
-        //long serviceId = intent.getLongExtra(KEY_SERVICE_ID, -1);
-        //
-        //switch (action){
-        //    case ACTION_SYNC:
-        //        Log.d(TAG, "onHandleIntent");
-        //        sync();
-        //        break;
-        //}
     }
 
-    private void sync() {
-
+    private void sendUDPMessage(MessageType messageType, byte eventType, BaseData data) {
+        PackageData packageData = new PackageData(messageType, eventType, data);
+        try {
+            DatagramSocket socket = new DatagramSocket();
+            InetAddress local = InetAddress.getByName(Constants.SERVERADDRESS);
+            DatagramPacket packet = new DatagramPacket(
+                    packageData.getPackageData(),
+                    packageData.getPackageData().length,
+                    local,
+                    Constants.UDP_PORT);
+            socket.send(packet);
+        } catch (SocketException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

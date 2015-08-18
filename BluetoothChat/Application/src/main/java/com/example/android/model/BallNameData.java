@@ -7,10 +7,10 @@ import com.example.android.utils.Byte2Hex;
  */
 public class BallNameData {
 
-    private DataBuffer mDataBuffer;
+    private DataBufferForList mDataBuffer;
 
     public BallNameData(String ballName){
-        mDataBuffer = new DataBuffer();
+        mDataBuffer = new DataBufferForList();
         final byte[] lengthBytes = Byte2Hex.int2byte(ballName.length(), 2);
         mDataBuffer.append(lengthBytes);
         final byte[] ballNameRealBytes = ballName.getBytes();
@@ -18,6 +18,6 @@ public class BallNameData {
     }
 
     public byte[] getData(){
-        return mDataBuffer.consumeBytes(mDataBuffer.size());
+        return mDataBuffer.getBytes(mDataBuffer.size());
     }
 }

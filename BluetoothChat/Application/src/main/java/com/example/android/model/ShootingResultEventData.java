@@ -1,6 +1,5 @@
 package com.example.android.model;
 
-import com._94fifty.model.ShootingRecord;
 import com.example.android.utils.Byte2Hex;
 
 /**
@@ -8,12 +7,12 @@ import com.example.android.utils.Byte2Hex;
  */
 public class ShootingResultEventData {
 
-    private DataBuffer mDataBuffer;
+    private DataBufferForList mDataBuffer;
     /**
      * only valid for shooting_result
      */
-    public ShootingResultEventData(ShootingRecord shootingRecord){
-        mDataBuffer = new DataBuffer(20);
+    public ShootingResultEventData(ShootingRecordWrapper shootingRecord){
+        mDataBuffer = new DataBufferForList();
         //ball speed
         byte[] ballSpeed = new byte[4];
         mDataBuffer.append(ballSpeed);
@@ -35,6 +34,6 @@ public class ShootingResultEventData {
     }
 
     public byte[] getData(){
-        return mDataBuffer.consumeBytes(mDataBuffer.size());
+        return mDataBuffer.getBytes(mDataBuffer.size());
     }
 }

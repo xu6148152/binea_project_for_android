@@ -16,9 +16,9 @@ public class BallEvent {
      * 0x05 shooting_result
      */
 
-    DataBuffer dataBuffer;
+    DataBufferForList dataBuffer;
     public BallEvent(byte eventType){
-        dataBuffer = new DataBuffer(16);
+        dataBuffer = new DataBufferForList();
         //eventType
         dataBuffer.append(eventType);
         //reserve
@@ -36,7 +36,7 @@ public class BallEvent {
         }
         dataBuffer.append(ballMac);
         //controllmac
-        String[] ipAddressParts = Constants.ipAddress.split("\\.");
+        String[] ipAddressParts = Constants.SERVERADDRESS.split("\\.");
         byte[] controllerMac = new byte[6];
         for(int i = 0;i<ipAddressParts.length; i++){
             Integer integer = Integer.parseInt(ipAddressParts[i]);
@@ -51,6 +51,6 @@ public class BallEvent {
      * @return return the ballevent data
      */
     public byte[] getData(){
-        return dataBuffer.consumeBytes(dataBuffer.size());
+        return dataBuffer.getBytes(dataBuffer.size());
     }
 }

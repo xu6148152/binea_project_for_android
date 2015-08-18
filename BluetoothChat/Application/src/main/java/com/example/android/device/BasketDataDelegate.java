@@ -2,6 +2,7 @@ package com.example.android.device;
 
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
+import android.content.Intent;
 import android.os.HandlerThread;
 import android.util.Log;
 import com._94fifty.device.BluetoothDeviceBridgeFactory;
@@ -20,16 +21,24 @@ import com._94fifty.model.response.notification.RawDataNotification;
 import com._94fifty.model.response.notification.ShootingActivityRecordNotification;
 import com._94fifty.model.type.ActivityLimitBasis;
 import com._94fifty.model.type.ConnectionState;
-import com._94fifty.model.type.InvocationType;
 import com._94fifty.model.type.NotificationTrigger;
 import com._94fifty.model.type.RequestStatus;
 import com._94fifty.model.type.ResponseStatus;
-import com.example.android.listener.BasketballDataNotificationListener;
-import com.example.android.process.DataProcessHandler;
 import com.example.android.bluetoothchat.DeviceResponseCallback;
+import com.example.android.bluetoothchat.TaskIntentService;
+import com.example.android.listener.BasketballDataNotificationListener;
 import com.example.android.listener.EndDribblingListener;
 import com.example.android.listener.EndRawStreamListener;
 import com.example.android.listener.EndShootingListener;
+import com.example.android.model.DribblingRecordWrapper;
+import com.example.android.model.EventType;
+import com.example.android.model.MessageType;
+import com.example.android.model.ShootingRecordWrapper;
+import com.example.android.process.DataProcessHandler;
+
+import static com._94fifty.model.type.InvocationType.DribblingActivityRecord;
+import static com._94fifty.model.type.InvocationType.RawData;
+import static com._94fifty.model.type.InvocationType.ShootingActivityRecord;
 
 /**
  * Created by xubinggui on 7/20/15.
@@ -50,8 +59,6 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
     private HandlerThread mHandlerThread;
     private DataProcessHandler handler;
 
-    private StringBuilder sb;
-
     private Context mContext;
 
     public BasketDataDelegate(BluetoothSocket socket, Context context) {
@@ -65,7 +72,7 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
     }
 
     @Override public void onConnectionStateChanged(ConnectionState connectionState) {
-        Log.d(TAG, "onConnectionStateChanged " );
+        Log.d(TAG, "onConnectionStateChanged ");
         mCurrentConnectionState = connectionState;
         //if(connectionState == ConnectionState.Open){
         //    Log.d(TAG, "onConnectionStateChanged open ");
@@ -75,66 +82,102 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
 
     @Override public void onNotification(AbstractNotification abstractNotification) {
         Log.d(TAG, "onNotification" + abstractNotification);
+        Intent intent = new Intent(mContext, TaskIntentService.class);
         //for(int i =0;i<notification.getRawData().length;i++){
         //    if(notification.getRawData()[i] != 0)
         //    Log.d(TAG,"onNotification " + notification.getRawData()[i]);
         //}
-        if(abstractNotification.getType() == InvocationType.DribblingActivityRecord) {
+        if(abstractNotification.getType() == DribblingActivityRecord) {
             DribblingActivityRecordNotification notification =
                     (DribblingActivityRecordNotification) abstractNotification;
-            Log.d(TAG, "DribblingActivityRecordNotification onNotification " + notification.getRecord().getTotalDribbles());
+            Log.d(TAG, " DribblingActivityRecordNotification isLastNotification "
+                    + notification.isLastNotification());
+            intent.putExtra(TaskIntentService.DATA,
+                    new DribblingRecordWrapper(notification.getRecord()));
+            intent.putExtra(TaskIntentService.MESSAGE_TYPE, MessageType.toInt(MessageType.BALL_EVENT));
             mListener.dribblingActivityRecord(notification);
-        }else if(abstractNotification.getType() == InvocationType.ShootingActivityRecord){
+        }else if(abstractNotification.getType() == ShootingActivityRecord){
             ShootingActivityRecordNotification notification =
                     (ShootingActivityRecordNotification) abstractNotification;
-            Log.d(TAG, "ShootingActivityRecordNotification onNotification " + notification);
-        }else if(abstractNotification.getType() == InvocationType.RawData){
+            ShootingRecordWrapper recordWrapper = new ShootingRecordWrapper(notification.getRecord());
+            intent.putExtra(TaskIntentService.DATA, recordWrapper);
+            intent.putExtra(TaskIntentService.MESSAGE_TYPE, MessageType.toInt(MessageType.BALL_EVENT));
+            intent.putExtra(TaskIntentService.EVENT_TYPE, EventType.SHOOTING_RESULT);
+            Log.d(TAG, "ShootingActivityRecordNotification " + recordWrapper);
+        }else if(abstractNotification.getType() == RawData){
             RawDataNotification notification =
                     (RawDataNotification) abstractNotification;
             Log.d(TAG, "notificationId " + notification.getNotificationId());
-            //Intent intent = new Intent(mContext, TaskIntentService.class);
-            //intent.putExtra(TaskIntentService.DATA, notification.getRawData());
-            //mContext.startService(intent);
-            //String readMessage = Byte2Hex.convert2byte(notification.getRawData());
-            //sb.append(readMessage);
-            //final Message msg = handler.obtainMessage();
-            //msg.what = DataProcessHandler.NEW_RAW_DATA;
-            //msg.obj = new RawDataMessage(notification.getRawData());
-            //handler.sendMessage(msg);
-
         }
 
+        mContext.startService(intent);
     }
 
     @Override public void onResponse(AbstractResponse abstractResponse) {
-        if(abstractResponse.getType() == InvocationType.EndRawStream){
-            if(endRawStreamListener != null) {
-                if (abstractResponse.getStatus() == ResponseStatus.OK) {
-                    Log.d(TAG, "rawData " + sb.toString());
-                    sb.delete(0, sb.length());
-                    endRawStreamListener.onResponse(true);
-                } else {
-                    endRawStreamListener.onResponse(false);
-                }
-            }
-        }else if(abstractResponse.getType() == InvocationType.EndShootingActivity){
-            if(endShootingListener != null) {
-                if (abstractResponse.getStatus() == ResponseStatus.OK) {
-                    endShootingListener.onResponse(true);
-                } else {
-                    endShootingListener.onResponse(false);
-                }
-            }
-        }else if(abstractResponse.getType() == InvocationType.EndDribblingActivity){
-            if(endDribblingListener != null) {
-                if (abstractResponse.getStatus() == ResponseStatus.OK) {
-                    endDribblingListener.onResponse(true);
-                } else {
-                    endDribblingListener.onResponse(false);
-                }
-            }
-        }
         Log.d(TAG, "onResponse " + abstractResponse.toString());
+        if(abstractResponse.getStatus() != ResponseStatus.OK){
+            if(abstractResponse.getStatus() == ResponseStatus.InProgress){
+                   if(abstractResponse instanceof EndShootingActivityResponse){
+                       endShootingActivity();
+                   }
+            }
+            return;
+        }
+        Intent intent = null;
+        switch (abstractResponse.getType()){
+            case StartRawStream:
+
+                break;
+            case EndRawStream:
+
+                break;
+            case StartDribblingActivity:
+
+                break;
+            case EndDribblingActivity:
+
+                break;
+            case StartShootingActivity:
+                intent = new Intent(mContext, TaskIntentService.class);
+                intent.putExtra(TaskIntentService.MESSAGE_TYPE, MessageType.toInt(
+                        MessageType.BALL_EVENT));
+                intent.putExtra(TaskIntentService.EVENT_TYPE, EventType.SHOOTING_SESSION_STARTED);
+                break;
+            case EndShootingActivity:
+                intent = new Intent(mContext, TaskIntentService.class);
+                intent.putExtra(TaskIntentService.MESSAGE_TYPE, MessageType.toInt(
+                        MessageType.BALL_EVENT));
+                intent.putExtra(TaskIntentService.EVENT_TYPE, EventType.SHOOTING_SESSION_ENDED);
+                break;
+        }
+        if(intent != null) {
+            mContext.startService(intent);
+        }
+        //if(abstractResponse.getType() == EndRawStream){
+        //    if(endRawStreamListener != null) {
+        //        if (abstractResponse.getStatus() == ResponseStatus.OK) {
+        //            endRawStreamListener.onResponse(true);
+        //        } else {
+        //            endRawStreamListener.onResponse(false);
+        //        }
+        //    }
+        //}else if(abstractResponse.getType() == EndShootingActivity){
+        //    if(endShootingListener != null) {
+        //        if (abstractResponse.getStatus() == ResponseStatus.OK) {
+        //            endShootingListener.onResponse(true);
+        //        } else {
+        //            endShootingListener.onResponse(false);
+        //        }
+        //    }
+        //}else if(abstractResponse.getType() == EndDribblingActivity){
+        //    if(endDribblingListener != null) {
+        //        if (abstractResponse.getStatus() == ResponseStatus.OK) {
+        //            endDribblingListener.onResponse(true);
+        //        } else {
+        //            endDribblingListener.onResponse(false);
+        //        }
+        //    }
+        //}
     }
 
     @Override public void onResponseError(byte[] bytes, String s) {
@@ -178,7 +221,7 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
     }
 
     public void startShootingActivity(){
-        DeviceFacade.startShootingActivity(mDeviceBridge, ActivityLimitBasis.Time,
+        DeviceFacade.startShootingActivity(mDeviceBridge, ActivityLimitBasis.Event,
                 NotificationTrigger.Event, 10, 1, 1,
                 new DeviceResponseCallback<StartShootingActivityResponse>() {
                     @Override protected void onResponse(StartShootingActivityResponse response) {
@@ -197,7 +240,6 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
     }
 
     public void startRawStream(){
-        sb = new StringBuilder();
         DeviceFacade.startRawStream(mDeviceBridge,
                 new DeviceResponseCallback<StartRawStreamResponse>() {
                     @Override protected void onResponse(StartRawStreamResponse response) {

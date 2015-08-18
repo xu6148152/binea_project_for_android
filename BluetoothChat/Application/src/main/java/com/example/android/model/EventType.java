@@ -10,4 +10,5 @@ public interface EventType{
     public static final byte SHOOTING_SESSION_STARTED = 0x23;
     public static final byte SHOOTING_SESSION_ENDED = 0x24;
     public static final byte SHOOTING_RESULT = 0x25;
+    public static final byte DRIBBLING_RESULT = 0x26;
 }
