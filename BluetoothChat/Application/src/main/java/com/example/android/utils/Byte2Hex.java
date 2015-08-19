@@ -135,7 +135,7 @@ public class Byte2Hex {
         byte[] bytes = new byte[capacity];
         int j = 0;
         for(int i = 0;i<capacity;i++){
-            bytes[i] = (byte) (value >> j & 0xff);
+            bytes[capacity - i - 1] = (byte) (value >> j & 0xff);
             j += 8;
         }
         return bytes;
@@ -146,15 +146,14 @@ public class Byte2Hex {
         return ByteBuffer.allocate(4).putFloat(value).array();
     }
 
-    public static byte[] int2byte(int value, int capacity){
+    public static byte[] int2ByteArray(int value, int capacity){
         byte[] bytes = new byte[capacity];
         int j = 0;
         for(int i = 0;i<capacity;i++){
-            bytes[i] = (byte) (value >> j & 0xff);
+            bytes[capacity - i - 1] = (byte) (value >> j & 0xff);
             j += 8;
         }
         return bytes;
-        //return ByteBuffer.allocate(4).putInt(value).array();
     }
 
     public static int crc16(final byte[] buffer) {

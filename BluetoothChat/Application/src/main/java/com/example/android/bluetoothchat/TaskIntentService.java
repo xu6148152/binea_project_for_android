@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.util.Log;
 import com.example.android.model.BaseData;
 import com.example.android.model.DribblingRecordWrapper;
+import com.example.android.model.GlobalVar;
 import com.example.android.model.MessageType;
 import com.example.android.model.PackageData;
 import com.example.android.model.ShootingRecordWrapper;
@@ -71,7 +72,7 @@ public class TaskIntentService extends WrapperIntentService {
         PackageData packageData = new PackageData(messageType, eventType, data);
         try {
             DatagramSocket socket = new DatagramSocket();
-            InetAddress local = InetAddress.getByName(Constants.SERVERADDRESS);
+            InetAddress local = InetAddress.getByName(GlobalVar.SERVER_ADDRESS);
             DatagramPacket packet = new DatagramPacket(
                     packageData.getPackageData(),
                     packageData.getPackageData().length,

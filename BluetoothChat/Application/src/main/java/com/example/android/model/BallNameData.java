@@ -11,7 +11,7 @@ public class BallNameData {
 
     public BallNameData(String ballName){
         mDataBuffer = new DataBufferForList();
-        final byte[] lengthBytes = Byte2Hex.int2byte(ballName.length(), 2);
+        final byte[] lengthBytes = Byte2Hex.int2ByteArray(ballName.length(), 2);
         mDataBuffer.append(lengthBytes);
         final byte[] ballNameRealBytes = ballName.getBytes();
         mDataBuffer.append(ballNameRealBytes);

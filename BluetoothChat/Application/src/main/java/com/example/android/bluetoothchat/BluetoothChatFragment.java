@@ -47,6 +47,8 @@ import com.example.android.common.logger.Log;
 import com.example.android.model.GlobalVar;
 import com.example.android.utils.Byte2Hex;
 import com.example.android.utils.FileUtil;
+import com.example.android.utils.RegexUtil;
+import java.nio.ByteOrder;
 
 /**
  * This fragment controls Bluetooth to communicate with other devices.
@@ -67,6 +69,7 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
     private Button mStartShootingButton;
     private Button mStartRawStream;
     private Chronometer time;
+    private EditText et_ip;
 
     private boolean isStartDribbling = false;
     private boolean isStartShooting = false;
@@ -167,6 +170,7 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
                              @Nullable Bundle savedInstanceState) {
         //ShootingRecord record = new ShootingRecord();
         //PackageData data = new PackageData(MessageType.BALL_EVENT, EventType.SHOOTING_RESULT, record);
+        Log.d(TAG, " " + ByteOrder.nativeOrder());
         return inflater.inflate(R.layout.fragment_bluetooth_chat, container, false);
     }
 
@@ -179,6 +183,14 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
         mStartShootingButton = (Button) view.findViewById(R.id.btn_start_shooting);
         mStartRawStream = (Button) view.findViewById(R.id.btn_start_raw_stream);
         time = (Chronometer) view.findViewById(R.id.time);
+        et_ip = (EditText) view.findViewById(R.id.et_ip);
+        et_ip.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    GlobalVar.SERVER_ADDRESS = et_ip.getText().toString();
+                }
+            }
+        });
         time.setText("00:00:00");
         time.setFormat("计时：%s");
     }
@@ -438,6 +450,10 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
     @Override public void onClick(View v) {
         if(mChatService.delegate == null){
             Toast.makeText(getActivity(), "basketball do not connect", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(!RegexUtil.isValidIp(GlobalVar.SERVER_ADDRESS)){
+            Toast.makeText(getActivity(), "please use right ip format", Toast.LENGTH_SHORT).show();
             return;
         }
         String msg = null;

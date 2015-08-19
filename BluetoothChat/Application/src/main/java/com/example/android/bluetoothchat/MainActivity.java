@@ -17,6 +17,11 @@
 
 package com.example.android.bluetoothchat;
 
+import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
@@ -47,6 +52,12 @@ public class MainActivity extends SampleActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        IntentFilter intentFilter = new IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED);
+        registerReceiver(mReceiver, intentFilter);
+        intentFilter = new IntentFilter(BluetoothDevice.ACTION_ACL_DISCONNECTED);
+        registerReceiver(mReceiver, intentFilter);
+        intentFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+        registerReceiver(mReceiver, intentFilter);
 
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -107,4 +118,22 @@ public class MainActivity extends SampleActivityBase {
 
         Log.i(TAG, "Ready");
     }
+
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override public void onReceive(Context context, Intent intent) {
+            switch (intent.getAction()){
+                case BluetoothDevice.ACTION_ACL_CONNECTED:
+                    Log.d(TAG, "bluetoothdevice bluetooth connected");
+                    break;
+
+                case BluetoothDevice.ACTION_ACL_DISCONNECTED:
+                    Log.d(TAG, "bluetoothdevice bluetooth disconnected");
+                    break;
+
+                case BluetoothDevice.ACTION_FOUND:
+                    Log.d(TAG, "bluetoothdevice bluetooth found");
+                    break;
+            }
+        }
+    };
 }

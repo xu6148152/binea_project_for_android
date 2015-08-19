@@ -18,10 +18,10 @@ public class ShootingResultEventData {
         mDataBuffer.append(ballSpeed);
         //currentShotArc
         int currentShotArc = shootingRecord.getCurrentShotArc();
-        mDataBuffer.append(Byte2Hex.int2byte(currentShotArc, 4));
+        mDataBuffer.append(Byte2Hex.int2ByteArray(currentShotArc, 4));
         //currentSpin
         int currentSpin = shootingRecord.getCurrentShotSpin();
-        mDataBuffer.append(Byte2Hex.int2byte(currentSpin, 4));
+        mDataBuffer.append(Byte2Hex.int2ByteArray(currentSpin, 4));
         //currentSpinRate
         byte[] spinRate = new byte[4];
         mDataBuffer.append(spinRate);

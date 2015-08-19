@@ -1,7 +1,6 @@
 package com.example.android.model;
 
 import android.text.TextUtils;
-import com.example.android.bluetoothchat.Constants;
 
 /**
  * Created by xubinggui on 8/17/15.
@@ -32,15 +31,15 @@ public class BallEvent {
         byte[] ballMac = new byte[6];
         for(int i = 0; i<macAddressParts.length; i++){
             Integer hex = Integer.parseInt(macAddressParts[i], 16);
-            ballMac[i] = hex.byteValue();
+            ballMac[macAddressParts.length - i - 1] = hex.byteValue();
         }
         dataBuffer.append(ballMac);
         //controllmac
-        String[] ipAddressParts = Constants.SERVERADDRESS.split("\\.");
+        String[] ipAddressParts = GlobalVar.SERVER_ADDRESS.split("\\.");
         byte[] controllerMac = new byte[6];
         for(int i = 0;i<ipAddressParts.length; i++){
             Integer integer = Integer.parseInt(ipAddressParts[i]);
-            controllerMac[i] = integer.byteValue();
+            controllerMac[ipAddressParts.length - i - 1] = integer.byteValue();
         }
         dataBuffer.append(controllerMac);
 
