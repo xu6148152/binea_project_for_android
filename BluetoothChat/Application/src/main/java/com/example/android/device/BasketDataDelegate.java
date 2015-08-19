@@ -92,8 +92,8 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
                     (DribblingActivityRecordNotification) abstractNotification;
             Log.d(TAG, " DribblingActivityRecordNotification isLastNotification "
                     + notification.isLastNotification());
-            intent.putExtra(TaskIntentService.DATA,
-                    new DribblingRecordWrapper(notification.getRecord()));
+            DribblingRecordWrapper recordWrapper = new DribblingRecordWrapper(notification.getRecord());
+            intent.putExtra(TaskIntentService.DATA, recordWrapper);
             intent.putExtra(TaskIntentService.MESSAGE_TYPE, MessageType.toInt(MessageType.BALL_EVENT));
             mListener.dribblingActivityRecord(notification);
         }else if(abstractNotification.getType() == ShootingActivityRecord){
@@ -119,6 +119,8 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
             if(abstractResponse.getStatus() == ResponseStatus.InProgress){
                    if(abstractResponse instanceof EndShootingActivityResponse){
                        endShootingActivity();
+                   }else if(abstractResponse instanceof EndDribblingActivityResponse){
+                       endDribblingActivity();
                    }
             }
             return;

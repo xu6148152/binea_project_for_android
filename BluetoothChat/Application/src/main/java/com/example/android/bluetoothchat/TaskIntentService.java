@@ -50,6 +50,7 @@ public class TaskIntentService extends WrapperIntentService {
     }
 
     @Override protected void onHandleIntent(Intent intent) {
+        Log.d(TAG, " onHandleIntent data ");
         final Serializable data = intent.getSerializableExtra(DATA);
         final byte eventType = intent.getByteExtra(EVENT_TYPE, (byte) -1);
         final int messageType = intent.getIntExtra(MESSAGE_TYPE, -1);
@@ -59,13 +60,11 @@ public class TaskIntentService extends WrapperIntentService {
             Log.d(TAG, " ShootingRecordWrapper " + recordWrapper.getCurrentShotMade());
         }else if(data instanceof DribblingRecordWrapper){
             DribblingRecordWrapper recordWrapper = (DribblingRecordWrapper) data;
-            sendUDPMessage(MessageType.toEnum(messageType), eventType, recordWrapper);
             Log.d(TAG, " DribblingRecordWrapper " + recordWrapper.getTotalDribbles());
+            sendUDPMessage(MessageType.toEnum(messageType), eventType, recordWrapper);
         }else{
             sendUDPMessage(MessageType.toEnum(messageType), eventType, null);
         }
-
-        Log.d(TAG, " onHandleIntent data " + data);
     }
 
     private void sendUDPMessage(MessageType messageType, byte eventType, BaseData data) {
@@ -79,6 +78,7 @@ public class TaskIntentService extends WrapperIntentService {
                     local,
                     Constants.UDP_PORT);
             socket.send(packet);
+            Log.d(TAG, "sendUDPMessage " + packet);
         } catch (SocketException e) {
             e.printStackTrace();
         } catch (IOException e) {

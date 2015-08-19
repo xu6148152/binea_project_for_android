@@ -35,7 +35,7 @@ public interface Constants {
     public static final String TOAST = "toast";
     public static final String DRIBBLING_ACTIVITY_RECORD_NOTIFICATION = "dribbling_activity_record_notification";
 
-    public static final String SERVERADDRESS = "192.168.1.1";
+    public static final String SERVERADDRESS = "192.168.0.83";
 
     public static final int UDP_PORT = 23120;
 
