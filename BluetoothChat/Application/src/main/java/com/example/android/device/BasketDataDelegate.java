@@ -24,7 +24,7 @@ import com._94fifty.model.type.ConnectionState;
 import com._94fifty.model.type.NotificationTrigger;
 import com._94fifty.model.type.RequestStatus;
 import com._94fifty.model.type.ResponseStatus;
-import com.example.android.bluetoothchat.DeviceResponseCallback;
+import com.example.android.listener.DeviceResponseCallback;
 import com.example.android.bluetoothchat.TaskIntentService;
 import com.example.android.listener.BasketballDataNotificationListener;
 import com.example.android.listener.EndDribblingListener;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.bluetoothchat;
+package com.example.android.classical;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -43,6 +43,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.example.android.bluetoothchat.Constants;
+import com.example.android.bluetoothchat.R;
 import com.example.android.common.logger.Log;
 import com.example.android.model.GlobalVar;
 import com.example.android.utils.Byte2Hex;

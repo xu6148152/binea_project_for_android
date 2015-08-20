@@ -16,6 +16,8 @@
 
 package com.example.android.bluetoothchat;
 
+import com.example.android.classical.BluetoothChatService;
+
 /**
  * Defines several constants used between {@link BluetoothChatService} and the UI.
  */

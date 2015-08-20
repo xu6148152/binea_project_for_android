@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.bluetoothchat;
+package com.example.android.classical;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import com._94fifty.model.response.notification.DribblingActivityRecordNotification;
+import com.example.android.bluetoothchat.Constants;
 import com.example.android.common.logger.Log;
 import com.example.android.device.BasketDataDelegate;
 import com.example.android.listener.BasketballDataNotificationListener;

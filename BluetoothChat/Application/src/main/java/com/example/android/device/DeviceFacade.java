@@ -18,7 +18,7 @@ import com._94fifty.model.type.ActivityLimitBasis;
 import com._94fifty.model.type.NotificationTrigger;
 import com._94fifty.model.type.RequestStatus;
 import com._94fifty.model.type.ShootingAlgorithmType;
-import com.example.android.bluetoothchat.DeviceResponseCallback;
+import com.example.android.listener.DeviceResponseCallback;
 import java.util.Date;
 
 /**

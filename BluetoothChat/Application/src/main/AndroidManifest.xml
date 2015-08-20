@@ -26,9 +26,17 @@
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
     <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.read_external_storage" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.read_external_storage"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-feature
+            android:name="android.hardware.bluetooth_le"
+            android:required="true"
+            />
+
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
 
     <application
             android:allowBackup="true"
@@ -38,8 +46,32 @@
             >
 
         <activity
-                android:name=".MainActivity"
+                android:name="com.example.android.ble.DeviceScanActivity"
                 android:label="@string/app_name"
+                android:screenOrientation="portrait"
+                >
+
+        </activity>
+
+        <activity
+                android:name="com.example.android.classical.DeviceListActivity"
+                android:label="@string/select_device"
+                android:theme="@android:style/Theme.Holo.Dialog"
+                android:screenOrientation="portrait"
+                />
+
+        <service android:name="com.example.android.bluetoothchat.TaskIntentService"/>
+        <activity
+                android:name="com.example.android.ble.DeviceControlActivity"
+                android:screenOrientation="portrait"
+                />
+        <service
+                android:name="com.example.android.ble.BluetoothLeService"
+                android:enabled="true"
+                />
+
+        <activity
+                android:name="com.example.android.bluetoothchat.ChooseBluetoothActivity"
                 android:screenOrientation="portrait"
                 >
             <intent-filter>
@@ -49,12 +81,9 @@
         </activity>
 
         <activity
-                android:name=".DeviceListActivity"
-                android:label="@string/select_device"
-                android:theme="@android:style/Theme.Holo.Dialog"
+                android:name="com.example.android.classical.MainActivity"
+                android:screenOrientation="portrait"
                 />
-
-        <service android:name="com.example.android.bluetoothchat.TaskIntentService" />
 
     </application>
 
