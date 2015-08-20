@@ -2,6 +2,7 @@ package com.example.android.bluetoothchat;
 
 import android.content.Intent;
 import android.util.Log;
+import com.example.android.Constants;
 import com.example.android.model.BaseData;
 import com.example.android.model.DribblingRecordWrapper;
 import com.example.android.model.GlobalVar;

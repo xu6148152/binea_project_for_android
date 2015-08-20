@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.bluetoothchat;
+package com.example.android;
 
 import com.example.android.classical.BluetoothChatService;
 

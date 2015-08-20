@@ -43,7 +43,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.example.android.bluetoothchat.Constants;
+import com.example.android.Constants;
 import com.example.android.bluetoothchat.R;
 import com.example.android.common.logger.Log;
 import com.example.android.model.GlobalVar;
@@ -119,7 +119,6 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
         setHasOptionsMenu(true);
         // Get local Bluetooth adapter
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
         // If the adapter is null, then Bluetooth is not supported
         if (mBluetoothAdapter == null) {
             FragmentActivity activity = getActivity();

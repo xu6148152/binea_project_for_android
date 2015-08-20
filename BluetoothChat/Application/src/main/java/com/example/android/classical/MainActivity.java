@@ -27,13 +27,15 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ViewAnimator;
-
 import com.example.android.bluetoothchat.R;
+import com.example.android.bluetoothchat.TaskIntentService;
 import com.example.android.common.activities.SampleActivityBase;
 import com.example.android.common.logger.Log;
 import com.example.android.common.logger.LogFragment;
 import com.example.android.common.logger.LogWrapper;
 import com.example.android.common.logger.MessageOnlyLogFilter;
+import com.example.android.model.EventType;
+import com.example.android.model.MessageType;
 
 /**
  * A simple launcher activity containing a summary sample description, sample log and a custom
@@ -122,12 +124,23 @@ public class MainActivity extends SampleActivityBase {
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override public void onReceive(Context context, Intent intent) {
+            Intent intentService;
             switch (intent.getAction()){
                 case BluetoothDevice.ACTION_ACL_CONNECTED:
+                    intentService = new Intent(context, TaskIntentService.class);
+                    intentService.putExtra(TaskIntentService.MESSAGE_TYPE, MessageType.toInt(
+                            MessageType.BALL_EVENT));
+                    intentService.putExtra(TaskIntentService.EVENT_TYPE, EventType.BALL_CONNECTED);
+                    context.startService(intentService);
                     Log.d(TAG, "bluetoothdevice bluetooth connected");
                     break;
 
                 case BluetoothDevice.ACTION_ACL_DISCONNECTED:
+                    intentService = new Intent(context, TaskIntentService.class);
+                    intentService.putExtra(TaskIntentService.MESSAGE_TYPE, MessageType.toInt(
+                            MessageType.BALL_EVENT));
+                    intentService.putExtra(TaskIntentService.EVENT_TYPE, EventType.BALL_DISCONNECTED);
+                    context.startService(intentService);
                     Log.d(TAG, "bluetoothdevice bluetooth disconnected");
                     break;
 
