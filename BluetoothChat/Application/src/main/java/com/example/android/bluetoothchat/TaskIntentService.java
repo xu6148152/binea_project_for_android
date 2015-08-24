@@ -2,19 +2,14 @@ package com.example.android.bluetoothchat;
 
 import android.content.Intent;
 import android.util.Log;
-import com.example.android.Constants;
 import com.example.android.model.BaseData;
 import com.example.android.model.DribblingRecordWrapper;
-import com.example.android.model.GlobalVar;
 import com.example.android.model.MessageType;
 import com.example.android.model.PackageData;
 import com.example.android.model.ShootingRecordWrapper;
-import java.io.IOException;
+import com.example.android.utils.Byte2Hex;
+import com.example.android.utils.ReverByteData2Obj;
 import java.io.Serializable;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
 
 /**
  * Created by xubinggui on 7/31/15.
@@ -71,20 +66,22 @@ public class TaskIntentService extends WrapperIntentService {
 
     private void sendUDPMessage(MessageType messageType, byte eventType, BaseData data) {
         PackageData packageData = new PackageData(messageType, eventType, data);
-        try {
-            DatagramSocket socket = new DatagramSocket();
-            InetAddress local = InetAddress.getByName(GlobalVar.SERVER_ADDRESS);
-            DatagramPacket packet = new DatagramPacket(
-                    packageData.getPackageData(),
-                    packageData.getPackageData().length,
-                    local,
-                    Constants.UDP_PORT);
-            socket.send(packet);
-            Log.d(TAG, "sendUDPMessage " + packet);
-        } catch (SocketException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ReverByteData2Obj reverByteData2Obj = new ReverByteData2Obj(packageData.getPackageData(),
+                messageType, packageData.getTimeStamps(), Byte2Hex.int2ByteArray(packageData.getCrc16(), 2), packageData.getBodyLength(), eventType, data);
+        //try {
+        //    DatagramSocket socket = new DatagramSocket();
+        //    InetAddress local = InetAddress.getByName(GlobalVar.SERVER_ADDRESS);
+        //    DatagramPacket packet = new DatagramPacket(
+        //            packageData.getPackageData(),
+        //            packageData.getPackageData().length,
+        //            local,
+        //            Constants.UDP_PORT);
+        //    socket.send(packet);
+        //    Log.d(TAG, "sendUDPMessage " + packet);
+        //} catch (SocketException e) {
+        //    e.printStackTrace();
+        //} catch (IOException e) {
+        //    e.printStackTrace();
+        //}
     }
 }

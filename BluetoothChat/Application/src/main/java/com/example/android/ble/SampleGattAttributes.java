@@ -26,8 +26,8 @@ public class SampleGattAttributes {
     private static HashMap<String, String> attributes = new HashMap();
     public static String HEART_RATE_MEASUREMENT = "00002a37-0000-1000-8000-00805f9b34fb";
     public static String CLIENT_CHARACTERISTIC_CONFIG = "00002902-0000-1000-8000-00805f9b34fb";
-    public static final UUID BASKET_UUID_INSECURE = UUID.fromString("32E5FCFC-52EE-41B0-827A-F18929716FEF");
-
+    //public static final UUID BASKET_UUID_INSECURE = UUID.fromString("32e5fcfc-52ee-41b0-827a-f18929716fef");
+    public static final UUID BASKET_UUID_INSECURE = UUID.fromString("b69bc590-59d9-4920-9552-defcc31651fe");
     static {
         // Sample Services.
         attributes.put("0000180d-0000-1000-8000-00805f9b34fb", "Heart Rate Service");

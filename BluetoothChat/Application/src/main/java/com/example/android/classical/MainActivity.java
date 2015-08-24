@@ -22,6 +22,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
@@ -35,6 +36,7 @@ import com.example.android.common.logger.LogFragment;
 import com.example.android.common.logger.LogWrapper;
 import com.example.android.common.logger.MessageOnlyLogFilter;
 import com.example.android.model.EventType;
+import com.example.android.model.GlobalVar;
 import com.example.android.model.MessageType;
 
 /**
@@ -55,6 +57,8 @@ public class MainActivity extends SampleActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        WifiManager wm = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        GlobalVar.currentDeviceMacAddress = wm.getConnectionInfo().getMacAddress();
         IntentFilter intentFilter = new IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED);
         registerReceiver(mReceiver, intentFilter);
         intentFilter = new IntentFilter(BluetoothDevice.ACTION_ACL_DISCONNECTED);

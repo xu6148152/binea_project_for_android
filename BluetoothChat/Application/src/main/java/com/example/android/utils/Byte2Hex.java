@@ -1,12 +1,21 @@
 package com.example.android.utils;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class Byte2Hex {
 
+    public static final String TAG = Byte2Hex.class.getCanonicalName();
     public static final char[] HEXCODE = "0123456789ABCDEF".toCharArray();
 
     public static final String RAWDATACOMMAND = "7E5CA1FF380100000000000000020000000000000000000000E72401017E";
+
+    public static final byte Z = 0x5A;
+    public static final byte E = 0x45;
+    public static final byte P = 0x50;
 
     public static String bytesToHex(byte[] bytes, String delimiter) {
         StringBuilder r = new StringBuilder(bytes.length * 2);
@@ -135,7 +144,7 @@ public class Byte2Hex {
         byte[] bytes = new byte[capacity];
         int j = 0;
         for(int i = 0;i<capacity;i++){
-            bytes[capacity - i - 1] = (byte) (value >> j & 0xff);
+            bytes[i] = (byte) (value >> j & 0xff);
             j += 8;
         }
         return bytes;
@@ -147,12 +156,46 @@ public class Byte2Hex {
     }
 
     public static byte[] int2ByteArray(int value, int capacity){
+        //return ByteBuffer.allocate(4).putInt(value).order(ByteOrder.LITTLE_ENDIAN).array();
         byte[] bytes = new byte[capacity];
         int j = 0;
         for(int i = 0;i<capacity;i++){
-            bytes[capacity - i - 1] = (byte) (value >> j & 0xff);
+            bytes[i] = (byte) (value >> j & 0xff);
             j += 8;
         }
+        return bytes;
+    }
+
+    public static byte[] short2ByteArray(short value){
+        return ByteBuffer.allocate(2).putShort(value).order(ByteOrder.LITTLE_ENDIAN).array();
+    }
+
+    public static int bytesArray2int(byte[] bytes){
+        final ByteBuffer byteBuffer = ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN);
+        return byteBuffer.getInt();
+    }
+
+    public static short bytesArray2Short(byte[] bytes){
+        return ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN).getShort();
+    }
+
+    public static long bytesArray2long(byte[] bytes){
+        final ByteBuffer byteBuffer = ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN);
+        return byteBuffer.getLong();
+    }
+
+    public static float bytes2float(byte[] bytes){
+        final ByteBuffer byteBuffer = ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN);
+        return byteBuffer.getFloat();
+    }
+
+    public static byte[] float2bytes(float value){
+        int bits = Float.floatToIntBits(value);
+        byte[] bytes = new byte[4];
+        bytes[0] = (byte)(bits & 0xff);
+        bytes[1] = (byte)((bits >> 8) & 0xff);
+        bytes[2] = (byte)((bits >> 16) & 0xff);
+        bytes[3] = (byte)((bits >> 24) & 0xff);
         return bytes;
     }
 
@@ -170,5 +213,110 @@ public class Byte2Hex {
         return crc;
 
     }
+
+    public static boolean isBasketball(byte[] scanRecord) {
+        if (scanRecord == null || scanRecord.length < 31) return false;
+        if (scanRecord[0] == 0x02 && scanRecord[1] == 0x01 && scanRecord[2] == 0x06) {
+            int len = scanRecord[3];
+            int indexZ = 3 + 1 + (int)scanRecord[3] + 1 + 1 + 6 + 1 + 1;
+            if (scanRecord[indexZ] == Z && scanRecord[indexZ + 1] == E
+                    && scanRecord[indexZ + 2] == P && scanRecord[indexZ + 3] == P) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //public static List<UUID> parseUUIDs(final byte[] advertisedData) {
+    //    List<UUID> uuids = new ArrayList<UUID>();
+    //
+    //    int offset = 0;
+    //    while (offset < (advertisedData.length - 2)) {
+    //        int len = advertisedData[offset++];
+    //        if (len == 0)
+    //            break;
+    //
+    //        int type = advertisedData[offset++];
+    //        switch (type) {
+    //            case 0x02: // Partial list of 16-bit UUIDs
+    //            case 0x03: // Complete list of 16-bit UUIDs
+    //                while (len > 1) {
+    //                    int uuid16 = advertisedData[offset++];
+    //                    uuid16 += (advertisedData[offset++] << 8);
+    //                    len -= 2;
+    //                    uuids.add(UUID.fromString(String.format(
+    //                            "%08x-0000-1000-8000-00805f9b34fb", uuid16)));
+    //                }
+    //                break;
+    //            case 0x06:// Partial list of 128-bit UUIDs
+    //            case 0x07:// Complete list of 128-bit UUIDs
+    //                // Loop through the advertised 128-bit UUID's.
+    //                while (len >= 16) {
+    //                    try {
+    //                        // Wrap the advertised bits and order them.
+    //                        ByteBuffer buffer = ByteBuffer.wrap(advertisedData,
+    //                                offset++, 16).order(ByteOrder.LITTLE_ENDIAN);
+    //                        long mostSignificantBit = buffer.getLong();
+    //                        long leastSignificantBit = buffer.getLong();
+    //                        uuids.add(new UUID(leastSignificantBit,
+    //                                mostSignificantBit));
+    //                    } catch (IndexOutOfBoundsException e) {
+    //                        // Defensive programming.
+    //                        Log.e(TAG, e.toString());
+    //                        continue;
+    //                    } finally {
+    //                        // Move the offset to read the next uuid.
+    //                        offset += 15;
+    //                        len -= 16;
+    //                    }
+    //                }
+    //                break;
+    //            default:
+    //                offset += (len - 1);
+    //                break;
+    //        }
+    //    }
+    //
+    //    return uuids;
+    //}
+
+    public static List<UUID> parseUUIDs(byte[] advertisedData) {
+        List<UUID> uuids = new ArrayList<UUID>();
+
+        ByteBuffer buffer = ByteBuffer.wrap(advertisedData).order(ByteOrder.LITTLE_ENDIAN);
+        while (buffer.remaining() > 2) {
+            byte length = buffer.get();
+            if (length == 0) break;
+
+            byte type = buffer.get();
+            switch (type) {
+                case 0x02: // Partial list of 16-bit UUIDs
+                case 0x03: // Complete list of 16-bit UUIDs
+                    while (length >= 2) {
+                        uuids.add(UUID.fromString(String.format("%08x-0000-1000-8000-00805f9b34fb",
+                                buffer.getShort())));
+                        length -= 2;
+                    }
+                    break;
+
+                case 0x06: // Partial list of 128-bit UUIDs
+                case 0x07: // Complete list of 128-bit UUIDs
+                    while (length >= 16) {
+                        long lsb = buffer.getLong();
+                        long msb = buffer.getLong();
+                        uuids.add(new UUID(msb, lsb));
+                        length -= 16;
+                    }
+                    break;
+
+                default:
+                    buffer.position(buffer.position() + length - 1);
+                    break;
+            }
+        }
+
+        return uuids;
+    }
+
 
 }

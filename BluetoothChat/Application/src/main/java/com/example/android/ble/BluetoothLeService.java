@@ -26,12 +26,14 @@ import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
+import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 import com.example.android.device.BasketDataDelegate;
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -72,22 +74,26 @@ public class BluetoothLeService extends Service {
     // connection change and services discovered.
     private final BluetoothGattCallback mGattCallback = new BluetoothGattCallback() {
         @Override
-        public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
+        public void onConnectionStateChange(final BluetoothGatt gatt, int status, int newState) {
             String intentAction;
             if (newState == BluetoothProfile.STATE_CONNECTED) {
 
                 intentAction = ACTION_GATT_CONNECTED;
                 mConnectionState = STATE_CONNECTED;
                 broadcastUpdate(intentAction);
-                //final BluetoothDevice device = gatt.getDevice();
-                //try {
-                //    BluetoothSocket socket = device.createInsecureRfcommSocketToServiceRecord(
-                //            SampleGattAttributes.BASKET_UUID_INSECURE);
-                //    delegate = new BasketDataDelegate(socket, BluetoothLeService.this);
-                //} catch (IOException e) {
-                //    Log.e(TAG, "can not create BluetoothSocket ");
-                //    e.printStackTrace();
-                //}
+                new Thread(){
+                    @Override public void run() {
+                        final BluetoothDevice device = gatt.getDevice();
+                        try {
+                            BluetoothSocket socket = device.createInsecureRfcommSocketToServiceRecord(
+                                    SampleGattAttributes.BASKET_UUID_INSECURE);
+                            delegate = new BasketDataDelegate(socket, BluetoothLeService.this);
+                        } catch (IOException e) {
+                            Log.e(TAG, "can not create BluetoothSocket ");
+                            e.printStackTrace();
+                        }
+                    }
+                }.start();
                 Log.i(TAG, "Connected to GATT server.");
                 // Attempts to discover services after successful connection.
                 Log.i(TAG, "Attempting to start service discovery:" +

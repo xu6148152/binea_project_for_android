@@ -196,13 +196,7 @@ public class DeviceControlActivity extends Activity implements View.OnClickListe
         mStartRawStream = (Button) findViewById(R.id.btn_start_raw_stream);
         time = (Chronometer) findViewById(R.id.time);
         et_ip = (EditText) findViewById(R.id.et_ip);
-        et_ip.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    GlobalVar.SERVER_ADDRESS = et_ip.getText().toString();
-                }
-            }
-        });
+
         time.setText("00:00:00");
         time.setFormat("计时：%s");
 
@@ -354,6 +348,7 @@ public class DeviceControlActivity extends Activity implements View.OnClickListe
             Toast.makeText(this, "basketball do not connect", Toast.LENGTH_SHORT).show();
             return;
         }
+        GlobalVar.SERVER_ADDRESS = et_ip.getText().toString();
         if(!RegexUtil.isValidIp(GlobalVar.SERVER_ADDRESS)){
             Toast.makeText(this, "please use right ip format", Toast.LENGTH_SHORT).show();
             return;

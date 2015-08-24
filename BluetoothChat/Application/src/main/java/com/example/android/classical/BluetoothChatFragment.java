@@ -192,6 +192,7 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
                 }
             }
         });
+        et_ip.setText(GlobalVar.SERVER_ADDRESS);
         time.setText("00:00:00");
         time.setFormat("计时：%s");
     }
@@ -351,8 +352,8 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
                 case Constants.MESSAGE_DEVICE_NAME:
                     // save the connected device's name
                     mConnectedDeviceName = msg.getData().getString(Constants.DEVICE_NAME);
-                    GlobalVar.currentDeviceName = mConnectedDeviceName;
-                    GlobalVar.currentMacAddress = msg.getData().getString(Constants.DEVICE_ADDRESS);
+                    GlobalVar.currentBallName = mConnectedDeviceName;
+                    GlobalVar.currentBallMacAddress = msg.getData().getString(Constants.DEVICE_ADDRESS);
                     if (null != activity) {
                         Toast.makeText(activity, "Connected to "
                                 + mConnectedDeviceName, Toast.LENGTH_SHORT).show();
@@ -375,6 +376,10 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
     };
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(!RegexUtil.isValidIp(et_ip.getText().toString())){
+            Toast.makeText(getActivity(), "please use right ip format", Toast.LENGTH_SHORT).show();
+            return;
+        }
         switch (requestCode) {
             case REQUEST_CONNECT_DEVICE_SECURE:
                 // When DeviceListActivity returns with a device to connect
@@ -453,7 +458,7 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
             Toast.makeText(getActivity(), "basketball do not connect", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(!RegexUtil.isValidIp(GlobalVar.SERVER_ADDRESS)){
+        if(!RegexUtil.isValidIp(et_ip.getText().toString())){
             Toast.makeText(getActivity(), "please use right ip format", Toast.LENGTH_SHORT).show();
             return;
         }

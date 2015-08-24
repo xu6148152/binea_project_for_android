@@ -1,0 +1,69 @@
+{
+    "moduleRoot": "/Users/xubinggui/Android/my_project/BluetoothChat/Application",
+    "minSdkVersion": 18,
+    "targetSdkVersion": 22,
+    "bootClassPath": [
+        "/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/platforms/android-22/android.jar"
+    ],
+    "storeType": "jks",
+    "applicationVariant": "debug",
+    "projectRoot": "/Users/xubinggui/Android/my_project/BluetoothChat",
+    "sdkDir": "/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk",
+    "keyAlias": "AndroidDebugKey",
+    "rebelPluginVersion": "0.8.0.70 2015-08-21T10:06:08+0000",
+    "androidManifest": [
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/src/debug/AndroidManifest.xml",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/src/main/AndroidManifest.xml"
+    ],
+    "keyPassword": "android",
+    "mergedResources": "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/res/debug",
+    "resourcePath": [
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/src/debug/res",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/src/template/res",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/src/common/res",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/src/main/res"
+    ],
+    "androidPluginVersion": "1.1.0",
+    "type": "Gradle",
+    "storePassword": "android",
+    "assetPath": [
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/src/debug/assets",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/src/main/assets"
+    ],
+    "rebelDataDir": "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/jrebel/data/debug",
+    "sourcePath": [
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/src/debug/resources",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/src/main/resources"
+    ],
+    "explodedLibsResources": [
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/res/generated/debug",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/res/rs/debug",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/exploded-aar/com.android.support/gridlayout-v7/21.0.2/res",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/res",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.2/res"
+    ],
+    "storeFile": "/Users/xubinggui/.android/debug.keystore",
+    "resourcePackagePath": "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/resources/resources-debug.ap_",
+    "compileSdkVersion": "android-22",
+    "buildSystemVersion": "2.2.1",
+    "layoutVersion": 6,
+    "applicationId": "com.example.android.bluetoothchat",
+    "originalApplicationId": "com.example.android.bluetoothchat",
+    "apk": "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/outputs/apk/Application-debug.apk",
+    "buildToolsDir": "/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/build-tools/22.0.1",
+    "generatedJavaSourcePath": [
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/rs/debug",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/buildConfig/debug",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/r/debug",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/aidl/debug"
+    ],
+    "classPath": [
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/classes/debug",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/classes.jar",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/src/main/lib/lib94fifty-1.0.624.jar",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/exploded-aar/com.android.support/gridlayout-v7/21.0.2/classes.jar",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.2/classes.jar",
+        "/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.2/support-annotations-21.0.2.jar",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/libs/internal_impl-21.0.2.jar"
+    ]
+}

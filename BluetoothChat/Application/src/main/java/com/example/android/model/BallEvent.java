@@ -24,10 +24,11 @@ public class BallEvent {
         byte[] reserve = new byte[3];
         dataBuffer.append(reserve);
         //ball mac
-        if(TextUtils.isEmpty(GlobalVar.currentMacAddress)){
-            throw new RuntimeException("currentMacAddress is null");
+        if(TextUtils.isEmpty(GlobalVar.currentBallMacAddress)){
+            throw new RuntimeException("currentBallMacAddress is null");
         }
-        String[] macAddressParts = GlobalVar.currentMacAddress.split(":");
+        String[] macAddressParts = GlobalVar.currentBallMacAddress.split(":");
+
         byte[] ballMac = new byte[6];
         for(int i = 0; i<macAddressParts.length; i++){
             Integer hex = Integer.parseInt(macAddressParts[i], 16);
@@ -35,13 +36,15 @@ public class BallEvent {
         }
         dataBuffer.append(ballMac);
         //controllmac
-        String[] ipAddressParts = GlobalVar.SERVER_ADDRESS.split("\\.");
-        byte[] controllerMac = new byte[6];
-        for(int i = 0;i<ipAddressParts.length; i++){
-            Integer integer = Integer.parseInt(ipAddressParts[i]);
-            controllerMac[ipAddressParts.length - i - 1] = integer.byteValue();
-        }
-        dataBuffer.append(controllerMac);
+        //if(!TextUtils.isEmpty(GlobalVar.currentDeviceMacAddress)) {
+            String[] ipAddressParts = GlobalVar.currentDeviceMacAddress.split(":");
+            byte[] controllerMac = new byte[6];
+            for (int i = 0; i < ipAddressParts.length; i++) {
+                Integer integer = Integer.parseInt(ipAddressParts[i], 16);
+                controllerMac[ipAddressParts.length - i - 1] = integer.byteValue();
+            }
+            dataBuffer.append(controllerMac);
+        //}
 
     }
 

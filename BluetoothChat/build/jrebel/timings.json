@@ -1,0 +1,35 @@
+{
+    "timings": [
+        {
+            "type": "ProcessAndroidResources",
+            "timeMs": 8,
+            "count": 2
+        },
+        {
+            "type": "MergeResources",
+            "timeMs": 8,
+            "count": 2
+        },
+        {
+            "type": "JrebelPinResidsTask",
+            "timeMs": 2,
+            "count": 1
+        },
+        {
+            "type": "Total",
+            "timeMs": 4302,
+            "count": 1
+        },
+        {
+            "type": "JavaCompile",
+            "timeMs": 558,
+            "count": 1
+        },
+        {
+            "type": "UnflagPublicResourcesTask",
+            "timeMs": 1,
+            "count": 1
+        }
+    ],
+    "capturedAt": 1440387448236
+}

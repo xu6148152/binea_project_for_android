@@ -1,5 +1,6 @@
 package com.example.android.model;
 
+import com.example.android.common.logger.Log;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import java.util.List;
  * Created by xubinggui on 8/18/15.
  */
 public class DataBufferForList {
+    private static final String TAG = DataBufferForList.class.getCanonicalName();
     List<Byte> mDataByteLists;
 
     public DataBufferForList(){
@@ -28,6 +30,7 @@ public class DataBufferForList {
     }
 
     public byte[] getBytes(int length){
+        Log.d(TAG, " length " + length + " byteLists size " + mDataByteLists.size());
         byte[] bytes = new byte[length];
         for(int i = 0;i<length;i++){
             bytes[i] = mDataByteLists.get(i);

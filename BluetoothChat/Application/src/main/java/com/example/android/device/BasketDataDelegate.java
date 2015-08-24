@@ -72,7 +72,7 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
     }
 
     @Override public void onConnectionStateChanged(ConnectionState connectionState) {
-        Log.d(TAG, "onConnectionStateChanged ");
+        Log.d(TAG, "onConnectionStateChanged " + connectionState);
         mCurrentConnectionState = connectionState;
         //if(connectionState == ConnectionState.Open){
         //    Log.d(TAG, "onConnectionStateChanged open ");
