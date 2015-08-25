@@ -189,11 +189,11 @@ public class DeviceListActivity extends Activity {
                 public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
                     // Cancel discovery because it's costly and we're about to connect
                     mBtAdapter.cancelDiscovery();
-
+                    BluetoothDevice bd = (BluetoothDevice) mNewDevicesArrayAdapter.getItem(arg2);
                     // Get the device MAC address, which is the last 17 chars in the View
-                    String info = ((TextView) v).getText().toString();
-                    String address = info.substring(info.length() - 17);
-
+                    //String info = ((TextView) v).getText().toString();
+                    //String address = info.substring(info.length() - 17);
+                    String address = bd.getAddress();
                     // Create the result Intent and include the MAC address
                     Intent intent = new Intent();
                     intent.putExtra(EXTRA_DEVICE_ADDRESS, address);

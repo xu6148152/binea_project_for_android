@@ -458,7 +458,8 @@ public class BluetoothChatFragment extends Fragment implements View.OnClickListe
             Toast.makeText(getActivity(), "basketball do not connect", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(!RegexUtil.isValidIp(et_ip.getText().toString())){
+        GlobalVar.SERVER_ADDRESS = et_ip.getText().toString();
+        if(!RegexUtil.isValidIp(GlobalVar.SERVER_ADDRESS)){
             Toast.makeText(getActivity(), "please use right ip format", Toast.LENGTH_SHORT).show();
             return;
         }
