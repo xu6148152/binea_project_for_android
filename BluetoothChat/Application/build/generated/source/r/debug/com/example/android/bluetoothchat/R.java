@@ -188,6 +188,86 @@ containing a value of this type.
 </table>
          */
         public static final int layout_gravity=0x7f010018;
+        /** <p>Must be a fractional value, which is a floating point number appended with either % or %p, such as "<code>14.5%</code>".
+The % suffix always means a percentage of the base size; the optional %p suffix provides a size relative to
+some parent container.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int layout_heightPercent=0x7f01001a;
+        /** <p>Must be a fractional value, which is a floating point number appended with either % or %p, such as "<code>14.5%</code>".
+The % suffix always means a percentage of the base size; the optional %p suffix provides a size relative to
+some parent container.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int layout_marginBottomPercent=0x7f01001f;
+        /** <p>Must be a fractional value, which is a floating point number appended with either % or %p, such as "<code>14.5%</code>".
+The % suffix always means a percentage of the base size; the optional %p suffix provides a size relative to
+some parent container.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int layout_marginEndPercent=0x7f010021;
+        /** <p>Must be a fractional value, which is a floating point number appended with either % or %p, such as "<code>14.5%</code>".
+The % suffix always means a percentage of the base size; the optional %p suffix provides a size relative to
+some parent container.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int layout_marginLeftPercent=0x7f01001c;
+        /** <p>Must be a fractional value, which is a floating point number appended with either % or %p, such as "<code>14.5%</code>".
+The % suffix always means a percentage of the base size; the optional %p suffix provides a size relative to
+some parent container.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int layout_marginPercent=0x7f01001b;
+        /** <p>Must be a fractional value, which is a floating point number appended with either % or %p, such as "<code>14.5%</code>".
+The % suffix always means a percentage of the base size; the optional %p suffix provides a size relative to
+some parent container.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int layout_marginRightPercent=0x7f01001e;
+        /** <p>Must be a fractional value, which is a floating point number appended with either % or %p, such as "<code>14.5%</code>".
+The % suffix always means a percentage of the base size; the optional %p suffix provides a size relative to
+some parent container.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int layout_marginStartPercent=0x7f010020;
+        /** <p>Must be a fractional value, which is a floating point number appended with either % or %p, such as "<code>14.5%</code>".
+The % suffix always means a percentage of the base size; the optional %p suffix provides a size relative to
+some parent container.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int layout_marginTopPercent=0x7f01001d;
         /** <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -212,6 +292,16 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int layout_rowWeight=0x7f010014;
+        /** <p>Must be a fractional value, which is a floating point number appended with either % or %p, such as "<code>14.5%</code>".
+The % suffix always means a percentage of the base size; the optional %p suffix provides a size relative to
+some parent container.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int layout_widthPercent=0x7f010019;
         /** <p>Must be one of the following constant values.</p>
 <table>
 <colgroup align="left" />
@@ -936,5 +1026,180 @@ containing a value of this type.
           @attr name com.example.android.bluetoothchat:layout_rowWeight
         */
         public static final int GridLayout_Layout_layout_rowWeight = 9;
+        /** Attributes that can be used with a PercentLayout_Layout.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #PercentLayout_Layout_layout_heightPercent com.example.android.bluetoothchat:layout_heightPercent}</code></td><td></td></tr>
+           <tr><td><code>{@link #PercentLayout_Layout_layout_marginBottomPercent com.example.android.bluetoothchat:layout_marginBottomPercent}</code></td><td></td></tr>
+           <tr><td><code>{@link #PercentLayout_Layout_layout_marginEndPercent com.example.android.bluetoothchat:layout_marginEndPercent}</code></td><td></td></tr>
+           <tr><td><code>{@link #PercentLayout_Layout_layout_marginLeftPercent com.example.android.bluetoothchat:layout_marginLeftPercent}</code></td><td></td></tr>
+           <tr><td><code>{@link #PercentLayout_Layout_layout_marginPercent com.example.android.bluetoothchat:layout_marginPercent}</code></td><td></td></tr>
+           <tr><td><code>{@link #PercentLayout_Layout_layout_marginRightPercent com.example.android.bluetoothchat:layout_marginRightPercent}</code></td><td></td></tr>
+           <tr><td><code>{@link #PercentLayout_Layout_layout_marginStartPercent com.example.android.bluetoothchat:layout_marginStartPercent}</code></td><td></td></tr>
+           <tr><td><code>{@link #PercentLayout_Layout_layout_marginTopPercent com.example.android.bluetoothchat:layout_marginTopPercent}</code></td><td></td></tr>
+           <tr><td><code>{@link #PercentLayout_Layout_layout_widthPercent com.example.android.bluetoothchat:layout_widthPercent}</code></td><td></td></tr>
+           </table>
+           @see #PercentLayout_Layout_layout_heightPercent
+           @see #PercentLayout_Layout_layout_marginBottomPercent
+           @see #PercentLayout_Layout_layout_marginEndPercent
+           @see #PercentLayout_Layout_layout_marginLeftPercent
+           @see #PercentLayout_Layout_layout_marginPercent
+           @see #PercentLayout_Layout_layout_marginRightPercent
+           @see #PercentLayout_Layout_layout_marginStartPercent
+           @see #PercentLayout_Layout_layout_marginTopPercent
+           @see #PercentLayout_Layout_layout_widthPercent
+         */
+        public static final int[] PercentLayout_Layout = {
+            0x7f010019, 0x7f01001a, 0x7f01001b, 0x7f01001c,
+            0x7f01001d, 0x7f01001e, 0x7f01001f, 0x7f010020,
+            0x7f010021
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.example.android.bluetoothchat.R.attr#layout_heightPercent}
+          attribute's value can be found in the {@link #PercentLayout_Layout} array.
+
+
+          <p>Must be a fractional value, which is a floating point number appended with either % or %p, such as "<code>14.5%</code>".
+The % suffix always means a percentage of the base size; the optional %p suffix provides a size relative to
+some parent container.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.android.bluetoothchat:layout_heightPercent
+        */
+        public static final int PercentLayout_Layout_layout_heightPercent = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.example.android.bluetoothchat.R.attr#layout_marginBottomPercent}
+          attribute's value can be found in the {@link #PercentLayout_Layout} array.
+
+
+          <p>Must be a fractional value, which is a floating point number appended with either % or %p, such as "<code>14.5%</code>".
+The % suffix always means a percentage of the base size; the optional %p suffix provides a size relative to
+some parent container.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.android.bluetoothchat:layout_marginBottomPercent
+        */
+        public static final int PercentLayout_Layout_layout_marginBottomPercent = 6;
+        /**
+          <p>This symbol is the offset where the {@link com.example.android.bluetoothchat.R.attr#layout_marginEndPercent}
+          attribute's value can be found in the {@link #PercentLayout_Layout} array.
+
+
+          <p>Must be a fractional value, which is a floating point number appended with either % or %p, such as "<code>14.5%</code>".
+The % suffix always means a percentage of the base size; the optional %p suffix provides a size relative to
+some parent container.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.android.bluetoothchat:layout_marginEndPercent
+        */
+        public static final int PercentLayout_Layout_layout_marginEndPercent = 8;
+        /**
+          <p>This symbol is the offset where the {@link com.example.android.bluetoothchat.R.attr#layout_marginLeftPercent}
+          attribute's value can be found in the {@link #PercentLayout_Layout} array.
+
+
+          <p>Must be a fractional value, which is a floating point number appended with either % or %p, such as "<code>14.5%</code>".
+The % suffix always means a percentage of the base size; the optional %p suffix provides a size relative to
+some parent container.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.android.bluetoothchat:layout_marginLeftPercent
+        */
+        public static final int PercentLayout_Layout_layout_marginLeftPercent = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.example.android.bluetoothchat.R.attr#layout_marginPercent}
+          attribute's value can be found in the {@link #PercentLayout_Layout} array.
+
+
+          <p>Must be a fractional value, which is a floating point number appended with either % or %p, such as "<code>14.5%</code>".
+The % suffix always means a percentage of the base size; the optional %p suffix provides a size relative to
+some parent container.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.android.bluetoothchat:layout_marginPercent
+        */
+        public static final int PercentLayout_Layout_layout_marginPercent = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.example.android.bluetoothchat.R.attr#layout_marginRightPercent}
+          attribute's value can be found in the {@link #PercentLayout_Layout} array.
+
+
+          <p>Must be a fractional value, which is a floating point number appended with either % or %p, such as "<code>14.5%</code>".
+The % suffix always means a percentage of the base size; the optional %p suffix provides a size relative to
+some parent container.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.android.bluetoothchat:layout_marginRightPercent
+        */
+        public static final int PercentLayout_Layout_layout_marginRightPercent = 5;
+        /**
+          <p>This symbol is the offset where the {@link com.example.android.bluetoothchat.R.attr#layout_marginStartPercent}
+          attribute's value can be found in the {@link #PercentLayout_Layout} array.
+
+
+          <p>Must be a fractional value, which is a floating point number appended with either % or %p, such as "<code>14.5%</code>".
+The % suffix always means a percentage of the base size; the optional %p suffix provides a size relative to
+some parent container.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.android.bluetoothchat:layout_marginStartPercent
+        */
+        public static final int PercentLayout_Layout_layout_marginStartPercent = 7;
+        /**
+          <p>This symbol is the offset where the {@link com.example.android.bluetoothchat.R.attr#layout_marginTopPercent}
+          attribute's value can be found in the {@link #PercentLayout_Layout} array.
+
+
+          <p>Must be a fractional value, which is a floating point number appended with either % or %p, such as "<code>14.5%</code>".
+The % suffix always means a percentage of the base size; the optional %p suffix provides a size relative to
+some parent container.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.android.bluetoothchat:layout_marginTopPercent
+        */
+        public static final int PercentLayout_Layout_layout_marginTopPercent = 4;
+        /**
+          <p>This symbol is the offset where the {@link com.example.android.bluetoothchat.R.attr#layout_widthPercent}
+          attribute's value can be found in the {@link #PercentLayout_Layout} array.
+
+
+          <p>Must be a fractional value, which is a floating point number appended with either % or %p, such as "<code>14.5%</code>".
+The % suffix always means a percentage of the base size; the optional %p suffix provides a size relative to
+some parent container.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.android.bluetoothchat:layout_widthPercent
+        */
+        public static final int PercentLayout_Layout_layout_widthPercent = 0;
     };
 }

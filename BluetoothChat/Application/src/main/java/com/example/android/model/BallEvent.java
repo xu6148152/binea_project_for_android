@@ -32,7 +32,7 @@ public class BallEvent {
         byte[] ballMac = new byte[6];
         for(int i = 0; i<macAddressParts.length; i++){
             Integer hex = Integer.parseInt(macAddressParts[i], 16);
-            ballMac[macAddressParts.length - i - 1] = hex.byteValue();
+            ballMac[i] = hex.byteValue();
         }
         dataBuffer.append(ballMac);
         //controllmac
@@ -41,7 +41,7 @@ public class BallEvent {
             byte[] controllerMac = new byte[6];
             for (int i = 0; i < ipAddressParts.length; i++) {
                 Integer integer = Integer.parseInt(ipAddressParts[i], 16);
-                controllerMac[ipAddressParts.length - i - 1] = integer.byteValue();
+                controllerMac[i] = integer.byteValue();
             }
             dataBuffer.append(controllerMac);
         //}

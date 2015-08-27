@@ -72,6 +72,19 @@ public class MainActivity extends SampleActivityBase {
             transaction.replace(R.id.sample_content_fragment, fragment);
             transaction.commit();
         }
+
+        //new Thread(){
+        //    @Override public void run() {
+        //        while(true) {
+        //            Intent intentService = new Intent(MainActivity.this, TaskIntentService.class);
+        //            intentService.putExtra(TaskIntentService.MESSAGE_TYPE, MessageType.toInt(MessageType.BALL_EVENT));
+        //            intentService.putExtra(TaskIntentService.EVENT_TYPE, EventType.BALL_CONNECTED);
+        //            startService(intentService);
+        //            SystemClock.sleep(2000);
+        //        }
+        //    }
+        //}.start();
+
     }
 
     @Override

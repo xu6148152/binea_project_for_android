@@ -16,9 +16,18 @@ int attr layout_column 0x7f010015
 int attr layout_columnSpan 0x7f010016
 int attr layout_columnWeight 0x7f010017
 int attr layout_gravity 0x7f010018
+int attr layout_heightPercent 0x7f01001a
+int attr layout_marginBottomPercent 0x7f01001f
+int attr layout_marginEndPercent 0x7f010021
+int attr layout_marginLeftPercent 0x7f01001c
+int attr layout_marginPercent 0x7f01001b
+int attr layout_marginRightPercent 0x7f01001e
+int attr layout_marginStartPercent 0x7f010020
+int attr layout_marginTopPercent 0x7f01001d
 int attr layout_row 0x7f010012
 int attr layout_rowSpan 0x7f010013
 int attr layout_rowWeight 0x7f010014
+int attr layout_widthPercent 0x7f010019
 int attr orientation 0x7f01000b
 int attr rowCount 0x7f01000c
 int attr rowOrderPreserved 0x7f010010
@@ -196,3 +205,13 @@ int styleable GridLayout_Layout_layout_gravity 13
 int styleable GridLayout_Layout_layout_row 7
 int styleable GridLayout_Layout_layout_rowSpan 8
 int styleable GridLayout_Layout_layout_rowWeight 9
+int[] styleable PercentLayout_Layout { 0x7f010019, 0x7f01001a, 0x7f01001b, 0x7f01001c, 0x7f01001d, 0x7f01001e, 0x7f01001f, 0x7f010020, 0x7f010021 }
+int styleable PercentLayout_Layout_layout_heightPercent 1
+int styleable PercentLayout_Layout_layout_marginBottomPercent 6
+int styleable PercentLayout_Layout_layout_marginEndPercent 8
+int styleable PercentLayout_Layout_layout_marginLeftPercent 3
+int styleable PercentLayout_Layout_layout_marginPercent 2
+int styleable PercentLayout_Layout_layout_marginRightPercent 5
+int styleable PercentLayout_Layout_layout_marginStartPercent 7
+int styleable PercentLayout_Layout_layout_marginTopPercent 4
+int styleable PercentLayout_Layout_layout_widthPercent 0
