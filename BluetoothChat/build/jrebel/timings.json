@@ -2,12 +2,12 @@
     "timings": [
         {
             "type": "ProcessAndroidResources",
-            "timeMs": 16,
+            "timeMs": 18,
             "count": 2
         },
         {
             "type": "MergeResources",
-            "timeMs": 27,
+            "timeMs": 20,
             "count": 2
         },
         {
@@ -17,12 +17,12 @@
         },
         {
             "type": "Total",
-            "timeMs": 2975,
+            "timeMs": 6356,
             "count": 1
         },
         {
             "type": "JavaCompile",
-            "timeMs": 17,
+            "timeMs": 747,
             "count": 1
         },
         {
@@ -31,5 +31,5 @@
             "count": 1
         }
     ],
-    "capturedAt": 1440584458576
+    "capturedAt": 1440735076742
 }

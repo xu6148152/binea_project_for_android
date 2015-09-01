@@ -1,0 +1,74 @@
+package smartbasket;
+
+option java_package = "com.example.zprotocol";
+option java_outer_classname = "BasketballDataPackage";
+
+message Header{
+    required string prefix = 1;
+    required bytes version = 2;
+    required bytes messageType = 3;
+    required bytes timeStamps = 4;
+    required bytes crc16 = 5;
+    required bytes bodyLength = 6;
+}
+
+message Body{
+    //enum EventType{
+    //    BALLSTATE = 2;
+    //    BALLRESULT = 3;
+    //    BALLCOMMON = 1;
+    //};
+    //
+    //required EventType type = 1;
+
+    required BallEventCommon commonBody = 2;
+
+    optional BallEventBallState ballState = 3;
+
+    optional BallEventResult ballResult = 4;
+}
+
+/**
+
+*/
+message BallEventBallState{
+    required bytes ballNameLength = 1;
+
+    required bytes ballNameString = 2;
+}
+
+/**
+
+*/
+message BallEventCommon{
+    required bytes eventType = 1;
+
+    required bytes reserve = 2;
+
+    required bytes ballMac = 3;
+
+    required bytes controllerMac = 4;
+}
+
+/**
+
+*/
+message BallEventResult{
+    required float speed = 1;
+
+    required float arc = 2;
+
+    required float spin = 3;
+
+    required float spinRate = 4;
+
+    required bytes made = 5;
+
+    required bytes reserve = 6;
+}
+
+message BasketballProtocol {
+    required Header header = 1;
+
+    required Body body = 2;
+}

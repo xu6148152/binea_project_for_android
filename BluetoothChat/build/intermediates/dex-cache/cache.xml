@@ -2,18 +2,18 @@
 <items version="2" >
 
     <item
+        jar="/Users/xubinggui/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-protobuf-nano/0.7.0/1dff928a45edd417e051b3c2ce6b2f90b23e39dd/grpc-protobuf-nano-0.7.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1dff928a45edd417e051b3c2ce6b2f90b23e39dd">
+        <dex dex="/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/pre-dexed/debug/grpc-protobuf-nano-0.7.0-543e9c82607c5ce9dbfb453852b7947213d6957f.jar" />
+    </item>
+    <item
         jar="/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/exploded-aar/com.android.support/percent/23.0.0/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="fef469dcc3073ecc4706ba216479f2111e05834f">
         <dex dex="/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/pre-dexed/debug/classes-136750d2e67222a6f5846c4be30acef200a5972b.jar" />
-    </item>
-    <item
-        jar="/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.0/support-annotations-23.0.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="990e7f98a7bad86a40b1f0bcfeb039023afd0839">
-        <dex dex="/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/pre-dexed/debug/support-annotations-23.0.0-976e00cd2780f87a37deb34ea793e1f468f42d7e.jar" />
     </item>
     <item
         jar="/Users/xubinggui/Android/my_project/BluetoothChat/Application/src/main/lib/lib94fifty-1.0.624.jar"
@@ -23,6 +23,13 @@
         <dex dex="/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/pre-dexed/debug/lib94fifty-1.0.624-a58d295eeff4d3683b49e6c82d327d7b4b06674a.jar" />
     </item>
     <item
+        jar="/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.0/support-annotations-23.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="990e7f98a7bad86a40b1f0bcfeb039023afd0839">
+        <dex dex="/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/pre-dexed/debug/support-annotations-23.0.0-976e00cd2780f87a37deb34ea793e1f468f42d7e.jar" />
+    </item>
+    <item
         jar="/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/samples/android-22/connectivity/bluetooth/BluetoothChat/Application/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.2/classes.jar"
         jumboMode="false"
         revision="22.0.1"
@@ -30,32 +37,11 @@
         <dex dex="/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/samples/android-22/connectivity/bluetooth/BluetoothChat/Application/build/intermediates/pre-dexed/debug/classes-e4ee77f63aba1d1f4d69bd3fbd834729c7489439.jar" />
     </item>
     <item
-        jar="/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/libs/internal_impl-23.0.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="8bd336eeae661e8311330284897ee07f8ebaa297">
-        <dex dex="/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/pre-dexed/debug/internal_impl-23.0.0-00dcd6d07c069589a5d3b7ddd1dcf675be47b1b9.jar" />
-    </item>
-    <item
-        jar="/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.2/support-annotations-21.0.2.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="99373741f99a0556ee293c41e8faa1ca3ae8a4e6">
-        <dex dex="/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/samples/android-22/connectivity/bluetooth/BluetoothChat/Application/build/intermediates/pre-dexed/debug/support-annotations-21.0.2-4fca92a91ab07f57d5f33796d7c8cdb7f9c3e291.jar" />
-    </item>
-    <item
         jar="/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/samples/android-22/connectivity/bluetooth/BluetoothChat/Application/build/intermediates/exploded-aar/com.android.support/gridlayout-v7/21.0.2/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="9742ced04aafd9ac97dd2c66c1aa0e32d2ae7e54">
         <dex dex="/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/samples/android-22/connectivity/bluetooth/BluetoothChat/Application/build/intermediates/pre-dexed/debug/classes-942eb0e7da30ee2421a61d5c6cffdb301921c40a.jar" />
-    </item>
-    <item
-        jar="/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/exploded-aar/com.android.support/gridlayout-v7/21.0.2/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="9742ced04aafd9ac97dd2c66c1aa0e32d2ae7e54">
-        <dex dex="/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/pre-dexed/debug/classes-be2c813921bdf4e9a564b66a9765a36d07e1ccf3.jar" />
     </item>
     <item
         jar="/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.2/classes.jar"
@@ -77,6 +63,55 @@
         revision="22.0.1"
         sha1="d1bf02de1c56d942e7a9d093b8610ba1ef4128e3">
         <dex dex="/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/samples/android-22/connectivity/bluetooth/BluetoothChat/Application/build/intermediates/pre-dexed/debug/classes-f555bab8683c68a9f15244c664fd2f2a90e77587.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-core/0.7.0/58f361260a836577a6b8931224983e628218f31d/grpc-core-0.7.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="58f361260a836577a6b8931224983e628218f31d">
+        <dex dex="/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/pre-dexed/debug/grpc-core-0.7.0-0b122a4ddc55df51d6fe01c6e59fb9714a40e60c.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/libs/internal_impl-23.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="8bd336eeae661e8311330284897ee07f8ebaa297">
+        <dex dex="/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/pre-dexed/debug/internal_impl-23.0.0-00dcd6d07c069589a5d3b7ddd1dcf675be47b1b9.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.2/support-annotations-21.0.2.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="99373741f99a0556ee293c41e8faa1ca3ae8a4e6">
+        <dex dex="/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/samples/android-22/connectivity/bluetooth/BluetoothChat/Application/build/intermediates/pre-dexed/debug/support-annotations-21.0.2-4fca92a91ab07f57d5f33796d7c8cdb7f9c3e291.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/exploded-aar/com.android.support/gridlayout-v7/21.0.2/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9742ced04aafd9ac97dd2c66c1aa0e32d2ae7e54">
+        <dex dex="/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/pre-dexed/debug/classes-be2c813921bdf4e9a564b66a9765a36d07e1ccf3.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/pre-dexed/debug/jsr305-3.0.0-38416eb0e8bb408d80d7c79779a29a3e9c0d6f06.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/.gradle/caches/modules-2/files-2.1/com.google.protobuf.nano/protobuf-javanano/3.0.0-alpha-3/e4e116b609595b2b6e0622769b10b0daee9bc16c/protobuf-javanano-3.0.0-alpha-3.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e4e116b609595b2b6e0622769b10b0daee9bc16c">
+        <dex dex="/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/pre-dexed/debug/protobuf-javanano-3.0.0-alpha-3-51f87301fff78a317604c6cfcec7770e70ac5f1a.jar" />
+    </item>
+    <item
+        jar="/Users/xubinggui/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/18.0/cce0823396aa693798f8882e64213b1772032b09/guava-18.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="cce0823396aa693798f8882e64213b1772032b09">
+        <dex dex="/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/pre-dexed/debug/guava-18.0-78387c481e331b1b84a1c8b51c018b6da94651ca.jar" />
     </item>
     <item
         jar="/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/samples/android-22/connectivity/bluetooth/BluetoothChat/Application/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/libs/internal_impl-21.0.2.jar"

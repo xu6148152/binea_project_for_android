@@ -173,6 +173,11 @@ public class BluetoothChatService implements BasketballDataNotificationListener 
         setState(STATE_CONNECTING);
     }
 
+
+    public synchronized void disconnect(){
+
+    }
+
     /**
      * Start the ConnectedThread to begin managing a Bluetooth connection
      *

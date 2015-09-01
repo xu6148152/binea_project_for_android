@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <public type="attr" name="layout_marginStartPercent" id="0x7f010020" />
   <public type="attr" name="layout_rowWeight" id="0x7f010014" />
   <public type="attr" name="cardCornerRadius" id="0x7f010001" />
   <public type="attr" name="cardMaxElevation" id="0x7f010003" />
@@ -22,6 +23,7 @@
   <public type="attr" name="contentPadding" id="0x7f010006" />
   <public type="dimen" name="cardview_default_radius" id="0x7f050002" />
   <public type="layout" name="activity_choose_bluetooth" id="0x7f030001" />
+  <public type="attr" name="layout_widthPercent" id="0x7f010019" />
   <public type="dimen" name="margin_small" id="0x7f050008" />
   <public type="attr" name="cardUseCompatPadding" id="0x7f010004" />
   <public type="string" name="title_devices" id="0x7f060024" />
@@ -36,10 +38,12 @@
   <public type="color" name="cardview_shadow_end_color" id="0x7f040002" />
   <public type="style" name="CardView" id="0x7f070001" />
   <public type="attr" name="layout_columnWeight" id="0x7f010017" />
+  <public type="attr" name="layout_marginLeftPercent" id="0x7f01001c" />
   <public type="menu" name="bluetooth_chat" id="0x7f080001" />
   <public type="menu" name="main" id="0x7f080003" />
   <public type="attr" name="contentPaddingLeft" id="0x7f010007" />
   <public type="string" name="label_data" id="0x7f06000b" />
+  <public type="attr" name="layout_heightPercent" id="0x7f01001a" />
   <public type="string" name="none_found" id="0x7f060015" />
   <public type="layout" name="gatt_services_characteristics" id="0x7f030006" />
   <public type="dimen" name="default_gap" id="0x7f050003" />
@@ -56,6 +60,7 @@
   <public type="attr" name="cardBackgroundColor" id="0x7f010000" />
   <public type="attr" name="contentPaddingBottom" id="0x7f01000a" />
   <public type="color" name="cardview_light_background" id="0x7f040001" />
+  <public type="attr" name="layout_marginRightPercent" id="0x7f01001e" />
   <public type="style" name="CardView.Light" id="0x7f070003" />
   <public type="drawable" name="ic_action_device_access_bluetooth_searching" id="0x7f020000" />
   <public type="dimen" name="vertical_page_margin" id="0x7f05000a" />
@@ -73,14 +78,17 @@
   <public type="attr" name="layout_row" id="0x7f010012" />
   <public type="style" name="CardView.Dark" id="0x7f070002" />
   <public type="attr" name="useDefaultMargins" id="0x7f01000e" />
+  <public type="attr" name="layout_marginBottomPercent" id="0x7f01001f" />
   <public type="attr" name="rowOrderPreserved" id="0x7f010010" />
   <public type="string" name="start_raw_stream" id="0x7f06001f" />
   <public type="string" name="none_paired" id="0x7f060016" />
   <public type="string" name="sample_show_log" id="0x7f06001a" />
+  <public type="attr" name="layout_marginTopPercent" id="0x7f01001d" />
   <public type="dimen" name="cardview_default_elevation" id="0x7f050001" />
   <public type="string" name="bt_not_enabled_leaving" id="0x7f060002" />
   <public type="string" name="unknown_device" id="0x7f060029" />
   <public type="attr" name="columnCount" id="0x7f01000d" />
+  <public type="attr" name="layout_marginEndPercent" id="0x7f010021" />
   <public type="string" name="menu_scan" id="0x7f060010" />
   <public type="string" name="start_shooting" id="0x7f060020" />
   <public type="string" name="unknown_service" id="0x7f06002a" />
@@ -102,6 +110,7 @@
   <public type="string" name="discoverable" id="0x7f060007" />
   <public type="string" name="insecure_connect" id="0x7f060009" />
   <public type="string" name="no_data" id="0x7f060014" />
+  <public type="attr" name="layout_marginPercent" id="0x7f01001b" />
   <public type="color" name="cardview_dark_background" id="0x7f040000" />
   <public type="string" name="title_not_connected" id="0x7f060025" />
   <public type="attr" name="layout_rowSpan" id="0x7f010013" />
@@ -110,7 +119,7 @@
   <public type="string" name="error_bluetooth_not_supported" id="0x7f060008" />
   <public type="dimen" name="margin_huge" id="0x7f050005" />
   <item type="id" name="btn_start_shooting" />
-  <public type="id" name="btn_start_shooting" id="0x7f090020" />
+  <public type="id" name="btn_start_shooting" id="0x7f090021" />
   <item type="id" name="vertical" />
   <public type="id" name="vertical" id="0x7f090001" />
   <item type="id" name="connection_state" />
@@ -118,13 +127,13 @@
   <item type="id" name="device_name" />
   <public type="id" name="device_name" id="0x7f090029" />
   <item type="id" name="btn_start_raw_stream" />
-  <public type="id" name="btn_start_raw_stream" id="0x7f090021" />
+  <public type="id" name="btn_start_raw_stream" id="0x7f090022" />
   <item type="id" name="new_devices" />
-  <public type="id" name="new_devices" id="0x7f090017" />
+  <public type="id" name="new_devices" id="0x7f090018" />
   <item type="id" name="right" />
   <public type="id" name="right" id="0x7f09000f" />
   <item type="id" name="sample_main_layout" />
-  <public type="id" name="sample_main_layout" id="0x7f090019" />
+  <public type="id" name="sample_main_layout" id="0x7f09001a" />
   <item type="id" name="end" />
   <public type="id" name="end" id="0x7f09000a" />
   <item type="id" name="time" />
@@ -140,13 +149,13 @@
   <item type="id" name="center" />
   <public type="id" name="center" id="0x7f090005" />
   <item type="id" name="title_paired_devices" />
-  <public type="id" name="title_paired_devices" id="0x7f090014" />
+  <public type="id" name="title_paired_devices" id="0x7f090015" />
   <item type="id" name="et_ip" />
-  <public type="id" name="et_ip" id="0x7f090022" />
+  <public type="id" name="et_ip" id="0x7f090014" />
   <item type="id" name="tv_shoot_count" />
   <public type="id" name="tv_shoot_count" id="0x7f090023" />
   <item type="id" name="btn_start_dribbling" />
-  <public type="id" name="btn_start_dribbling" id="0x7f09001f" />
+  <public type="id" name="btn_start_dribbling" id="0x7f090020" />
   <item type="id" name="discoverable" />
   <public type="id" name="discoverable" id="0x7f090032" />
   <item type="id" name="btn_classical_bluetooth" />
@@ -162,7 +171,7 @@
   <item type="id" name="clip_vertical" />
   <public type="id" name="clip_vertical" id="0x7f090009" />
   <item type="id" name="in" />
-  <public type="id" name="in" id="0x7f09001d" />
+  <public type="id" name="in" id="0x7f09001e" />
   <item type="id" name="btn_ble" />
   <public type="id" name="btn_ble" id="0x7f090013" />
   <item type="id" name="alignBounds" />
@@ -172,25 +181,25 @@
   <item type="id" name="left" />
   <public type="id" name="left" id="0x7f09000e" />
   <item type="id" name="paired_devices" />
-  <public type="id" name="paired_devices" id="0x7f090015" />
+  <public type="id" name="paired_devices" id="0x7f090016" />
   <item type="id" name="log_fragment" />
-  <public type="id" name="log_fragment" id="0x7f09001b" />
+  <public type="id" name="log_fragment" id="0x7f09001c" />
   <item type="id" name="menu_toggle_log" />
   <public type="id" name="menu_toggle_log" id="0x7f090035" />
   <item type="id" name="et_new_file_name" />
   <public type="id" name="et_new_file_name" id="0x7f09002a" />
   <item type="id" name="button_scan" />
-  <public type="id" name="button_scan" id="0x7f090018" />
+  <public type="id" name="button_scan" id="0x7f090019" />
   <item type="id" name="fill_horizontal" />
   <public type="id" name="fill_horizontal" id="0x7f09000c" />
   <item type="id" name="top" />
   <public type="id" name="top" id="0x7f090011" />
   <item type="id" name="sample_output" />
-  <public type="id" name="sample_output" id="0x7f09001a" />
+  <public type="id" name="sample_output" id="0x7f09001b" />
   <item type="id" name="menu_scan" />
   <public type="id" name="menu_scan" id="0x7f09002e" />
   <item type="id" name="sample_content_fragment" />
-  <public type="id" name="sample_content_fragment" id="0x7f09001c" />
+  <public type="id" name="sample_content_fragment" id="0x7f09001d" />
   <item type="id" name="menu_connect" />
   <public type="id" name="menu_connect" id="0x7f090033" />
   <item type="id" name="menu_refresh" />
@@ -202,7 +211,7 @@
   <item type="id" name="clip_horizontal" />
   <public type="id" name="clip_horizontal" id="0x7f090008" />
   <item type="id" name="edit_text_out" />
-  <public type="id" name="edit_text_out" id="0x7f09001e" />
+  <public type="id" name="edit_text_out" id="0x7f09001f" />
   <item type="id" name="insecure_connect_scan" />
   <public type="id" name="insecure_connect_scan" id="0x7f090031" />
   <item type="id" name="horizontal" />
@@ -210,7 +219,7 @@
   <item type="id" name="secure_connect_scan" />
   <public type="id" name="secure_connect_scan" id="0x7f090030" />
   <item type="id" name="title_new_devices" />
-  <public type="id" name="title_new_devices" id="0x7f090016" />
+  <public type="id" name="title_new_devices" id="0x7f090017" />
   <item type="id" name="center_horizontal" />
   <public type="id" name="center_horizontal" id="0x7f090006" />
   <item type="id" name="fill" />
