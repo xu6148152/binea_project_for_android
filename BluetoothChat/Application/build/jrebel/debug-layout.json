@@ -7,10 +7,11 @@
     ],
     "storeType": "jks",
     "applicationVariant": "debug",
+    "multiDexEnabled": false,
     "projectRoot": "/Users/xubinggui/Android/my_project/BluetoothChat",
     "sdkDir": "/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk",
     "keyAlias": "AndroidDebugKey",
-    "rebelPluginVersion": "0.8.0.72 2015-08-24T12:51:20+0000",
+    "rebelPluginVersion": "0.8.0.76 2015-08-31T12:56:10+0000",
     "androidManifest": [
         "/Users/xubinggui/Android/my_project/BluetoothChat/Application/src/debug/AndroidManifest.xml",
         "/Users/xubinggui/Android/my_project/BluetoothChat/Application/src/main/AndroidManifest.xml"
@@ -47,7 +48,7 @@
     "resourcePackagePath": "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/resources/resources-debug.ap_",
     "compileSdkVersion": "android-23",
     "buildSystemVersion": "2.2.1",
-    "layoutVersion": 6,
+    "layoutVersion": 7,
     "applicationId": "com.example.android.bluetoothchat",
     "originalApplicationId": "com.example.android.bluetoothchat",
     "apk": "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/outputs/apk/Application-debug.apk",
@@ -55,8 +56,8 @@
     "generatedJavaSourcePath": [
         "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/buildConfig/debug",
         "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/r/debug",
-        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/aidl/debug",
         "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/rs/debug",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/aidl/debug",
         "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/proto/debug"
     ],
     "classPath": [

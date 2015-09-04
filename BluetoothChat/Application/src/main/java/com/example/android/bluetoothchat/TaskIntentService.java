@@ -7,8 +7,8 @@ import com.example.android.model.BaseData;
 import com.example.android.model.DribblingRecordWrapper;
 import com.example.android.model.GlobalVar;
 import com.example.android.model.MessageType;
+import com.example.android.model.PackageData;
 import com.example.android.model.ShootingRecordWrapper;
-import com.example.android.model.proto.ProtoDataPackage;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.DatagramPacket;
@@ -70,8 +70,8 @@ public class TaskIntentService extends WrapperIntentService {
     }
 
     private void sendUDPMessage(MessageType messageType, byte eventType, BaseData data) {
-        ProtoDataPackage packageData = new ProtoDataPackage(messageType, eventType, data);
-        //PackageData packageData = new PackageData(messageType, eventType, data);
+        //ProtoDataPackage packageData = new ProtoDataPackage(messageType, eventType, data);
+        PackageData packageData = new PackageData(messageType, eventType, data);
         //ReverByteData2Obj reverByteData2Obj = new ReverByteData2Obj(packageData.getPackageData(),
         //        messageType, packageData.getTimeStamps(), Byte2Hex.int2ByteArray(packageData.getCrc16(), 2), packageData.getBodyLength(), eventType, data);
         try {
