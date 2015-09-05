@@ -29,6 +29,7 @@ public class ChannelUtil {
 			return mChannel;
 		}
 
+
 		mChannel = getChannelBySharedPreferences(context);
 		if(!TextUtils.isEmpty(mChannel)){
 			return mChannel;
