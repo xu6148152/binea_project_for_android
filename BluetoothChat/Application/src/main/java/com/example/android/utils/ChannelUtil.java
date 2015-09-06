@@ -18,7 +18,6 @@ public class ChannelUtil {
 	private static final String CHANNEL_KEY = "zpchannel";
 	private static final String CHANNEL_VERSION_KEY = "zpchannel_version";
 	private static String mChannel;
-
 	public static String getChannel(Context context){
 		return getChannel(context, "");
 	}
