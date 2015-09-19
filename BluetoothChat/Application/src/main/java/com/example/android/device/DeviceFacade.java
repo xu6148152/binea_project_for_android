@@ -69,14 +69,13 @@ public class DeviceFacade {
             final long userId,
             final DeviceResponseCallback<StartShootingActivityResponse> callback){
         final StartShootingActivityRequest request = new StartShootingActivityRequest();
-
         request.setStartTimestamp(new Date());
         request.setActivityLimitBasis(activityLimitBasis);
         request.setNotificationTrigger(notificationTrigger);
         request.setActivityLimit(activityLimit);
         request.setNotificationInterval(notificationInterval);
         request.setPlayerHeight(70);
-        request.setShootingAlgorithmType(ShootingAlgorithmType.UsingPass);
+        request.setShootingAlgorithmType(ShootingAlgorithmType.WithMagnometer);
         request.setShotDistance(180);
         request.setUserId(userId);
         short i = (short)(int)(System.currentTimeMillis() & 0x7FFF);

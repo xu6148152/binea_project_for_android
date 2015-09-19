@@ -24,14 +24,15 @@ import com._94fifty.model.type.ConnectionState;
 import com._94fifty.model.type.NotificationTrigger;
 import com._94fifty.model.type.RequestStatus;
 import com._94fifty.model.type.ResponseStatus;
-import com.example.android.listener.DeviceResponseCallback;
 import com.example.android.bluetoothchat.TaskIntentService;
 import com.example.android.listener.BasketballDataNotificationListener;
+import com.example.android.listener.DeviceResponseCallback;
 import com.example.android.listener.EndDribblingListener;
 import com.example.android.listener.EndRawStreamListener;
 import com.example.android.listener.EndShootingListener;
 import com.example.android.model.DribblingRecordWrapper;
 import com.example.android.model.EventType;
+import com.example.android.model.GlobalVar;
 import com.example.android.model.MessageType;
 import com.example.android.model.ShootingRecordWrapper;
 import com.example.android.process.DataProcessHandler;
@@ -100,6 +101,10 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
             ShootingActivityRecordNotification notification =
                     (ShootingActivityRecordNotification) abstractNotification;
             ShootingRecordWrapper recordWrapper = new ShootingRecordWrapper(notification.getRecord());
+            if(notification.getRecord().getCurrentShotMade() > 0){
+                GlobalVar.shootMade++;
+                Log.d(TAG, "ShootingActivityRecordNotification smartnetdetected " + notification.getRecord().getSmartNetDetected() + " " + notification.getRecord().getCurrentShotMade());
+            }
             intent.putExtra(TaskIntentService.DATA, recordWrapper);
             intent.putExtra(TaskIntentService.MESSAGE_TYPE, MessageType.toInt(MessageType.BALL_EVENT));
             intent.putExtra(TaskIntentService.EVENT_TYPE, EventType.SHOOTING_RESULT);
@@ -224,7 +229,7 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
 
     public void startShootingActivity(){
         DeviceFacade.startShootingActivity(mDeviceBridge, ActivityLimitBasis.Event,
-                NotificationTrigger.Event, 10, 1, 1,
+                NotificationTrigger.Event, -1, 1, 1,
                 new DeviceResponseCallback<StartShootingActivityResponse>() {
                     @Override protected void onResponse(StartShootingActivityResponse response) {
                         Log.d(TAG, "startShootingActivity response " + response.getStatus().isOK());
@@ -233,6 +238,7 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
     }
 
     public void endShootingActivity(){
+        GlobalVar.shootMade = 0;
         DeviceFacade.endShootingActivity(mDeviceBridge,
                 new DeviceResponseCallback<EndShootingActivityResponse>() {
                     @Override protected void onResponse(EndShootingActivityResponse response) {

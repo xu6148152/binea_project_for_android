@@ -9,4 +9,5 @@ public class GlobalVar {
     //public static String SERVER_ADDRESS = "192.168.0.83";
     public static String SERVER_ADDRESS = "";
     public static String currentDeviceMacAddress = "";
+    public static int shootMade = 0;
 }

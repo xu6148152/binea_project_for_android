@@ -26,7 +26,8 @@ public class ShootingResultEventData {
         byte[] spinRate = new byte[4];
         mDataBuffer.append(spinRate);
         //Made
-        final short currentShotMade = shootingRecord.getCurrentShotMade();
+        final int currentShotMade = GlobalVar.shootMade;
+        //final short currentShotMade = shootingRecord.getCurrentShotMade();
         mDataBuffer.append(((byte)(currentShotMade & 0xff)));
         //reserve
         byte[] reserve = new byte[3];

@@ -54,11 +54,11 @@
     "apk": "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/outputs/apk/Application-debug.apk",
     "buildToolsDir": "/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/build-tools/22.0.1",
     "generatedJavaSourcePath": [
-        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/buildConfig/debug",
-        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/r/debug",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/proto/debug",
         "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/rs/debug",
         "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/aidl/debug",
-        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/proto/debug"
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/buildConfig/debug",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/r/debug"
     ],
     "classPath": [
         "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/classes/debug",
