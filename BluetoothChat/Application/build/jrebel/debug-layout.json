@@ -54,11 +54,11 @@
     "apk": "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/outputs/apk/Application-debug.apk",
     "buildToolsDir": "/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/build-tools/22.0.1",
     "generatedJavaSourcePath": [
-        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/proto/debug",
-        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/rs/debug",
-        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/aidl/debug",
         "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/buildConfig/debug",
-        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/r/debug"
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/r/debug",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/aidl/debug",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/proto/debug",
+        "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/generated/source/rs/debug"
     ],
     "classPath": [
         "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/classes/debug",
@@ -69,8 +69,8 @@
         "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/exploded-aar/com.android.support/gridlayout-v7/21.0.2/classes.jar",
         "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.2/classes.jar",
         "/Users/xubinggui/Android/my_project/BluetoothChat/Application/src/main/lib/lib94fifty-1.0.624.jar",
-        "/Users/xubinggui/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-core/0.7.0/58f361260a836577a6b8931224983e628218f31d/grpc-core-0.7.0.jar",
         "/Users/xubinggui/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar",
+        "/Users/xubinggui/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-core/0.7.0/58f361260a836577a6b8931224983e628218f31d/grpc-core-0.7.0.jar",
         "/Users/xubinggui/Android/my_project/BluetoothChat/Application/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/libs/internal_impl-23.0.0.jar",
         "/Users/xubinggui/.gradle/caches/modules-2/files-2.1/com.google.protobuf.nano/protobuf-javanano/3.0.0-alpha-3/e4e116b609595b2b6e0622769b10b0daee9bc16c/protobuf-javanano-3.0.0-alpha-3.jar",
         "/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.0/support-annotations-23.0.0.jar"

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+                android:id="@+id/btn_classical_bluetooth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="classical"/>
+
+        <Button
+                android:visibility="gone"
+                android:id="@+id/btn_ble"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ble"/>
+
+        <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ip:"
+                        android:textSize="30dp"
+                        android:textAllCaps="true"
+                        />
+
+                <Space
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        />
+                <EditText
+                        android:id="@+id/et_ip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+        </LinearLayout>
+</LinearLayout><!-- From: file:/Users/xubinggui/Android/my_project/BluetoothChat/Application/src/main/res/layout/activity_choose_bluetooth.xml -->

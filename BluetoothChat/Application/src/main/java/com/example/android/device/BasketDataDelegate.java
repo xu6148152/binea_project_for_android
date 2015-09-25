@@ -101,10 +101,13 @@ public class BasketDataDelegate implements DeviceBridge.Delegate {
             ShootingActivityRecordNotification notification =
                     (ShootingActivityRecordNotification) abstractNotification;
             ShootingRecordWrapper recordWrapper = new ShootingRecordWrapper(notification.getRecord());
-            if(notification.getRecord().getCurrentShotMade() > 0){
-                GlobalVar.shootMade++;
+            if(notification.getRecord().getCurrentShotMade() == 1){
+                GlobalVar.shootMade = 1;
                 Log.d(TAG, "ShootingActivityRecordNotification smartnetdetected " + notification.getRecord().getSmartNetDetected() + " " + notification.getRecord().getCurrentShotMade());
+            }else{
+                GlobalVar.shootMade = 0;
             }
+
             intent.putExtra(TaskIntentService.DATA, recordWrapper);
             intent.putExtra(TaskIntentService.MESSAGE_TYPE, MessageType.toInt(MessageType.BALL_EVENT));
             intent.putExtra(TaskIntentService.EVENT_TYPE, EventType.SHOOTING_RESULT);
