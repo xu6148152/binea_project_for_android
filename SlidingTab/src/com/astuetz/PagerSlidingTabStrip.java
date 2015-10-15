@@ -118,8 +118,9 @@ import com.astuetz.pagerslidingtabstrip.R;
 
     private int mTabBackgroundResId = R.drawable.psts_background_tab;
 
+    private final int MTEXTSELECTEDCOLOR = Color.parseColor("#D1EE00");
+    private final int TEXTNORMALCOLOR = Color.parseColor("#FFFFFF");
     private int mTextSelectedColor = Color.parseColor("#D1EE00");
-    ;
     private int mTextNormalColor = Color.parseColor("#33FFFFFF");
 
     public PagerSlidingTabStrip(Context context) {
@@ -315,7 +316,7 @@ import com.astuetz.pagerslidingtabstrip.R;
     private void updateTabStyles() {
         for (int i = 0; i < mTabCount; i++) {
             View v = mTabsContainer.getChildAt(i);
-            v.setBackgroundResource(mTabBackgroundResId);
+            //v.setBackgroundResource(mTabBackgroundResId);
             v.setPadding(mTabPadding, v.getPaddingTop(), mTabPadding, v.getPaddingBottom());
             TextView tab_title = (TextView) v.findViewById(R.id.psts_tab_title);
             if (tab_title != null) {
@@ -403,9 +404,13 @@ import com.astuetz.pagerslidingtabstrip.R;
         }
 
         super.onLayout(changed, l, t, r, b);
-        scrollTo(0, 0);
-    }
 
+        //if(mCurrentPosition == 0){
+        //    scrollTo(0, 0);
+        //}else{
+        //    scrollTo(mTabsContainer.getScreenWidth(), 0);
+        //}
+    }
     private OnGlobalLayoutListener firstTabGlobalLayoutListener = new OnGlobalLayoutListener() {
 
         @Override public void onGlobalLayout() {
@@ -425,7 +430,12 @@ import com.astuetz.pagerslidingtabstrip.R;
             if (mScrollOffset == 0) mScrollOffset = getWidth() / 2 - mPaddingLeft;
             mCurrentPosition = mPager.getCurrentItem();
             mCurrentPositionOffset = 0f;
-            scrollToChild(mCurrentPosition, 0);
+            //scrollToChild(mCurrentPosition, 0);
+            if(mCurrentPosition == 0){
+                scrollTo(0, 0);
+            }else{
+                scrollTo(mTabsContainer.getScreenWidth(), 0);
+            }
             updateSelection(mCurrentPosition);
         }
 
@@ -852,7 +862,9 @@ import com.astuetz.pagerslidingtabstrip.R;
         this.mTabTextTypefaceStyle = style;
         updateTabStyles();
         mTabsContainer.getFirstChild().setTextColor(mTextSelectedColor);
-        mTabsContainer.getSecondChild().setTextColor(mTextNormalColor);
+        if(mTabsContainer.getSecondChild() != null) {
+            mTabsContainer.getSecondChild().setTextColor(mTextNormalColor);
+        }
     }
 
     public void setTabBackground(int resId) {
@@ -931,11 +943,19 @@ import com.astuetz.pagerslidingtabstrip.R;
     private boolean shouldAnimation = true;
     private VelocityTracker mVelocityTracker;
     private int mMaximumVelocity;
-    private int mMinimumVelocity = 50;
+    private int mMinimumVelocity = 100;
     private void acquireVelocityTracker(final MotionEvent event) {
         if(mVelocityTracker == null){
             mVelocityTracker = VelocityTracker.obtain();
         }
         mVelocityTracker.addMovement(event);
+    }
+
+    public void setTextSelectedColor(int color){
+        if(color == -1){
+            mTextSelectedColor = MTEXTSELECTEDCOLOR;
+        }else {
+            mTextSelectedColor = TEXTNORMALCOLOR;
+        }
     }
 }

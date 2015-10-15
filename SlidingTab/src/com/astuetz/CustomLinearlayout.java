@@ -35,22 +35,35 @@ public class CustomLinearlayout extends LinearLayout {
 
 	@Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-		setMeasuredDimension(getScreenWidth() + OFFSET + getChildAt(0).getMeasuredWidth() / 2 + getChildAt(1).getMeasuredWidth() / 2, getMeasuredHeight());
+		int count = getChildCount();
+		if(count >= 2) {
+			setMeasuredDimension(getScreenWidth() + OFFSET + getChildAt(0).getMeasuredWidth() / 2 + getChildAt(1).getMeasuredWidth() / 2, getMeasuredHeight());
+		}
 	}
 
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		Log.d(TAG, "offset " + offset);
 
-		if(getChildCount() >= 2){
+		if(getChildCount() > 0) {
 			child1 = getChildAt(0);
-			child1.layout((getScreenWidth() - child1.getMeasuredWidth()) / 2 + offset, t, (getScreenWidth() + child1.getMeasuredWidth()) / 2 + offset, b);
+			child1.layout((getScreenWidth() - child1.getMeasuredWidth()) / 2 + offset, t,
+					(getScreenWidth() + child1.getMeasuredWidth()) / 2 + offset, b);
 
-			child2 = getChildAt(1);
-			child2.layout(child1.getRight() + OFFSET, t, child1.getRight() + OFFSET + child2.getMeasuredWidth(), b);
+			if (getChildCount() >= 2) {
+				child2 = getChildAt(1);
+				child2.layout(child1.getRight() + OFFSET, t, child1.getRight() + OFFSET + child2.getMeasuredWidth(), b);
 
-			Log.d(TAG, "left " + child1.getRight() + OFFSET + " right " + child1.getRight() + OFFSET + child2.getMeasuredWidth());
-			shouldOffset = child2.getLeft() + child2.getMeasuredWidth() / 2 - (child1.getLeft() + child1.getMeasuredWidth() / 2);
+				Log.d(TAG, "left "
+						+ child1.getRight()
+						+ OFFSET
+						+ " right "
+						+ child1.getRight()
+						+ OFFSET
+						+ child2.getMeasuredWidth());
+				shouldOffset = child2.getLeft() + child2.getMeasuredWidth() / 2 - (child1.getLeft()
+						+ child1.getMeasuredWidth() / 2);
+			}
 		}
 	}
 

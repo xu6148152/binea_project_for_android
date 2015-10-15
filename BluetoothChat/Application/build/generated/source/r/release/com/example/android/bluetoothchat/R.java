@@ -482,6 +482,12 @@ containing a value of this type.
         public static final int unknown_service=0x7f06002a;
     }
     public static final class style {
+        /**  translucent system bars
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+         
+         */
         public static final int AppTheme=0x7f070000;
         public static final int CardView=0x7f070001;
         public static final int CardView_Dark=0x7f070002;

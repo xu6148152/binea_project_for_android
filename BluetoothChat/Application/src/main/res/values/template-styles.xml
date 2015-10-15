@@ -22,7 +22,13 @@
 
     <style name="Theme.Sample" parent="Theme.Base" />
 
-    <style name="AppTheme" parent="Theme.Sample" />
+    <style name="AppTheme" parent="Theme.Sample" >
+        <item name="android:windowIsTranslucent">true</item>
+        //translucent system bars
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
     <!-- Widget styling -->
 
     <style name="Widget" />
