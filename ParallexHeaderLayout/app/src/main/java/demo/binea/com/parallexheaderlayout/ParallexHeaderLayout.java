@@ -3,6 +3,7 @@ package demo.binea.com.parallexheaderlayout;
 import android.content.Context;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -50,7 +51,7 @@ public class ParallexHeaderLayout extends FrameLayout {
 
     private ViewDragHelper.Callback mCallback = new ViewDragHelper.Callback() {
         @Override public boolean tryCaptureView(View child, int pointerId) {
-            return child == mHeader;
+            return true;
         }
 
         @Override public int getViewVerticalDragRange(View child) {
@@ -75,7 +76,7 @@ public class ParallexHeaderLayout extends FrameLayout {
 
     private void resetLayout() {
         mHeader.animate().setDuration(200).translationY(0);
-        mHeader.animate().setDuration(200).translationY(0);
+        mContent.animate().setDuration(200).translationY(0);
     }
 
     @Override public boolean onInterceptTouchEvent(MotionEvent ev) {
@@ -85,9 +86,18 @@ public class ParallexHeaderLayout extends FrameLayout {
             downY = ev.getY();
         }else if(action == MotionEvent.ACTION_MOVE){
             if(ev.getY() - downY > 0){
+                RecyclerView view = (RecyclerView) mContent;
+                if(view.getScrollY() >= 0){
+                    shouldInterceptTouch = true;
+                }else{
+                    shouldInterceptTouch = false;
+                }
+            }else{
+                shouldInterceptTouch = false;
             }
         }
-        return mViewDragHelper.shouldInterceptTouchEvent(ev);
+        Log.d(TAG, "onInterceptTouchEvent " + shouldInterceptTouch);
+        return shouldInterceptTouch && mViewDragHelper.shouldInterceptTouchEvent(ev);
     }
 
     float downY = 0;
