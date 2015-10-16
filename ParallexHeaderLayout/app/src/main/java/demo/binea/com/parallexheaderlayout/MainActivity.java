@@ -2,9 +2,9 @@ package demo.binea.com.parallexheaderlayout;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,25 +13,56 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private final String TAG = MainActivity.class.getCanonicalName();
-    
+
+    private BounceScroller scroller;
+
+    private int headerTop = 0;
+
+    private View mHeaderView;
+
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
+        scroller = (BounceScroller) findViewById(R.id.bounce_scroll);
+        scroller.setListener(bl).enableHeader(true);
+        mHeaderView = findViewById(R.id.iv_header);
+        headerTop = mHeaderView.getTop();
+        scroller.setParallexHeaderView(mHeaderView);
+        GridLayoutManager llm = new GridLayoutManager(this, 2);
+        llm.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override public int getSpanSize(int position) {
+                if (position == RecyclerAdapter.TYPE_HEADER) {
+                    return 2;
+                } else {
+                    return 1;
+                }
+            }
+        });
+
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
         recyclerView.setHasFixedSize(true);
+        recyclerView.addItemDecoration(new MarginDecoration(this));
         RecyclerAdapter adapter = new RecyclerAdapter();
         recyclerView.setAdapter(adapter);
-        Log.d(TAG, "can vertical scroll " + recyclerView.canScrollVertically(1));
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                //mHeaderView.offsetTopAndBottom(-dy);
+                headerTop += dy;
+                mHeaderView.setTranslationY(-headerTop / 2);
+            }
+        });
     }
 
     static class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
+        public static final int TYPE_HEADER = 0;
+        public static final int TYPE_ITEM = 1;
+
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            if(viewType == 0){
+            if(viewType == TYPE_HEADER){
                 //HEADER
                 return new HeaderViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_header_layout, null));
             }else{
@@ -44,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
             if(position > 0){
                 ViewHolder viewHolder = (ViewHolder) holder;
                 viewHolder.mTextView.setText(String.valueOf(position - 1));
+            }else{
+
             }
         }
 
@@ -53,9 +86,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override public int getItemViewType(int position) {
             if(position == 0){
-                return 0;
+                return TYPE_HEADER;
             }
-            return 1;
+            return TYPE_ITEM;
         }
 
         class ViewHolder extends RecyclerView.ViewHolder{
@@ -73,4 +106,27 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    private BounceListener bl = new BounceListener() {
+        @Override
+        public void onState(boolean header, BounceScroller.State state) {
+            if (header) {
+                if (state == BounceScroller.State.STATE_SHOW) {
+                } else if (state == BounceScroller.State.STATE_OVER) {
+                } else if (state == BounceScroller.State.STATE_FIT_EXTRAS) {
+                    scroller.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            scroller.resetState();
+                        }
+                    }, 800);
+                }
+            }
+        }
+
+        @Override
+        public void onOffset(boolean header, int offset) {
+
+        }
+    };
 }

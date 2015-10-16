@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/tv_number"
-        android:layout_height="50dp"
         android:layout_width="match_parent"
-        />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#00FF00"
+        >
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher"
+            />
+    <TextView
+            android:id="@+id/tv_number"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Inside Out Swing"
+            />
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mike Trout"/>
+</LinearLayout>

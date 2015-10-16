@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<demo.binea.com.parallexheaderlayout.ParallexHeaderLayout
+<FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#000000"
+        >
+
         <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher"/>
+                android:id="@+id/iv_header"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_launcher"
+                android:scaleType="fitStart"
+                android:layout_marginTop="-100dp"/>
+
+    <demo.binea.com.parallexheaderlayout.BounceScroller
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/bounce_scroll"
+            >
+
         <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
-</demo.binea.com.parallexheaderlayout.ParallexHeaderLayout>
+                android:layout_height="match_parent"/>
+    </demo.binea.com.parallexheaderlayout.BounceScroller>
+</FrameLayout>

@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">ParallexHeaderLayout</string>
     <string name="action_settings">Settings</string>
+
+    <string name="pull_listview">Pullable ListView</string>
+    <string name="pull_textview">Pullable TextView</string>
+    <string name="bounce_textview">Bounce TextView</string>
+    <string name="bounce_listview">Bounce TextView</string>
 </resources>
