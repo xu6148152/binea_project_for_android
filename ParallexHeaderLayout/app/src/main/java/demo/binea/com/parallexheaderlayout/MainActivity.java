@@ -3,7 +3,6 @@ package demo.binea.com.parallexheaderlayout;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +15,6 @@ public class MainActivity extends AppCompatActivity {
 
     private BounceScroller scroller;
 
-    private int headerTop = 0;
-
     private View mHeaderView;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         scroller = (BounceScroller) findViewById(R.id.bounce_scroll);
         scroller.setListener(bl).enableHeader(true);
         mHeaderView = findViewById(R.id.iv_header);
-        headerTop = mHeaderView.getTop();
         scroller.setParallexHeaderView(mHeaderView);
         GridLayoutManager llm = new GridLayoutManager(this, 2);
         llm.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
@@ -40,15 +36,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new MarginDecoration(this));
         RecyclerAdapter adapter = new RecyclerAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            private int headerTop = 0;
             @Override public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                //mHeaderView.offsetTopAndBottom(-dy);
                 headerTop += dy;
                 mHeaderView.setTranslationY(-headerTop / 2);
             }
