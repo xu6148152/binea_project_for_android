@@ -167,6 +167,7 @@ public class BounceScroller extends RelativeLayout {
 		Log.d(TAG, System.currentTimeMillis() + " onDraw");
 	}
 
+
 	private int getViewTop(View view) {
 		if (view == null) {
 			return 0;
