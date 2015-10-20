@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         scroller.setListener(bl).enableHeader(true);
         mHeaderView = findViewById(R.id.iv_header);
         scroller.setParallexHeaderView(mHeaderView);
+        scroller.setCanBounce(false);
         GridLayoutManager llm = new GridLayoutManager(this, 2);
         llm.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override public int getSpanSize(int position) {

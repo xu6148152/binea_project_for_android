@@ -24,6 +24,8 @@ public class BounceScroller extends RelativeLayout {
 
 	public static float ratio = 0.5f;
 
+	private boolean canBounce = true;
+
 	public static enum State {
 		STATE_FIT_CONTENT, STATE_SHOW, STATE_OVER, STATE_FIT_EXTRAS
 	};
@@ -414,6 +416,9 @@ public class BounceScroller extends RelativeLayout {
 	}
 
 	private boolean offsetContent(int offset) {
+		if(!canBounce) {
+			return true;
+		}
 		if (mContentView != null) {
 			mContentView.offsetTopAndBottom(offset);
 		}
@@ -632,5 +637,9 @@ public class BounceScroller extends RelativeLayout {
 		Rect rect = new Rect(left, top, right, bottom);
 		boolean contains = rect.contains(eventX, eventY);
 		return contains;
+	}
+
+	public void setCanBounce(boolean canBounce){
+		this.canBounce = canBounce;
 	}
 }
