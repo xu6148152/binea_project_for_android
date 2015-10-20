@@ -22,10 +22,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         scroller = (BounceScroller) findViewById(R.id.bounce_scroll);
-        scroller.setListener(bl).enableHeader(true);
+        scroller.enableHeader(true);
         mHeaderView = findViewById(R.id.iv_header);
         scroller.setParallexHeaderView(mHeaderView);
-        scroller.setCanBounce(false);
+        //scroller.setCanBounce(false);
         GridLayoutManager llm = new GridLayoutManager(this, 2);
         llm.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override public int getSpanSize(int position) {
@@ -102,27 +102,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-    private BounceListener bl = new BounceListener() {
-        @Override
-        public void onState(boolean header, BounceScroller.State state) {
-            if (header) {
-                if (state == BounceScroller.State.STATE_SHOW) {
-                } else if (state == BounceScroller.State.STATE_OVER) {
-                } else if (state == BounceScroller.State.STATE_FIT_EXTRAS) {
-                    scroller.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            scroller.resetState();
-                        }
-                    }, 800);
-                }
-            }
-        }
-
-        @Override
-        public void onOffset(boolean header, int offset) {
-
-        }
-    };
 }

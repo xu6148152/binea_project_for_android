@@ -17,7 +17,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 
-public class BounceScroller extends RelativeLayout {
+public class BounceScroller extends RelativeLayout implements BounceListener{
 	public static final String TAG = "BounceScroller";
 
 	public static final int DEFALUT_DURATION = 400;
@@ -25,6 +25,8 @@ public class BounceScroller extends RelativeLayout {
 	public static float ratio = 0.5f;
 
 	private boolean canBounce = true;
+
+	private long scrollDuration = 800;
 
 	public static enum State {
 		STATE_FIT_CONTENT, STATE_SHOW, STATE_OVER, STATE_FIT_EXTRAS
@@ -66,7 +68,7 @@ public class BounceScroller extends RelativeLayout {
 
 	public BounceScroller(Context context, AttributeSet attrs) {
 		super(context, attrs);
-
+		setListener(this);
 		mInterpolator = new DecelerateInterpolator();
 		remainOffset = 0;
 	}
@@ -639,7 +641,32 @@ public class BounceScroller extends RelativeLayout {
 		return contains;
 	}
 
-	public void setCanBounce(boolean canBounce){
+	public BounceScroller setCanBounce(boolean canBounce){
 		this.canBounce = canBounce;
+		return this;
+	}
+
+	public BounceScroller setScrollDuration(long duration){
+		this.scrollDuration = duration;
+		return this;
+	}
+
+	@Override public void onState(boolean header, State state) {
+		if (header) {
+			if (state == BounceScroller.State.STATE_SHOW) {
+			} else if (state == BounceScroller.State.STATE_OVER) {
+			} else if (state == BounceScroller.State.STATE_FIT_EXTRAS) {
+				postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						resetState();
+					}
+				}, scrollDuration);
+			}
+		}
+	}
+
+	@Override public void onOffset(boolean header, int offset) {
+
 	}
 }
