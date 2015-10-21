@@ -1,12 +1,14 @@
 package demo.binea.com.parallexheaderlayout;
 
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,9 +47,17 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             private int headerTop = 0;
+
             @Override public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 headerTop += dy;
                 mHeaderView.setTranslationY(-headerTop / 2);
+            }
+        });
+        final NestedScrollView scrollView = (NestedScrollView) findViewById(R.id.scrollView);
+
+        scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override public void onScrollChanged() {
+                mHeaderView.setTranslationY(-scrollView.getScrollY() / 2);
             }
         });
     }
