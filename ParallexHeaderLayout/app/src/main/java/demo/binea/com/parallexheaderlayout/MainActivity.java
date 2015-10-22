@@ -1,14 +1,17 @@
 package demo.binea.com.parallexheaderlayout;
 
 import android.os.Bundle;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.GridLayout;
+import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
     private View mHeaderView;
 
+    private GridLayout gridLayout;
+
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
@@ -27,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         scroller.enableHeader(true);
         mHeaderView = findViewById(R.id.iv_header);
         scroller.setParallexHeaderView(mHeaderView);
-
+        gridLayout = (GridLayout) findViewById(R.id.grid_layout);
         //scroller.setCanBounce(false);
         GridLayoutManager llm = new GridLayoutManager(this, 2);
         llm.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
@@ -53,13 +58,15 @@ public class MainActivity extends AppCompatActivity {
                 mHeaderView.setTranslationY(-headerTop / 2);
             }
         });
-        final NestedScrollView scrollView = (NestedScrollView) findViewById(R.id.scrollView);
+        final ScrollView scrollView = (ScrollView) findViewById(R.id.scrollView);
 
         scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
             @Override public void onScrollChanged() {
                 mHeaderView.setTranslationY(-scrollView.getScrollY() / 2);
             }
         });
+
+        initGridLayout();
     }
 
     static class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
@@ -111,6 +118,36 @@ public class MainActivity extends AppCompatActivity {
             public HeaderViewHolder(View itemView) {
                 super(itemView);
             }
+        }
+    }
+
+    private void initGridLayout() {
+        gridLayout.removeAllViews();
+
+        int total = 12;
+        int column = 5;
+        int row = total / column;
+        gridLayout.setColumnCount(column);
+        gridLayout.setRowCount(row + 1);
+        for(int i =0, c = 0, r = 0; i < total; i++, c++)
+        {
+            if(c == column)
+            {
+                c = 0;
+                r++;
+            }
+            ImageView oImageView = new ImageView(this);
+            oImageView.setImageResource(R.mipmap.ic_launcher);
+            GridLayout.LayoutParams param =new GridLayout.LayoutParams();
+            param.height = GridLayout.LayoutParams.WRAP_CONTENT;
+            param.width = GridLayout.LayoutParams.WRAP_CONTENT;
+            param.rightMargin = 5;
+            param.topMargin = 5;
+            param.setGravity(Gravity.CENTER);
+            param.columnSpec = GridLayout.spec(c);
+            param.rowSpec = GridLayout.spec(r);
+            oImageView.setLayoutParams (param);
+            gridLayout.addView(oImageView);
         }
     }
 }
