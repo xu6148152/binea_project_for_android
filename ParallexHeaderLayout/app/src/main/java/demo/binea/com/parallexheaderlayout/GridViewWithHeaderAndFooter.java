@@ -36,6 +36,7 @@ public class GridViewWithHeaderAndFooter extends GridView {
          */
         public View view;
         public ViewGroup viewContainer;
+
         /**
          * The data backing the view. This is returned from {@link ListAdapter#getItem(int)}.
          */
