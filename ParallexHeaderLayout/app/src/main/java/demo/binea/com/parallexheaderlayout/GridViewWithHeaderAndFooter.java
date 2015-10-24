@@ -44,6 +44,7 @@ public class GridViewWithHeaderAndFooter extends GridView {
         /**
          * <code>true</code> if the fixed view should be selectable in the grid
          */
+
         public boolean isSelectable;
     }
 
