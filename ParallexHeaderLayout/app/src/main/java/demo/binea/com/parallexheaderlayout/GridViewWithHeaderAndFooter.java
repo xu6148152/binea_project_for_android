@@ -60,6 +60,7 @@ public class GridViewWithHeaderAndFooter extends GridView {
     private ItemClickHandler mItemClickHandler;
 
     private void initHeaderGridView() {
+
     }
 
     public GridViewWithHeaderAndFooter(Context context) {
