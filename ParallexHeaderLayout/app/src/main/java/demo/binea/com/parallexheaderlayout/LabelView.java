@@ -40,6 +40,7 @@ public class LabelView extends TextView {
     private float _offsety;
     private float _anchorx;
     private float _anchory;
+
     private float _angel;
     private int _labelViewContainerID;
     private Animation _animation = new Animation() {
@@ -231,6 +232,7 @@ public class LabelView extends TextView {
         _offsety = _anchory;
 
         clearAnimation();
+
         startAnimation(_animation);
     }
 
