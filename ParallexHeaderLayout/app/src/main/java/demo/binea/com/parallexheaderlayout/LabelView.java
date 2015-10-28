@@ -71,17 +71,13 @@ public class LabelView extends TextView {
         _animation.setFillBefore(true);
         _animation.setFillAfter(true);
         _animation.setFillEnabled(true);
-
     }
-
 
     private void init() {
 
         if (!(getLayoutParams() instanceof ViewGroup.LayoutParams)) {
-            LayoutParams layoutParams =
-                    new LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT);
+            LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
             setLayoutParams(layoutParams);
         }
 
@@ -113,16 +109,13 @@ public class LabelView extends TextView {
                 calcOffset(getMeasuredWidth(), d, g, v.getMeasuredWidth(), false);
             }
         });
-
     }
 
-
-    public void setTargetViewInBaseAdapter(View target, int targetWidth, int distance, Gravity gravity) {
+    public void setTargetViewInBaseAdapter(View target, int targetWidth, int distance,
+            Gravity gravity) {
         if (!replaceLayout(target)) {
             return;
         }
-        //measure(0, 0);
-        //calcOffset(getMeasuredWidth(), distance, gravity, targetWidth, true);
         calcOffset(dip2Px(targetWidth), distance, gravity, targetWidth, true);
     }
 
@@ -132,7 +125,9 @@ public class LabelView extends TextView {
         }
 
         ViewGroup frameContainer = (ViewGroup) getParent();
-        assert (frameContainer.getChildCount() == 2);
+        if(BuildConfig.DEBUG && frameContainer.getChildCount() == 0){
+            throw new RuntimeException();
+        }
         View target = frameContainer.getChildAt(0);
 
         ViewGroup parentContainer = (ViewGroup) frameContainer.getParent();
@@ -143,7 +138,8 @@ public class LabelView extends TextView {
                     continue;
                 }
                 View view = parentContainer.getChildAt(i);
-                RelativeLayout.LayoutParams para = (RelativeLayout.LayoutParams) view.getLayoutParams();
+                RelativeLayout.LayoutParams para =
+                        (RelativeLayout.LayoutParams) view.getLayoutParams();
                 for (int j = 0; j < para.getRules().length; j++) {
                     if (para.getRules()[j] == _labelViewContainerID) {
                         para.getRules()[j] = target.getId();
@@ -158,12 +154,15 @@ public class LabelView extends TextView {
         parentContainer.removeViewAt(groupIndex);
         frameContainer.removeView(target);
         frameContainer.removeView(this);
-        parentContainer.addView(target,groupIndex);
+        parentContainer.addView(target, groupIndex);
         _labelViewContainerID = -1;
     }
 
     private boolean replaceLayout(View target) {
-        if (getParent() != null || target == null || target.getParent() == null || _labelViewContainerID != -1) {
+        if (getParent() != null
+                || target == null
+                || target.getParent() == null
+                || _labelViewContainerID != -1) {
             return false;
         }
 
@@ -183,7 +182,8 @@ public class LabelView extends TextView {
                         continue;
                     }
                     View view = parentContainer.getChildAt(i);
-                    RelativeLayout.LayoutParams para = (RelativeLayout.LayoutParams) view.getLayoutParams();
+                    RelativeLayout.LayoutParams para =
+                            (RelativeLayout.LayoutParams) view.getLayoutParams();
                     for (int j = 0; j < para.getRules().length; j++) {
                         if (para.getRules()[j] == target.getId()) {
                             para.getRules()[j] = _labelViewContainerID;
@@ -198,8 +198,8 @@ public class LabelView extends TextView {
             FrameLayout labelViewContainer = new FrameLayout(getContext());
             ViewGroup.LayoutParams targetLayoutParam = target.getLayoutParams();
             labelViewContainer.setLayoutParams(targetLayoutParam);
-            target.setLayoutParams(new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            target.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT));
 
             // add target and label in dummy layout
             labelViewContainer.addView(target);
@@ -212,7 +212,8 @@ public class LabelView extends TextView {
         return true;
     }
 
-    private void calcOffset(int labelWidth, int distance, Gravity gravity, int targetWidth, boolean isDP) {
+    private void calcOffset(int labelWidth, int distance, Gravity gravity, int targetWidth,
+            boolean isDP) {
 
         int d = dip2Px(distance);
         int tw = isDP ? dip2Px(targetWidth) : targetWidth;
