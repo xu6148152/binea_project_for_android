@@ -128,6 +128,7 @@ public class LabelView extends TextView {
         if(BuildConfig.DEBUG && frameContainer.getChildCount() == 0){
             throw new RuntimeException();
         }
+
         View target = frameContainer.getChildAt(0);
 
         ViewGroup parentContainer = (ViewGroup) frameContainer.getParent();
