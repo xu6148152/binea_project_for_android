@@ -141,6 +141,7 @@ public class LabelView extends TextView {
                 View view = parentContainer.getChildAt(i);
                 RelativeLayout.LayoutParams para =
                         (RelativeLayout.LayoutParams) view.getLayoutParams();
+
                 for (int j = 0; j < para.getRules().length; j++) {
                     if (para.getRules()[j] == _labelViewContainerID) {
                         para.getRules()[j] = target.getId();
