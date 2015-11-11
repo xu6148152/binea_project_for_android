@@ -11,16 +11,16 @@
         android:orientation="horizontal"
         >
 
-    <View
-            android:id="@+id/indicator1"
-            android:layout_width="6dp"
-            android:layout_height="6dp"
-            />
+    <!--<View-->
+            <!--android:id="@+id/indicator1"-->
+            <!--android:layout_width="6dp"-->
+            <!--android:layout_height="6dp"-->
+            <!--/>-->
 
-    <View
-            android:id="@+id/indicator2"
-            android:layout_width="6dp"
-            android:layout_height="6dp"
-            android:layout_marginLeft="9dp"
-            />
+    <!--<View-->
+            <!--android:id="@+id/indicator2"-->
+            <!--android:layout_width="6dp"-->
+            <!--android:layout_height="6dp"-->
+            <!--android:layout_marginLeft="9dp"-->
+            <!--/>-->
 </LinearLayout><!-- From: file:/Users/xubinggui/Android/android_dev/android-libs/SlidingTab/res/layout/sliding_indicator.xml -->

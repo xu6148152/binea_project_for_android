@@ -411,6 +411,7 @@ import com.astuetz.pagerslidingtabstrip.R;
         //    scrollTo(mTabsContainer.getScreenWidth(), 0);
         //}
     }
+
     private OnGlobalLayoutListener firstTabGlobalLayoutListener = new OnGlobalLayoutListener() {
 
         @Override public void onGlobalLayout() {
@@ -431,9 +432,9 @@ import com.astuetz.pagerslidingtabstrip.R;
             mCurrentPosition = mPager.getCurrentItem();
             mCurrentPositionOffset = 0f;
             //scrollToChild(mCurrentPosition, 0);
-            if(mCurrentPosition == 0){
+            if (mCurrentPosition == 0) {
                 scrollTo(0, 0);
-            }else{
+            } else {
                 scrollTo(mTabsContainer.getScreenWidth(), 0);
             }
             updateSelection(mCurrentPosition);
@@ -492,40 +493,48 @@ import com.astuetz.pagerslidingtabstrip.R;
     }
 
     private class PageListener implements OnPageChangeListener {
+        private int scrollOffset = 0;
 
         @TargetApi(Build.VERSION_CODES.HONEYCOMB) @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            //			Log.d(TAG, "position " + position + " positionOffset " + positionOffset + " positionOffsetPixels " + positionOffsetPixels);
-            mCurrentPosition = position;
-            if (!shouldAnimation) {
-                return;
-            }
-            mCurrentPositionOffset = positionOffset;
-            //            int offset = mTabCount > 0 ? (int) (positionOffset * mTabsContainer.getChildAt(position).getWidth()) : 0;
-            int offset = mTabCount > 0 ? positionOffsetPixels : 0;
-            //            scrollToChild(position, offset);
-            if (Math.abs(offset) > 0) {
-                //mTabsContainer.setOffset((-(float) positionOffsetPixels / mTabsContainer.getScreenWidth() * mTabsContainer.shouldOffset()));
-                //mTabsContainer.requestLayout();
-                smoothScrollTo((int) ((float) positionOffsetPixels / mTabsContainer.getScreenWidth()
-                        * mTabsContainer.shouldOffset()), 0);
-                //draw text color
-                Integer selectedColor =
-                        (Integer) mArgbEvaluator.evaluate(positionOffset, mTextSelectedColor,
-                                mTextNormalColor);
-                Integer nextColor =
-                        (Integer) mArgbEvaluator.evaluate(1 - positionOffset, mTextSelectedColor,
-                                mTextNormalColor);
-
-                final TextView selectedTextView = mTabsContainer.getFirstChild();
-                final TextView nextTextView = mTabsContainer.getSecondChild();
-                if (selectedTextView != null) {
-                    selectedTextView.setTextColor(selectedColor);
-                }
-                if (nextTextView != null) {
-                    nextTextView.setTextColor(nextColor);
-                }
-            }
+            Log.d(TAG, "scrollOffset "
+                    + scrollOffset
+                    + "position "
+                    + position
+                    + " positionOffset "
+                    + positionOffset
+                    + " positionOffsetPixels "
+                    + positionOffsetPixels);
+            //mCurrentPosition = position;
+            //if (!shouldAnimation) {
+            //    return;
+            //}
+            //mCurrentPositionOffset = positionOffset;
+            //int offset = mTabCount > 0 ? positionOffsetPixels : 0;
+            //if (Math.abs(offset) > 0) {
+            //    //smoothScrollTo((int) ((float) positionOffsetPixels / mTabsContainer.getScreenWidth()
+            //    //        * mTabsContainer.shouldOffset()), 0);
+            //    smoothScrollTo((int) (positionOffset * mTabsContainer.shouldOffset()) + scrollOffset, 0);
+            //    //draw text color
+            //    Integer selectedColor =
+            //            (Integer) mArgbEvaluator.evaluate(positionOffset, mTextSelectedColor,
+            //                    mTextNormalColor);
+            //    Integer nextColor =
+            //            (Integer) mArgbEvaluator.evaluate(1 - positionOffset, mTextSelectedColor,
+            //                    mTextNormalColor);
+            //    final TextView selectedTextView =
+            //            (TextView) mTabsContainer.getChildAt(mPager.getCurrentItem());
+            //    final TextView nextTextView =
+            //            (TextView) mTabsContainer.getChildAt(mPager.getCurrentItem() + 1);
+            //    //final TextView selectedTextView = mTabsContainer.getFirstChild();
+            //    //final TextView nextTextView = mTabsContainer.getSecondChild();
+            //    if (selectedTextView != null) {
+            //        selectedTextView.setTextColor(selectedColor);
+            //    }
+            //    if (nextTextView != null) {
+            //        nextTextView.setTextColor(nextColor);
+            //    }
+            //}
             if (mDelegatePageListener != null) {
                 mDelegatePageListener.onPageScrolled(position, positionOffset,
                         positionOffsetPixels);
@@ -535,6 +544,21 @@ import com.astuetz.pagerslidingtabstrip.R;
         @Override public void onPageScrollStateChanged(int state) {
             if (state == ViewPager.SCROLL_STATE_IDLE) {
                 shouldAnimation = true;
+                final int currentItem = mPager.getCurrentItem();
+                if (currentItem == 0) {
+                    scrollOffset = 0;
+                } else {
+                    View currentView = mTabsContainer.getChildAt(mPager.getCurrentItem());
+                    View previousView = mTabsContainer.getChildAt(mPager.getCurrentItem() - 1);
+                    scrollOffset = currentView.getWidth() / 2
+                            + previousView.getWidth() / 2
+                            + mTabsContainer.OFFSET;
+                }
+                mCurrentPosition = currentItem;
+                Log.d(TAG, "state == SCROLL_STATE_IDEL scrollOffset "
+                        + scrollOffset
+                        + " currentItem "
+                        + currentItem);
             }
             //			//Full tabTextAlpha for current item
             //			View currentTab = mTabsContainer.getChildAt(mPager.getCurrentItem());
@@ -557,9 +581,9 @@ import com.astuetz.pagerslidingtabstrip.R;
         }
 
         @Override public void onPageSelected(int position) {
-            if(!shouldAnimation) {
-                updateTabPosition(position);
-            }
+            //if(!shouldAnimation) {
+            updateTabPosition(position);
+            //}
             if (mDelegatePageListener != null) {
                 mDelegatePageListener.onPageSelected(position);
             }
@@ -568,13 +592,31 @@ import com.astuetz.pagerslidingtabstrip.R;
 
     private void updateTabPosition(int position) {
         updateSelection(position);
-        if (position == 0) {
-            //scrollTo(0, 0);
-            smoothScrollTo(0, 0);
-        } else {
-            //scrollTo(mTabsContainer.getScreenWidth(), 0);
-            smoothScrollTo(mTabsContainer.getScreenWidth(), 0);
+        //if (position == 0) {
+        //    //scrollTo(0, 0);
+        //    smoothScrollTo(0, 0);
+        //} else {
+        //    //scrollTo(mTabsContainer.getScreenWidth(), 0);
+        //    smoothScrollTo(mTabsContainer.getScreenWidth(), 0);
+        //}
+        int distance = 0;
+        //View previewousView = mTabsContainer.getChildAt(position - 1);
+        //View nextView = mTabsContainer.getChildAt(position);
+        //distance = previewousView.getWidth() / 2
+        //        + mTabsContainer.OFFSET * position
+        //        + nextView.getWidth() / 2;
+        if(position != 0) {
+            for (int i = 0; i <= position; i++) {
+                if (i == 0 || i == position) {
+                    distance += mTabsContainer.getChildAt(i).getWidth() / 2;
+                } else {
+                    distance += mTabsContainer.getChildAt(i).getWidth();
+                }
+            }
+            distance += mTabsContainer.OFFSET * position;
         }
+        Log.d(TAG, "distance " + distance + " position " + position);
+        smoothScrollTo(distance, 0);
     }
 
     private void updateSelection(int position) {
@@ -862,7 +904,7 @@ import com.astuetz.pagerslidingtabstrip.R;
         this.mTabTextTypefaceStyle = style;
         updateTabStyles();
         mTabsContainer.getFirstChild().setTextColor(mTextSelectedColor);
-        if(mTabsContainer.getSecondChild() != null) {
+        if (mTabsContainer.getSecondChild() != null) {
             mTabsContainer.getSecondChild().setTextColor(mTextNormalColor);
         }
     }
@@ -904,6 +946,7 @@ import com.astuetz.pagerslidingtabstrip.R;
                 break;
 
             case MotionEvent.ACTION_UP:
+                mCurrentPosition = mPager.getCurrentItem();
                 mVelocityTracker.computeCurrentVelocity(1000, mMaximumVelocity);
                 final float xVelocity = mVelocityTracker.getXVelocity();
                 float upX = ev.getX();
@@ -912,24 +955,29 @@ import com.astuetz.pagerslidingtabstrip.R;
                         + " downx "
                         + downX
                         + " mCurrentPosition "
-                        + mCurrentPosition + " xVelocity " + xVelocity + " mMinimumVelocity " + mMinimumVelocity);
+                        + mCurrentPosition
+                        + " xVelocity "
+                        + xVelocity
+                        + " mMinimumVelocity "
+                        + mMinimumVelocity);
                 float deltaX = upX - downX;
-                if (deltaX > 0 && mCurrentPosition == 1) {
+
+                if (deltaX > 0) {
                     shouldAnimation = false;
-                    if(Math.abs(deltaX) > mTabsContainer.shouldOffset() / 2 || Math.abs(xVelocity) > mMinimumVelocity) {
-                        mCurrentPosition = 0;
-                        mPager.setCurrentItem(mCurrentPosition);
-                    }else{
+                    if (Math.abs(deltaX) > mTabsContainer.shouldOffset() / 2
+                            || Math.abs(xVelocity) > mMinimumVelocity) {
+                        previousPage(mCurrentPosition);
+                    } else {
                         updateTabPosition(mCurrentPosition);
                     }
 
                     return true;
-                } else if (deltaX < 0 && mCurrentPosition == 0) {
+                } else if (deltaX < 0) {
                     shouldAnimation = false;
-                    if(Math.abs(deltaX) > mTabsContainer.shouldOffset() / 2 || Math.abs(xVelocity) > mMinimumVelocity) {
-                        mCurrentPosition = 1;
-                        mPager.setCurrentItem(mCurrentPosition);
-                    }else{
+                    if (Math.abs(deltaX) > mTabsContainer.shouldOffset() / 2
+                            || Math.abs(xVelocity) > mMinimumVelocity) {
+                        nextPage(mCurrentPosition);
+                    } else {
                         updateTabPosition(mCurrentPosition);
                     }
 
@@ -940,21 +988,32 @@ import com.astuetz.pagerslidingtabstrip.R;
         return super.dispatchTouchEvent(ev);
     }
 
+    private void nextPage(int mCurrentPosition) {
+        mCurrentPosition++;
+        mPager.setCurrentItem(mCurrentPosition);
+    }
+
+    private void previousPage(int mCurrentPosition) {
+        mCurrentPosition--;
+        mPager.setCurrentItem(mCurrentPosition);
+    }
+
     private boolean shouldAnimation = true;
     private VelocityTracker mVelocityTracker;
     private int mMaximumVelocity;
     private int mMinimumVelocity = 100;
+
     private void acquireVelocityTracker(final MotionEvent event) {
-        if(mVelocityTracker == null){
+        if (mVelocityTracker == null) {
             mVelocityTracker = VelocityTracker.obtain();
         }
         mVelocityTracker.addMovement(event);
     }
 
-    public void setTextSelectedColor(int color){
-        if(color == -1){
+    public void setTextSelectedColor(int color) {
+        if (color == -1) {
             mTextSelectedColor = MTEXTSELECTEDCOLOR;
-        }else {
+        } else {
             mTextSelectedColor = TEXTNORMALCOLOR;
         }
     }

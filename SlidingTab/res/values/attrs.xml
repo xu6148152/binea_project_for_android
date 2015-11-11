@@ -49,6 +49,7 @@
 
     <declare-styleable name="SlidingTabWithIndicatorLayout">
         <attr name="indicator" format="reference" />
+        <attr name="tab_height" format="dimension" />
     </declare-styleable>
 
 </resources>

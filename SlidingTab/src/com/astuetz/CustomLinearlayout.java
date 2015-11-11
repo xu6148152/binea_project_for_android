@@ -35,34 +35,35 @@ public class CustomLinearlayout extends LinearLayout {
 
 	@Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-		int count = getChildCount();
-		if(count >= 2) {
-			setMeasuredDimension(getScreenWidth() + OFFSET + getChildAt(0).getMeasuredWidth() / 2 + getChildAt(1).getMeasuredWidth() / 2, getMeasuredHeight());
+		int width = 0;
+		for(int i = 0; i< getChildCount(); i++) {
+			if(i == 0) {
+				width += getChildAt(i).getMeasuredWidth() / 2;
+			}else if(i == getChildCount() - 1) {
+				width += getChildAt(i).getMeasuredWidth() / 2;
+			}else {
+				width += getChildAt(i).getMeasuredWidth();
+			}
 		}
+		setMeasuredDimension(getScreenWidth() + OFFSET * (getChildCount() - 1) + width, getMeasuredHeight());
 	}
 
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		Log.d(TAG, "offset " + offset);
 
-		if(getChildCount() > 0) {
-			child1 = getChildAt(0);
-			child1.layout((getScreenWidth() - child1.getMeasuredWidth()) / 2 + offset, t,
-					(getScreenWidth() + child1.getMeasuredWidth()) / 2 + offset, b);
-
-			if (getChildCount() >= 2) {
-				child2 = getChildAt(1);
-				child2.layout(child1.getRight() + OFFSET, t, child1.getRight() + OFFSET + child2.getMeasuredWidth(), b);
-
-				Log.d(TAG, "left "
-						+ child1.getRight()
-						+ OFFSET
-						+ " right "
-						+ child1.getRight()
-						+ OFFSET
-						+ child2.getMeasuredWidth());
-				shouldOffset = child2.getLeft() + child2.getMeasuredWidth() / 2 - (child1.getLeft()
-						+ child1.getMeasuredWidth() / 2);
+		for(int i = 0; i < getChildCount(); i++) {
+			View child1 = getChildAt(i);
+			if(i == 0){
+				child1.layout((getScreenWidth() - child1.getMeasuredWidth()) / 2 + offset, t,
+						(getScreenWidth() + child1.getMeasuredWidth()) / 2 + offset, b);
+			}else {
+				View previousChild = getChildAt(i - 1);
+				child1.layout(previousChild.getRight() + OFFSET, t, previousChild.getRight() + OFFSET + child1.getMeasuredWidth(), b);
+				if(shouldOffset == 0){
+					shouldOffset = child1.getLeft() + child1.getMeasuredWidth() / 2 - (previousChild.getLeft()
+							+ previousChild.getMeasuredWidth() / 2);
+				}
 			}
 		}
 	}

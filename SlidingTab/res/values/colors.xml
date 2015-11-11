@@ -3,4 +3,5 @@
     <color name="psts_background_tab_pressed">#1AFFFFFF</color>
     <color name="psts_background_tab_pressed_ripple">#AAFFFFFF</color>
     <color name="common_bg">#282B2D</color>
+    <color name="common_bottom_line">#1C1E20</color>
 </resources>
