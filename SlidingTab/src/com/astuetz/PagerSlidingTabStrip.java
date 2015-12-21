@@ -415,6 +415,7 @@ import com.astuetz.pagerslidingtabstrip.R;
     private OnGlobalLayoutListener firstTabGlobalLayoutListener = new OnGlobalLayoutListener() {
 
         @Override public void onGlobalLayout() {
+            Log.d(TAG, "onGlobalLayout ");
             View view = mTabsContainer.getChildAt(0);
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
                 removeGlobalLayoutListenerPreJB();
@@ -432,12 +433,13 @@ import com.astuetz.pagerslidingtabstrip.R;
             mCurrentPosition = mPager.getCurrentItem();
             mCurrentPositionOffset = 0f;
             //scrollToChild(mCurrentPosition, 0);
-            if (mCurrentPosition == 0) {
-                scrollTo(0, 0);
-            } else {
-                scrollTo(mTabsContainer.getScreenWidth(), 0);
-            }
-            updateSelection(mCurrentPosition);
+            //if (mCurrentPosition == 0) {
+            //    scrollTo(0, 0);
+            //} else {
+            //    scrollTo(mTabsContainer.getScreenWidth(), 0);
+            //}
+            updateTabPosition(mCurrentPosition);
+            //updateSelection(mCurrentPosition);
         }
 
         @SuppressWarnings("deprecation") private void removeGlobalLayoutListenerPreJB() {

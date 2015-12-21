@@ -20,6 +20,7 @@ public class SlidingTabWithIndicatorLayout extends AppBarLayout {
     private PagerSlidingTabStrip tabs;
     private LinearLayout ll_indicator_container;
     private int indicator;
+    private int tabHeight;
 
     public SlidingTabWithIndicatorLayout(Context context) {
         this(context, null);
@@ -35,7 +36,7 @@ public class SlidingTabWithIndicatorLayout extends AppBarLayout {
         TypedArray ta = context.obtainStyledAttributes(attrs,
                 R.styleable.SlidingTabWithIndicatorLayout);
         indicator = ta.getResourceId(R.styleable.SlidingTabWithIndicatorLayout_indicator, -1);
-        int tabHeight = ta.getDimensionPixelOffset(
+        tabHeight = ta.getDimensionPixelOffset(
                 R.styleable.SlidingTabWithIndicatorLayout_tab_height, dp2px(40)
                 );
         ta.recycle();
@@ -100,5 +101,9 @@ public class SlidingTabWithIndicatorLayout extends AppBarLayout {
     private int dp2px(int dp) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
                 getResources().getDisplayMetrics());
+    }
+
+    public int getTabHeight() {
+        return tabHeight;
     }
 }
