@@ -1,0 +1,14 @@
+package com.zepp.www.likeanimation;
+
+/**
+ * Created by xubinggui on 12/25/15.
+ */
+public class Utils {
+    public static double mapValueFromRangeToRange(double value, double fromLow, double fromHigh, double toLow, double toHigh) {
+        return toLow + ((value - fromLow) / (fromHigh - fromLow) * (toHigh - toLow));
+    }
+
+    public static double clamp(double value, double low, double high) {
+        return Math.min(Math.max(value, low), high);
+    }
+}
