@@ -3,10 +3,12 @@ package com.zepp.www.likeanimation;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.zepp.www.likeanimation.leonids.ParticleSystem;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -91,5 +93,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void toast(String text) {
         Toast.makeText(this,text,Toast.LENGTH_SHORT).show();
+    }
+
+    public void goPraticale(View view) {
+        ParticleSystem ps = new ParticleSystem(this, 100, R.mipmap.ic_launcher, 800);
+        ps.setScaleRange(0.7f, 1.3f);
+        ps.setSpeedRange(0.1f, 0.25f);
+        ps.setAcceleration(0.0001f, 90);
+        ps.setRotationSpeedRange(90, 180);
+        ps.setFadeOut(200, new AccelerateInterpolator());
+        ps.oneShot(view, 100);
     }
 }
