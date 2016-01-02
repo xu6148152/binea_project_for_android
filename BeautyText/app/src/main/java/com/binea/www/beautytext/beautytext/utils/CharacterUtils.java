@@ -66,18 +66,18 @@ public class CharacterUtils {
      * @param oldGaps 新字符串每个字符的间距
      * @return
      */
-    public static float getOffset(int from, int move, float progress, float startX, float oldStartX, List<Float> gaps, List<Float> oldGaps) {
+    public static float getOffset(int from, int move, float progress, float startX, float oldStartX, float[] gaps, float[] oldGaps) {
 
         // 计算目标点
         float dist = startX;
         for (int i = 0; i < move; i++) {
-            dist += gaps.get(i);
+            dist += gaps[i];
         }
 
         // 计算当前点
         float cur = oldStartX;
         for (int i = 0; i < from; i++) {
-            cur += oldGaps.get(i);
+            cur += oldGaps[i];
         }
 
         return cur + (dist - cur) * progress;

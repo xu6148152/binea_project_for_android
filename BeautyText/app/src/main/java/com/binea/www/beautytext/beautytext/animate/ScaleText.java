@@ -41,8 +41,6 @@ public class ScaleText extends BaseBeautyText {
 
     @Override protected void drawFrame(Canvas canvas) {
         float newOffset = mNewStartX;
-        float oldOffset = mOldStartX;
-
         int maxLength = Math.max(mOldText.length(), mNewText.length());
 
         for (int i = 0; i < maxLength; i++) {
@@ -66,7 +64,6 @@ public class ScaleText extends BaseBeautyText {
                             mOldPaint);
                 }
             }
-            oldOffset += oldGaps.get(i);
 
             // draw new text
             if (i < mNewText.length()) {
@@ -86,11 +83,15 @@ public class ScaleText extends BaseBeautyText {
                     mNewPaint.setTextSize(size);
 
                     float width = mNewPaint.measureText(mNewText.charAt(i) + "");
+                    float newGapsWidth = 0;
+                    //if(i < newGaps.size()) {
+                    //    newGapsWidth = newGaps.get(i);
+                    //}
+                    Log.d(TAG, "newGapsWidth " + newGaps[i]);
                     canvas.drawText(mNewText.charAt(i) + "", 0, 1,
-                            newOffset + (newGaps.get(i) - width) / 2, mNewStartY, mNewPaint);
+                            newOffset + (newGaps[i] - width) / 2, mNewStartY, mNewPaint);
                 }
-
-                newOffset += newGaps.get(i);
+                newOffset += newGaps[i];
             }
         }
     }

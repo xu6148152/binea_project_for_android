@@ -16,8 +16,8 @@ public abstract class BaseBeautyText implements IBeautyText {
     public final String TAG = this.getClass().getCanonicalName();
     Paint mNewPaint, mOldPaint;
 
-    protected List<Float> newGaps = new ArrayList<>();
-    protected List<Float> oldGaps = new ArrayList<>();
+    protected float[] newGaps = new float[100];
+    protected float[] oldGaps = new float[100];
 
     protected float mTextSize;
 
@@ -60,12 +60,12 @@ public abstract class BaseBeautyText implements IBeautyText {
         mTextSize = mBeautyText.getTextSize();
         mNewPaint.setTextSize(mTextSize);
         for (int i = 0; i < mNewText.length(); i++) {
-            newGaps.add(mNewPaint.measureText(String.valueOf(mNewText.charAt(i))));
+            newGaps[i] = mNewPaint.measureText(String.valueOf(mNewText.charAt(i)));
         }
 
         mOldPaint.setTextSize(mTextSize);
         for (int i = 0; i < mOldText.length(); i++) {
-            oldGaps.add(mOldPaint.measureText(String.valueOf(mOldText.charAt(i))));
+            oldGaps[i] = mOldPaint.measureText(String.valueOf(mOldText.charAt(i)));
         }
 
         mOldStartX = (mBeautyText.getMeasuredWidth()
