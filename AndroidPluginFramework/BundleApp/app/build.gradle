@@ -5,21 +5,16 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.binea.www.beautytext"
-        minSdkVersion 16
-        targetSdkVersion 21
+        applicationId "com.binea.www.bundleapp"
+        minSdkVersion 18
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
     }
     buildTypes {
         release {
-            debuggable true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-
-        debug {
-            debuggable true
         }
     }
 }
