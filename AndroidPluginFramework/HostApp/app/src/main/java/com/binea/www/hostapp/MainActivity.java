@@ -15,13 +15,13 @@ public class MainActivity extends AppCompatActivity {
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        AssetsMultiDexLoader.install(getApplicationContext());
         TextView tv_hello = (TextView) findViewById(R.id.tv_hello);
         tv_hello.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                //loadApk();
+                loadApk();
             }
         });
-        AssetsMultiDexLoader.install(getApplicationContext());
         loadClass();
     }
 
@@ -53,16 +53,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadApk() {
         try {
-            Class<?> clazz = getClassLoader()
-                    .loadClass("com.binea.www.bundleapp.MathUtil");
+            Class<?> clazz = getClassLoader().loadClass("com.binea.www.bundleapp.MathUtil");
             Constructor<?> constructor = clazz.getConstructor();
-            Object bundleUtils = constructor.newInstance();
+            Object object = constructor.newInstance();
 
-            Method printSumMethod = clazz.getMethod("sum", Context.class,
-                    int.class, int.class);
-            printSumMethod.setAccessible(true);
-            Integer sum = (Integer)printSumMethod.invoke(bundleUtils,
-                    getApplicationContext(), 10, 20);
+            Method method = clazz.getMethod("sum", Context.class, int.class, int.class);
+            method.setAccessible(true);
+            method.invoke(object, getApplicationContext(), 10, 20);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SecurityException e) {

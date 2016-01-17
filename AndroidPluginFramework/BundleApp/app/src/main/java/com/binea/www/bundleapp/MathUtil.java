@@ -8,6 +8,6 @@ import android.widget.Toast;
  */
 public class MathUtil {
     public void sum(Context context, int a, int b){
-        Toast.makeText(context, a + b, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, String.valueOf(a + b), Toast.LENGTH_LONG).show();
     }
 }

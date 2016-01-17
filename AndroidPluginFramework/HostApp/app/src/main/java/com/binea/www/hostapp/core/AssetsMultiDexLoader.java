@@ -169,7 +169,7 @@ public class AssetsMultiDexLoader {
         Object[] combined = (Object[]) Array.newInstance(original.getClass().getComponentType(),
                 original.length + extraElement.length);
         System.arraycopy(original, 0, combined, 0, original.length);
-        System.arraycopy(extraElement, 0, combined, 0, extraElement.length);
+        System.arraycopy(extraElement, 0, combined, original.length, extraElement.length);
         field.set(object, combined);
     }
 
