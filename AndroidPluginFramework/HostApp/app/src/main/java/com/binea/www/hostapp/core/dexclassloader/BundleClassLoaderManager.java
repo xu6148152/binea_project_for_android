@@ -1,6 +1,7 @@
-package com.binea.www.hostapp.core;
+package com.binea.www.hostapp.core.dexclassloader;
 
 import android.content.Context;
+import com.binea.www.hostapp.core.AssetsManager;
 import dalvik.system.DexClassLoader;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -27,8 +28,8 @@ public class BundleClassLoaderManager {
             }
         });
         for (File f : files) {
-            BundleDexClassLoader loader =
-                    new BundleDexClassLoader(f.getAbsolutePath(), file.getAbsolutePath(), null,
+            DexClassLoader loader =
+                    new DexClassLoader(f.getAbsolutePath(), file.getAbsolutePath(), null,
                             context.getClassLoader());
             bundleDexClassLoaderList.add(loader);
         }

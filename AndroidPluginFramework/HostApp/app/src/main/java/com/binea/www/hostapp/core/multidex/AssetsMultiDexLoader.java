@@ -1,10 +1,11 @@
-package com.binea.www.hostapp.core;
+package com.binea.www.hostapp.core.multidex;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.util.Log;
+import com.binea.www.hostapp.core.AssetsManager;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
