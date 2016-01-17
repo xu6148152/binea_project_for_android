@@ -17,6 +17,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * dexList里面存储着当前运行程序的所有class信息
+ * 动态加载apk的关键在于反射出hostapk的DexBaseClassLoader dexList,用dexList读取指定文件的信息makeDexElements
+ * 最后将hostapk dexElements 与 bundleapk makeDexElements合并，设置到hostapk 的dexList
+ *
  * Created by xubinggui on 1/16/16.
  */
 public class AssetsMultiDexLoader {

@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
-import com.binea.www.hostapp.core.AssetsMultiDexLoader;
+import com.binea.www.hostapp.core.BundleClassLoaderManager;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -15,14 +15,15 @@ public class MainActivity extends AppCompatActivity {
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        AssetsMultiDexLoader.install(getApplicationContext());
+        //AssetsMultiDexLoader.install(getApplicationContext());
+        BundleClassLoaderManager.install(getApplicationContext());
         TextView tv_hello = (TextView) findViewById(R.id.tv_hello);
         tv_hello.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 loadApk();
             }
         });
-        loadClass();
+        //loadClass();
     }
 
     @Override protected void attachBaseContext(Context newBase) {
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadApk() {
         try {
-            Class<?> clazz = getClassLoader().loadClass("com.binea.www.bundleapp.MathUtil");
+            Class<?> clazz = BundleClassLoaderManager.loadClass(getApplicationContext(), "com.binea.www.bundleapp.MathUtil");
             Constructor<?> constructor = clazz.getConstructor();
             Object object = constructor.newInstance();
 
