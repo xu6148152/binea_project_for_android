@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Code transformer</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <h1>type less, code faster</h1>
+    <div class="row">
+      <div class="input-col">
+        <h2>CSS copied from Sketch.app</h2>
+        <textarea class="code input" id="sketch-css">/* Tyler Lawrence: */
+font-family: Avenir-Roman;
+font-size: 32px;
+color: #000000;
+line-height: 44px;</textarea>
+      </div>
+      <div class="output-col">
+        <h2>React Native Style</h2>
+        <textarea class="code output" id="rn-style"></textarea>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-col">
+        <h2>Simplified layout</h2>
+        <textarea class="code input" id="view-code">v s.container
+  i s.headerImage
+  t s.text Game History
+v 
+  to
+    i s.XX
+so
+  RoundButton s.follow
+</textarea>
+      </div>
+      <div class="output-col">
+        <h2>React Native JSX</h2>
+        <textarea class="code output" id="rn-jsx"></textarea>
+      </div>
+    </div>
+
+  </body>
+  <script src="./logic.js"></script>
+</html>

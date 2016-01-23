@@ -1,0 +1,51 @@
+body {
+  padding: 15px;
+}
+
+.row {
+  display : flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+.row > div {
+  flex: 1;
+}
+
+h1 {
+  font-size: 20px;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: normal;
+  margin: 0;
+}
+
+textarea.code {
+  display: inline-block;
+  margin: 10px auto;
+  width: 90%;
+  min-height: 150px;
+
+  font-family: monospace;
+  line-height: 1.35;
+  font-size: 15px;
+  padding: 5px;
+  border: 1px solid #888;
+}
+
+textarea:focus {
+  outline: 0;
+  border: 1px solid red;
+}
+
+#rn-jsx {
+  min-height: 400px;
+}
+
+#view-code {
+  min-height: 300px;
+}
