@@ -10,10 +10,18 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/hellojni" />
+            <option value="$PROJECT_DIR$/moreteapots" />
+          </set>
+        </option>
+        <option name="myModules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/hellojni" />
+            <option value="$PROJECT_DIR$/moreteapots" />
           </set>
         </option>
       </GradleProjectSettings>
     </option>
   </component>
 </project>
-
