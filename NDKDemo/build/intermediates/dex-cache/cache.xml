@@ -2,53 +2,32 @@
 <items version="2" >
 
     <item
-        jar="/Users/xubinggui/Android/my_project/NDKDemo/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/classes.jar"
+        jar="/Users/xubinggui/Android/binea_project_for_android/NDKDemo/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/jars/libs/internal_impl-21.0.3.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
-        <dex dex="/Users/xubinggui/Android/my_project/NDKDemo/app/build/intermediates/pre-dexed/debug/classes-a654ca5654a020648769271e99294983ec328173.jar" />
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/xubinggui/Android/binea_project_for_android/NDKDemo/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3_292167a3cc467481d96806126be23d3c99497c14.jar" />
     </item>
     <item
-        jar="/Users/xubinggui/Android/my_project/NDKDemo/app/build/intermediates/exploded-aar/NDKDemo/hellojni/unspecified/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="33b7738dc31c20c35df12a49d217b8b4be2b8cd5">
-        <dex dex="/Users/xubinggui/Android/my_project/NDKDemo/app/build/intermediates/pre-dexed/debug/classes-3321d0ee98f2a3a1435a874bfa0a7ba5317b6359.jar" />
-    </item>
-    <item
-        jar="/Users/xubinggui/Android/my_project/NDKDemo/app/build/intermediates/exploded-aar/NDKDemo/hellojni/unspecified/classes.jar"
+        jar="/Users/xubinggui/Android/binea_project_for_android/NDKDemo/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="33b7738dc31c20c35df12a49d217b8b4be2b8cd5">
-        <dex dex="/Users/xubinggui/Android/my_project/NDKDemo/app/build/intermediates/pre-dexed/debug/classes-3321d0ee98f2a3a1435a874bfa0a7ba5317b6359.jar" />
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/xubinggui/Android/binea_project_for_android/NDKDemo/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-21.0.3_94148fb1d9906a5b6a7c8643a4e23b53cf7c04e5.jar" />
     </item>
     <item
-        jar="/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
+        jar="/Users/xubinggui/Downloads/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
-        <dex dex="/Users/xubinggui/Android/my_project/NDKDemo/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.1-79bc3f9f19bbf46602f95d1244d2e0f0eb233636.jar" />
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/xubinggui/Android/binea_project_for_android/NDKDemo/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3_2bea3af4c1fd6e78143c658051daf8ad6359adf6.jar" />
     </item>
     <item
-        jar="/Users/xubinggui/Android/my_project/NDKDemo/app/build/intermediates/exploded-aar/NDKDemo/moreteapots/unspecified/classes.jar"
+        jar="/Users/xubinggui/Android/binea_project_for_android/NDKDemo/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="fc06b251b6262ee3cdfbe423dbcaa1f711d2182c">
-        <dex dex="/Users/xubinggui/Android/my_project/NDKDemo/app/build/intermediates/pre-dexed/debug/classes-202eb6c97cb4d170faa151506349c56aed4280fa.jar" />
-    </item>
-    <item
-        jar="/Users/xubinggui/Android/my_project/NDKDemo/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
-        <dex dex="/Users/xubinggui/Android/my_project/NDKDemo/app/build/intermediates/pre-dexed/debug/classes-12789876752014e177f5b1867022897a7a63128b.jar" />
-    </item>
-    <item
-        jar="/Users/xubinggui/Android/my_project/NDKDemo/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/libs/internal_impl-23.1.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
-        <dex dex="/Users/xubinggui/Android/my_project/NDKDemo/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1-bc807ecb517db0d88fdc26b18443b7d87a45abfa.jar" />
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/xubinggui/Android/binea_project_for_android/NDKDemo/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-21.0.3_868a156da6e303027cd44a522c07e9d16fb829d3.jar" />
     </item>
 
 </items>

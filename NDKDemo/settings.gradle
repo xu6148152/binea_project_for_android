@@ -1,1 +1,2 @@
-include ':app', ':hellojni', ':moreteapots'
+include ':app',':hellojni'
+//        , ':moreteapots'
