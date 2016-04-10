@@ -1,0 +1,70 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "www.zepp.com.build_time_tracker_plugin"
+        minSdkVersion 18
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+}
+
+class HelloWorldTask extends DefaultTask {
+    @Optional
+    String msg = "I'm binea"
+
+    @TaskAction
+    def Hello() {
+        print "Hello world $msg"
+    }
+}
+
+task Hello(type: HelloWorldTask)
+
+task Hello1(type: HelloWorldTask) {
+    msg = "I'm a programer"
+}
+
+apply plugin: DateAndTimePlugin
+
+dateAndTime {
+    timeFormat = 'HH:mm:ss.SSS'
+    dateFormat = 'MM/dd/yyyy'
+}
+
+class DateAndTimePlugin implements Plugin<Project> {
+
+    @Override
+    void apply(Project project) {
+        project.extensions.create("dateAndTime", DateAndTimePluginExtension)
+
+        project.task('showTime') {
+            println "Current time is " + new Date().format(project.dateAndTime.timeFormat)
+        }
+
+        project.task('showDate') {
+            println "Current date is " + new Date().format(project.dateAndTime.dateFormat)
+        }
+    }
+}
+
+class DateAndTimePluginExtension {
+    String timeFormat = "MM/dd/yyyyHH:mm:ss.SSS"
+    String dateFormat = "yyyy-MM-dd"
+}
