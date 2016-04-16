@@ -1,14 +1,12 @@
-package com.zepp.www.gradle.reporters
+package binea.reporters
 
 import au.com.bytecode.opencsv.CSVWriter
-import com.zepp.www.gradle.Timing
-import net.rubygrapefruit.platform.SystemInfo
-import net.rubygrapefruit.platform.internal.DefaultSystemInfo
+import binea.Timing
+import org.gradle.api.logging.Logger
 import org.gradle.internal.TrueTimeProvider
-import org.gradle.wrapper.Logger
 
 import java.text.DateFormat
-import java.text.SimpleDateFormat;
+import java.text.SimpleDateFormat
 
 /**
  * Created by xubinggui on 4/5/16.

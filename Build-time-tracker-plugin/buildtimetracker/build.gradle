@@ -1,6 +1,11 @@
 apply plugin: 'groovy'
 apply plugin: 'maven'
 
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
 dependencies {
     compile gradleApi()
     compile localGroovy()
@@ -14,6 +19,15 @@ dependencies {
     testCompile 'junit:junit:4.11'
 }
 
-repositories {
-    mavenCentral()
-}
+version = 1.0
+group = 'binea'
+archivesBaseName = 'buildtimetracker'
+repositories.mavenCentral()
+
+//uploadArchives {
+//    repositories.mavenDeployer {
+//        repository(url: 'file:../lib')
+//    }
+//}
+
+apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'

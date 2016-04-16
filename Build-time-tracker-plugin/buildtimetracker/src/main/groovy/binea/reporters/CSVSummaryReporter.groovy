@@ -1,8 +1,8 @@
-package com.zepp.www.gradle.reporters
+package binea.reporters
 
 import au.com.bytecode.opencsv.CSVReader
-import com.zepp.www.gradle.Timing
-import org.gradle.wrapper.Logger
+import binea.Timing
+import org.gradle.api.logging.Logger
 import org.ocpsoft.prettytime.PrettyTime;
 
 /**
@@ -46,10 +46,19 @@ public class CSVSummaryReporter extends AbstractBuildTimeTrackerReporter {
         def csvFile = new File(csv)
 
         if (csv.isEmpty()) {
+            throw new ReporterConfigurationError(ReporterConfigurationError.ErrorType.REQUIRED,
+                    this.getClass().getSimpleName(),
+                    "csv")
         }
 
         if (!csvFile.exists() || !csvFile.isFile()) {
+            throw new ReporterConfigurationError(ReporterConfigurationError.ErrorType.INVALID,
+                    this.getClass().getSimpleName(),
+                    "csv",
+                    "$CSV either doesn't exist or is not a valid file")
         }
+
+        printReport(new CSVReader(new BufferedReader(new FileReader(csvFile))))
     }
 
     void printReport(CSVReader reader) {
@@ -62,13 +71,21 @@ public class CSVSummaryReporter extends AbstractBuildTimeTrackerReporter {
                 collectEntries { k, v -> [Long.valueOf(k), v.collect { Long.valueOf(it[6]) }.sum()]
                 }
 
-
+        printTotal(times)
+        printToday(times)
     }
 
     void printTotal(Map<Long, Long> times) {
-        long total = times.collect {it.value}.sum()
+        long total = times.collect { it.value }.sum()
         def prettyTime = new PrettyTime()
-        def first = new Date((Long)times.keySet().min())
-        logger.quie
+        def first = new Date((Long) times.keySet().min())
+        logger.quiet "Total build time: " + FormattingUtils.formatDuration(total)
+        logger.quiet "(measured since " + prettyTime.format(first) + ")"
+    }
+
+    void printToday(Map<Long, Long> times) {
+        def midnight = dateUtils.localMidnightUTCTimestamp
+        long today = times.collect { it.key >= midnight ? it.value : 0 }.sum()
+        logger.quiet "Build time today: " + FormattingUtils.formatDuration(today)
     }
 }

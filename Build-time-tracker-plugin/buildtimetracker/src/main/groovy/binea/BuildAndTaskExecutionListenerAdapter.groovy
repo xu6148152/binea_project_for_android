@@ -1,4 +1,4 @@
-package com.zepp.www.gradle
+package binea
 
 import org.gradle.BuildListener
 import org.gradle.BuildResult

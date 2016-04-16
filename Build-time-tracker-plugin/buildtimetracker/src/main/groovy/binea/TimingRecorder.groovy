@@ -1,4 +1,4 @@
-package com.zepp.www.gradle
+package binea
 
 import org.gradle.BuildResult
 import org.gradle.api.Task
@@ -43,7 +43,15 @@ class TimingRecorder extends BuildAndTaskExecutionListenerAdapter implements Tas
     }
 
     @Override
-    void buildFinished(BuildResult buildResult) {
-        plugin.
+    void buildFinished(BuildResult result) {
+        plugin.reporters.each { it.run timings; it.onBuildResult result }
+    }
+
+    List<String> getTasks() {
+        timings*.path
+    }
+
+    Timing getTiming(String path) {
+        timings.find { it.path == path }
     }
 }

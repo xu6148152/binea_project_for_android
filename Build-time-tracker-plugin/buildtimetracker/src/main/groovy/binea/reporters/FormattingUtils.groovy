@@ -1,11 +1,9 @@
-package com.zepp.www.gradle.reporters
+package binea.reporters
 
-import com.zepp.www.gradle.Timing
-import org.gradle.BuildResult
-import org.gradle.wrapper.Logger;
+import java.util.concurrent.TimeUnit;
 
 /**
- * Created by xubinggui on 4/5/16.
+ * Created by xubinggui on 4/8/16.
  //                            _ooOoo_  
  //                           o8888888o  
  //                           88" . "88  
@@ -29,20 +27,25 @@ import org.gradle.wrapper.Logger;
  //                  佛祖镇楼                  BUG辟易 
 
  */
-abstract class AbstractBuildTimeTrackerReporter {
-    Map<String, String> options
-    Logger logger
-
-    AbstractBuildTimeTrackerReporter(Map<String, String> options, Logger logger) {
-        this.options = options
-        this.logger = logger
+public class FormattingUtils {
+    static String formatDuration(long ms) {
+        def hours = TimeUnit.MILLISECONDS.toHours(ms)
+        def minutes = TimeUnit.MILLISECONDS.toMinutes(ms) - TimeUnit.HOURS.toMinutes(hours)
+        def seconds = TimeUnit.MILLISECONDS.toSeconds(ms) - TimeUnit.MINUTES.toSeconds(minutes) -
+                TimeUnit.HOURS.toSeconds(hours)
+        def millis = ms - TimeUnit.MINUTES.toMillis(minutes) -
+                TimeUnit.SECONDS.toMillis(seconds) -
+                TimeUnit.HOURS.toMillis(hours)
+        if (hours > 0) {
+            String.format("%d:%02d:%02d",
+                    hours,
+                    minutes,
+                    seconds)
+        } else {
+            String.format("%d:%02d.%03d",
+                    minutes,
+                    seconds,
+                    millis)
+        }
     }
-
-    abstract run(List<Timing> timings)
-
-    String getOption(String name, String defaultVal) {
-        options[name] == null ? defaultVal : options[name]
-    }
-
-    void onBuildResult(BuildResult result) {}
 }

@@ -1,10 +1,9 @@
-package com.zepp.www.gradle.reporters
+package binea.reporters
 
-import org.joda.time.DateTime
-import org.joda.time.DateTimeZone;
+import groovy.transform.Memoized;
 
 /**
- * Created by xubinggui on 4/8/16.
+ * Created by xubinggui on 4/14/16.
  //                            _ooOoo_  
  //                           o8888888o  
  //                           88" . "88  
@@ -28,10 +27,27 @@ import org.joda.time.DateTimeZone;
  //                  佛祖镇楼                  BUG辟易 
 
  */
-public class DateUtils {
-    DateUtils() {}
+public class TerminalInfo {
+    @Memoized
+    public int getWidth(int fallback) {
+        def cols = System.getenv("COLUMNS")
+        if (cols != null) {
+            return Integer.parseInt(cols, 10)
+        }
 
-    long getLocalMidnightUTCTimestamp() {
-        DateTime.now().withTime(0, 0, 0, 0).withZone(DateTimeZone.UTC).getMillis()
+        if (System.getenv("TERM") == null) {
+            return fallback
+        }
+
+        try {
+            Process p = Runtime.getRuntime().
+                    exec(["bash", "-c", "tput cols 2> /dev/tty"] as String[])
+            p.waitFor()
+            def reader = new BufferedReader(new InputStreamReader(p.getInputStream()))
+            def line = reader.readLine()?.trim()
+            if (line != null) Integer.valueOf(line) else fallback
+        } catch (IOException ignore) {
+            fallback
+        }
     }
 }

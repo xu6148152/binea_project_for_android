@@ -1,13 +1,7 @@
-package com.zepp.www.gradle
-
-import org.gradle.api.NamedDomainObjectCollection;
-import org.gradle.api.Plugin;
-import org.gradle.api.Project
-import org.gradle.api.reporting.ReportingExtension
-import org.gradle.wrapper.Logger;
+package binea.reporters;
 
 /**
- * Created by xubinggui on 4/5/16.
+ * Created by xubinggui on 4/8/16.
  * //                            _ooOoo_
  * //                           o8888888o
  * //                           88" . "88
@@ -30,20 +24,11 @@ import org.gradle.wrapper.Logger;
  * //         .............................................
  * //                  佛祖镇楼                  BUG辟易
  */
-public class BuildTimeTrackerPlugin implements Plugin<Project> {
-
-    def REPORTERS = [
-
-    ]
-
-    Logger logger
-
-    NamedDomainObjectCollection<ReportingExtension> reportingExtensions
-
-    @Override public void apply(Project project) {
-        this.logger = project.logger
-        project.extensions.create("buildtimetracker", BuildTimeTrackerExtension)
-        reportingExtensions = project.buildtimetracker.extensions.reporters = project.container(ReportingExtension)
-        project.gradle.addBuildListener(new TimingRecorder(this))
+public class MemoryUtil {
+    public static long getPhysicalMemoryAvailable() {
+        com.sun.management.OperatingSystemMXBean bean =
+                (com.sun.management.OperatingSystemMXBean)
+                        java.lang.management.ManagementFactory.getOperatingSystemMXBean();
+        return bean.getTotalPhysicalMemorySize();
     }
 }

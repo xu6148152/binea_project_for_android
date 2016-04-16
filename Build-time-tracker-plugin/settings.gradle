@@ -1,1 +1,3 @@
-include ':app', ':buildtimetracker', ':timeanddate'
+include ':app', ':buildtimetracker', ':timeanddate', ':hellocustomgradleplugin'
+
+rootProject.name = ''

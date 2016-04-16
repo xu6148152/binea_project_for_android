@@ -8,7 +8,7 @@ repositories.mavenCentral()
 
 dependencies {
     compile gradleApi()
-//    groovy localGroovy()
+    compile localGroovy()
 }
 
 uploadArchives {

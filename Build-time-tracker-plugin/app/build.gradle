@@ -1,5 +1,22 @@
 apply plugin: 'com.android.application'
 
+buildscript {
+    repositories {
+        maven {
+            url 'file:../lib'
+        }
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+//        classpath group: 'binea', name: 'datetimeplugin', version: '1.0'
+        classpath group: 'binea', name: 'buildtimetracker', version: '1.0'
+    }
+}
+
+//apply plugin: 'time'
+apply plugin: 'track'
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
@@ -17,6 +34,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 
 dependencies {
@@ -25,46 +46,58 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.3.0'
 }
 
-class HelloWorldTask extends DefaultTask {
-    @Optional
-    String msg = "I'm binea"
+//class HelloWorldTask extends DefaultTask {
+//    @Optional
+//    String msg = "I'm binea"
+//
+//    @TaskAction
+//    def Hello() {
+//        print "Hello world $msg"
+//    }
+//}
+//
+//task Hello(type: HelloWorldTask)
+//
+//task Hello1(type: HelloWorldTask) {
+//    msg = "I'm a programer"
+//}
 
-    @TaskAction
-    def Hello() {
-        print "Hello world $msg"
-    }
-}
+//apply plugin: DateAndTimePlugin
+//
+//dateAndTime {
+//    timeFormat = 'HH:mm:ss.SSS'
+//    dateFormat = 'MM/dd/yyyy'
+//}
+//
+//class DateAndTimePlugin implements Plugin<Project> {
+//
+//    @Override
+//    void apply(Project project) {
+//        project.extensions.create("dateAndTime", DateAndTimePluginExtension)
+//
+//        project.task('showTime') {
+//            println "Current time is " + new Date().format(project.dateAndTime.timeFormat)
+//        }
+//
+//        project.task('showDate') {
+//            println "Current date is " + new Date().format(project.dateAndTime.dateFormat)
+//        }
+//    }
+//}
+//
+//class DateAndTimePluginExtension {
+//    String timeFormat = "MM/dd/yyyyHH:mm:ss.SSS"
+//    String dateFormat = "yyyy-MM-dd"
+//}
 
-task Hello(type: HelloWorldTask)
-
-task Hello1(type: HelloWorldTask) {
-    msg = "I'm a programer"
-}
-
-apply plugin: DateAndTimePlugin
-
-dateAndTime {
-    timeFormat = 'HH:mm:ss.SSS'
-    dateFormat = 'MM/dd/yyyy'
-}
-
-class DateAndTimePlugin implements Plugin<Project> {
-
-    @Override
-    void apply(Project project) {
-        project.extensions.create("dateAndTime", DateAndTimePluginExtension)
-
-        project.task('showTime') {
-            println "Current time is " + new Date().format(project.dateAndTime.timeFormat)
+buildtimetracker {
+    reporters {
+        csv {
+            output "times.csv"
+            append true
+            header false
         }
 
-        project.task('showDate') {
-            println "Current date is " + new Date().format(project.dateAndTime.dateFormat)
-        }
+        summary {}
     }
-}
-
-class DateAndTimePluginExtension {
-    String timeFormat = "MM/dd/yyyyHH:mm:ss.SSS"
-    String dateFormat = "yyyy-MM-dd"
 }

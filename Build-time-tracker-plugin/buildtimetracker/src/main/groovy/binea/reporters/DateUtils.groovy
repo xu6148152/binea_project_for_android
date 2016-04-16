@@ -1,6 +1,7 @@
-package com.zepp.www.gradle.reporters
+package binea.reporters
 
-import org.apache.ivy.util.MemoryUtil;
+import org.joda.time.DateTime
+import org.joda.time.DateTimeZone;
 
 /**
  * Created by xubinggui on 4/8/16.
@@ -27,36 +28,10 @@ import org.apache.ivy.util.MemoryUtil;
  //                  佛祖镇楼                  BUG辟易 
 
  */
-public class SysInfo {
-    String getOSIdentifier() {
-        ["os.name", "os.version", "os.arch"].collect { System.getProperty(it) }.join(" ")
-    }
+public class DateUtils {
+    public DateUtils() {}
 
-    long getMaxMemory() {
-
-    }
-
-    String getCPUIdentifier() {
-        def os = System.getProperty("os.name")
-        if (os.equalsIgnoreCase("mac os x")) {
-            def proc = ["sysctl", "-n", "machdep.cpu.brand_string"].execute()
-            proc.waitFor()
-
-            if (proc.exitValue() == 0) {
-                return proc.in.text.trim()
-            }
-        } else if (os.equalsIgnoreCase("linux")) {
-            def osName = ""
-            new File("/proc/cpuinfo").eachLine {
-                if (!osName.isEmpty()) return
-
-                if (it.startsWith("model name")) {
-                    osName = it.split(": ")[1]
-                }
-            }
-            return osName
-        }
-
-        return ""
+    long getLocalMidnightUTCTimestamp() {
+        DateTime.now().withTime(0, 0, 0, 0).withZone(DateTimeZone.UTC).getMillis()
     }
 }
