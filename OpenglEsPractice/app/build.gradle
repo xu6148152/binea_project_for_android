@@ -1,4 +1,20 @@
+buildscript {
+    dependencies {
+        repositories {
+            mavenCentral()
+        }
+
+        classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
+    }
+}
 apply plugin: 'com.android.application'
+apply plugin: 'hugo'
+
+dependencies {
+    repositories {
+        mavenCentral()
+    }
+}
 
 android {
     compileSdkVersion 23
@@ -23,4 +39,5 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.jakewharton.timber:timber:4.1.2'
 }
