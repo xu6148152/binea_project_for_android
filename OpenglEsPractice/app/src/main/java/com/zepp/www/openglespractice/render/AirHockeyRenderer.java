@@ -1,15 +1,31 @@
 package com.zepp.www.openglespractice.render;
 
 import android.content.Context;
-import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import com.zepp.www.openglespractice.R;
+import com.zepp.www.openglespractice.util.LogHelper;
+import com.zepp.www.openglespractice.util.ShaderHelper;
 import com.zepp.www.openglespractice.util.TextureResourceReader;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
+
+import static android.opengl.GLES20.GL_COLOR_BUFFER_BIT;
+import static android.opengl.GLES20.GL_FLOAT;
+import static android.opengl.GLES20.GL_LINES;
+import static android.opengl.GLES20.GL_POINTS;
+import static android.opengl.GLES20.GL_TRIANGLES;
+import static android.opengl.GLES20.glClear;
+import static android.opengl.GLES20.glClearColor;
+import static android.opengl.GLES20.glDrawArrays;
+import static android.opengl.GLES20.glEnableVertexAttribArray;
+import static android.opengl.GLES20.glGetAttribLocation;
+import static android.opengl.GLES20.glGetUniformLocation;
+import static android.opengl.GLES20.glUniform4f;
+import static android.opengl.GLES20.glUseProgram;
+import static android.opengl.GLES20.glVertexAttribPointer;
 
 /**
  * Created by xubinggui on 4/24/16.
@@ -41,21 +57,28 @@ public class AirHockeyRenderer implements GLSurfaceView.Renderer {
 
     float[] tableVerticesWithTriangles = {
             //triangle 1
-            0f, 0f, 9f, 14f, 0f, 14f,
+            -0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f,
 
             //triangle 2
-            0f, 0f, 9f, 0f, 9f, 14f,
+            -0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f,
 
             // Line1
-            0f, 7f, 9f, 7f,
+            -0.5f, 0f, 0.5f, 0f,
 
             //Mallets
-            4.5f, 2f, 4.5f, 12f,
+            0f, -0.25f, 0f, 0.25f,
     };
 
     private static final int BYTES_PER_FLOAT = 4;
     private final FloatBuffer vertexData;
     private Context mContext;
+    private int program;
+
+    private static final String U_COLOR = "u_Color";
+    private int uColorLocation;
+
+    private static final String A_POSITOIN = "a_Position";
+    private int aPositionLocation;
 
     public AirHockeyRenderer(Context context) {
         mContext = context;
@@ -69,11 +92,25 @@ public class AirHockeyRenderer implements GLSurfaceView.Renderer {
     }
 
     @Override public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        GLES20.glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         String vertexShaderSource = TextureResourceReader.readTextFileFromResource(mContext,
                 R.raw.simple_vertex_shader);
         String fragmentShaderSource = TextureResourceReader.readTextFileFromResource(mContext,
                 R.raw.simple_fragment_shader);
+        int vertextShader = ShaderHelper.compileVertexShader(vertexShaderSource);
+        int fragmentShader = ShaderHelper.compileFragmentShader(fragmentShaderSource);
+        ShaderHelper.linkProgram(vertextShader, fragmentShader);
+        if (LogHelper.enabled) {
+            ShaderHelper.validateProgram(program);
+        }
+        glUseProgram(program);
+        uColorLocation = glGetUniformLocation(program, U_COLOR);
+        aPositionLocation = glGetAttribLocation(program, A_POSITOIN);
+        vertexData.position(0);
+        //****** very import method *******//
+        glVertexAttribPointer(aPositionLocation, POSITION_COMPOENT_COUNT, GL_FLOAT, false, 0,
+                vertexData);
+        glEnableVertexAttribArray(aPositionLocation);
     }
 
     @Override public void onSurfaceChanged(GL10 gl, int width, int height) {
@@ -81,6 +118,23 @@ public class AirHockeyRenderer implements GLSurfaceView.Renderer {
     }
 
     @Override public void onDrawFrame(GL10 gl) {
+        glClear(GL_COLOR_BUFFER_BIT);
 
+        //set triangle color
+        glUniform4f(uColorLocation, 1.0f, 1.0f, 1.0f, 1.0f);
+        //draw two triangles
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+
+        //set line color
+        glUniform4f(uColorLocation, 1.0f, 0.0f, 0.0f, 1.0f);
+        glDrawArrays(GL_LINES, 6, 2);
+
+        //draw the first blue mallets
+        glUniform4f(uColorLocation, 0.0f, 0.0f, 1.0f, 1.0f);
+        glDrawArrays(GL_POINTS, 8, 1);
+
+        //draw the second red mallets
+        glUniform4f(uColorLocation, 1.0f, 0.0f, 0.0f, 1.0f);
+        glDrawArrays(GL_POINTS, 9, 1);
     }
 }

@@ -29,6 +29,26 @@ import android.util.Log;
 public class LogHelper {
     public static final boolean enabled = true;
 
+    public static void debug(Object object, String msg) {
+        d(object.getClass().getCanonicalName(), msg);
+    }
+
+    public static void verbose(Object object, String msg) {
+        v(object.getClass().getCanonicalName(), msg);
+    }
+
+    public static void warn(Object object, String msg) {
+        w(object.getClass().getCanonicalName(), msg);
+    }
+
+    public static void info(Object object, String msg) {
+        i(object.getClass().getCanonicalName(), msg);
+    }
+
+    public static void error(Object object, String msg) {
+        e(object.getClass().getCanonicalName(), msg);
+    }
+
     public static void d(String tag, String msg) {
         if (enabled) {
             Log.d(tag, msg);

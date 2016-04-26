@@ -16,5 +16,12 @@
                 android:text="first_opengl"
                 android:onClick="firstOpengl"
                 />
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Air Hockey1"
+                android:onClick="AirHockey1"
+                />
     </LinearLayout>
 </ScrollView>

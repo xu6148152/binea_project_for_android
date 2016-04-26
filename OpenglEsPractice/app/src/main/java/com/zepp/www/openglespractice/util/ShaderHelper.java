@@ -1,14 +1,6 @@
 package com.zepp.www.openglespractice.util;
 
-import static android.opengl.GLES20.GL_COMPILE_STATUS;
-import static android.opengl.GLES20.GL_FRAGMENT_SHADER;
-import static android.opengl.GLES20.GL_VERTEX_SHADER;
-import static android.opengl.GLES20.glCompileShader;
-import static android.opengl.GLES20.glCreateShader;
-import static android.opengl.GLES20.glDeleteShader;
-import static android.opengl.GLES20.glGetShaderInfoLog;
-import static android.opengl.GLES20.glGetShaderiv;
-import static android.opengl.GLES20.glShaderSource;
+import static android.opengl.GLES20.*;
 
 /**
  * Created by xubinggui on 4/25/16.
@@ -71,5 +63,46 @@ public class ShaderHelper {
         }
 
         return shaderObjectId;
+    }
+
+    public static int linkProgram(int vertextShaderId, int fragmentShaderId) {
+        final int programObjectId = glCreateProgram();
+
+        if (programObjectId == 0) {
+            LogHelper.w(TAG, "Could not create new program");
+            return 0;
+        }
+
+        glAttachShader(programObjectId, vertextShaderId);
+        glAttachShader(programObjectId, fragmentShaderId);
+
+        glLinkProgram(programObjectId);
+
+        final int[] status = new int[1];
+        glGetProgramiv(programObjectId, GL_LINK_STATUS, status, 0);
+
+        LogHelper.v(TAG, "Result of linking program: \n" + glGetProgramInfoLog(programObjectId));
+
+        if (status[0] == 0) {
+            glDeleteProgram(programObjectId);
+            LogHelper.w(TAG, "Linking of program failed.");
+            return 0;
+        }
+
+        return programObjectId;
+    }
+
+    public static boolean validateProgram(int programObjectId) {
+        glValidateProgram(programObjectId);
+
+        final int[] validateStatus = new int[1];
+        glGetProgramiv(programObjectId, GL_VALIDATE_STATUS, validateStatus, 0);
+
+        LogHelper.v(TAG, "Result of validating program: "
+                + validateStatus[0]
+                + "\nLog:"
+                + glGetProgramInfoLog(programObjectId));
+
+        return validateStatus[0] != 0;
     }
 }

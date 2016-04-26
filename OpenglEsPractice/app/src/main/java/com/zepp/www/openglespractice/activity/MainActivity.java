@@ -17,4 +17,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, FirstOpenglActivity.class);
         startActivity(intent);
     }
+
+    public void AirHockey1(View view) {
+        Intent intent = new Intent(this, AirHockeyActivity.class);
+        startActivity(intent);
+    }
 }
