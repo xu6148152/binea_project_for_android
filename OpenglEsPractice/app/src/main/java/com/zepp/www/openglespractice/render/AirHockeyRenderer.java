@@ -38,15 +38,22 @@ import static android.opengl.GLES20.*;
  * //         .............................................
  * //                  佛祖镇楼                  BUG辟易
  */
+
+/**
+ * blended_value = (vertex_0_value * (100% - distance_ratio) + (vertext_1_value * distance_ratio))
+ */
 public class AirHockeyRenderer implements GLSurfaceView.Renderer {
 
-    private static final int POSITION_COMPOENT_COUNT = 2;
+    private static final int POSITION_COMPONENT_COUNT = 2;
 
     private static final int BYTES_PER_FLOAT = 4;
     private final FloatBuffer vertexData;
     private Context mContext;
     private static final String U_COLOR = "u_Color";
-    private int uColorLocation;
+    private static final String A_COLOR = "a_Color";
+    private static final int COLOR_COMPONENT_COUNT = 3;
+    private static final int STRIDE =
+            (POSITION_COMPONENT_COUNT + COLOR_COMPONENT_COUNT) * BYTES_PER_FLOAT;
 
     private static final String A_POSITOIN = "a_Position";
 
@@ -57,17 +64,38 @@ public class AirHockeyRenderer implements GLSurfaceView.Renderer {
         };
 
         float[] tableVerticesWithTriangles = {
-                //triangle 1
-                -0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f,
+                ////triangle 1
+                //-0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f,
+                //
+                ////triangle 2
+                //-0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f,
 
-                //triangle 2
-                -0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f,
+                // Order of coordinate X, Y, R, G, B
+                // triangle fan
+                // triangle1
+                0, 0, 1f, 1f, 1f,
+                //x2, y2
+                -0.5f, -0.5f, 0.7f, 0.7f, 0.7f,
+                //x3, y3
+                0.5f, -0.5f, 0.7f, 0.7f, 0.7f,
+                //triangle2
+                0.5f, 0.5f, 0.7f, 0.7f, 0.7f,
+                //x5, y5
+                -0.5f, 0.5f, 0.7f, 0.7f, 0.7f,
+                //x6, y6
+                -0.5f, -0.5f, 0.7f, 0.7f, 0.7f,
 
                 // Line1
-                -0.5f, 0f, 0.5f, 0f,
+                //x0, y0
+                -0.5f, 0f, 1f, 0f, 0f,
+                //x1, y1
+                0.5f, 0f, 0f, 0f, 0f,
 
                 //Mallets
-                0f, -0.25f, 0f, 0.25f,
+                //x0, y0
+                0f, -0.25f, 0f, 0f, 1f,
+                //x1, y1
+                0f, 0.25f, 1f, 0f, 0f,
         };
 
         vertexData = ByteBuffer.allocateDirect(tableVerticesWithTriangles.length * BYTES_PER_FLOAT)
@@ -77,7 +105,7 @@ public class AirHockeyRenderer implements GLSurfaceView.Renderer {
     }
 
     @Override public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         String vertexShaderSource = TextureResourceReader.readTextFileFromResource(mContext,
                                                                                    R.raw.simple_vertex_shader);
         String fragmentShaderSource = TextureResourceReader.readTextFileFromResource(mContext,
@@ -89,37 +117,44 @@ public class AirHockeyRenderer implements GLSurfaceView.Renderer {
             ShaderHelper.validateProgram(program);
         }
         glUseProgram(program);
-        uColorLocation = glGetUniformLocation(program, U_COLOR);
+        //uColorLocation = glGetUniformLocation(program, U_COLOR);
+        int aColorLocation = glGetAttribLocation(program, A_COLOR);
         int aPositionLocation = glGetAttribLocation(program, A_POSITOIN);
         vertexData.position(0);
         //****** very import method *******//
-        glVertexAttribPointer(aPositionLocation, POSITION_COMPOENT_COUNT, GL_FLOAT, false, 0,
+        glVertexAttribPointer(aPositionLocation, POSITION_COMPONENT_COUNT, GL_FLOAT, false, STRIDE,
                               vertexData);
         glEnableVertexAttribArray(aPositionLocation);
+
+        vertexData.position(POSITION_COMPONENT_COUNT);
+        //****** very import method *******//
+        glVertexAttribPointer(aColorLocation, COLOR_COMPONENT_COUNT, GL_FLOAT, false, STRIDE,
+                              vertexData);
+        glEnableVertexAttribArray(aColorLocation);
     }
 
     @Override public void onSurfaceChanged(GL10 gl, int width, int height) {
-
+        glViewport(0, 0, width, height);
     }
 
     @Override public void onDrawFrame(GL10 gl) {
         glClear(GL_COLOR_BUFFER_BIT);
 
         //set triangle color
-        glUniform4f(uColorLocation, 1.0f, 1.0f, 1.0f, 1.0f);
+        //glUniform4f(uColorLocation, 1.0f, 1.0f, 1.0f, 1.0f);
         //draw two triangles
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, 6);
 
         //set line color
-        glUniform4f(uColorLocation, 1.0f, 0.0f, 0.0f, 1.0f);
+        //glUniform4f(uColorLocation, 1.0f, 0.0f, 0.0f, 1.0f);
         glDrawArrays(GL_LINES, 6, 2);
 
         //draw the first blue mallets
-        glUniform4f(uColorLocation, 0.0f, 0.0f, 1.0f, 1.0f);
+        //glUniform4f(uColorLocation, 0.0f, 0.0f, 1.0f, 1.0f);
         glDrawArrays(GL_POINTS, 8, 1);
 
         //draw the second red mallets
-        glUniform4f(uColorLocation, 1.0f, 0.0f, 0.0f, 1.0f);
+        //glUniform4f(uColorLocation, 1.0f, 0.0f, 0.0f, 1.0f);
         glDrawArrays(GL_POINTS, 9, 1);
     }
 }
