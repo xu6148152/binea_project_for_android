@@ -14,12 +14,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void firstOpengl(View view) {
-        Intent intent = new Intent(this, FirstOpenglActivity.class);
-        startActivity(intent);
+        startActivityForClass(FirstOpenglActivity.class);
     }
 
     public void AirHockey1(View view) {
-        Intent intent = new Intent(this, AirHockeyActivity.class);
-        startActivity(intent);
+        startActivityForClass(AirHockeyActivity.class);
+    }
+
+    public void AirHockeyOrtho(View view) {
+        startActivityForClass(AirHockeyOrthoActivity.class);
+    }
+
+    private void startActivityForClass(Class clazz) {
+        startActivity(new Intent(this, clazz));
     }
 }

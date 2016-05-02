@@ -23,5 +23,12 @@
                 android:text="Air Hockey1"
                 android:onClick="AirHockey1"
                 />
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Air Hockey Ortho"
+                android:onClick="AirHockeyOrtho"
+                />
     </LinearLayout>
 </ScrollView>

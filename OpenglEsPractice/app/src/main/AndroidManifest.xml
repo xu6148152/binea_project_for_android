@@ -20,6 +20,8 @@
         <activity android:name=".activity.FirstOpenglActivity"/>
         <activity android:name=".activity.AirHockeyActivity">
         </activity>
+        <activity android:name=".activity.AirHockeyOrthoActivity">
+        </activity>
     </application>
 
 </manifest>
