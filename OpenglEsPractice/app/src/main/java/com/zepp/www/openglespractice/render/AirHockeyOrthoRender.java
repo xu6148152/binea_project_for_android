@@ -37,7 +37,7 @@ public class AirHockeyOrthoRender extends BaseHockeyRender {
 
     private static final String U_MATRIX = "u_Matrix";
 
-    private final float[] projectionMatrix = new float[16];
+    protected final float[] projectionMatrix = new float[16];
 
     private int uMatrixLocation;
 

@@ -18,10 +18,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.FirstOpenglActivity"/>
-        <activity android:name=".activity.AirHockeyActivity">
-        </activity>
-        <activity android:name=".activity.AirHockeyOrthoActivity">
-        </activity>
+        <activity android:name=".activity.AirHockeyActivity"/>
+        <activity android:name=".activity.AirHockeyOrthoActivity"/>
+        <activity android:name=".activity.AirHockey3DActivity"/>
     </application>
 
 </manifest>

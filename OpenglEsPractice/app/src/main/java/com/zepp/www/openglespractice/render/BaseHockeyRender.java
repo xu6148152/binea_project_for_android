@@ -49,15 +49,16 @@ import static android.opengl.GLES20.glViewport;
  * //                  佛祖镇楼                  BUG辟易
  */
 public abstract class BaseHockeyRender implements GLSurfaceView.Renderer {
-    private static final int POSITION_COMPONENT_COUNT = 2;
 
-    private static final int BYTES_PER_FLOAT = 4;
+    protected static int POSITION_COMPONENT_COUNT = 2;
+
+    protected static final int BYTES_PER_FLOAT = 4;
     private final FloatBuffer vertexData;
     protected Context mContext;
     private static final String U_COLOR = "u_Color";
     private static final String A_COLOR = "a_Color";
-    private static final int COLOR_COMPONENT_COUNT = 3;
-    private static final int STRIDE =
+    protected static final int COLOR_COMPONENT_COUNT = 3;
+    protected static int STRIDE =
             (POSITION_COMPONENT_COUNT + COLOR_COMPONENT_COUNT) * BYTES_PER_FLOAT;
 
     private static final String A_POSITOIN = "a_Position";
@@ -70,44 +71,12 @@ public abstract class BaseHockeyRender implements GLSurfaceView.Renderer {
                 0f, 0f, 0f, 14f, 9f, 14f, 9f, 0f,
         };
 
-        float[] tableVerticesWithTriangles = {
-                ////triangle 1
-                //-0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f,
-                //
-                ////triangle 2
-                //-0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f,
+        float[] tableVerticesWithTriangles = getTableVertex();
 
-                // Order of coordinate X, Y, R, G, B
-                // triangle fan
-                // triangle1
-                0, 0, 1f, 1f, 1f,
-                //x2, y2
-                -0.5f, -0.8f, 0.7f, 0.7f, 0.7f,
-                //x3, y3
-                0.5f, -0.8f, 0.7f, 0.7f, 0.7f,
-                //triangle2
-                0.5f, 0.8f, 0.7f, 0.7f, 0.7f,
-                //x5, y5
-                -0.5f, 0.8f, 0.7f, 0.7f, 0.7f,
-                //x6, y6
-                -0.5f, -0.8f, 0.7f, 0.7f, 0.7f,
-
-                // Line1
-                //x0, y0
-                -0.5f, 0f, 1f, 0f, 0f,
-                //x1, y1
-                0.5f, 0f, 0f, 0f, 0f,
-
-                //Mallets
-                //x0, y0
-                0f, -0.4f, 0f, 0f, 1f,
-                //x1, y1
-                0f, 0.4f, 1f, 0f, 0f,
-        };
-
-        vertexData = ByteBuffer.allocateDirect(tableVerticesWithTriangles.length * BYTES_PER_FLOAT)
-                               .order(ByteOrder.nativeOrder())
-                               .asFloatBuffer();
+                vertexData = ByteBuffer.allocateDirect(
+                        tableVerticesWithTriangles.length * BYTES_PER_FLOAT)
+                                       .order(ByteOrder.nativeOrder())
+                                       .asFloatBuffer();
         vertexData.put(tableVerticesWithTriangles);
     }
 
@@ -173,4 +142,41 @@ public abstract class BaseHockeyRender implements GLSurfaceView.Renderer {
     protected abstract String readFragmentShader();
 
     protected abstract void getMatrixPosition();
+
+    protected float[] getTableVertex() {
+        return new float[]{
+                ////triangle 1
+                //-0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f,
+                //
+                ////triangle 2
+                //-0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f,
+
+                // Order of coordinate X, Y, R, G, B
+                // triangle fan
+                // triangle1
+                0, 0, 1f, 1f, 1f,
+                //x2, y2
+                -0.5f, -0.8f, 0.7f, 0.7f, 0.7f,
+                //x3, y3
+                0.5f, -0.8f, 0.7f, 0.7f, 0.7f,
+                //triangle2
+                0.5f, 0.8f, 0.7f, 0.7f, 0.7f,
+                //x5, y5
+                -0.5f, 0.8f, 0.7f, 0.7f, 0.7f,
+                //x6, y6
+                -0.5f, -0.8f, 0.7f, 0.7f, 0.7f,
+
+                // Line1
+                //x0, y0
+                -0.5f, 0f, 1f, 0f, 0f,
+                //x1, y1
+                0.5f, 0f, 0f, 0f, 0f,
+
+                //Mallets
+                //x0, y0
+                0f, -0.4f, 0f, 0f, 1f,
+                //x1, y1
+                0f, 0.4f, 1f, 0f, 0f,
+        };
+    }
 }
