@@ -29,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
         startActivityForClass(AirHockey3DActivity.class);
     }
 
+    public void AirHockeyTextured(View view) {
+        startActivityForClass(AirHockeyTextureActivity.class);
+    }
+
     private void startActivityForClass(Class clazz) {
         startActivity(new Intent(this, clazz));
     }

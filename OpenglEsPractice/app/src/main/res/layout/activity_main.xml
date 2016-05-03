@@ -37,5 +37,12 @@
                 android:text="Air Hockey 3D"
                 android:onClick="AirHockey3D"
                 />
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Air Hockey Textured"
+                android:onClick="AirHockeyTextured"
+                />
     </LinearLayout>
 </ScrollView>
