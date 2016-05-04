@@ -33,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
         startActivityForClass(AirHockeyTextureActivity.class);
     }
 
+    public void AirHockeyWithBetterMallets(View view) {
+        startActivityForClass(AirHockeyWithBetterMalletsActivity.class);
+    }
+
     private void startActivityForClass(Class clazz) {
         startActivity(new Intent(this, clazz));
     }
