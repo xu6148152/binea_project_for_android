@@ -5,6 +5,8 @@ import com.zepp.www.openglespractice.util.Geometry;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.opengl.GLES20.*;
+
 /**
  * Created by xubinggui on 5/4/16.
  * //                            _ooOoo_
@@ -68,11 +70,40 @@ public class ObjectBuilder {
         return null;
     }
 
-    private void appendOpenCylinder(Geometry.Cylinder puck, int numPoints) {
+    private void appendOpenCylinder(Geometry.Cylinder cylinder, int numPoints) {
+        final int startVertex = offset / FLOATS_PER_VERTEX;
+        final int numVertices = sizeOfOpenCylinderInVertices(numPoints);
+        final float yStart = cylinder.center.y - (cylinder.height / 2f);
+        final float yEnd = cylinder.center.y + (cylinder.height / 2f);
 
+        for (int i = 0; i<=numPoints; i++) {
+            float angleInRadians = ((float)i / (float)numPoints) * ((float) Math.PI * 2f);
+
+            float xPosition =
+                    (float) (cylinder.center.x + cylinder.radius * Math.cos(angleInRadians));
+            float zPosition =
+                    (float) (cylinder.center.z + cylinder.radius * Math.sin(angleInRadians));
+
+            vertexData[offset++] = xPosition;
+            vertexData[offset++] = yStart;
+            vertexData[offset++] = zPosition;
+            vertexData[offset++] = xPosition;
+            vertexData[offset++] = yEnd;
+            vertexData[offset++] = zPosition;
+        }
+        drawList.add(new DrawCommand() {
+            @Override public void draw() {
+                glDrawArrays(GL_TRIANGLE_STRIP, startVertex, numVertices);
+            }
+        })
     }
 
     private void appendCircle(Geometry.Circle circle, int numPoints) {
+
+        final int startVertex = offset / FLOATS_PER_VERTEX;
+
+        final int numVertices = sizeOfCircleInVertices(numPoints);
+
         //Center point of fan
         vertexData[offset++] = circle.center.x;
         vertexData[offset++] = circle.center.y;
@@ -89,6 +120,12 @@ public class ObjectBuilder {
             vertexData[offset++] =
                     (float) (circle.center.z + circle.radius * Math.sin(angleInRadius));
         }
+
+        drawList.add(new DrawCommand() {
+            @Override public void draw() {
+                glDrawArrays(GL_TRIANGLE_FAN, startVertex, numVertices);
+            }
+        });
     }
 
     static interface DrawCommand {
