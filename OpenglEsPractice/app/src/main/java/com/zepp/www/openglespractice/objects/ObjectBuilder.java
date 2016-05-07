@@ -95,7 +95,7 @@ public class ObjectBuilder {
             @Override public void draw() {
                 glDrawArrays(GL_TRIANGLE_STRIP, startVertex, numVertices);
             }
-        })
+        });
     }
 
     private void appendCircle(Geometry.Circle circle, int numPoints) {
