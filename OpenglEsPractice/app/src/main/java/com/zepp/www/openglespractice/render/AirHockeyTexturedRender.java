@@ -12,7 +12,11 @@ import com.zepp.www.openglespractice.util.TextureHelper;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import static android.opengl.GLES20.*;
+import static android.opengl.GLES20.GL_COLOR_BUFFER_BIT;
+import static android.opengl.GLES20.GL_TEXTURE0;
+import static android.opengl.GLES20.glClear;
+import static android.opengl.GLES20.glClearColor;
+import static android.opengl.GLES20.glViewport;
 import static android.opengl.Matrix.multiplyMM;
 import static android.opengl.Matrix.rotateM;
 import static android.opengl.Matrix.setIdentityM;
@@ -67,10 +71,12 @@ public class AirHockeyTexturedRender implements GLSurfaceView.Renderer {
         glClearColor(0f, 0f, 0f, 0f);
 
         table = new Table();
-        mallet = new Mallet();
+        mallet = new Mallet(0.08f, 0.15f, 32);
 
-        textureProgram = new TextureShaderProgram(mContext, R.raw.texture_vertex_shader, R.raw.texture_fragment_shader);
-        colorProgram = new ColorShaderProgram(mContext, R.raw.simple_vertex_shader_texture, R.raw.simple_fragment_shader_texture);
+        textureProgram = new TextureShaderProgram(mContext, R.raw.texture_vertex_shader,
+                                                  R.raw.texture_fragment_shader);
+        colorProgram = new ColorShaderProgram(mContext, R.raw.simple_vertex_shader_texture,
+                                              R.raw.simple_fragment_shader_texture);
 
         texture = TextureHelper.loadTexture(mContext, R.drawable.air_hockey_surface);
 
@@ -79,8 +85,7 @@ public class AirHockeyTexturedRender implements GLSurfaceView.Renderer {
 
     @Override public void onSurfaceChanged(GL10 gl, int width, int height) {
         glViewport(0, 0, width, height);
-        MatrixHelper.perspectiveM(
-                projectionMatrix, 45, (float)width / (float) height, 1f, 10f);
+        MatrixHelper.perspectiveM(projectionMatrix, 45, (float) width / (float) height, 1f, 10f);
 
         setIdentityM(modelMatrix, 0);
         translateM(modelMatrix, 0, 0f, 0f, -2.5f);
@@ -102,7 +107,7 @@ public class AirHockeyTexturedRender implements GLSurfaceView.Renderer {
 
         //Draw the mallet
         colorProgram.useProgram();
-        colorProgram.setUniforms(projectionMatrix);
+        colorProgram.setUniforms(projectionMatrix, 1f, 0f, 0f);
         mallet.bindData(colorProgram);
         mallet.draw();
     }

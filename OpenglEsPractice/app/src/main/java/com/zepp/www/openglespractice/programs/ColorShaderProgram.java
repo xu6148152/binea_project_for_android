@@ -32,10 +32,11 @@ public class ColorShaderProgram extends ShaderProgram {
 
     // Uniform locations
     private final int uMatrixLocation;
+    private final int uColorLocation;
 
     // Attribute locations
     private final int aPositionLocation;
-    private final int aColorLocation;
+    //private final int aColorLocation;
 
     public ColorShaderProgram(
             Context context, int vertexShaderResourceId, int fragmentShaderResourceId) {
@@ -45,18 +46,20 @@ public class ColorShaderProgram extends ShaderProgram {
         uMatrixLocation = glGetUniformLocation(program, U_MATRIX);
         // Retrieve attribute locations for the shader program.
         aPositionLocation = glGetAttribLocation(program, A_POSITION);
-        aColorLocation = glGetAttribLocation(program, A_COLOR);
+        //aColorLocation = glGetAttribLocation(program, A_COLOR);
+        uColorLocation = glGetUniformLocation(program, U_COLOR);
     }
 
-    public void setUniforms(float[] matrix) {
+    public void setUniforms(float[] matrix, float r, float g, float b) {
         glUniformMatrix4fv(uMatrixLocation, 1, false, matrix, 0);
+        glUniform4f(uColorLocation, r, g, b, 1f);
     }
 
     public int getPositionAttributeLocation() {
         return aPositionLocation;
     }
 
-    public int getColorAttributeLocation() {
-        return aColorLocation;
-    }
+    //public int getColorAttributeLocation() {
+        //return aColorLocation;
+    //}
 }

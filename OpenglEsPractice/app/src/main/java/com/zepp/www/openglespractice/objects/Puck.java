@@ -5,11 +5,8 @@ import com.zepp.www.openglespractice.programs.ColorShaderProgram;
 import com.zepp.www.openglespractice.util.Geometry;
 import java.util.List;
 
-import static com.zepp.www.openglespractice.support.Constants.BYTES_PER_FLOAT;
-import static com.zepp.www.openglespractice.support.Constants.COLOR_COMPONENT_COUNT;
-
 /**
- * Created by xubinggui on 5/3/16.
+ * Created by xubinggui on 5/8/16.
  * //                            _ooOoo_
  * //                           o8888888o
  * //                           88" . "88
@@ -32,28 +29,18 @@ import static com.zepp.www.openglespractice.support.Constants.COLOR_COMPONENT_CO
  * //         .............................................
  * //                  佛祖镇楼                  BUG辟易
  */
-public class Mallet {
+public class Puck {
     private static final int POSITION_COMPONENT_COUNT = 3;
 
-    public final float radius;
-    public final float height;
-
-    private static final int STRIDE =
-            (POSITION_COMPONENT_COUNT + COLOR_COMPONENT_COUNT) * BYTES_PER_FLOAT;
-
-    private static final float[] VERTEX_DATA = {
-            //Order of coordinates: X, Y, R, G, B
-            0f, -0.4f, 0f, 0f, 1f, 0f, 0.4f, 1f, 0f, 0f,
-    };
+    public final float radius, height;
 
     private final VertexArray vertexArray;
     private final List<ObjectBuilder.DrawCommand> drawList;
 
-    public Mallet(float radius, float height, int numPointsAroundMallet) {
-        ObjectBuilder.GeneratedData generatedData =
-                ObjectBuilder.createMallet(new Geometry.Point(0f, 0f, 0f), radius, height,
-                                           numPointsAroundMallet);
-
+    public Puck(float radius, float height, int numPointsAroundPuck) {
+        ObjectBuilder.GeneratedData generatedData = ObjectBuilder.createPuck(
+                new Geometry.Cylinder(new Geometry.Point(0f, 0f, 0f), radius, height),
+                numPointsAroundPuck);
         this.radius = radius;
         this.height = height;
 
@@ -63,14 +50,10 @@ public class Mallet {
 
     public void bindData(ColorShaderProgram colorProgram) {
         vertexArray.setVertexAttribPointer(0, colorProgram.getPositionAttributeLocation(),
-                                           POSITION_COMPONENT_COUNT, STRIDE);
-
-        //vertexArray.setVertexAttribPointer(0, colorProgram.getColorAttributeLocation(),
-        //                                   COLOR_COMPONENT_COUNT, STRIDE);
+                                           POSITION_COMPONENT_COUNT, 0);
     }
 
     public void draw() {
-        //glDrawArrays(GL_POINTS, 0, 2);
         for (ObjectBuilder.DrawCommand command : drawList) {
             command.draw();
         }
