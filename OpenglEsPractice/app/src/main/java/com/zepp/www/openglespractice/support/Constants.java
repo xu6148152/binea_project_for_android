@@ -32,4 +32,6 @@ public class Constants {
     public static final int TEXTURE_COORDINATES_COMPONENT_COUNT = 2;
 
     public static final int COLOR_COMPONENT_COUNT = 3;
+
+    public static final int FLOATS_PER_VERTEX = 3;
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import static android.opengl.GLES20.GL_TRIANGLE_FAN;
 import static android.opengl.GLES20.GL_TRIANGLE_STRIP;
 import static android.opengl.GLES20.glDrawArrays;
+import static com.zepp.www.openglespractice.support.Constants.*;
 
 /**
  * Created by xubinggui on 5/4/16.
@@ -33,7 +34,6 @@ import static android.opengl.GLES20.glDrawArrays;
  * //                  佛祖镇楼                  BUG辟易
  */
 public class ObjectBuilder {
-    private static final int FLOATS_PER_VERTEX = 3;
     private final float[] vertexData;
     private int offset = 0;
 
