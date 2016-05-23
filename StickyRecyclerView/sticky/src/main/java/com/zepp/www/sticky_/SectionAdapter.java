@@ -1,9 +1,10 @@
-package com.zepp.www.stickyrecyclerview;
+package com.zepp.www.sticky_;
 
 import android.support.annotation.IntDef;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import com.zepp.www.sticky_.R;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.security.InvalidParameterException;

@@ -1,4 +1,4 @@
-package com.zepp.www.stickyrecyclerview;
+package com.zepp.www.sticky_;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

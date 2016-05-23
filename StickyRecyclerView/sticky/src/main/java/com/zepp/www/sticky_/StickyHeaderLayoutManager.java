@@ -1,9 +1,10 @@
-package com.zepp.www.stickyrecyclerview;
+package com.zepp.www.sticky_;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseIntArray;
 import android.view.View;
 import android.view.ViewGroup;
+import com.zepp.www.sticky_.R;
 import java.util.HashSet;
 import java.util.Set;
 

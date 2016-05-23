@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import com.zepp.www.stickyrecyclerview.R;
-import com.zepp.www.stickyrecyclerview.SectionAdapter;
+import com.zepp.www.sticky_.SectionAdapter;
 
 public class DemoActivity extends AppCompatActivity {
 
