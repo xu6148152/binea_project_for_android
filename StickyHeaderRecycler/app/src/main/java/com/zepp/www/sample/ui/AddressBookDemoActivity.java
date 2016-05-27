@@ -1,5 +1,6 @@
 package com.zepp.www.sample.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -24,6 +25,11 @@ public class AddressBookDemoActivity extends DemoActivity implements RandomUserL
 
         recyclerView.setLayoutManager(new StickyHeaderLayoutManager());
         recyclerView.setAdapter(adapter);
+        findViewById(R.id.btn_main_activity).setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                startActivity(new Intent(AddressBookDemoActivity.this, MainActivity.class));
+            }
+        });
     }
 
     @Override
