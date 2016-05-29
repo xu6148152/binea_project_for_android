@@ -32,14 +32,45 @@
                 android:name=".daemon.WhiteService"
                 android:enabled="true"
                 android:exported="true"
+                android:process=":white"
                 >
         </service>
         <service
                 android:name=".daemon.GrayService"
                 android:enabled="true"
                 android:exported="true"
+                android:process=":gray"
                 >
         </service>
+
+        <service
+                android:name=".daemon.GrayService$GrayInnerService"
+                android:enabled="true"
+                android:exported="false"
+                android:process=":gray"
+                />
+
+        <service
+                android:name=".daemon.WakeReceiver$WakeNotifyService"
+                android:enabled="true"
+                android:exported="false"
+                />
+
+        <service
+                android:name=".daemon.WakeReceiver$WakeGrayInnerService"
+                android:enabled="true"
+                android:exported="false"
+                />
+
+        <receiver
+                android:name=".daemon.WakeReceiver"
+                android:enabled="true"
+                android:exported="false"
+                >
+            <intent-filter>
+                <action android:name="com.wake.gray"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

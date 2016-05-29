@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import com.zepp.www.daemonservice.daemon.BackgroundService;
+import com.zepp.www.daemonservice.daemon.GrayService;
 import com.zepp.www.daemonservice.daemon.WhiteService;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,5 +23,10 @@ public class MainActivity extends AppCompatActivity {
     public void startForegroundService(View view) {
         Intent whIntent = new Intent(this, WhiteService.class);
         startService(whIntent);
+    }
+
+    public void startGrayService(View view) {
+        Intent grayIntent = new Intent(this, GrayService.class);
+        startService(grayIntent);
     }
 }
