@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="zepp_red">#FF2829</color>
+    <color name="common_header_text_color">#A5A5A6</color>
+    <color name="calibration_retry_text_color">#FF2829</color>
+    <color name="calibration_cancel_text_color">#D61111</color>
+
+
+    <color name="common_dialog_button_1">#3C464D</color>
+    <color name="common_dialog_button_2">#30383D</color>
+    <color name="common_dialog_button_3">#FF2829</color>
+    <color name="common_dialog_button_4">#D61111</color>
+    <color name="common_dialog_button_1_p">#2A3136</color>
+    <color name="common_dialog_button_2_p">#262C30</color>
+    <color name="common_dialog_button_3_p">#CC2020</color>
+    <color name="common_dialog_button_4_p">#AB0D0D</color>
+    <color name="common_dialog_button_pressed">#1B1D1F</color>
+
+    <color name="common_bg">#1F2D3D</color>
+    <color name="tab_bottom_bg">#262A2C</color>
+    <color name="common_score_green">#7EC600</color>
+    <color name="common_score_red">#F81219</color>
+    <color name="common_score_orange">#FED131</color>
+    <color name="common_stroke_color">#A5A5A6</color>
+    <color name="common_btn_txt_color">#99FFFFFF</color>
+
+    <color name="green_blue">#D1EE00</color>
+    <color name="green_blue_disable">#66D1EE00</color>
+    <color name="green_blue_p">#A7BE00</color>
+
+
+    <color name="bottom_meun_background">#7D000000</color>
+    <color name="bottom_meun_tag">#F0F0F0</color>
+    <color name="black_20_alpha">#33000000</color>
+    <color name="black_50_alpha">#7f000000</color>
+    <color name="transprent">#00000000</color>
+    <color name="white_transprent">#00FFFFFF</color>
+
+
+    <color name="grey_black_1">#33383C</color>
+    <color name="grey_black_1_p">#282C30</color>
+    <color name="grey_black_2">#3D4348</color>
+    <color name="grey_black_2_p">#303539</color>
+    <color name="grey_black_3">#4F565C</color>
+    <color name="grey_black_3_p">#474E53</color>
+    <color name="grey_black_4">#636B72</color>
+    <color name="grey_black_4_p">#5A6167</color>
+    <color name="grey_black_5">#788087</color>
+    <color name="grey_black_5_p">#6C7379</color>
+
+    <color name="history_challenge">#26292B</color>
+    <color name="track_play_red">#FFFE1311</color>
+    <color name="track_play_red_p">#FFCB0F0D</color>
+    <color name="common_press_bg">#1A000000</color>
+    <color name="common_press_bg_1">#1B1D1F</color>
+
+
+    <!-- TOP POPMENU-->
+    <color name="top_menu_transparency">#F5F3F3F3</color>
+    <color name="white_transparency_1">#F5F4F4F4</color>
+    <color name="white_transparency_1_p">#F5DCDCDC</color>
+
+    <color name="white_transparency_2">#F5E9E9E9</color>
+    <color name="white_transparency_2_p">#F5D2D2D2</color>
+    <color name="white_transparency_3">#F5DEDEDE</color>
+    <color name="white_transparency_3_p">#F5C8C8C8</color>
+    <color name="white_transparency_4">#F5D3D3D3</color>
+    <color name="white_transparency_4_p">#F5BEBEBE</color>
+
+    <!-- share pop -->
+    <color name="blue_cancle">#007AFF</color>
+    <color name="white_p">#E6E6E6</color>
+    <color name="app_bg">#1E2022</color>
+
+    <color name="level_green">#7EC600</color>
+    <color name="level_yellow">#FFB300</color>
+    <color name="level_red">#FF2829</color>
+
+    <color name="common_green">#D1EE00</color>
+
+    <color name="pin_normal">#6B767E</color>
+
+    <color name="setting_white">#33FFFFFF</color>
+    <color name="setting_bg">#202020</color>
+
+    <color name="common_dark_1">#1D2E3D</color>
+    <color name="common_dark_1_10alpha">#1A1D2E3D</color>
+    <color name="common_dark_1_20alpha">#331D2E3D</color>
+    <color name="common_dark_2">#50667B</color>
+
+    <color name="common_gray_line">#E6E8EB</color>
+</resources>

@@ -1,0 +1,16 @@
+{
+  "name": "reactwithnative",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "start": "node node_modules/react-native/local-cli/cli.js start",
+  "dependencies": {
+    "react": "0.14.5",
+    "react-native": "0.25.1"
+  }
+}

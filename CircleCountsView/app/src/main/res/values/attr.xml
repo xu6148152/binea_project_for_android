@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircleCountsView">
+        <attr name="ccv_max" format="integer"/>
+        <attr name="ccv_progress" format="integer"/>
+        <attr name="ccv_textString" format="string"/>
+        <attr name="ccv_unitString" format="string"/>
+        <attr name="ccv_progressColor" format="color"/>
+        <attr name="ccv_textSize" format="dimension"/>
+        <attr name="ccv_emptyColor" format="color"/>
+        <attr name="ccv_textColor" format="color"/>
+        <attr name="ccv_unitColor" format="color"/>
+        <attr name="ccv_unitSize" format="dimension"/>
+
+        <attr name="ccv_multiple_line" format="boolean"/>
+        <attr name="ccv_description_text_size" format="dimension"/>
+        <attr name="ccv_description_text_color" format="color"/>
+        <attr name="ccv_description_text" format="string"/>
+        <attr name="ccv_stroke_width" format="dimension"/>
+
+    </declare-styleable>
+</resources>

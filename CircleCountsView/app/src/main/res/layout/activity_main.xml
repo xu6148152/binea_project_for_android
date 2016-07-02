@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context="com.zepp.www.circlecountsview.MainActivity">
+
+    <com.zepp.www.circlecountsview.CircleCountsView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:ccv_textString="100"
+            app:ccv_textSize="100dp"
+            app:ccv_unitSize="20dp"
+            app:ccv_max="100"
+            app:ccv_progress="50"
+            app:ccv_unitString="/100"
+            app:ccv_description_text_size="50dp"/>
+</RelativeLayout>
