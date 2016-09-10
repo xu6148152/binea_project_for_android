@@ -1,0 +1,42 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="com.zepp.www.binderdemo">
+
+    <application
+            android:allowBackup="true"
+            android:label="@string/app_name"
+            android:icon="@mipmap/ic_launcher"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme">
+
+        <service
+                android:name=".MessengerService"
+                android:process=":remote"/>
+        <service
+                android:name=".BookManagerService"
+                android:process=":remote"/>
+        <service
+                android:name=".BinderPoolService"
+                android:process=":remote"/>
+
+        <!--<activity android:name=".MessengerActivity">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="android.intent.action.MAIN"/>-->
+        <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+        <!--</intent-filter>-->
+        <!--</activity>-->
+
+        <activity android:name=".BinderPoolActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <provider
+                android:authorities="com.zepp.www.binderdemo.BookProvider"
+                android:name=".BookProvider"
+                android:permission="com.zepp.www.provider"
+                android:process=":provider"/>
+    </application>
+
+</manifest>
