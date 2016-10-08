@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.view.View;
 import java.util.concurrent.CountDownLatch;
 
 //  Created by xubinggui on 9/10/16.
