@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
                 //    return new RecolorSample();
                 //case 9:
                 //    return new RotateSample();
-                //case 10:
-                //    return new ChangeTextSample();
+                case 10:
+                    return new ChangeTextSample();
                 //case 11:
                 //    return new CustomTransitionSample();
                 //case 12:

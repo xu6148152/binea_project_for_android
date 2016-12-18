@@ -47,7 +47,6 @@ public class AutoTransitionSample extends Fragment {
         transitionGroup.findViewById(R.id.button).setOnClickListener(new VisibleToggleClickListener() {
              @Override protected void changeVisibility(boolean visible) {
                  TransitionManager.beginDelayedTransition(transitionGroup);
-
                  textView.setVisibility(visible ? View.VISIBLE : View.GONE);
             }
         });
