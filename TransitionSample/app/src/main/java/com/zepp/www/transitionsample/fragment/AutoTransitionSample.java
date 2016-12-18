@@ -1,4 +1,4 @@
-package com.zepp.www.transitionsample;
+package com.zepp.www.transitionsample.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.zepp.www.transitionsample.R;
+import com.zepp.www.transitionsample.VisibleToggleClickListener;
 
 //  Created by xubinggui on 17/12/2016.
 //                            _ooOoo_  

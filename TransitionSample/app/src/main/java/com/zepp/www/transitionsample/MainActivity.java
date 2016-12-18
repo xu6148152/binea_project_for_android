@@ -9,6 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import com.zepp.www.transitionsample.fragment.AutoTransitionSample;
+import com.zepp.www.transitionsample.fragment.ChangeTextSample;
+import com.zepp.www.transitionsample.fragment.CustomTransitionSample;
+import com.zepp.www.transitionsample.fragment.ExplodeAndEpicenterExample;
+import com.zepp.www.transitionsample.fragment.ImageTransformSample;
+import com.zepp.www.transitionsample.fragment.InterpolatorDurationStartDelaySample;
+import com.zepp.www.transitionsample.fragment.PathMotionSample;
+import com.zepp.www.transitionsample.fragment.RecolorSample;
+import com.zepp.www.transitionsample.fragment.RotateSample;
+import com.zepp.www.transitionsample.fragment.ScaleSample;
+import com.zepp.www.transitionsample.fragment.ScenesSample;
+import com.zepp.www.transitionsample.fragment.SlideSample;
+import com.zepp.www.transitionsample.fragment.TransitionNameSample;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,28 +64,28 @@ public class MainActivity extends AppCompatActivity {
                     return new AutoTransitionSample();
                 case 1:
                     return new InterpolatorDurationStartDelaySample();
-                //case 2:
-                //    return new PathMotionSample();
-                //case 3:
-                //    return new SlideSample();
-                //case 4:
-                //    return new ScaleSample();
-                //case 5:
-                //    return new ExplodeAndEpicenterExample();
-                //case 6:
-                //    return new TransitionNameSample();
-                //case 7:
-                //    return new ImageTransformSample();
-                //case 8:
-                //    return new RecolorSample();
-                //case 9:
-                //    return new RotateSample();
+                case 2:
+                    return new PathMotionSample();
+                case 3:
+                    return new SlideSample();
+                case 4:
+                    return new ScaleSample();
+                case 5:
+                    return new ExplodeAndEpicenterExample();
+                case 6:
+                    return new TransitionNameSample();
+                case 7:
+                    return new ImageTransformSample();
+                case 8:
+                    return new RecolorSample();
+                case 9:
+                    return new RotateSample();
                 case 10:
                     return new ChangeTextSample();
-                //case 11:
-                //    return new CustomTransitionSample();
-                //case 12:
-                //    return new ScenesSample();
+                case 11:
+                    return new CustomTransitionSample();
+                case 12:
+                    return new ScenesSample();
             }
             return null;
         }

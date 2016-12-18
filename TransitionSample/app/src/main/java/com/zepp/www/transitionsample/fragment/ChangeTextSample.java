@@ -1,4 +1,4 @@
-package com.zepp.www.transitionsample;
+package com.zepp.www.transitionsample.fragment;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.zepp.www.transitionsample.R;
 import com.zepp.www.transitionsample.library.ChangeText;
 
 //  Created by xubinggui on 18/12/2016.
