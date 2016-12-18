@@ -35,19 +35,22 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override public void onListItemClick(ListView l, View v, int position, long id) {
-            getActivity().getSupportFragmentManager()
-                         .beginTransaction()
-                         .replace(R.id.container, createFragmentForPosition(position))
-                         .addToBackStack(String.valueOf(position))
-                         .commit();
+            Fragment fragment = createFragmentForPosition(position);
+            if (fragment != null) {
+                getActivity().getSupportFragmentManager()
+                             .beginTransaction()
+                             .replace(R.id.container, fragment)
+                             .addToBackStack(String.valueOf(position))
+                             .commit();
+            }
         }
 
         private Fragment createFragmentForPosition(int index) {
             switch (index) {
                 case 0:
                     return new AutoTransitionSample();
-                //case 1:
-                //    return new InterpolatorDurationStartDelaySample();
+                case 1:
+                    return new InterpolatorDurationStartDelaySample();
                 //case 2:
                 //    return new PathMotionSample();
                 //case 3:
