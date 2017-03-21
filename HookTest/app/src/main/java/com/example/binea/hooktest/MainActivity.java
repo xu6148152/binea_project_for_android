@@ -1,6 +1,8 @@
 package com.example.binea.hooktest;
 
+import com.example.binea.hooktest.ams_hook.HookAMSActivity;
 import com.example.binea.hooktest.binder_hook_service.HookServiceActivity;
+import com.example.binea.hooktest.proxy.HookedActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void onStartHookServiceActivity(View view) {
         Intent intent = new Intent(this, HookServiceActivity.class);
+        startActivity(intent);
+    }
+
+    public void onStartHookAms(View view) {
+        Intent intent = new Intent(this, HookAMSActivity.class);
         startActivity(intent);
     }
 }

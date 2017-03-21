@@ -1,4 +1,4 @@
-package com.example.binea.hooktest;
+package com.example.binea.hooktest.proxy;
 
 import android.app.Activity;
 import android.app.Instrumentation;

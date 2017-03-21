@@ -1,5 +1,7 @@
 package com.example.binea.hooktest;
 
+import com.example.binea.hooktest.proxy.InstrumentationProxy;
+
 import android.app.Application;
 import android.app.Instrumentation;
 import android.util.Log;

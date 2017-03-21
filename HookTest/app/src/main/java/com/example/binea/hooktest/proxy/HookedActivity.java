@@ -1,4 +1,6 @@
-package com.example.binea.hooktest;
+package com.example.binea.hooktest.proxy;
+
+import com.example.binea.hooktest.R;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

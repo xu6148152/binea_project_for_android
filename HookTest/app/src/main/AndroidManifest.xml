@@ -17,9 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".HookedActivity">
+        <activity android:name=".proxy.HookedActivity">
         </activity>
         <activity android:name=".binder_hook_service.HookServiceActivity">
+        </activity>
+        <activity android:name=".ams_hook.HookAMSActivity">
         </activity>
     </application>
 

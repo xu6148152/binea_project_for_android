@@ -17,4 +17,9 @@
             android:layout_height="wrap_content"
             android:text="start hooked service"
             android:onClick="onStartHookServiceActivity"/>
+
+    <Button android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+    android:text="start hooked ams"
+    android:onClick="onStartHookAms"/>
 </LinearLayout>
